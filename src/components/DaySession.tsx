@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useApp } from '@/contexts/AppContext';
 import { programDays } from '@/data/programContent';
+import { getNarration } from '@/data/sessionNarration';
+import { useTextToSpeech } from '@/hooks/useTextToSpeech';
 import { 
   ArrowLeft, 
   ArrowRight,
@@ -14,16 +16,26 @@ import {
   PenLine,
   Lightbulb,
   Sparkles,
-  X
+  X,
+  Volume2,
+  Loader2
 } from 'lucide-react';
 
 export function DaySession() {
   const { user, selectedDay, setCurrentView, completeDay, addJournalEntry } = useApp();
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
   const [reflectionText, setReflectionText] = useState('');
   const [reasonsToQuit, setReasonsToQuit] = useState(['', '', '']);
   const [showCompletion, setShowCompletion] = useState(false);
+  
+  const { speak, toggle, stop, isLoading, isPlaying } = useTextToSpeech();
+
+  // Stop audio when changing modules or leaving
+  useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, [currentModuleIndex, stop]);
 
   if (!user) return null;
 
@@ -44,20 +56,35 @@ export function DaySession() {
     }
   };
 
+  const handlePlayNarration = () => {
+    if (isPlaying) {
+      toggle();
+    } else {
+      const narration = getNarration(currentModule.id, currentModule.content);
+      if (narration) {
+        speak(narration);
+      }
+    }
+  };
+
   const handleNext = () => {
+    stop(); // Stop any playing audio
     if (currentModuleIndex < dayContent.modules.length - 1) {
       setCurrentModuleIndex(prev => prev + 1);
       setReflectionText('');
     } else {
-      // Day complete
       handleDayComplete();
     }
+  };
+
+  const handlePrevious = () => {
+    stop(); // Stop any playing audio
+    setCurrentModuleIndex(prev => prev - 1);
   };
 
   const handleDayComplete = () => {
     completeDay(selectedDay);
     
-    // Save reflections to journal
     if (reflectionText.trim()) {
       addJournalEntry({
         date: new Date(),
@@ -67,7 +94,6 @@ export function DaySession() {
       });
     }
 
-    // Save reasons to quit
     const validReasons = reasonsToQuit.filter(r => r.trim() !== '');
     validReasons.forEach(reason => {
       addJournalEntry({
@@ -82,6 +108,7 @@ export function DaySession() {
   };
 
   const handleClose = () => {
+    stop();
     setCurrentView('dashboard');
   };
 
@@ -119,44 +146,77 @@ export function DaySession() {
   }
 
   const renderModuleContent = () => {
+    const hasNarration = !!getNarration(currentModule.id);
+    
     switch (currentModule.type) {
       case 'video':
       case 'audio':
         return (
           <div className="flex flex-col items-center">
-            {/* Simulated player */}
-            <div className="w-full aspect-video bg-gradient-to-br from-primary/20 to-freedom/20 rounded-2xl flex items-center justify-center mb-6">
+            {/* Audio Player */}
+            <div className="w-full aspect-video bg-gradient-to-br from-primary/20 to-freedom/20 rounded-2xl flex flex-col items-center justify-center mb-6 relative overflow-hidden">
+              {/* Animated background when playing */}
+              {isPlaying && (
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-freedom/30 animate-pulse" />
+              )}
+              
               <button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="w-20 h-20 rounded-full gradient-hero flex items-center justify-center shadow-button hover:scale-105 transition-transform"
+                onClick={handlePlayNarration}
+                disabled={isLoading}
+                className="w-20 h-20 rounded-full gradient-hero flex items-center justify-center shadow-button hover:scale-105 transition-transform disabled:opacity-50 relative z-10"
               >
-                {isPlaying ? (
+                {isLoading ? (
+                  <Loader2 className="w-8 h-8 text-primary-foreground animate-spin" />
+                ) : isPlaying ? (
                   <Pause className="w-8 h-8 text-primary-foreground" />
                 ) : (
                   <Play className="w-8 h-8 text-primary-foreground ml-1" />
                 )}
               </button>
+              
+              <p className="mt-4 text-sm text-muted-foreground relative z-10">
+                {isLoading ? 'Generating audio...' : isPlaying ? 'Playing...' : 'Tap to play audio narration'}
+              </p>
+
+              {/* Sound wave animation when playing */}
+              {isPlaying && (
+                <div className="flex items-center gap-1 mt-2">
+                  {[1, 2, 3, 4, 5].map((i) => (
+                    <div
+                      key={i}
+                      className="w-1 bg-primary rounded-full animate-pulse"
+                      style={{
+                        height: `${Math.random() * 20 + 10}px`,
+                        animationDelay: `${i * 0.1}s`,
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
             
             {/* Script/Content Preview */}
             <div className="bg-card rounded-2xl p-6 shadow-soft w-full">
-              <h4 className="font-semibold mb-3">Session Content</h4>
-              <p className="text-muted-foreground leading-relaxed">
-                {selectedDay === 1 && currentModuleIndex === 0 && (
-                  <>
-                    "Hello and welcome! Today marks Day 1 of your journey to becoming completely smoke-free. 
-                    Take a moment to appreciate this decision – you've taken the first step toward a healthier, happier you. 
-                    Congratulations!
-                    <br /><br />
-                    Over the next 10 days, we're going to walk this path together. And here's something unusual you'll love: 
-                    you don't have to quit smoking today. In fact, for the first few days of this program, you can keep 
-                    smoking as usual..."
-                  </>
+              <div className="flex items-center justify-between mb-3">
+                <h4 className="font-semibold">Session Transcript</h4>
+                {hasNarration && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={handlePlayNarration}
+                    disabled={isLoading}
+                    className="text-primary"
+                  >
+                    <Volume2 className="w-4 h-4 mr-1" />
+                    {isPlaying ? 'Pause' : 'Listen'}
+                  </Button>
                 )}
-                {(selectedDay !== 1 || currentModuleIndex !== 0) && (
-                  <>Content for {currentModule.title}. This session will guide you through {dayContent.objective.toLowerCase()}</>
-                )}
-              </p>
+              </div>
+              <div className="text-muted-foreground leading-relaxed whitespace-pre-line max-h-64 overflow-y-auto">
+                {getNarration(currentModule.id) || 
+                  `Content for ${currentModule.title}. This session will guide you through ${dayContent.objective.toLowerCase()}`
+                }
+              </div>
             </div>
           </div>
         );
@@ -214,29 +274,35 @@ export function DaySession() {
         );
 
       case 'text':
+        const textNarration = getNarration(currentModule.id);
         return (
           <div className="bg-card rounded-2xl p-6 shadow-soft">
-            <p className="text-foreground leading-relaxed">
-              {selectedDay === 1 && currentModule.id === 'd1m3' && (
+            {textNarration && (
+              <div className="flex justify-end mb-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={handlePlayNarration}
+                  disabled={isLoading}
+                  className="text-primary"
+                >
+                  {isLoading ? (
+                    <Loader2 className="w-4 h-4 mr-1 animate-spin" />
+                  ) : (
+                    <Volume2 className="w-4 h-4 mr-1" />
+                  )}
+                  {isPlaying ? 'Pause' : 'Listen'}
+                </Button>
+              </div>
+            )}
+            <div className="text-foreground leading-relaxed whitespace-pre-line">
+              {textNarration || (
                 <>
-                  <strong className="text-lg block mb-4 text-gradient-hero font-display">What to Expect</strong>
-                  Over the next few days, we'll cover topics like why we smoke, how nicotine hooks us, 
-                  what triggers your cravings, and clever ways to break the habit loop that's kept you smoking.
-                  <br /><br />
-                  You'll learn proven techniques from psychology – like how to reframe your thoughts and practice 
-                  mindfulness – but we'll keep it very practical and relatable.
-                  <br /><br />
-                  <strong>By Day 5</strong>, you'll start noticing a big shift in how you view cigarettes.
-                  <br /><br />
-                  <strong>On Day 6</strong>, you'll smoke your last cigarette – and it will feel empowering, not scary.
-                  <br /><br />
-                  <strong>Days 7-10</strong> will help you solidify your new smoke-free life.
+                  <strong className="text-lg block mb-4 text-gradient-hero font-display">{currentModule.title}</strong>
+                  Educational content about {currentModule.title}. {dayContent.objective}
                 </>
               )}
-              {(selectedDay !== 1 || currentModule.id !== 'd1m3') && (
-                <>Educational content about {currentModule.title}. {dayContent.objective}</>
-              )}
-            </p>
+            </div>
           </div>
         );
 
@@ -271,7 +337,7 @@ export function DaySession() {
       {/* Header */}
       <div className="bg-card border-b border-border p-4 sticky top-0 z-10">
         <div className="flex items-center justify-between mb-4">
-          <Button variant="ghost" size="icon" onClick={() => setCurrentView('program')}>
+          <Button variant="ghost" size="icon" onClick={() => { stop(); setCurrentView('program'); }}>
             <ArrowLeft className="w-5 h-5" />
           </Button>
           <div className="text-center">
@@ -328,7 +394,7 @@ export function DaySession() {
           <Button 
             variant="outline"
             size="lg"
-            onClick={() => setCurrentModuleIndex(prev => prev - 1)}
+            onClick={handlePrevious}
             disabled={currentModuleIndex === 0}
             className="flex-1"
           >
