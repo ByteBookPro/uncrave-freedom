@@ -1,13 +1,39 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import React from 'react';
+import { AppProvider, useApp } from '@/contexts/AppContext';
+import { Onboarding } from '@/components/Onboarding';
+import { Dashboard } from '@/components/Dashboard';
+import { ProgramView } from '@/components/ProgramView';
+import { DaySession } from '@/components/DaySession';
+import { CravingTool } from '@/components/CravingTool';
+
+function AppContent() {
+  const { currentView, isOnboarded } = useApp();
+
+  if (!isOnboarded || currentView === 'onboarding') {
+    return <Onboarding />;
+  }
+
+  switch (currentView) {
+    case 'dashboard':
+      return <Dashboard />;
+    case 'program':
+      return <ProgramView />;
+    case 'session':
+      return <DaySession />;
+    case 'craving':
+      return <CravingTool />;
+    default:
+      return <Dashboard />;
+  }
+}
 
 const Index = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
+    <AppProvider>
+      <div className="min-h-screen max-w-md mx-auto bg-background relative overflow-hidden shadow-2xl">
+        <AppContent />
       </div>
-    </div>
+    </AppProvider>
   );
 };
 
