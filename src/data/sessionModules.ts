@@ -294,12 +294,161 @@ export const daySessions: DaySession[] = [
   },
   {
     dayNumber: 2,
-    title: "Understanding Your Addiction",
-    subtitle: "The Science of Nicotine",
+    title: "Why Do I Smoke?",
+    subtitle: "Understanding Addiction & Beliefs",
     modules: [
       {
         id: 'd2m1',
-        title: "How Nicotine Hooks You",
+        title: "Welcome to Day 2",
+        description: "Understanding the fundamental question: Why do you smoke?",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 420, // 7:00
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Welcome Back!",
+              content: "Day 2 – great to see you here. Today we're going to answer a fundamental question: Why do you smoke?",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "👋",
+              narration: "Welcome back! Day 2 – great to see you here. Today we're going to answer a fundamental question: Why do you smoke? More specifically, what do you think you're getting from cigarettes? Understanding this is key, because once we unravel the illusion of smoking, the whole habit starts to lose its grip on you. I know that might sound bold, but stick with me. By the end of today's session, you'll see your cigarettes in a completely new light. And once you see the truth, you can't unsee it."
+            },
+            {
+              id: 's2',
+              title: "My Reasons vs. Reality",
+              content: "On one side: 'It relaxes me,' 'Helps me focus,' 'It's my reward.' On the other side: the surprising truth behind each belief.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "⚖️",
+              narration: "Let me show you something interesting. Imagine two columns. On the left, we have 'My Reasons for Smoking' – the things you genuinely believe cigarettes give you. Things like: 'It relaxes me,' 'It helps me focus,' 'It's a reward or treat,' 'It relieves boredom.' These feel real, don't they? They feel like facts. But on the right column, we have 'Reality' – what's actually happening in your brain and body. And I have to warn you... the reality is quite different from what you might expect. Let's explore each one together."
+            },
+            {
+              id: 's3',
+              title: "The Stress Relief Illusion",
+              content: "Nicotine actually increases your baseline stress. The 'relief' you feel is just easing the withdrawal that smoking itself created.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-muted/80",
+              icon: "😰",
+              narration: "'I smoke to relax or relieve stress.' This is probably the number one belief. You light up when you're anxious or after a long day, and you feel like it calms you down. But here's the surprising truth: nicotine actually raises your baseline stress levels. When you haven't smoked for a while, your nicotine level drops and your brain starts to panic – this is withdrawal, and it creates a sense of stress and irritability. The cigarette temporarily eases that withdrawal, so you feel a wave of relief – ahh, much better. But that relief is only bringing you back to the baseline of a non-smoker. Studies show smokers actually have higher stress overall than non-smokers, because they go through this constant cycle of mini-withdrawals and relief. It's like wearing tight shoes just for the relief of taking them off. The relaxation is real, but it's fixing a problem that nicotine created in the first place."
+            },
+            {
+              id: 's4',
+              title: "The Focus Fallacy",
+              content: "Nicotine gives a short-term jolt, but as it wears off, withdrawal kicks in and concentration drops below normal.",
+              backgroundGradient: "bg-gradient-to-br from-muted/80 to-success/80",
+              icon: "🎯",
+              narration: "'I need a cigarette to focus or think.' Nicotine can give a short-term jolt – it releases adrenaline, which can make your heart beat faster and sharpen concentration for a few minutes. But here's the kicker: as that effect wears off, withdrawal kicks in and your concentration actually drops, often leaving you worse off than before. It's why smokers often feel foggy or edgy if they haven't had a cigarette – hardly a recipe for good focus. You might think, 'I do my best work after a smoke break,' but in reality, you could do even better work once your brain is free of the constant nicotine rollercoaster. There are other ways to boost focus – like short breaks with deep breathing or stretching – that don't come with a crash. Non-smokers manage to concentrate just fine. And soon, you will too."
+            },
+            {
+              id: 's5',
+              title: "The Pleasure Myth",
+              content: "Nicotine triggers dopamine, creating brief 'pleasure.' But notice: is the whole cigarette enjoyable, or just the first puff?",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "😊",
+              narration: "'I smoke because I enjoy it – I like the taste, the ritual, it's my me-time or reward.' This one is deeply personal. Cigarettes can feel like a friend, a little treat. Maybe you love that first drag in the morning with coffee, or stepping outside at work to have a moment alone. I get it – it's not just the nicotine, it's the whole ritual. But let's examine that enjoyment. Yes, nicotine triggers dopamine, the pleasure chemical, so there is a brief enjoyment. But everything around that – the taste, the smell, the ash – if you look at it objectively, those aren't truly pleasant for most people after the first puff or two. Have you ever noticed mid-way through a cigarette, it's not as enjoyable as the first puff? Often, smokers will say the best part of a smoke is lighting it – after that, you're mostly just feeding the addiction to avoid feeling bad. In a couple of days, I'll ask you to smoke very slowly and consciously as an exercise, and many people realize during that the taste isn't actually that great – you might even find it unpleasant when you really pay attention."
+            },
+            {
+              id: 's6',
+              title: "Habit & Boredom",
+              content: "Cigarettes fill the gaps of time. Waiting for a bus? Light up. But habits can be changed – and we have the tools.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
+              icon: "🔄",
+              narration: "'I smoke out of habit or boredom.' Totally understandable – cigarettes fill in the gaps of time. Waiting for a bus? Light up. Driving? Have one. It's something to do with your hands and a way to punctuate your day. The downside is, it also keeps you trapped – you end up structuring your day around it without even realizing. Checking when you can smoke, stepping out frequently, planning around it. The good news is that habits can be changed. We'll work on the habit loop in detail on Day 3 – identifying those cues and finding new routines that give you a sense of satisfaction. Breaking a habit, especially one you've done thousands of times, might sound hard, but it's very doable with the right approach – and we have that lined up for you. Tomorrow, you'll see exactly how."
+            },
+            {
+              id: 's7',
+              title: "The Key Insight",
+              content: "Most 'benefits' you think you get from smoking are either illusions or can be achieved in healthier ways. The negatives are very real.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "💡",
+              narration: "Whatever your reasons, the takeaway today is this: Most of the 'benefits' you think you get from smoking are either illusions or can be achieved in healthier ways. And the negatives – well, we all know the health risks, but smoking also causes you daily inconveniences and anxieties that you might not even realize until they're gone. The constant planning around when you can smoke. The guilt after each cigarette. The money disappearing from your wallet. The way you have to step away from conversations, from meals, from moments with loved ones. All of that is about to change. You're going to discover that everything good you thought smoking gave you can be found elsewhere – and everything bad will simply disappear."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd2m2',
+        title: "Why Do You Smoke?",
+        description: "Interactive exercise to identify your personal beliefs about smoking.",
+        type: 'CHECKPOINT',
+        estimatedSeconds: 180, // 3:00
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Reflect on Your Reasons",
+              content: "Which of these resonate with you? Select all that apply: Stress relief, Focus, Enjoyment, Social connection, Habit/Boredom, Addiction.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "🤔",
+              narration: "Now let's do a quick exercise. On your screen, you'll see some common reasons people smoke. Go ahead and think about which ones resonate with you – why do you smoke? Be honest with yourself. There's no judgment here. Whether it's for stress relief, focus, enjoyment, social connection, habit, or simply because you feel addicted – these are all very common answers. In fact, I used to believe many of these myself. Thank you for your honesty. Each of these beliefs is something we'll address together, showing you the reality behind the illusion."
+            }
+          ]
+        }
+      },
+      {
+        id: 'd2m3',
+        title: "Inside Your Addicted Brain",
+        description: "Understanding the neuroscience of nicotine addiction.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 480, // 8:00
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "The Science of Addiction",
+              content: "Let's look at what actually happens inside your brain when you smoke. Understanding this is power.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "🧠",
+              narration: "Now let's delve into the science a bit – don't worry, we'll keep it simple. You probably know nicotine is addictive. But what does that actually mean inside your brain? Understanding the mechanics of addiction is incredibly empowering. Once you see how the trap works, it becomes much easier to escape it. Think of it like a magic trick – once you know how the illusion is performed, you can never be fooled by it again. Let me show you behind the curtain."
+            },
+            {
+              id: 's2',
+              title: "10 Seconds to Your Brain",
+              content: "Within 10 seconds of inhaling, nicotine reaches your brain and binds to nicotinic receptors, triggering dopamine release.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "⚡",
+              narration: "Here's what happens each time you smoke: Within 10 seconds of that inhale, nicotine reaches your brain. It binds to nicotinic receptors – they're literally named after nicotine! – and triggers a release of dopamine, that feel-good neurotransmitter. Dopamine is like a big 'YES, DO THAT AGAIN!' signal to your brain. So your brain says, hey, that was nice. Meanwhile, nicotine also causes other effects – a slight increase in heart rate, a bit of adrenaline. This can make you feel alert or comforted or both depending on the context. The drug is weirdly both a stimulant and relaxant. So far, this sounds pretty good, right? But here's where the trap closes..."
+            },
+            {
+              id: 's3',
+              title: "The Withdrawal Begins",
+              content: "Nicotine leaves your system quickly. Those receptors start 'screaming' for more, creating tension, irritability, and the feeling that you 'need' a cigarette.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-muted/80",
+              icon: "📉",
+              narration: "But nicotine doesn't stick around for long. Your body starts clearing it within minutes. The pleasant feelings fade, and because your brain got used to that nicotine, its absence now registers as a problem. Those nicotinic receptors literally get irritated when they're empty – imagine them kind of yelling, 'Feed me more nicotine!' This is withdrawal – and it starts very soon after finishing a cigarette. That subtle tension builds and builds, and you interpret it as 'I need a cigarette.' It might manifest as difficulty concentrating, slight anxiety, irritability, or just a gnawing feeling that something's off. So you have another cigarette..."
+            },
+            {
+              id: 's4',
+              title: "The Endless Loop",
+              content: "You smoke → feel relief → nicotine leaves → withdrawal builds → you smoke again. This is the trap. This is addiction.",
+              backgroundGradient: "bg-gradient-to-br from-muted/80 to-success/80",
+              icon: "🔄",
+              narration: "So you have another cigarette, and ahh – those receptors are satisfied again, the discomfort goes away, and dopamine gives you a little pat on the back. Thus the cycle continues. Over time, your brain also associates cigarettes with things – coffee, driving, breaks, emotions – so those situations themselves trigger cravings even before withdrawal kicks in. We'll talk more about those cues tomorrow. But here's the key insight: Smoking doesn't actually give you anything positive long-term – it mostly relieves the symptoms it created. It's like someone tapping your shoulder incessantly – smoking is just telling them 'stop for a moment' but they'll start tapping again soon. This is the nature of addiction. A never-ending loop."
+            },
+            {
+              id: 's5',
+              title: "It's Not Your Fault",
+              content: "Nicotine addiction is compared to heroin in how addictive it can be. You were trapped by a drug – you're not weak or lacking willpower.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "❤️",
+              narration: "Now, please don't take this as a scolding lecture. It's not. It's empowerment. Because guess what – when you see cigarettes for what they truly are – a delivery system for an addictive drug, wrapped in habit and ritual – you start to take away their mystique, their perceived power. It's not you that's weak or lacking willpower – nicotine is just very good at creating dependency. In fact, nicotine addiction is often compared to heroin in how addictive it can be. But unlike illicit drugs, cigarettes are sold at every corner store, often without any immediate extreme impairment, so we fall into the trap casually and it digs in deep. You were duped by a very clever trap. Now you're waking up to it."
+            },
+            {
+              id: 's6',
+              title: "The Tobacco Industry's Design",
+              content: "Cigarettes are engineered for maximum addictiveness. You were targeted by billions of dollars of manipulation. Now you're fighting back.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
+              icon: "🏭",
+              narration: "I also want to briefly mention something important: cigarettes weren't just accidentally addictive. They were engineered this way. The tobacco industry has spent billions of dollars and decades of research figuring out how to make cigarettes as addictive as possible. They've added chemicals to speed nicotine delivery to your brain. They've designed the taste, the packaging, the marketing – all to hook you and keep you hooked. You weren't weak. You were targeted. But now, armed with knowledge, you can break free. Understanding is power. And you're gaining that power right now."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd2m4',
+        title: "Why Other Methods Often Fail",
+        description: "Understanding why behavioral approaches work better than willpower alone.",
         type: 'ANIMATED_SLIDES',
         estimatedSeconds: 360, // 6:00
         gatingRequired: true,
@@ -307,104 +456,115 @@ export const daySessions: DaySession[] = [
           slides: [
             {
               id: 's1',
-              title: "The Nicotine Cycle",
-              content: "When you smoke, nicotine reaches your brain in 7 seconds. It triggers dopamine release, creating a brief 'reward' feeling.",
-              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
-              icon: "🧪"
+              title: "Other Quit Methods",
+              content: "Cold turkey, nicotine patches, gum, vaping, medications... You may have tried some of these. Let's talk about why they often fail.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "📋",
+              narration: "I also want to briefly talk about other quit methods and why what we're doing here is special. Maybe you've tried some of these: Cold turkey – just stopping suddenly on your own. Nicotine Replacement Therapy like patches or gum. Medications like Chantix or Zyban. Vaping as a substitute. Or maybe hypnotherapy or acupuncture. There's no one right way to quit – different methods help different people – but the reason we focus on a program like this, which is mostly psychological and behavioral, is that success tends to be higher when you tackle the mental side of smoking along with the physical."
             },
             {
               id: 's2',
-              title: "But Here's The Truth",
-              content: "That 'reward' only relieves the withdrawal that the PREVIOUS cigarette created. You're not getting pleasure—you're getting RELIEF from your own addiction.",
-              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
-              icon: "🎭"
+              title: "Cold Turkey: 5-10% Success",
+              content: "Going cold turkey has tough odds. You have cravings but no mental strategy to handle them. That's why most people relapse.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-muted/80",
+              icon: "🦃",
+              narration: "Going cold turkey has about a 5-10% long-term success rate. It's tough because you have cravings and no mental strategy to handle them. You're relying on pure willpower, and eventually that runs out. You feel deprived, you feel like you're missing something, and sooner or later you crack. The mental battle is exhausting, and without changing how you think about smoking, you're fighting with one hand tied behind your back."
             },
             {
               id: 's3',
-              title: "The Addiction Loop",
-              content: "Smoke → Brief relief → Nicotine leaves → Withdrawal → Smoke again. You're not enjoying cigarettes. You're treating withdrawal.",
-              backgroundGradient: "bg-gradient-to-br from-coral/80 to-muted/80",
-              icon: "🔄"
+              title: "NRT: Addresses Only Physical",
+              content: "Nicotine patches and gum soften withdrawal, but many people relapse after stopping because the mental habit remains unchanged.",
+              backgroundGradient: "bg-gradient-to-br from-muted/80 to-accent/80",
+              icon: "💊",
+              narration: "Nicotine gum or patches can double success rates in some cases, because they soften withdrawal. But many people end up relapsing when they stop using them if they haven't changed their habits and thoughts. Plus, some people end up using NRT and still smoking – which defeats the purpose entirely. The physical withdrawal from nicotine is actually quite mild. It's the psychological addiction – the habits, the beliefs, the associations – that keeps people trapped. NRT only addresses half the problem."
             },
             {
               id: 's4',
-              title: "Non-Smokers Don't Need Relief",
-              content: "Non-smokers don't wake up with withdrawal pangs. They don't 'need' cigarettes after meals. The only 'need' cigarettes create is more cigarettes.",
-              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
-              icon: "💭"
+              title: "Vaping: Trading One Addiction",
+              content: "Vaping removes tar but keeps you addicted to nicotine – often at even higher levels. We don't want to swap one trap for another.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-success/80",
+              icon: "💨",
+              narration: "Vaping might remove tar and some chemicals, but it keeps you addicted to nicotine and can actually make nicotine intake even higher because it's so convenient to vape continuously. You can vape indoors, in your car, at your desk – there's no natural stopping point. We don't want to just swap one addiction for another. The goal is freedom from nicotine entirely, and that's what this program delivers."
             },
             {
               id: 's5',
-              title: "What You're Actually Doing",
-              content: "Imagine wearing tight shoes just for the relief of taking them off. That's what smoking is—creating discomfort to relieve it.",
-              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
-              icon: "👟"
+              title: "Behavioral Programs: The Best Results",
+              content: "Programs that combine psychological techniques with support show the highest success rates. That's exactly what you're doing right now.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🏆",
+              narration: "Behavioral programs – like what we're doing – have shown a lot of promise. They're the closest to replicating that one-on-one counseling which is considered the gold standard of quitting methods. Studies show that people using smoking cessation apps with evidence-based content like cognitive behavioral therapy have significantly higher quit rates. So you're investing your time in a method that science says can really work. You're not just trying to quit – you're changing your entire relationship with cigarettes. And that's why it lasts."
             },
             {
               id: 's6',
-              title: "The Physical Truth",
-              content: "Pure nicotine withdrawal is incredibly mild—equivalent to mild hunger. The intense 'cravings' are 95% psychological, not physical.",
-              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
-              icon: "📊"
+              title: "Your Advantage",
+              content: "You're addressing both the physical AND psychological aspects of addiction. That's why this approach is different. That's why it works.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
+              icon: "✨",
+              narration: "The reason this program works is that we're addressing both sides: the physical reality of nicotine addiction AND the psychological beliefs, habits, and associations that keep you smoking. By the time you smoke your last cigarette, you won't just be physically ready – you'll be mentally ready. You won't feel like you're giving something up. You'll feel like you're escaping a trap. That's the difference. That's why people who quit this way don't miss smoking. Because there's nothing to miss once you see the truth."
             },
           ]
         }
       },
       {
-        id: 'd2m2',
-        title: "Breaking The Cycle",
-        type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 240, // 4:00
-        gatingRequired: true,
-        content: {
-          slides: [
-            {
-              id: 's1',
-              title: "The Great Revelation",
-              content: "Cigarettes don't give you anything positive. They only temporarily relieve the negative state they themselves created.",
-              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
-              icon: "💡"
-            },
-            {
-              id: 's2',
-              title: "True Relaxation",
-              content: "Cigarettes don't relax you. Nicotine is a stimulant—it increases heart rate and blood pressure. The 'relaxation' is just withdrawal relief.",
-              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
-              icon: "😌"
-            },
-            {
-              id: 's3',
-              title: "Concentration Myth",
-              content: "Cigarettes don't help you concentrate. They briefly restore what nicotine withdrawal took away. Non-smokers concentrate just fine—better, actually.",
-              backgroundGradient: "bg-gradient-to-br from-success/80 to-accent/80",
-              icon: "🎯"
-            },
-            {
-              id: 's4',
-              title: "Today's Realization",
-              content: "Every 'benefit' of smoking is actually just temporary relief from the problem smoking created. There is no genuine benefit. None.",
-              backgroundGradient: "bg-gradient-to-br from-accent/80 to-primary/80",
-              icon: "🌟"
-            },
-          ]
-        }
-      },
-      {
-        id: 'd2m3',
+        id: 'd2m5',
         title: "Deep Breathing Practice",
+        description: "Learn to truly relax without cigarettes.",
         type: 'GUIDED_PRACTICE',
         estimatedSeconds: 180, // 3:00
         gatingRequired: true,
         practiceType: 'BREATHING',
       },
       {
-        id: 'd2m4',
-        title: "Body Awareness Scan",
-        description: "Notice how your body feels as a smoker.",
-        type: 'GUIDED_PRACTICE',
+        id: 'd2m6',
+        title: "Today's Assignment & Tomorrow",
+        description: "Wrapping up Day 2 and preparing for Day 3.",
+        type: 'ANIMATED_SLIDES',
         estimatedSeconds: 300, // 5:00
         gatingRequired: true,
-        practiceType: 'BODY_SCAN',
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Your Assignment Today",
+              content: "Notice and question your reasons each time you smoke. Did the cigarette actually solve your problem, or just make you feel momentarily better?",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "📝",
+              narration: "Alright, enough science – what do we do with this knowledge? Today, just start noticing and questioning your own reasons each time you smoke. For example, later today if you light up because you're stressed, observe: Did the cigarette actually solve the problem you were stressed about, or did it just make you feel momentarily better? If you smoke because you're bored, ask: Is the cigarette actually entertaining, or is it just something to do with my hands? How else might I address this boredom? Curiosity is your tool. We're not forcing any change in your smoking just yet – but being curious and mindful is the first step to weakening the habit's hold."
+            },
+            {
+              id: 's2',
+              title: "The Growing Realization",
+              content: "Don't worry if cigarettes become less satisfying. That's the goal. We're aligning your heart and mind to naturally want to let go.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "🌱",
+              narration: "One more thing: Sometimes people worry, 'If I start thinking like this, will smoking become unenjoyable and then I'll struggle because I hate it but am addicted?' The goal is that smoking becomes something you naturally want to let go of. We're working on aligning your heart and mind so they both agree: 'I don't actually want to smoke.' When that clicks, quitting is not a battle; it's a relief. So yes, over the next days you might find cigarettes less satisfying – that's a good thing. Don't force it or fake it; just let the realizations come naturally."
+            },
+            {
+              id: 's3',
+              title: "Day 2 Recap",
+              content: "Cigarettes trick us into thinking they help, but they're only relieving withdrawal they caused. Real benefits can be gotten in better ways.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-success/80",
+              icon: "📚",
+              narration: "Let's recap: Today we learned that cigarettes trick us into thinking they help us, but mostly they're relieving the withdrawal they caused. The real benefits – relaxation, focus, pleasure – can be gotten in better ways. And you're learning those ways soon. For now, keep smoking as you normally do, but with a bit more awareness. Jot down in your journal if you notice something new – like 'hmm, I realized my post-meal cigarette actually tastes kinda bad after the first few puffs' or 'I noticed I got an urge while watching a TV show just because a character smoked.'"
+            },
+            {
+              id: 's4',
+              title: "Coming Tomorrow: Day 3",
+              content: "Tomorrow we dive into habits and triggers – why you smoke when you do, and how to start breaking those patterns.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🔮",
+              narration: "Tomorrow, we're diving deeper into habits and triggers – essentially why you smoke when you do, and how those automatic patterns form. It's really fascinating – you'll practically see the strings that have been pulling on you, and we'll start cutting them one by one. You're doing great. Day 2 is complete, and you're already arming yourself with knowledge that will set you free. Keep up the good work, and see you on Day 3!"
+            },
+            {
+              id: 's5',
+              title: "Day 2 Complete!",
+              content: "You're doing amazing. 2 days done, the journey continues. The knowledge you gained today is already changing how you see cigarettes.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
+              icon: "🎉",
+              narration: "Congratulations on completing Day 2! You now understand the true nature of nicotine addiction. You see through the illusions of stress relief, focus, and pleasure. You know why other methods often fail and why this one works. That knowledge is power – and it's already working inside you, changing how you see cigarettes. Remember: none of these realizations are to make you feel foolish. Many smokers hold these beliefs. You were caught in a trap designed by people with billions of dollars to spend on keeping you hooked. But now you're waking up. And soon, you'll be free. See you tomorrow for Day 3!"
+            },
+          ]
+        }
       },
     ]
   },
