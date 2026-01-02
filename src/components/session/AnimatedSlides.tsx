@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, ChevronLeft, ChevronRight, Volume2, VolumeX, Loader2, Music, FileText } from 'lucide-react';
+import { Play, Pause, ChevronLeft, ChevronRight, Volume2, VolumeX, Loader2, Music, FileText, Timer } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { VoicePreset } from '@/hooks/useTextToSpeech';
 import { useBackgroundMusic } from '@/hooks/useBackgroundMusic';
@@ -31,6 +31,7 @@ interface AnimatedSlidesProps {
   title?: string;
   narrationKey?: string;
   defaultVoicePreset?: VoicePreset;
+  totalEstimatedSeconds?: number;
 }
 
 // Detect voice preset based on slide content
@@ -77,7 +78,8 @@ export function AnimatedSlides({
   onComplete,
   title,
   narrationKey,
-  defaultVoicePreset = 'dailyCoach'
+  defaultVoicePreset = 'dailyCoach',
+  totalEstimatedSeconds = 600
 }: AnimatedSlidesProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
@@ -91,6 +93,9 @@ export function AnimatedSlides({
   const [isPaused, setIsPaused] = useState(false);
   const [currentAudioDuration, setCurrentAudioDuration] = useState(0);
   const [completedSlides, setCompletedSlides] = useState<Set<number>>(new Set());
+  const [elapsedSeconds, setElapsedSeconds] = useState(0); // Track actual elapsed time
+  const [currentSlideElapsed, setCurrentSlideElapsed] = useState(0); // Per-slide elapsed time
+  
   const { fetchAndCacheAudio, isLoading: isCacheLoading } = useAudioCache();
   const backgroundMusic = useBackgroundMusic({ volume: 0.12 });
   const { profile } = useAuth();
@@ -101,10 +106,12 @@ export function AnimatedSlides({
   const abortControllerRef = useRef<AbortController | null>(null);
   const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
   const slideTimerRef = useRef<NodeJS.Timeout | null>(null);
-  
+  const slideStartTimeRef = useRef<number>(Date.now()); // Track when current slide started
   // Refs for tracking
   const currentIndexRef = useRef(currentIndex);
   const isPlayingRef = useRef(isPlaying);
+  const audioEnabledRef = useRef(audioEnabled);
+  const isPausedRef = useRef(isPaused);
   
   // Keep refs in sync
   useEffect(() => {
@@ -114,6 +121,14 @@ export function AnimatedSlides({
   useEffect(() => {
     isPlayingRef.current = isPlaying;
   }, [isPlaying]);
+  
+  useEffect(() => {
+    audioEnabledRef.current = audioEnabled;
+  }, [audioEnabled]);
+  
+  useEffect(() => {
+    isPausedRef.current = isPaused;
+  }, [isPaused]);
   
   // Get user's language and voice preference
   const userLanguage: ContentLanguage = profile?.language || 'en';
@@ -217,11 +232,15 @@ export function AnimatedSlides({
     }
   }, [slides.length, onProgress, onComplete]);
 
-  // Play narration for current slide
-  const playSlideNarration = useCallback(async () => {
-    if (!audioEnabled || isPaused) {
+  // Play narration for current slide - using refs for stable access
+  const playSlideNarration = useCallback(async (slideIndex: number) => {
+    if (!audioEnabledRef.current || isPausedRef.current) {
       return;
     }
+
+    // Get slide data from slides array using the passed index
+    const slide = slides[slideIndex];
+    if (!slide) return;
 
     // Cancel any pending requests first
     if (abortControllerRef.current) {
@@ -242,14 +261,15 @@ export function AnimatedSlides({
     
     // Create new abort controller for this slide
     abortControllerRef.current = new AbortController();
+    const currentAbortController = abortControllerRef.current;
     
     // Get narration text for current slide
-    const narrationText = currentSlide.narration || currentSlide.content;
+    const narrationText = slide.narration || slide.content;
 
     if (!narrationText || narrationText.length === 0) {
       // No narration, advance immediately with small delay
       setTimeout(() => {
-        if (isPlayingRef.current) {
+        if (isPlayingRef.current && currentIndexRef.current === slideIndex) {
           advanceToNextSlide();
         }
       }, 2000);
@@ -259,13 +279,19 @@ export function AnimatedSlides({
     setIsNarrationLoading(true);
     
     try {
-      const voicePreset = currentSlide.voicePreset || detectVoicePreset(currentSlide, title) || defaultVoicePreset;
+      const voicePreset = slide.voicePreset || detectVoicePreset(slide, title) || defaultVoicePreset;
       
       const result = await fetchAndCacheAudio(narrationText, {
         preset: voicePreset,
         gender: userGender,
         language: userLanguage,
-      }, abortControllerRef.current.signal);
+      }, currentAbortController.signal);
+      
+      // Check if we're still on the same slide
+      if (currentIndexRef.current !== slideIndex) {
+        setIsNarrationLoading(false);
+        return;
+      }
       
       if (!result) {
         setIsNarrationLoading(false);
@@ -370,9 +396,9 @@ export function AnimatedSlides({
       }, fallbackTime);
     }
   }, [
-    audioEnabled, isPaused, currentSlide, userLanguage,
-    title, defaultVoicePreset, fetchAndCacheAudio, userGender,
-    advanceToNextSlide, getTimingMultiplier, hasImagePair, slides.length, onProgress
+    slides, userLanguage, title, defaultVoicePreset, 
+    fetchAndCacheAudio, userGender, advanceToNextSlide, 
+    getTimingMultiplier, hasImagePair, onProgress
   ]);
 
   // Start background music when component mounts and slideshow starts
@@ -410,7 +436,7 @@ export function AnimatedSlides({
     if (isPlaying && !isPaused) {
       // Small delay to ensure state is settled before playing
       const timer = setTimeout(() => {
-        playNarrationRef.current();
+        playNarrationRef.current(currentIndex);
       }, 100);
       return () => clearTimeout(timer);
     }
@@ -483,6 +509,31 @@ export function AnimatedSlides({
       onComplete?.();
     }
   }, [viewedSlides.size, slides.length, onComplete]);
+  
+  // Track elapsed time for the module
+  useEffect(() => {
+    if (!isPlaying) return;
+    
+    const interval = setInterval(() => {
+      setElapsedSeconds(prev => prev + 1);
+      setCurrentSlideElapsed(prev => prev + 1);
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  }, [isPlaying]);
+  
+  // Reset slide elapsed time when slide changes
+  useEffect(() => {
+    setCurrentSlideElapsed(0);
+    slideStartTimeRef.current = Date.now();
+  }, [currentIndex]);
+  
+  // Format time for display
+  const formatTime = (seconds: number): string => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
 
   const goToSlide = (index: number) => {
     // Stop current audio before navigating
@@ -494,6 +545,13 @@ export function AnimatedSlides({
     if (slideTimerRef.current) {
       clearTimeout(slideTimerRef.current);
     }
+    
+    // Calculate new elapsed time based on slide position
+    const perSlideEstimate = totalEstimatedSeconds / slides.length;
+    setElapsedSeconds(Math.floor(index * perSlideEstimate));
+    setCurrentSlideElapsed(0);
+    setAudioProgress(0);
+    
     setCurrentIndex(index);
     setSlideProgress(0);
     setViewedSlides(prev => new Set([...prev, index]));
@@ -721,7 +779,7 @@ export function AnimatedSlides({
             </Button>
           </div>
 
-          <span className="text-xs sm:text-sm text-muted-foreground flex items-center gap-1 sm:gap-2">
+          <div className="text-xs sm:text-sm text-muted-foreground flex items-center gap-1.5 sm:gap-2">
             {(isNarrationLoading || isCacheLoading) && (
               <Loader2 className="w-3 h-3 sm:w-4 sm:h-4 animate-spin text-primary" />
             )}
@@ -731,8 +789,10 @@ export function AnimatedSlides({
             {backgroundMusic.isPlaying && (
               <Music className="w-3 h-3 sm:w-4 sm:h-4 text-primary/60" />
             )}
-            {currentIndex + 1} / {slides.length}
-          </span>
+            <span className="font-mono">{formatTime(elapsedSeconds)}</span>
+            <span className="text-muted-foreground/50">/</span>
+            <span className="font-mono text-muted-foreground/70">{formatTime(totalEstimatedSeconds)}</span>
+          </div>
 
           <div className="flex items-center gap-0.5 sm:gap-1">
             <Button

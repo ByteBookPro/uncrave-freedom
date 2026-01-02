@@ -386,6 +386,7 @@ export function DaySessionPlayer({
             onComplete={handleMediaComplete}
             title={currentModule.title}
             narrationKey={currentModule.id}
+            totalEstimatedSeconds={currentModule.estimatedSeconds}
           />
         );
 
