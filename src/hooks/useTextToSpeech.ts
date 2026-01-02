@@ -25,12 +25,13 @@ export function useTextToSpeech() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
 
-  // Get user's voice preference from profile
-  const getUserVoiceGender = useCallback((): VoiceGender => {
+  // Get user's voice preference from profile - read directly from profile each time
+  const getUserVoiceGender = (): VoiceGender => {
     const voicePref = (profile as any)?.voice_preference;
+    console.log('Getting voice gender, profile voice_preference:', voicePref);
     if (voicePref === 'energetic_male') return 'male';
     return 'female'; // Default to calm_female
-  }, [profile]);
+  };
 
   const speak = useCallback(async (text: string, options?: SpeakOptions | string) => {
     if (!text) return;
@@ -40,7 +41,7 @@ export function useTextToSpeech() {
       ? { voiceId: options } 
       : options || {};
 
-    // Use user's voice preference if not explicitly specified
+    // Use user's voice preference if not explicitly specified - get fresh value
     const gender = opts.gender || getUserVoiceGender();
 
     setIsLoading(true);
@@ -111,13 +112,13 @@ export function useTextToSpeech() {
     } finally {
       setIsLoading(false);
     }
-  }, []);
+  }, [profile]);
 
   const pause = useCallback(() => {
     if (audioRef.current) {
       audioRef.current.pause();
     }
-  }, [getUserVoiceGender, profile]);
+  }, []);
 
   const resume = useCallback(() => {
     if (audioRef.current) {
