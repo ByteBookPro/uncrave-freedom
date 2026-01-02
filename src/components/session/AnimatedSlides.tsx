@@ -35,6 +35,9 @@ export function AnimatedSlides({
   const currentSlide = slides[currentIndex];
   const totalProgress = ((currentIndex + slideProgress / 100) / slides.length) * 100;
 
+  // Track if all slides have been viewed
+  const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]));
+
   useEffect(() => {
     if (!isPlaying) return;
 
@@ -43,8 +46,10 @@ export function AnimatedSlides({
         if (prev >= 100) {
           // Move to next slide
           if (currentIndex < slides.length - 1) {
-            setCurrentIndex((i) => i + 1);
-            onProgress?.(currentIndex + 1, slides.length);
+            const nextIndex = currentIndex + 1;
+            setCurrentIndex(nextIndex);
+            setViewedSlides(prevViewed => new Set([...prevViewed, nextIndex]));
+            onProgress?.(nextIndex + 1, slides.length);
             return 0;
           } else {
             // Completed all slides
@@ -60,10 +65,18 @@ export function AnimatedSlides({
     return () => clearInterval(progressInterval);
   }, [isPlaying, currentIndex, slides.length, slideDuration, onProgress, onComplete]);
 
+  // Check completion when all slides viewed
+  useEffect(() => {
+    if (viewedSlides.size === slides.length) {
+      onComplete?.();
+    }
+  }, [viewedSlides.size, slides.length, onComplete]);
+
   const goToSlide = (index: number) => {
     setCurrentIndex(index);
     setSlideProgress(0);
-    onProgress?.(index, slides.length);
+    setViewedSlides(prev => new Set([...prev, index]));
+    onProgress?.(index + 1, slides.length);
   };
 
   const goNext = () => {

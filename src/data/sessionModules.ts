@@ -33,117 +33,7 @@ export const daySessions: DaySession[] = [
       {
         id: 'd1m1',
         title: "Welcome to Your Freedom Journey",
-        description: "Discover how thousands have quit smoking without willpower or suffering.",
-        type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 210, // 3:30
-        gatingRequired: true,
-        content: {
-          slides: [
-            {
-              id: 's1',
-              title: "Welcome to UnCrave",
-              content: "Hello and welcome! Today marks Day 1 of your journey to becoming completely smoke-free. You've made an incredible decision.",
-              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
-              icon: "👋"
-            },
-            {
-              id: 's2',
-              title: "You're Not Alone",
-              content: "Millions have walked this path before you. Over 1.3 billion people smoke, but every day, thousands break free—for good.",
-              backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
-              icon: "🌍"
-            },
-            {
-              id: 's3',
-              title: "This Is Different",
-              content: "Forget willpower. Forget suffering. This program works by changing how you THINK about smoking, not by fighting cravings.",
-              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
-              icon: "🧠"
-            },
-            {
-              id: 's4',
-              title: "The 10-Day Promise",
-              content: "In just 10 days, you'll go from smoker to non-smoker—not through deprivation, but through understanding and freedom.",
-              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
-              icon: "✨"
-            },
-            {
-              id: 's5',
-              title: "Keep Smoking (For Now)",
-              content: "Yes, you read that right. For the first 5 days, keep smoking as usual. We're rewiring your brain, not torturing it.",
-              backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
-              icon: "🚬"
-            },
-          ]
-        }
-      },
-      {
-        id: 'd1m2',
-        title: "The Science of Freedom",
-        description: "Learn why this method works when others have failed.",
-        type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 300, // 5:00
-        gatingRequired: true,
-        content: {
-          slides: [
-            {
-              id: 's1',
-              title: "Why Willpower Fails",
-              content: "98% of cold-turkey attempts fail. Not because smokers are weak, but because they're fighting the wrong battle.",
-              backgroundGradient: "bg-gradient-to-br from-muted/80 to-primary/80",
-              icon: "💪"
-            },
-            {
-              id: 's2',
-              title: "The Belief Trap",
-              content: "You don't smoke because you're addicted. You smoke because you BELIEVE cigarettes give you something. That belief is the trap.",
-              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
-              icon: "🪤"
-            },
-            {
-              id: 's3',
-              title: "Nicotine's Small Secret",
-              content: "Nicotine withdrawal is incredibly mild—like a slight itch. The mental 'need' you feel is 95% psychological, not physical.",
-              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
-              icon: "🔬"
-            },
-            {
-              id: 's4',
-              title: "Changing Your Mind",
-              content: "When you truly understand that cigarettes give you NOTHING—no relaxation, no pleasure, no benefit—quitting becomes effortless.",
-              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
-              icon: "💡"
-            },
-            {
-              id: 's5',
-              title: "The Path Forward",
-              content: "Over the next 10 days, we'll examine every reason you think you smoke. One by one, we'll dissolve the illusions.",
-              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
-              icon: "🛤️"
-            },
-            {
-              id: 's6',
-              title: "Your Only Task Today",
-              content: "Smoke as usual, but start noticing. When do you reach for a cigarette? What do you expect to feel? Just observe.",
-              backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80",
-              icon: "👁️"
-            },
-          ]
-        }
-      },
-      {
-        id: 'd1m3',
-        title: "First Breathing Practice",
-        description: "Learn the breathing technique you'll use to handle any urge.",
-        type: 'GUIDED_PRACTICE',
-        estimatedSeconds: 180, // 3:00
-        gatingRequired: true,
-        practiceType: 'BREATHING',
-      },
-      {
-        id: 'd1m4',
-        title: "Your Coach's Message",
-        description: "Personal encouragement for your journey.",
+        description: "Introduction to the program and what to expect over 10 days.",
         type: 'ANIMATED_SLIDES',
         estimatedSeconds: 240, // 4:00
         gatingRequired: true,
@@ -151,43 +41,224 @@ export const daySessions: DaySession[] = [
           slides: [
             {
               id: 's1',
-              title: "I Believe In You",
-              content: "I was exactly where you are. After 15 years of smoking, I tried everything. Pills, patches, hypnosis. Nothing worked—until I understood.",
-              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
-              icon: "❤️"
+              title: "Hello & Welcome!",
+              content: "Today marks Day 1 of your journey to becoming completely smoke-free. Take a moment to appreciate this decision – you've taken the first step toward a healthier, happier you. Congratulations!",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "👋"
             },
             {
               id: 's2',
-              title: "The Moment It Clicked",
-              content: "When I finally saw through the illusion, quitting wasn't hard—it was a relief. That same clarity is coming for you.",
-              backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
-              icon: "✨"
+              title: "Walking Together",
+              content: "Over the next 10 days, we're going to walk this path together. And here's something unusual you'll love: you don't have to quit smoking today.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
+              icon: "🤝"
             },
             {
               id: 's3',
-              title: "Trust The Process",
-              content: "Some days you'll be skeptical. Some days excited. Both are normal. Just keep showing up, keep watching, keep listening.",
-              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
-              icon: "🙏"
+              title: "Keep Smoking (For Now)",
+              content: "For the first few days of this program, you can keep smoking as usual. Sounds odd, right? But this is exactly how our method works.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "🚬"
             },
             {
               id: 's4',
-              title: "Tomorrow Awaits",
-              content: "Day 2, we'll dive into how nicotine actually works—and why everything you think you know about addiction is probably wrong.",
+              title: "Changing Your Mind First",
+              content: "We first change the way you think and feel about smoking, and then quitting becomes much easier. No shock to your system, no sudden withdrawals on Day 1.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "🧠"
+            },
+            {
+              id: 's5',
+              title: "No Willpower Required",
+              content: "We're not going to force you to quit by sheer willpower – instead, we'll gently remove your desire to smoke at its root.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
+              icon: "✨"
+            },
+            {
+              id: 's6',
+              title: "Freedom Without Misery",
+              content: "Imagine that: freedom from smoking without feeling deprived or miserable. It might sound too good to be true, and you might be a bit skeptical – that's okay!",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "🕊️"
+            },
+          ]
+        }
+      },
+      {
+        id: 'd1m2',
+        title: "Your Reasons to Quit",
+        description: "Reflect on and record your personal motivations for becoming smoke-free.",
+        type: 'CHECKPOINT',
+        estimatedSeconds: 180, // 3:00
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "What Are Your Reasons?",
+              content: "Everyone has their own reasons for quitting. Maybe it's for your family, your health, or your finances. What are yours?",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "💭"
+            }
+          ]
+        }
+      },
+      {
+        id: 'd1m3',
+        title: "The 10-Day Roadmap",
+        description: "Learn what to expect each day of your journey.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 300, // 5:00
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "15-20 Minutes Daily",
+              content: "Each day, you'll spend about 15 to 20 minutes with me. We'll have a little chat about a specific aspect of smoking or quitting.",
+              backgroundGradient: "bg-gradient-to-br from-muted/80 to-primary/80",
+              icon: "⏰"
+            },
+            {
+              id: 's2',
+              title: "Interactive Learning",
+              content: "You'll see slides with key points, do short exercises, and watch animations that make the ideas come alive. Think of it as a fun coaching session each day.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "🎯"
+            },
+            {
+              id: 's3',
+              title: "Days 1-5: Understanding",
+              content: "We'll cover why we smoke, how nicotine hooks us, what triggers your cravings, and clever ways to break the habit loop that's kept you smoking.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🔍"
+            },
+            {
+              id: 's4',
+              title: "The Shift",
+              content: "By Day 5, you'll start noticing a big shift in how you view cigarettes. Many people say it's like a switch flips in their mind.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
+              icon: "💡"
+            },
+            {
+              id: 's5',
+              title: "Day 6: Your Last Cigarette",
+              content: "On Day 6, you'll smoke your last cigarette – and it will feel empowering, not scary. The cigarette goes from being a 'friend' to something you don't need.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
+              icon: "🚫"
+            },
+            {
+              id: 's6',
+              title: "Days 7-10: Solidifying Freedom",
+              content: "We'll spend the final days helping you solidify your smoke-free life – handling any cravings, building healthier habits, and ensuring you feel confident forever.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80",
+              icon: "🏆"
+            },
+          ]
+        }
+      },
+      {
+        id: 'd1m4',
+        title: "Why This Works",
+        description: "Understand the science behind our approach and why it's different.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 300, // 5:00
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Proven By Science",
+              content: "Using a supportive quit-smoking app can make you nearly 1.5–2 times more likely to quit successfully compared to going it alone. You've given yourself a real advantage.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "📊"
+            },
+            {
+              id: 's2',
+              title: "No Judgment Here",
+              content: "We're not going to lecture you about how bad smoking is – you already know it's unhealthy. Instead, we respect you and your decision to quit.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
+              icon: "🤗"
+            },
+            {
+              id: 's3',
+              title: "A Clean Slate",
+              content: "If you've tried to quit before and relapsed, you're not alone. Many smokers try multiple times before succeeding. Let's wipe that slate clean. You are here now.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "🔄"
+            },
+            {
+              id: 's4',
+              title: "Feel the Excitement",
+              content: "Take a deep breath. Feel a little excitement – you are at the start of something great. By the end of these 10 days, you will be free.",
               backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
-              icon: "🌅"
+              icon: "🎉"
+            },
+            {
+              id: 's5',
+              title: "Picture Your Freedom",
+              content: "No more being chained to the need to light up, no more worrying about when you can smoke next, no more guilt or hiding. Instead, freedom.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "🕊️"
             },
           ]
         }
       },
       {
         id: 'd1m5',
-        title: "Urge Surfing Introduction",
-        description: "A powerful technique to ride out cravings without fighting them.",
+        title: "Visualization Exercise",
+        description: "Visualize yourself as a non-smoker on Day 11.",
         type: 'GUIDED_PRACTICE',
-        estimatedSeconds: 150, // 2:30
+        estimatedSeconds: 180, // 3:00
         gatingRequired: true,
-        practiceType: 'URGE_SURFING',
+        practiceType: 'VISUALIZATION',
+      },
+      {
+        id: 'd1m6',
+        title: "Your Commitment",
+        description: "Close Day 1 with a commitment to continue tomorrow.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 180, // 3:00
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "We're Here For You",
+              content: "You have resources at your fingertips – support whenever you need to vent or ask for tips. Quitting is one of the most important things you'll ever do, but you're not alone.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "❤️"
+            },
+            {
+              id: 's2',
+              title: "Today's Simple Task",
+              content: "Commit to this process. Tell yourself: 'I am doing this. I'm giving myself these 10 days to change my life.' That's it.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
+              icon: "✅"
+            },
+            {
+              id: 's3',
+              title: "Keep Smoking Today",
+              content: "You don't need to change anything else right now. You can smoke as you normally do today – just be sure to come back for Day 2 tomorrow.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "📅"
+            },
+            {
+              id: 's4',
+              title: "You've Already Won",
+              content: "By starting this program, you've already done one of the hardest parts – you made the decision to try. Give yourself credit for that.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
+              icon: "🏅"
+            },
+            {
+              id: 's5',
+              title: "See You Tomorrow!",
+              content: "Tomorrow, we'll dive into understanding why we smoke – and bust some myths that have been holding you back. It's going to be eye-opening and empowering!",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "🌅"
+            },
+          ]
+        }
       },
     ]
   },
