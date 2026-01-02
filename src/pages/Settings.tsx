@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, User, Calendar, LogOut, Globe, Cigarette } from 'lucide-react';
+import { ArrowLeft, User, Calendar, LogOut, Globe, Cigarette, Volume2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,12 +13,18 @@ import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';
 
 type ContentLanguage = 'en' | 'de' | 'zh' | 'hi';
+type VoicePreference = 'calm_female' | 'energetic_male';
 
 const languageLabels: Record<ContentLanguage, string> = {
   en: 'English',
   de: 'Deutsch',
   zh: '中文',
   hi: 'हिन्दी'
+};
+
+const voiceLabels: Record<VoicePreference, { name: string; description: string }> = {
+  calm_female: { name: 'Calm Coach', description: 'Warm, soothing female voice' },
+  energetic_male: { name: 'Energetic Coach', description: 'Motivating, upbeat male voice' }
 };
 
 export default function Settings() {
@@ -28,6 +34,7 @@ export default function Settings() {
   
   const [displayName, setDisplayName] = useState('');
   const [language, setLanguage] = useState<ContentLanguage>('en');
+  const [voicePreference, setVoicePreference] = useState<VoicePreference>('calm_female');
   const [cigarettesPerDay, setCigarettesPerDay] = useState<number | ''>('');
   const [yearsSmoking, setYearsSmoking] = useState<number | ''>('');
   const [isSaving, setIsSaving] = useState(false);
@@ -37,6 +44,7 @@ export default function Settings() {
     if (profile) {
       setDisplayName(profile.display_name || '');
       setLanguage((profile.language as ContentLanguage) || 'en');
+      setVoicePreference(((profile as any).voice_preference as VoicePreference) || 'calm_female');
       setCigarettesPerDay(profile.cigarettes_per_day || '');
       setYearsSmoking(profile.years_smoking || '');
     }
@@ -52,6 +60,7 @@ export default function Settings() {
         .update({
           display_name: displayName || null,
           language,
+          voice_preference: voicePreference,
           cigarettes_per_day: cigarettesPerDay === '' ? null : cigarettesPerDay,
           years_smoking: yearsSmoking === '' ? null : yearsSmoking,
         })
@@ -144,6 +153,28 @@ export default function Settings() {
                       <div className="flex items-center gap-2">
                         <Globe className="h-4 w-4" />
                         {label}
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="voice">Narrator Voice</Label>
+              <Select value={voicePreference} onValueChange={(val) => setVoicePreference(val as VoicePreference)}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {Object.entries(voiceLabels).map(([code, { name, description }]) => (
+                    <SelectItem key={code} value={code}>
+                      <div className="flex items-center gap-2">
+                        <Volume2 className="h-4 w-4" />
+                        <div>
+                          <span className="font-medium">{name}</span>
+                          <span className="text-muted-foreground ml-2 text-sm">— {description}</span>
+                        </div>
                       </div>
                     </SelectItem>
                   ))}

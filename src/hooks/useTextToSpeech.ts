@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback } from 'react';
+import { useAuth } from '@/contexts/AuthContext';
 
 // Voice presets for different content contexts
 export type VoicePreset = 
@@ -17,11 +18,19 @@ export interface SpeakOptions {
 }
 
 export function useTextToSpeech() {
+  const { profile } = useAuth();
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
+
+  // Get user's voice preference from profile
+  const getUserVoiceGender = useCallback((): VoiceGender => {
+    const voicePref = (profile as any)?.voice_preference;
+    if (voicePref === 'energetic_male') return 'male';
+    return 'female'; // Default to calm_female
+  }, [profile]);
 
   const speak = useCallback(async (text: string, options?: SpeakOptions | string) => {
     if (!text) return;
@@ -30,6 +39,9 @@ export function useTextToSpeech() {
     const opts: SpeakOptions = typeof options === 'string' 
       ? { voiceId: options } 
       : options || {};
+
+    // Use user's voice preference if not explicitly specified
+    const gender = opts.gender || getUserVoiceGender();
 
     setIsLoading(true);
     setError(null);
@@ -50,7 +62,8 @@ export function useTextToSpeech() {
       console.log('Requesting TTS:', {
         text: text.substring(0, 50) + '...',
         preset: opts.preset || 'dailyCoach',
-        gender: opts.gender || 'female'
+        gender,
+        voicePreference: (profile as any)?.voice_preference || 'calm_female'
       });
 
       const response = await fetch(
@@ -65,7 +78,7 @@ export function useTextToSpeech() {
             text, 
             voiceId: opts.voiceId,
             preset: opts.preset || 'dailyCoach',
-            gender: opts.gender || 'female'
+            gender
           }),
         }
       );
@@ -104,7 +117,7 @@ export function useTextToSpeech() {
     if (audioRef.current) {
       audioRef.current.pause();
     }
-  }, []);
+  }, [getUserVoiceGender, profile]);
 
   const resume = useCallback(() => {
     if (audioRef.current) {
