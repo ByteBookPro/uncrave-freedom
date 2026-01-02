@@ -7,6 +7,7 @@ import { AnimatedSlides } from './AnimatedSlides';
 import { BreathingCoach } from '../practices/BreathingCoach';
 import { UrgeSurfing } from '../practices/UrgeSurfing';
 import { BodyScan } from '../practices/BodyScan';
+import { TriggerChecklist } from '../TriggerChecklist';
 import { 
   ArrowLeft, 
   ArrowRight,
@@ -287,6 +288,23 @@ export function DaySessionPlayer({
             onComplete={() => handlePracticeComplete()}
             onCancel={() => setActivePractice(null)}
           />
+        );
+      case 'TRIGGER_SCAN':
+        // Trigger scan uses the TriggerChecklist component
+        return (
+          <div className="min-h-screen bg-background p-4">
+            <TriggerChecklist 
+              onComplete={() => handlePracticeComplete()}
+              showSaveButton={true}
+            />
+            <Button 
+              variant="outline" 
+              className="w-full mt-4"
+              onClick={() => setActivePractice(null)}
+            >
+              Cancel
+            </Button>
+          </div>
         );
       case 'VISUALIZATION':
         // Visualization uses BodyScan component for now (guided meditation style)

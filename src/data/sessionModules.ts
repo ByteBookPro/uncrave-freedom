@@ -679,6 +679,15 @@ export const daySessions: DaySession[] = [
         }
       },
       {
+        id: 'd3m2b',
+        title: "Identify Your Personal Triggers",
+        description: "Select all the situations that make you want to smoke.",
+        type: 'GUIDED_PRACTICE',
+        estimatedSeconds: 180,
+        gatingRequired: true,
+        practiceType: 'TRIGGER_SCAN',
+      },
+      {
         id: 'd3m3',
         title: "Creating Alternative Responses",
         description: "For every trigger, we create a new, healthier response.",
