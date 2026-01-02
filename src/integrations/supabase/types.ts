@@ -294,6 +294,8 @@ export type Database = {
           quit_date: string | null
           subscription_expires_at: string | null
           subscription_status: string | null
+          trigger_alternatives: Json | null
+          triggers: string[] | null
           updated_at: string
           voice_preference: string | null
           years_smoking: number | null
@@ -307,6 +309,8 @@ export type Database = {
           quit_date?: string | null
           subscription_expires_at?: string | null
           subscription_status?: string | null
+          trigger_alternatives?: Json | null
+          triggers?: string[] | null
           updated_at?: string
           voice_preference?: string | null
           years_smoking?: number | null
@@ -320,6 +324,8 @@ export type Database = {
           quit_date?: string | null
           subscription_expires_at?: string | null
           subscription_status?: string | null
+          trigger_alternatives?: Json | null
+          triggers?: string[] | null
           updated_at?: string
           voice_preference?: string | null
           years_smoking?: number | null
