@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { ContentLanguage } from '@/types/database';
 
 // Voice presets for different content contexts
 export type VoicePreset = 
@@ -15,6 +16,7 @@ export interface SpeakOptions {
   voiceId?: string;
   preset?: VoicePreset;
   gender?: VoiceGender;
+  language?: ContentLanguage;
 }
 
 export function useTextToSpeech() {
@@ -22,15 +24,21 @@ export function useTextToSpeech() {
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [currentText, setCurrentText] = useState<string>('');
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
 
-  // Get user's voice preference from profile - read directly from profile each time
+  // Get user's voice preference from profile
   const getUserVoiceGender = (): VoiceGender => {
     const voicePref = (profile as any)?.voice_preference;
-    console.log('Getting voice gender, profile voice_preference:', voicePref);
     if (voicePref === 'energetic_male') return 'male';
-    return 'female'; // Default to calm_female
+    return 'female';
+  };
+
+  // Get user's language preference from profile
+  const getUserLanguage = (): ContentLanguage => {
+    return (profile as any)?.language || 'en';
   };
 
   const speak = useCallback(async (text: string, options?: SpeakOptions | string) => {
@@ -41,30 +49,42 @@ export function useTextToSpeech() {
       ? { voiceId: options } 
       : options || {};
 
-    // Use user's voice preference if not explicitly specified - get fresh value
+    // Use user's preferences if not explicitly specified
     const gender = opts.gender || getUserVoiceGender();
+    const language = opts.language || getUserLanguage();
+
+    // Cancel any ongoing request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
+
+    // Stop any currently playing audio immediately
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      audioRef.current = null;
+    }
+
+    // Clean up previous audio URL
+    if (audioUrlRef.current) {
+      URL.revokeObjectURL(audioUrlRef.current);
+      audioUrlRef.current = null;
+    }
 
     setIsLoading(true);
+    setIsPlaying(false);
     setError(null);
+    setCurrentText(text);
+
+    // Create new abort controller for this request
+    abortControllerRef.current = new AbortController();
 
     try {
-      // Stop any currently playing audio
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-
-      // Clean up previous audio URL
-      if (audioUrlRef.current) {
-        URL.revokeObjectURL(audioUrlRef.current);
-        audioUrlRef.current = null;
-      }
-
       console.log('Requesting TTS:', {
         text: text.substring(0, 50) + '...',
         preset: opts.preset || 'dailyCoach',
         gender,
-        voicePreference: (profile as any)?.voice_preference || 'calm_female'
+        language
       });
 
       const response = await fetch(
@@ -79,8 +99,10 @@ export function useTextToSpeech() {
             text, 
             voiceId: opts.voiceId,
             preset: opts.preset || 'dailyCoach',
-            gender
+            gender,
+            language
           }),
+          signal: abortControllerRef.current.signal
         }
       );
 
@@ -105,8 +127,12 @@ export function useTextToSpeech() {
       };
 
       await audio.play();
-      console.log('Audio playback started with preset:', opts.preset || 'dailyCoach');
     } catch (err) {
+      // Ignore abort errors
+      if (err instanceof Error && err.name === 'AbortError') {
+        console.log('TTS request was cancelled');
+        return;
+      }
       console.error('TTS error:', err);
       setError(err instanceof Error ? err.message : 'Failed to generate speech');
     } finally {
@@ -127,10 +153,26 @@ export function useTextToSpeech() {
   }, []);
 
   const stop = useCallback(() => {
+    // Cancel any pending request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
+    
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
+      audioRef.current = null;
     }
+    
+    // Clean up audio URL
+    if (audioUrlRef.current) {
+      URL.revokeObjectURL(audioUrlRef.current);
+      audioUrlRef.current = null;
+    }
+    
+    setIsPlaying(false);
+    setIsLoading(false);
   }, []);
 
   const toggle = useCallback(() => {
@@ -150,5 +192,6 @@ export function useTextToSpeech() {
     isLoading,
     isPlaying,
     error,
+    currentText,
   };
 }

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, ChevronLeft, ChevronRight, Volume2, VolumeX, Loader2, Music } from 'lucide-react';
+import { Play, Pause, ChevronLeft, ChevronRight, Volume2, VolumeX, Loader2, Music, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTextToSpeech, VoicePreset } from '@/hooks/useTextToSpeech';
 import { useBackgroundMusic } from '@/hooks/useBackgroundMusic';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface Slide {
   id: string;
@@ -11,18 +12,18 @@ interface Slide {
   content: string;
   backgroundGradient?: string;
   icon?: string;
-  narration?: string; // Optional narration text for this slide
-  voicePreset?: VoicePreset; // Optional voice preset for this slide
+  narration?: string;
+  voicePreset?: VoicePreset;
 }
 
 interface AnimatedSlidesProps {
   slides: Slide[];
   autoPlay?: boolean;
-  slideDuration?: number; // base seconds per slide (auto-adjusts for narration length)
+  slideDuration?: number;
   onProgress?: (currentSlide: number, totalSlides: number) => void;
   onComplete?: () => void;
   title?: string;
-  narrationKey?: string; // Key to look up narration in sessionNarration
+  narrationKey?: string;
   defaultVoicePreset?: VoicePreset;
 }
 
@@ -30,44 +31,37 @@ interface AnimatedSlidesProps {
 function detectVoicePreset(slide: Slide, title?: string): VoicePreset {
   const text = `${slide.title} ${slide.content} ${slide.narration || ''}`.toLowerCase();
   
-  // Breathing, meditation, guided exercises
   if (text.includes('breathe') || text.includes('breathing') || text.includes('inhale') || 
       text.includes('exhale') || text.includes('close your eyes') || text.includes('meditation')) {
     return 'guided';
   }
   
-  // Craving/urge surfing content
   if (text.includes('craving') || text.includes('urge') || text.includes('emergency') ||
       text.includes('waves') || text.includes('surf')) {
     return 'cravingEmergency';
   }
   
-  // Motivational content, endings, pledges
   if (text.includes('congratulation') || text.includes('you did it') || text.includes('freedom') ||
       text.includes('commit') || text.includes('promise') || text.includes('celebrate') ||
       text.includes('you can do') || text.includes('proud')) {
     return 'motivationLift';
   }
   
-  // Personal stories
   if (text.includes('let me tell you') || text.includes('story') || text.includes('imagine') ||
       text.includes('picture') || text.includes('i know what') || text.includes('sarah') ||
       text.includes('years ago')) {
     return 'story';
   }
   
-  // Default to daily coach
   return 'dailyCoach';
 }
 
-// Calculate slide duration based on narration length (~150 words per minute)
+// Calculate slide duration based on narration length
 function calculateSlideDuration(slide: Slide, baseDuration: number): number {
   const narrationText = slide.narration || slide.content;
   const wordCount = narrationText.split(/\s+/).length;
-  // Average speaking rate: ~150 words per minute = 2.5 words per second
-  // Add buffer for pauses and processing
   const estimatedDuration = Math.max(baseDuration, (wordCount / 2.2) + 3);
-  return Math.min(estimatedDuration, 120); // Cap at 2 minutes per slide
+  return Math.min(estimatedDuration, 120);
 }
 
 export function AnimatedSlides({
@@ -85,9 +79,10 @@ export function AnimatedSlides({
   const [slideProgress, setSlideProgress] = useState(0);
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [musicEnabled, setMusicEnabled] = useState(true);
+  const [showTranscript, setShowTranscript] = useState(true);
   const [hasPlayedNarration, setHasPlayedNarration] = useState<Set<number>>(new Set());
   
-  const { speak, stop, isLoading: isNarrationLoading, isPlaying: isNarrationPlaying } = useTextToSpeech();
+  const { speak, stop, isLoading: isNarrationLoading, isPlaying: isNarrationPlaying, currentText } = useTextToSpeech();
   const backgroundMusic = useBackgroundMusic({ volume: 0.12 });
 
   // Guard against empty slides array
@@ -112,6 +107,9 @@ export function AnimatedSlides({
   // Track if all slides have been viewed
   const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]));
 
+  // Current transcript text
+  const currentNarration = currentSlide.narration || currentSlide.content;
+
   // Start background music when component mounts and slideshow starts
   useEffect(() => {
     if (isPlaying && musicEnabled) {
@@ -121,7 +119,7 @@ export function AnimatedSlides({
     }
   }, [isPlaying, musicEnabled]);
 
-  // Duck music when narration is playing, unduck when it stops
+  // Duck music when narration is playing
   useEffect(() => {
     if (isNarrationPlaying) {
       backgroundMusic.duck();
@@ -137,23 +135,19 @@ export function AnimatedSlides({
     };
   }, []);
 
-  // Play narration when slide changes with appropriate voice preset
+  // Play narration when slide changes
   useEffect(() => {
     if (!audioEnabled || hasPlayedNarration.has(currentIndex)) return;
     
     const narrationText = currentSlide.narration || currentSlide.content;
     if (narrationText && narrationText.length > 0) {
-      // Determine the voice preset for this slide
       const voicePreset = currentSlide.voicePreset || detectVoicePreset(currentSlide, title) || defaultVoicePreset;
-      
-      console.log(`Playing narration for slide ${currentIndex + 1} with preset: ${voicePreset}`);
-      // Don't pass gender - let useTextToSpeech use user's preference from profile
       speak(narrationText, { preset: voicePreset });
       setHasPlayedNarration(prev => new Set([...prev, currentIndex]));
     }
   }, [currentIndex, audioEnabled, currentSlide, hasPlayedNarration, speak, title, defaultVoicePreset]);
 
-  // Stop narration when component unmounts or audio disabled
+  // Stop narration when component unmounts
   useEffect(() => {
     return () => {
       stop();
@@ -173,7 +167,6 @@ export function AnimatedSlides({
     const progressInterval = setInterval(() => {
       setSlideProgress((prev) => {
         if (prev >= 100) {
-          // Move to next slide
           if (currentIndex < slides.length - 1) {
             const nextIndex = currentIndex + 1;
             setCurrentIndex(nextIndex);
@@ -181,13 +174,11 @@ export function AnimatedSlides({
             onProgress?.(nextIndex + 1, slides.length);
             return 0;
           } else {
-            // Completed all slides
             setIsPlaying(false);
             onComplete?.();
             return 100;
           }
         }
-        // Use dynamic duration for progress calculation
         return prev + (100 / (currentSlideDuration * 10));
       });
     }, 100);
@@ -203,6 +194,14 @@ export function AnimatedSlides({
   }, [viewedSlides.size, slides.length, onComplete]);
 
   const goToSlide = (index: number) => {
+    // Stop current audio before navigating
+    stop();
+    // Clear played narration for new slide so it plays again
+    setHasPlayedNarration(prev => {
+      const newSet = new Set(prev);
+      newSet.delete(index);
+      return newSet;
+    });
     setCurrentIndex(index);
     setSlideProgress(0);
     setViewedSlides(prev => new Set([...prev, index]));
@@ -221,7 +220,7 @@ export function AnimatedSlides({
     }
   };
 
-  // Ken Burns animation styles - use dynamic duration
+  // Ken Burns animation styles
   const kenBurnsStyle = {
     animation: isPlaying ? `kenBurns ${currentSlideDuration}s ease-in-out` : 'none',
   };
@@ -339,6 +338,16 @@ export function AnimatedSlides({
             <Button
               variant="ghost"
               size="icon"
+              onClick={() => setShowTranscript(!showTranscript)}
+              className="h-10 w-10"
+              title={showTranscript ? "Hide transcript" : "Show transcript"}
+            >
+              <FileText className={cn("w-5 h-5", !showTranscript && "text-muted-foreground")} />
+            </Button>
+            
+            <Button
+              variant="ghost"
+              size="icon"
               onClick={() => setMusicEnabled(!musicEnabled)}
               className="h-10 w-10"
               title={musicEnabled ? "Mute background music" : "Enable background music"}
@@ -361,6 +370,15 @@ export function AnimatedSlides({
             </Button>
           </div>
         </div>
+
+        {/* Transcript display */}
+        {showTranscript && (
+          <ScrollArea className="h-24 w-full rounded-lg bg-muted/50 p-3">
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {currentNarration}
+            </p>
+          </ScrollArea>
+        )}
       </div>
 
       {/* Add Ken Burns keyframes via style tag */}
