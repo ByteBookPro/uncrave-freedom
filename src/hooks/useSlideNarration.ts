@@ -1,7 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
-import { useAudioCache } from '@/hooks/useAudioCache';
-import { VoicePreset } from '@/hooks/useTextToSpeech';
 import { ContentLanguage } from '@/types/database';
+import { VoicePreset } from '@/hooks/useTextToSpeech';
 
 interface UseSlideNarrationOptions {
   language: ContentLanguage;
@@ -16,9 +15,17 @@ interface NarrationState {
   isComplete: boolean;
 }
 
+// In-memory cache for audio during session
+const audioCache = new Map<string, { url: string; blob: Blob }>();
+
+// Generate a cache key from text and settings
+function getCacheKey(text: string, language: ContentLanguage, preset: string, gender: string): string {
+  const textHash = text.substring(0, 100).replace(/\s+/g, '_').substring(0, 50);
+  return `${language}_${preset}_${gender}_${textHash}`;
+}
+
 export function useSlideNarration(options: UseSlideNarrationOptions) {
   const { language, gender } = options;
-  const { fetchAndCacheAudio } = useAudioCache();
   
   const [state, setState] = useState<NarrationState>({
     isLoading: false,
@@ -34,21 +41,13 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
   const currentSlideIdRef = useRef<string | null>(null);
   const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
   
-  // Cleanup function
-  const cleanup = useCallback(() => {
-    // Clear progress tracking
+  // Cleanup audio element only (not abort controller)
+  const cleanupAudioElement = useCallback(() => {
     if (progressIntervalRef.current) {
       clearInterval(progressIntervalRef.current);
       progressIntervalRef.current = null;
     }
     
-    // Abort any pending fetch
-    if (abortControllerRef.current) {
-      abortControllerRef.current.abort();
-      abortControllerRef.current = null;
-    }
-    
-    // Stop and clear audio element
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.onended = null;
@@ -59,13 +58,23 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
       audioRef.current.onloadedmetadata = null;
       audioRef.current = null;
     }
+  }, []);
+  
+  // Full cleanup including abort
+  const fullCleanup = useCallback(() => {
+    cleanupAudioElement();
+    
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
     
     currentSlideIdRef.current = null;
-  }, []);
+  }, [cleanupAudioElement]);
   
   // Stop narration completely
   const stop = useCallback(() => {
-    cleanup();
+    fullCleanup();
     setState({
       isLoading: false,
       isPlaying: false,
@@ -73,7 +82,7 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
       duration: 0,
       isComplete: false,
     });
-  }, [cleanup]);
+  }, [fullCleanup]);
   
   // Play narration for a slide
   const play = useCallback(async (
@@ -84,11 +93,19 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
   ): Promise<void> => {
     // Don't restart if already playing the same slide
     if (currentSlideIdRef.current === slideId && audioRef.current && !audioRef.current.paused) {
+      console.log('Already playing slide:', slideId);
       return;
     }
     
-    // Clean up previous audio
-    cleanup();
+    console.log('Playing narration for slide:', slideId);
+    
+    // Clean up previous audio element only (don't abort - let new request take over)
+    cleanupAudioElement();
+    
+    // Abort previous fetch if any
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
     
     // Store callback and slide ID
     onEndedCallbackRef.current = onEnded || null;
@@ -96,8 +113,9 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
     
     // Early exit if no text
     if (!text || text.trim().length === 0) {
+      console.log('No text for slide:', slideId);
       setState(prev => ({ ...prev, isComplete: true }));
-      onEnded?.();
+      setTimeout(() => onEnded?.(), 500);
       return;
     }
     
@@ -108,38 +126,83 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
     setState(prev => ({ ...prev, isLoading: true, isPlaying: false, progress: 0, isComplete: false }));
     
     try {
-      const result = await fetchAndCacheAudio(text, {
-        preset: voicePreset,
-        gender,
-        language,
-      }, controller.signal);
+      const preset = voicePreset || 'dailyCoach';
+      const cacheKey = getCacheKey(text, language, preset, gender);
       
-      // Check if we were aborted during fetch
-      if (controller.signal.aborted || currentSlideIdRef.current !== slideId) {
-        return;
+      // Check cache first
+      const cached = audioCache.get(cacheKey);
+      let audioUrl: string;
+      
+      if (cached) {
+        console.log('Using cached audio:', cacheKey);
+        audioUrl = cached.url;
+      } else {
+        console.log('Fetching audio:', cacheKey);
+        
+        const response = await fetch(
+          `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/text-to-speech`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+            },
+            body: JSON.stringify({ 
+              text, 
+              preset,
+              gender,
+              language
+            }),
+            signal: controller.signal
+          }
+        );
+
+        // Check if aborted during fetch
+        if (controller.signal.aborted) {
+          console.log('Fetch aborted for slide:', slideId);
+          return;
+        }
+        
+        // Check if still current slide
+        if (currentSlideIdRef.current !== slideId) {
+          console.log('Slide changed during fetch, ignoring:', slideId);
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error(`TTS API error: ${response.status}`);
+        }
+
+        const blob = await response.blob();
+        audioUrl = URL.createObjectURL(blob);
+        audioCache.set(cacheKey, { url: audioUrl, blob });
+        console.log('Cached audio:', cacheKey);
       }
       
-      if (!result) {
-        setState(prev => ({ ...prev, isLoading: false }));
+      // Final check before playing
+      if (currentSlideIdRef.current !== slideId) {
+        console.log('Slide changed before playback, ignoring:', slideId);
         return;
       }
       
       // Create and configure audio element
-      const audio = new Audio(result.url);
+      const audio = new Audio(audioUrl);
       audioRef.current = audio;
       
       audio.onloadedmetadata = () => {
         if (currentSlideIdRef.current !== slideId) return;
+        console.log('Audio loaded, duration:', audio.duration);
         setState(prev => ({ ...prev, duration: audio.duration }));
       };
       
       audio.onplay = () => {
         if (currentSlideIdRef.current !== slideId) return;
+        console.log('Audio playing for slide:', slideId);
         setState(prev => ({ ...prev, isPlaying: true, isLoading: false }));
         
         // Start progress tracking
         progressIntervalRef.current = setInterval(() => {
-          if (audioRef.current && !audioRef.current.paused) {
+          if (audioRef.current && !audioRef.current.paused && audioRef.current.duration > 0) {
             const progress = (audioRef.current.currentTime / audioRef.current.duration) * 100;
             setState(prev => ({ ...prev, progress: Math.min(progress, 100) }));
           }
@@ -154,6 +217,8 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
       };
       
       audio.onended = () => {
+        console.log('Audio ended for slide:', slideId);
+        
         // Clear progress interval
         if (progressIntervalRef.current) {
           clearInterval(progressIntervalRef.current);
@@ -164,7 +229,8 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
         
         // Only call callback if this is still the current slide
         if (currentSlideIdRef.current === slideId && onEndedCallbackRef.current) {
-          // Small delay before calling onEnded to ensure state is settled
+          console.log('Calling onEnded callback for slide:', slideId);
+          // Small delay before advancing
           setTimeout(() => {
             if (currentSlideIdRef.current === slideId) {
               onEndedCallbackRef.current?.();
@@ -174,7 +240,7 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
       };
       
       audio.onerror = (e) => {
-        console.error('Audio playback error:', e);
+        console.error('Audio playback error for slide:', slideId, e);
         setState(prev => ({ ...prev, isLoading: false, isPlaying: false }));
       };
       
@@ -183,13 +249,13 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
       
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') {
-        console.log('Narration fetch aborted for slide:', slideId);
+        console.log('Narration aborted for slide:', slideId);
         return;
       }
-      console.error('Narration error:', err);
+      console.error('Narration error for slide:', slideId, err);
       setState(prev => ({ ...prev, isLoading: false }));
     }
-  }, [language, gender, fetchAndCacheAudio, cleanup]);
+  }, [language, gender, cleanupAudioElement]);
   
   // Pause current audio
   const pause = useCallback(() => {
@@ -205,12 +271,12 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
     }
   }, []);
   
-  // Cleanup on unmount
+  // Cleanup on unmount only
   useEffect(() => {
     return () => {
-      cleanup();
+      fullCleanup();
     };
-  }, [cleanup]);
+  }, []);
   
   return {
     ...state,

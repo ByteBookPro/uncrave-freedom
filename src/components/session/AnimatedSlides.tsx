@@ -177,11 +177,18 @@ export function AnimatedSlides({
     }
   }, [slides.length, onProgress, onComplete]);
 
-  // Play narration for current slide
+  // Use ref to avoid dependency on narration object
+  const narrationRef = useRef(narration);
+  useEffect(() => {
+    narrationRef.current = narration;
+  }, [narration]);
+  
+  // Play narration for current slide - stable callback
   const playCurrentSlide = useCallback(() => {
     if (!audioEnabledRef.current || !isPlayingRef.current) return;
     
-    const slide = slides[currentIndexRef.current];
+    const slideIndex = currentIndexRef.current;
+    const slide = slides[slideIndex];
     if (!slide) return;
     
     const text = slide.narration || slide.content;
@@ -189,16 +196,15 @@ export function AnimatedSlides({
     
     // Mark slide as completed and advance when narration ends
     const handleNarrationEnded = () => {
-      const completedIndex = currentIndexRef.current;
-      setCompletedSlides(prev => new Set([...prev, completedIndex]));
+      setCompletedSlides(prev => new Set([...prev, slideIndex]));
       
       if (isPlayingRef.current) {
         advanceToNextSlide();
       }
     };
     
-    narration.play(slide.id, text, voicePreset, handleNarrationEnded);
-  }, [slides, title, defaultVoicePreset, narration, advanceToNextSlide]);
+    narrationRef.current.play(slide.id, text, voicePreset, handleNarrationEnded);
+  }, [slides, title, defaultVoicePreset, advanceToNextSlide]);
 
   // Start background music when component mounts and slideshow starts
   useEffect(() => {
@@ -239,30 +245,30 @@ export function AnimatedSlides({
   // Handle play/pause state changes
   useEffect(() => {
     if (!isPlaying) {
-      narration.stop();
+      narrationRef.current.stop();
       if (pauseTimerRef.current) {
         clearTimeout(pauseTimerRef.current);
         pauseTimerRef.current = null;
       }
     }
-  }, [isPlaying, narration]);
+  }, [isPlaying]);
 
   // Cleanup on unmount
   useEffect(() => {
     return () => {
-      narration.stop();
+      narrationRef.current.stop();
       if (pauseTimerRef.current) {
         clearTimeout(pauseTimerRef.current);
       }
     };
-  }, [narration]);
+  }, []);
 
   // Stop narration when audio is disabled
   useEffect(() => {
     if (!audioEnabled) {
-      narration.stop();
+      narrationRef.current.stop();
     }
-  }, [audioEnabled, narration]);
+  }, [audioEnabled]);
 
   // Fallback timer for when audio is disabled
   useEffect(() => {
@@ -311,7 +317,7 @@ export function AnimatedSlides({
 
   const goToSlide = (index: number) => {
     // Stop current narration before navigating
-    narration.stop();
+    narrationRef.current.stop();
     if (pauseTimerRef.current) {
       clearTimeout(pauseTimerRef.current);
       setIsPaused(false);
