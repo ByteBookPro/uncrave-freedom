@@ -53,53 +53,102 @@ export const daySessions: DaySession[] = [
         gatingRequired: true,
         content: {
           slides: [
+            // Text-first slides for narration impact
             {
               id: 's1',
-              title: "A New Journey Begins",
-              content: "Today marks Day 1 of your journey to becoming completely smoke-free.",
-              backgroundImage: "/assets/day1/slide1-journey-begins.jpg",
-              textPosition: 'top',
-              narration: "Hello, and welcome. I'm so glad you're here. Today marks Day 1 of your journey to becoming completely smoke-free. Before we go any further, I want you to pause and really appreciate this moment. You made a choice. You chose to be here. That might sound simple, but it's not. Every single person who has ever quit smoking started exactly where you are right now – making that first decision to try. So congratulations. Seriously. Give yourself credit. You've already done something that millions of smokers never do: you've taken action."
+              title: "Welcome",
+              content: "Hello, and welcome. I'm so glad you're here.",
+              backgroundGradient: "bg-gradient-to-br from-primary/90 to-coral/80",
+              icon: "👋",
+              narration: "Hello, and welcome. I'm so glad you're here. Today marks Day 1 of your journey to becoming completely smoke-free."
             },
             {
               id: 's2',
-              title: "You're Not Alone",
-              content: "I know what it's like to feel trapped by cigarettes. The constant planning, the guilt, the fear.",
-              backgroundImage: "/assets/day1/slide2-not-alone.jpg",
-              textPosition: 'top',
-              narration: "I know what it's like. I really do. I know what it feels like to wake up in the morning and reach for a cigarette before your feet even touch the floor. I know the way you plan your entire day around smoke breaks – meetings, car rides, dinners, all scheduled around when you can slip away to light up. I know the guilt that washes over you after every single cigarette, that voice in your head that says 'I should quit' while your hand is already reaching for the pack. And I know the fear. The fear that you can't do it. That you've tried before and failed. That you're somehow different, weaker, more addicted than everyone else. You're not. And over the next 10 days, I'm going to prove it to you."
+              title: "A New Journey Begins",
+              content: "Today marks Day 1 of your journey to becoming completely smoke-free.",
+              backgroundImage: "/assets/day1/slide1-journey-begins.jpg",
+              textPosition: 'bottom',
+              narration: "Before we go any further, I want you to pause and really appreciate this moment. You made a choice. You chose to be here. That might sound simple, but it's not. Every single person who has ever quit smoking started exactly where you are right now – making that first decision to try. So congratulations. Seriously. Give yourself credit. You've already done something that millions of smokers never do: you've taken action."
             },
             {
               id: 's3',
-              title: "The Real Secret",
-              content: "We change the way you think and feel about smoking first. Then quitting becomes natural.",
-              backgroundImage: "/assets/day1/slide3-real-secret.jpg",
-              textPosition: 'top-left',
-              narration: "Here's the secret that changed everything for me, and for the millions of people who have successfully quit using this approach: we don't start by changing your behavior. We start by changing your mind. Think about it. Right now, somewhere in your brain, smoking is connected to positive things – relaxation, stress relief, social connection, pleasure after a meal. These associations are powerful. They've been built up over years, maybe decades, of smoking. If you try to quit while those associations are still there, you'll feel like you're giving something up. You'll feel deprived. And eventually, you'll go back. But what if we could rewire those associations first? What if, by the time you smoke your last cigarette, you actually don't want to smoke anymore? That's exactly what we're going to do. No willpower required."
+              title: "I Know What It's Like",
+              content: "The constant planning around smoke breaks. The guilt after every cigarette. The fear that you can't quit.",
+              backgroundGradient: "bg-gradient-to-br from-muted/90 to-primary/80",
+              icon: "💭",
+              narration: "I know what it's like. I really do. I know what it feels like to wake up in the morning and reach for a cigarette before your feet even touch the floor. I know the way you plan your entire day around smoke breaks – meetings, car rides, dinners, all scheduled around when you can slip away to light up."
             },
             {
               id: 's4',
-              title: "A Personal Story",
-              content: "Sarah smoked for 23 years. Two packs a day. She'd tried to quit 11 times.",
-              backgroundImage: "/assets/day1/slide4-sarah-story.jpg",
-              textPosition: 'top-left',
-              narration: "Let me tell you about someone I'll call Sarah. Sarah started smoking when she was 16. By the time she found this program, she was 39 years old and smoking two packs a day. Twenty-three years. Forty cigarettes daily. She'd tried to quit eleven times. Cold turkey, nicotine patches, gum, prescription medications, hypnotherapy – she'd tried it all. Each time, she'd last a few days, maybe a few weeks, and then something would happen. Stress at work. A fight with her husband. A night out with friends. And she'd smoke 'just one.' Just one turned into just a few. And before she knew it, she was right back where she started, only now with added shame and the conviction that she simply couldn't quit. She was, as she put it, 'a hopeless case.' But she wasn't. And neither are you."
+              title: "You're Not Alone",
+              content: "You're not weaker or more addicted than everyone else. And over the next 10 days, I'm going to prove it.",
+              backgroundImage: "/assets/day1/slide2-not-alone.jpg",
+              textPosition: 'bottom',
+              narration: "I know the guilt that washes over you after every single cigarette, that voice in your head that says 'I should quit' while your hand is already reaching for the pack. And I know the fear. The fear that you can't do it. That you've tried before and failed. That you're somehow different, weaker, more addicted than everyone else. You're not. And over the next 10 days, I'm going to prove it to you."
             },
             {
               id: 's5',
-              title: "Sarah's Transformation",
-              content: "On Day 11, the urge wasn't there. She was free.",
-              backgroundImage: "/assets/day1/slide5-transformation.jpg",
-              textPosition: 'top-left',
-              narration: "Sarah completed this 10-day program, just like you're starting today. And something remarkable happened. On Day 11, she woke up, and for the first time in 23 years, she didn't want a cigarette. Not because she was fighting the urge with willpower. Not because she was distracting herself or chewing gum or wearing a patch. The urge simply wasn't there. She said it felt like waking up from a strange dream, like she'd been under some kind of spell, and now she was finally awake. It's been three years now. She hasn't smoked a single cigarette. And she doesn't miss it. Not even a little. That's what's possible. That's what I want for you. And it starts right here, right now, today."
+              title: "The Real Secret",
+              content: "We don't start by changing your behavior. We start by changing your mind.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🧠",
+              narration: "Here's the secret that changed everything for me, and for the millions of people who have successfully quit using this approach: we don't start by changing your behavior. We start by changing your mind."
             },
             {
               id: 's6',
-              title: "Freedom Without Misery",
-              content: "Imagine quitting without feeling deprived. That's not a fantasy.",
+              title: "Rewiring Your Mind",
+              content: "What if, by the time you smoke your last cigarette, you actually don't want to smoke anymore?",
+              backgroundImage: "/assets/day1/slide3-real-secret.jpg",
+              textPosition: 'bottom',
+              narration: "Think about it. Right now, somewhere in your brain, smoking is connected to positive things – relaxation, stress relief, social connection, pleasure after a meal. These associations are powerful. They've been built up over years, maybe decades. If you try to quit while those associations are still there, you'll feel like you're giving something up. But what if we could rewire those associations first? What if, by the time you smoke your last cigarette, you actually don't want to smoke anymore? That's exactly what we're going to do. No willpower required."
+            },
+            {
+              id: 's7',
+              title: "Sarah's Story",
+              content: "She started smoking at 16. By 39, she was smoking two packs a day. She'd tried to quit 11 times.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
+              icon: "📖",
+              narration: "Let me tell you about someone I'll call Sarah. Sarah started smoking when she was 16. By the time she found this program, she was 39 years old and smoking two packs a day. Twenty-three years. Forty cigarettes daily. She'd tried to quit eleven times."
+            },
+            {
+              id: 's8',
+              title: "A Hopeless Case?",
+              content: "Cold turkey, patches, gum, medications, hypnotherapy – she'd tried it all. Each time, she'd go back.",
+              backgroundImage: "/assets/day1/slide4-sarah-story.jpg",
+              textPosition: 'bottom',
+              narration: "Cold turkey, nicotine patches, gum, prescription medications, hypnotherapy – she'd tried it all. Each time, she'd last a few days, maybe a few weeks, and then something would happen. Stress at work. A fight with her husband. A night out with friends. And she'd smoke 'just one.' Just one turned into just a few. And before she knew it, she was right back where she started, only now with added shame and the conviction that she simply couldn't quit. She was, as she put it, 'a hopeless case.' But she wasn't. And neither are you."
+            },
+            {
+              id: 's9',
+              title: "The Transformation",
+              content: "On Day 11, she woke up and didn't want a cigarette. The urge simply wasn't there.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "✨",
+              narration: "Sarah completed this 10-day program, just like you're starting today. And something remarkable happened. On Day 11, she woke up, and for the first time in 23 years, she didn't want a cigarette. Not because she was fighting the urge with willpower. The urge simply wasn't there."
+            },
+            {
+              id: 's10',
+              title: "Three Years Free",
+              content: "She said it felt like waking up from a strange dream. That's what's possible for you.",
+              backgroundImage: "/assets/day1/slide5-transformation.jpg",
+              textPosition: 'bottom',
+              narration: "She said it felt like waking up from a strange dream, like she'd been under some kind of spell, and now she was finally awake. It's been three years now. She hasn't smoked a single cigarette. And she doesn't miss it. Not even a little. That's what's possible. That's what I want for you. And it starts right here, right now, today."
+            },
+            {
+              id: 's11',
+              title: "Imagine Freedom",
+              content: "Imagine quitting smoking and not feeling deprived. Not feeling like you're missing out.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "🕊️",
+              narration: "I want you to imagine something. Imagine quitting smoking and not feeling deprived. Not feeling like you're missing out on something. Not white-knuckling through every meal, every coffee break, every stressful moment."
+            },
+            {
+              id: 's12',
+              title: "Real Freedom",
+              content: "'I can't have a cigarette' is misery. 'I don't want a cigarette' is freedom.",
               backgroundImage: "/assets/day1/slide6-freedom.jpg",
-              textPosition: 'top',
-              narration: "I want you to imagine something. Imagine quitting smoking and not feeling deprived. Not feeling like you're missing out on something. Not white-knuckling through every meal, every coffee break, every stressful moment, telling yourself 'I can't have a cigarette.' Instead, imagine thinking 'I don't want a cigarette.' Those two phrases might sound similar, but they're worlds apart. 'I can't' is restriction. It's deprivation. It's misery. 'I don't want to' is freedom. And that's what this program delivers. Freedom. Real freedom. The kind where you walk past other smokers and feel relief that you're not them anymore. The kind where you can handle stress, enjoy meals, and live your life without ever needing to light up. I know it might sound too good to be true right now. And that's okay. You don't need to believe me yet. Just stay with me for the next 10 days, and let me show you."
+              textPosition: 'bottom',
+              narration: "Instead, imagine thinking 'I don't want a cigarette.' Those two phrases might sound similar, but they're worlds apart. 'I can't' is restriction. It's deprivation. It's misery. 'I don't want to' is freedom. And that's what this program delivers. Freedom. Real freedom. The kind where you walk past other smokers and feel relief that you're not them anymore. I know it might sound too good to be true right now. And that's okay. You don't need to believe me yet. Just stay with me for the next 10 days, and let me show you."
             },
           ]
         }
