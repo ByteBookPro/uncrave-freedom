@@ -82,14 +82,15 @@ export function AnimatedSlides({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [slideProgress, setSlideProgress] = useState(0);
+  const [audioProgress, setAudioProgress] = useState(0); // Audio playback progress 0-100
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [musicEnabled, setMusicEnabled] = useState(true);
   const [showTranscript, setShowTranscript] = useState(true);
   const [isNarrationLoading, setIsNarrationLoading] = useState(false);
   const [isNarrationPlaying, setIsNarrationPlaying] = useState(false);
-  const [isPaused, setIsPaused] = useState(false); // 5-sec pause between slides
+  const [isPaused, setIsPaused] = useState(false);
   const [currentAudioDuration, setCurrentAudioDuration] = useState(0);
-  
+  const [completedSlides, setCompletedSlides] = useState<Set<number>>(new Set());
   const { fetchAndCacheAudio, isLoading: isCacheLoading } = useAudioCache();
   const backgroundMusic = useBackgroundMusic({ volume: 0.12 });
   const { profile } = useAuth();
@@ -182,6 +183,7 @@ export function AnimatedSlides({
     setIsNarrationPlaying(false);
     setIsNarrationLoading(false);
     setCurrentAudioDuration(0);
+    setAudioProgress(0);
   }, []);
 
   // Advance to next slide - only pause between major sections (every 3 slides)
@@ -296,10 +298,18 @@ export function AnimatedSlides({
       audio.onplay = () => {
         setIsNarrationPlaying(true);
         setIsNarrationLoading(false);
+        setAudioProgress(0);
+      };
+      
+      // Track audio progress for progress bar
+      audio.ontimeupdate = () => {
+        if (audio.duration > 0) {
+          const progress = (audio.currentTime / audio.duration) * 100;
+          setAudioProgress(progress);
+        }
       };
       
       audio.onpause = () => {
-        // Only set not playing if we actually paused (not if we're seeking)
         if (audioRef.current?.paused && !audioRef.current?.ended) {
           setIsNarrationPlaying(false);
         }
@@ -308,6 +318,11 @@ export function AnimatedSlides({
       audio.onended = () => {
         setIsNarrationPlaying(false);
         setIsNarrationLoading(false);
+        setAudioProgress(100);
+        
+        // Mark current slide as completed
+        const completedIndex = currentIndexRef.current;
+        setCompletedSlides(prev => new Set([...prev, completedIndex]));
         
         // Clear any pending slide timer
         if (slideTimerRef.current) {
@@ -318,6 +333,7 @@ export function AnimatedSlides({
         // Advance to next slide after audio completes
         setTimeout(() => {
           if (isPlayingRef.current) {
+            setAudioProgress(0);
             advanceToNextSlide();
           }
         }, 800);
@@ -384,10 +400,19 @@ export function AnimatedSlides({
     };
   }, []);
 
-  // Play narration when slide changes and playing
+  // Play narration when slide changes and playing - use stable ref to prevent re-triggering
+  const playNarrationRef = useRef(playSlideNarration);
+  useEffect(() => {
+    playNarrationRef.current = playSlideNarration;
+  }, [playSlideNarration]);
+  
   useEffect(() => {
     if (isPlaying && !isPaused) {
-      playSlideNarration();
+      // Small delay to ensure state is settled before playing
+      const timer = setTimeout(() => {
+        playNarrationRef.current();
+      }, 100);
+      return () => clearTimeout(timer);
     }
     
     return () => {
@@ -622,28 +647,60 @@ export function AnimatedSlides({
           <ChevronRight className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-white" />
         </button>
 
-        {/* Slide indicator */}
+        {/* Slide indicator with completion checkmarks */}
         <div className="absolute bottom-2 xs:bottom-3 sm:bottom-4 left-0 right-0 flex justify-center gap-1 xs:gap-1.5 z-10 flex-wrap px-4">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               className={cn(
-                "w-1.5 h-1.5 xs:w-2 xs:h-2 rounded-full transition-all",
+                "relative w-1.5 h-1.5 xs:w-2 xs:h-2 rounded-full transition-all",
                 index === currentIndex 
                   ? "bg-white w-4 xs:w-5 sm:w-6" 
-                  : index < currentIndex 
-                    ? "bg-white/70" 
-                    : "bg-white/30"
+                  : completedSlides.has(index)
+                    ? "bg-green-400" 
+                    : index < currentIndex 
+                      ? "bg-white/70" 
+                      : "bg-white/30"
               )}
-            />
+            >
+              {completedSlides.has(index) && index !== currentIndex && (
+                <span className="absolute inset-0 flex items-center justify-center text-[6px] text-white">✓</span>
+              )}
+            </button>
           ))}
         </div>
       </div>
 
       {/* Controls */}
       <div className="p-3 sm:p-4 bg-card space-y-2 sm:space-y-3">
-        {/* Progress bar */}
+        {/* Audio progress bar for current slide */}
+        <div className="space-y-1">
+          <div className="flex items-center justify-between text-[10px] sm:text-xs text-muted-foreground">
+            <span className="flex items-center gap-1">
+              {isNarrationPlaying && <Volume2 className="w-3 h-3 animate-pulse text-primary" />}
+              {isNarrationLoading && <Loader2 className="w-3 h-3 animate-spin text-primary" />}
+              {!isNarrationPlaying && !isNarrationLoading && completedSlides.has(currentIndex) && (
+                <span className="text-green-500">✓ Completed</span>
+              )}
+              {!isNarrationPlaying && !isNarrationLoading && !completedSlides.has(currentIndex) && (
+                <span>Slide {currentIndex + 1}</span>
+              )}
+            </span>
+            <span>{Math.round(audioProgress)}%</span>
+          </div>
+          <div className="w-full h-1.5 sm:h-2 bg-muted rounded-full overflow-hidden">
+            <div 
+              className={cn(
+                "h-full rounded-full transition-all duration-150",
+                completedSlides.has(currentIndex) ? "bg-green-500" : "bg-primary"
+              )}
+              style={{ width: `${audioProgress}%` }}
+            />
+          </div>
+        </div>
+        
+        {/* Overall progress bar */}
         <div className="w-full h-1 sm:h-1.5 bg-muted rounded-full overflow-hidden">
           <div 
             className="h-full gradient-hero rounded-full transition-all duration-100"
