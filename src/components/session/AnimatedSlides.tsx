@@ -13,6 +13,8 @@ interface Slide {
   title: string;
   content: string;
   backgroundGradient?: string;
+  backgroundImage?: string;
+  textPosition?: 'top' | 'center' | 'bottom' | 'top-left' | 'bottom-left';
   icon?: string;
   narration?: string;
   voicePreset?: VoicePreset;
@@ -250,36 +252,75 @@ export function AnimatedSlides({
     animation: isPlaying ? `kenBurns ${currentSlideDuration}s ease-in-out` : 'none',
   };
 
+  // Get text position classes based on slide config
+  const getTextPositionClasses = (position?: string) => {
+    switch (position) {
+      case 'top':
+        return 'items-center justify-start pt-6 sm:pt-8 md:pt-12';
+      case 'top-left':
+        return 'items-start justify-start pt-6 sm:pt-8 md:pt-12 pl-4 sm:pl-6 md:pl-8 text-left';
+      case 'bottom':
+        return 'items-center justify-end pb-12 sm:pb-14 md:pb-16';
+      case 'bottom-left':
+        return 'items-start justify-end pb-12 sm:pb-14 md:pb-16 pl-4 sm:pl-6 md:pl-8 text-left';
+      default:
+        return 'items-center justify-center';
+    }
+  };
+
   return (
     <div className="w-full rounded-2xl overflow-hidden shadow-card">
       {/* Slide display */}
       <div 
         className={cn(
-          "relative min-h-[240px] sm:min-h-[280px] md:aspect-video overflow-hidden",
-          currentSlide.backgroundGradient || "bg-gradient-to-br from-primary/80 to-freedom/80"
+          "relative min-h-[300px] sm:min-h-[360px] md:aspect-video overflow-hidden",
+          !currentSlide.backgroundImage && (currentSlide.backgroundGradient || "bg-gradient-to-br from-primary/80 to-freedom/80")
         )}
         style={kenBurnsStyle}
       >
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/4 left-1/4 w-24 sm:w-32 h-24 sm:h-32 bg-white rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-28 sm:w-40 h-28 sm:h-40 bg-white rounded-full blur-3xl" />
-        </div>
+        {/* Background image if provided */}
+        {currentSlide.backgroundImage && (
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ 
+              backgroundImage: `url(${currentSlide.backgroundImage})`,
+            }}
+          >
+            {/* Subtle overlay for text readability */}
+            <div className="absolute inset-0 bg-black/20" />
+          </div>
+        )}
+        
+        {/* Background pattern (only show if no image) */}
+        {!currentSlide.backgroundImage && (
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-1/4 left-1/4 w-24 sm:w-32 h-24 sm:h-32 bg-white rounded-full blur-3xl" />
+            <div className="absolute bottom-1/4 right-1/4 w-28 sm:w-40 h-28 sm:h-40 bg-white rounded-full blur-3xl" />
+          </div>
+        )}
 
-        {/* Content */}
+        {/* Content - positioned based on slide config */}
         <div 
-          className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 text-center text-white animate-fade-in"
+          className={cn(
+            "absolute inset-0 flex flex-col p-4 sm:p-6 md:p-8 text-white animate-fade-in",
+            getTextPositionClasses(currentSlide.textPosition)
+          )}
           key={currentSlide.id}
         >
-          {currentSlide.icon && (
+          {currentSlide.icon && !currentSlide.backgroundImage && (
             <span className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4">{currentSlide.icon}</span>
           )}
-          <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 md:mb-4 drop-shadow-lg px-2">
-            {currentSlide.title}
-          </h3>
-          <p className="text-sm sm:text-base md:text-lg opacity-90 max-w-xs sm:max-w-sm md:max-w-md leading-relaxed drop-shadow px-2">
-            {currentSlide.content}
-          </p>
+          {/* Hide embedded text if image has its own text baked in */}
+          {!currentSlide.backgroundImage && (
+            <>
+              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 md:mb-4 drop-shadow-lg px-2 max-w-md">
+                {currentSlide.title}
+              </h3>
+              <p className="text-sm sm:text-base md:text-lg opacity-90 max-w-xs sm:max-w-sm md:max-w-md leading-relaxed drop-shadow px-2">
+                {currentSlide.content}
+              </p>
+            </>
+          )}
         </div>
 
         {/* Slide navigation arrows */}
@@ -287,8 +328,8 @@ export function AnimatedSlides({
           onClick={goPrev}
           disabled={currentIndex === 0}
           className={cn(
-            "absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/20 backdrop-blur flex items-center justify-center transition-opacity",
-            currentIndex === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-black/40"
+            "absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/30 backdrop-blur flex items-center justify-center transition-opacity z-10",
+            currentIndex === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-black/50"
           )}
         >
           <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -297,15 +338,15 @@ export function AnimatedSlides({
           onClick={goNext}
           disabled={currentIndex === slides.length - 1}
           className={cn(
-            "absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/20 backdrop-blur flex items-center justify-center transition-opacity",
-            currentIndex === slides.length - 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-black/40"
+            "absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/30 backdrop-blur flex items-center justify-center transition-opacity z-10",
+            currentIndex === slides.length - 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-black/50"
           )}
         >
           <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         </button>
 
         {/* Slide indicator */}
-        <div className="absolute bottom-2 sm:bottom-4 left-0 right-0 flex justify-center gap-1 sm:gap-1.5">
+        <div className="absolute bottom-2 sm:bottom-4 left-0 right-0 flex justify-center gap-1 sm:gap-1.5 z-10">
           {slides.map((_, index) => (
             <button
               key={index}
