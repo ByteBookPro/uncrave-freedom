@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, User, Calendar, LogOut, Globe, Cigarette, Play, Square, Loader2, Zap, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, User, Calendar, LogOut, Cigarette, Play, Square, Loader2, Zap, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { useToast } from '@/hooks/use-toast';
@@ -16,20 +15,21 @@ import { TriggerChecklist } from '@/components/TriggerChecklist';
 import { TriggerAlternatives } from '@/components/TriggerAlternatives';
 type ContentLanguage = 'en' | 'de' | 'zh' | 'hi';
 type VoiceGender = 'female' | 'male';
+type VoicePreference = 'calm_female' | 'energetic_male';
 
+// Sample texts for voice preview - short, engaging intro in each language
 const sampleTexts: Record<ContentLanguage, string> = {
   en: "Hello! I'm your personal coach, here to guide you on your journey to a smoke-free life.",
   de: "Hallo! Ich bin dein persönlicher Coach und begleite dich auf deinem Weg in ein rauchfreies Leben.",
   zh: "你好！我是你的私人教练，将在你迈向无烟生活的旅程中为你提供指导。",
   hi: "नमस्ते! मैं आपका व्यक्तिगत कोच हूँ, धूम्रपान-मुक्त जीवन की आपकी यात्रा में आपका मार्गदर्शन करने के लिए यहाँ हूँ।"
 };
-type VoicePreference = 'calm_female' | 'energetic_male';
 
-const languageLabels: Record<ContentLanguage, string> = {
-  en: 'English',
-  de: 'Deutsch',
-  zh: '中文',
-  hi: 'हिन्दी'
+const languageLabels: Record<ContentLanguage, { name: string; native: string }> = {
+  en: { name: 'English', native: 'English' },
+  de: { name: 'German', native: 'Deutsch' },
+  zh: { name: 'Chinese', native: '中文' },
+  hi: { name: 'Hindi', native: 'हिन्दी' }
 };
 
 const voiceLabels: Record<VoicePreference, { name: string; description: string }> = {
@@ -50,6 +50,7 @@ export default function Settings() {
   const [isSaving, setIsSaving] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [previewingVoice, setPreviewingVoice] = useState<VoicePreference | null>(null);
+  const [previewingLanguage, setPreviewingLanguage] = useState<ContentLanguage | null>(null);
   const [previewAudio, setPreviewAudio] = useState<HTMLAudioElement | null>(null);
   const [triggersOpen, setTriggersOpen] = useState(false);
   const [alternativesOpen, setAlternativesOpen] = useState(false);
@@ -61,17 +62,21 @@ export default function Settings() {
       setPreviewAudio(null);
     }
     setPreviewingVoice(null);
+    setPreviewingLanguage(null);
   }, [previewAudio]);
 
-  const playVoicePreview = useCallback(async (voice: VoicePreference) => {
-    // Stop any current preview
+  // Play a TTS preview with given parameters
+  const playPreview = useCallback(async (
+    previewLang: ContentLanguage,
+    gender: VoiceGender,
+    onStart: () => void,
+    onEnd: () => void
+  ) => {
     stopPreview();
-    
-    setPreviewingVoice(voice);
+    onStart();
     
     try {
-      const gender: VoiceGender = voice === 'calm_female' ? 'female' : 'male';
-      const sampleText = sampleTexts[language];
+      const sampleText = sampleTexts[previewLang];
       
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/text-to-speech`,
@@ -84,7 +89,7 @@ export default function Settings() {
           body: JSON.stringify({
             text: sampleText,
             gender,
-            language,
+            language: previewLang,
             preset: 'dailyCoach'
           }),
         }
@@ -98,13 +103,13 @@ export default function Settings() {
       
       audio.onended = () => {
         URL.revokeObjectURL(audioUrl);
-        setPreviewingVoice(null);
+        onEnd();
         setPreviewAudio(null);
       };
       
       audio.onerror = () => {
         URL.revokeObjectURL(audioUrl);
-        setPreviewingVoice(null);
+        onEnd();
         setPreviewAudio(null);
         toast({
           title: 'Preview failed',
@@ -116,15 +121,37 @@ export default function Settings() {
       setPreviewAudio(audio);
       await audio.play();
     } catch (error) {
-      console.error('Voice preview error:', error);
-      setPreviewingVoice(null);
+      console.error('Preview error:', error);
+      onEnd();
       toast({
         title: 'Preview failed',
-        description: 'Could not generate voice preview.',
+        description: 'Could not generate preview.',
         variant: 'destructive',
       });
     }
-  }, [language, stopPreview, toast]);
+  }, [stopPreview, toast]);
+
+  // Preview a specific language
+  const playLanguagePreview = useCallback((lang: ContentLanguage) => {
+    const gender: VoiceGender = voicePreference === 'calm_female' ? 'female' : 'male';
+    playPreview(
+      lang,
+      gender,
+      () => setPreviewingLanguage(lang),
+      () => setPreviewingLanguage(null)
+    );
+  }, [voicePreference, playPreview]);
+
+  // Preview a specific voice type
+  const playVoicePreview = useCallback((voice: VoicePreference) => {
+    const gender: VoiceGender = voice === 'calm_female' ? 'female' : 'male';
+    playPreview(
+      language,
+      gender,
+      () => setPreviewingVoice(voice),
+      () => setPreviewingVoice(null)
+    );
+  }, [language, playPreview]);
 
   useEffect(() => {
     if (profile) {
@@ -235,23 +262,66 @@ export default function Settings() {
               />
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="language">Language</Label>
-              <Select value={language} onValueChange={(val) => setLanguage(val as ContentLanguage)}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.entries(languageLabels).map(([code, label]) => (
-                    <SelectItem key={code} value={code}>
-                      <div className="flex items-center gap-2">
-                        <Globe className="h-4 w-4" />
-                        {label}
+            <div className="space-y-3">
+              <Label>Language & Voice</Label>
+              <p className="text-sm text-muted-foreground">
+                Select your preferred language for narration. Tap the play button to preview.
+              </p>
+              <div className="space-y-2">
+                {Object.entries(languageLabels).map(([code, { name, native }]) => {
+                  const langCode = code as ContentLanguage;
+                  const isSelected = language === langCode;
+                  const isPreviewing = previewingLanguage === langCode;
+                  
+                  return (
+                    <div 
+                      key={code}
+                      className={`flex items-center justify-between p-3 rounded-lg border transition-colors cursor-pointer ${
+                        isSelected 
+                          ? 'border-primary bg-primary/5' 
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                      onClick={() => setLanguage(langCode)}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                          isSelected ? 'border-primary' : 'border-muted-foreground'
+                        }`}>
+                          {isSelected && <div className="w-2 h-2 rounded-full bg-primary" />}
+                        </div>
+                        <div>
+                          <p className="font-medium">{native}</p>
+                          <p className="text-sm text-muted-foreground">{name}</p>
+                        </div>
                       </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-9 w-9"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (isPreviewing) {
+                            stopPreview();
+                          } else {
+                            playLanguagePreview(langCode);
+                          }
+                        }}
+                        disabled={(previewingLanguage !== null || previewingVoice !== null) && !isPreviewing}
+                      >
+                        {isPreviewing ? (
+                          previewAudio ? (
+                            <Square className="h-4 w-4" />
+                          ) : (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          )
+                        ) : (
+                          <Play className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
 
             <div className="space-y-3">
@@ -294,7 +364,7 @@ export default function Settings() {
                             playVoicePreview(code as VoicePreference);
                           }
                         }}
-                        disabled={previewingVoice !== null && !isPreviewing}
+                        disabled={(previewingVoice !== null || previewingLanguage !== null) && !isPreviewing}
                       >
                         {isPreviewing ? (
                           previewAudio ? (
