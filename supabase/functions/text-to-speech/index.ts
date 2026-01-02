@@ -5,49 +5,164 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
 };
 
-// Voice presets optimized for psychological impact in behavior change content
-// Based on research: warm mezzo-soprano/baritone, variable pacing, context-aware settings
-const voicePresets = {
-  // Default daily coach - warm, steady, supportive
-  dailyCoach: {
-    stability: 0.52,           // 45-60 range: stable but not robotic
-    similarity_boost: 0.82,    // 75-90 range: consistent voice
-    style: 0.28,               // 20-35 range: warm emotion, not theatrical
-    speed: 0.97,               // ~0.95-1.00: natural pace
+// Voice preset types that map to language-specific settings
+type PresetType = 'dailyCoach' | 'motivationLift' | 'cravingEmergency' | 'story' | 'guided';
+type VoiceGender = 'female' | 'male';
+type ContentLanguage = 'en' | 'de' | 'zh' | 'hi';
+
+interface VoiceSettings {
+  stability: number;
+  similarity_boost: number;
+  style: number;
+  speed: number;
+}
+
+// Language-specific voice presets optimized for smoking cessation content
+// Based on: warm coach archetype, language-specific articulation needs
+const languagePresets: Record<ContentLanguage, Record<PresetType, VoiceSettings>> = {
+  // English - baseline warm coach settings
+  en: {
+    dailyCoach: {
+      stability: 0.58,
+      similarity_boost: 0.85,
+      style: 0.25,
+      speed: 0.96,
+    },
+    motivationLift: {
+      stability: 0.48,
+      similarity_boost: 0.85,
+      style: 0.38,
+      speed: 1.02,
+    },
+    cravingEmergency: {
+      stability: 0.70,
+      similarity_boost: 0.80,
+      style: 0.15,
+      speed: 0.90,
+    },
+    story: {
+      stability: 0.52,
+      similarity_boost: 0.85,
+      style: 0.35,
+      speed: 1.00,
+    },
+    guided: {
+      stability: 0.74,
+      similarity_boost: 0.78,
+      style: 0.12,
+      speed: 0.90,
+    },
   },
-  // Motivation lift - end of modules, pledges, breakthroughs
-  motivationLift: {
-    stability: 0.42,           // 35-50 range: slightly more expressive
-    similarity_boost: 0.85,
-    style: 0.38,               // 30-45 range: more energy
-    speed: 1.02,               // 1.00-1.05: slightly faster, brighter
+
+  // Hindi (हिंदी) - warm urban Indian accent, soft confidence
+  // Short lines + punctuation for natural breaths
+  hi: {
+    dailyCoach: {
+      stability: 0.60,           // 0.55-0.65 range
+      similarity_boost: 0.85,    // 0.80-0.90 range
+      style: 0.28,               // 0.22-0.35 range
+      speed: 0.96,               // 0.94-0.98 range
+    },
+    motivationLift: {
+      stability: 0.52,
+      similarity_boost: 0.85,
+      style: 0.40,
+      speed: 1.02,
+    },
+    cravingEmergency: {
+      stability: 0.72,           // H-GUIDED preset for calm grounding
+      similarity_boost: 0.82,
+      style: 0.16,               // 0.10-0.22 range
+      speed: 0.91,               // 0.88-0.94 range
+    },
+    story: {
+      stability: 0.52,           // 0.45-0.60 range
+      similarity_boost: 0.85,
+      style: 0.38,               // 0.30-0.45 range
+      speed: 1.02,               // 0.98-1.05 range
+    },
+    guided: {
+      stability: 0.72,           // 0.65-0.78 range
+      similarity_boost: 0.82,
+      style: 0.16,               // 0.10-0.22 range
+      speed: 0.91,               // 0.88-0.94 range
+    },
   },
-  // Craving emergency / urge surfing - calm, grounding
-  cravingEmergency: {
-    stability: 0.68,           // 60-75 range: extra steady
-    similarity_boost: 0.80,
-    style: 0.18,               // 10-25 range: calm, minimal expression
-    speed: 0.90,               // 0.88-0.95: slower, more pauses
+
+  // Chinese (简体中文) - Standard Putonghua, clear tones, calm authority
+  // Needs "breathing punctuation" for clarity
+  zh: {
+    dailyCoach: {
+      stability: 0.66,           // 0.60-0.72 range
+      similarity_boost: 0.87,    // 0.82-0.92 range
+      style: 0.22,               // 0.15-0.28 range
+      speed: 0.98,               // 0.95-1.00 range
+    },
+    motivationLift: {
+      stability: 0.55,
+      similarity_boost: 0.87,
+      style: 0.35,
+      speed: 1.03,
+    },
+    cravingEmergency: {
+      stability: 0.76,           // ZH-GUIDED preset
+      similarity_boost: 0.85,
+      style: 0.13,               // 0.08-0.18 range
+      speed: 0.91,               // 0.88-0.94 range
+    },
+    story: {
+      stability: 0.58,           // 0.50-0.65 range
+      similarity_boost: 0.87,
+      style: 0.35,               // 0.28-0.42 range
+      speed: 1.03,               // 1.00-1.06 range
+    },
+    guided: {
+      stability: 0.76,           // 0.70-0.82 range
+      similarity_boost: 0.85,
+      style: 0.13,               // 0.08-0.18 range
+      speed: 0.91,               // 0.88-0.94 range
+    },
   },
-  // Story / explanation - engaging narrative
-  story: {
-    stability: 0.48,
-    similarity_boost: 0.85,
-    style: 0.32,               // Warm storytelling
-    speed: 0.95,               // 145-165 wpm equivalent
-  },
-  // Guided breathing / meditation
-  guided: {
-    stability: 0.72,           // Very steady for breathing exercises
-    similarity_boost: 0.78,
-    style: 0.15,               // Minimal, calming
-    speed: 0.88,               // 110-135 wpm equivalent
+
+  // German (Deutsch) - Hochdeutsch, warm and supportive, not news anchor
+  // Short spoken German, supportive phrasing
+  de: {
+    dailyCoach: {
+      stability: 0.64,           // 0.58-0.70 range
+      similarity_boost: 0.89,    // 0.85-0.93 range
+      style: 0.25,               // 0.18-0.32 range
+      speed: 0.95,               // 0.92-0.97 range
+    },
+    motivationLift: {
+      stability: 0.52,
+      similarity_boost: 0.89,
+      style: 0.38,
+      speed: 1.01,
+    },
+    cravingEmergency: {
+      stability: 0.76,           // DE-GUIDED preset
+      similarity_boost: 0.88,
+      style: 0.13,               // 0.08-0.18 range
+      speed: 0.90,               // 0.88-0.93 range
+    },
+    story: {
+      stability: 0.56,           // 0.48-0.65 range
+      similarity_boost: 0.89,
+      style: 0.38,               // 0.30-0.45 range
+      speed: 1.01,               // 0.98-1.04 range
+    },
+    guided: {
+      stability: 0.76,           // 0.70-0.82 range
+      similarity_boost: 0.88,
+      style: 0.13,               // 0.08-0.18 range
+      speed: 0.90,               // 0.88-0.93 range
+    },
   },
 };
 
 // Voice options by language and gender
-// Using multilingual voices that support all 4 languages
-const voiceOptions: Record<string, Record<string, string>> = {
+// Using ElevenLabs multilingual voices that support all 4 languages
+const voiceOptions: Record<ContentLanguage, Record<VoiceGender, string>> = {
   en: {
     female: 'EXAVITQu4vr4xnSDxMaL',  // Sarah - warm mezzo-soprano
     male: 'JBFqnCBsd6RMkjVDRZzb',    // George - warm baritone
@@ -66,9 +181,48 @@ const voiceOptions: Record<string, Record<string, string>> = {
   },
 };
 
-type VoicePreset = keyof typeof voicePresets;
-type VoiceGender = 'female' | 'male';
-type ContentLanguage = 'en' | 'de' | 'zh' | 'hi';
+// Process text with language-specific enhancements for natural pacing
+function processTextForLanguage(text: string, language: ContentLanguage): string {
+  let processed = text;
+
+  // Common processing for all languages
+  processed = processed.replace(/\.{3,}/g, '... ');
+
+  switch (language) {
+    case 'hi':
+      // Hindi: ensure pauses around key phrases
+      // "ठीक है… एक सांस लेते हैं।" pattern
+      processed = processed
+        .replace(/([।!?])(\s)/g, '$1...$2')  // Add pause after Hindi punctuation
+        .replace(/(अब|फिर|और|लेकिन)(\s)/g, '...$1$2');  // Pause before connectors
+      break;
+
+    case 'zh':
+      // Chinese: breathing punctuation, pause around key markers
+      processed = processed
+        .replace(/([。！？])(\s*)/g, '$1...$2')  // Pause after Chinese punctuation
+        .replace(/(现在|然后|但是|接下来)/g, '...$1');  // Pause before connectors
+      break;
+
+    case 'de':
+      // German: supportive phrasing, natural spoken pauses
+      processed = processed
+        .replace(/(Jetzt|Dann|Aber|Und jetzt)/gi, '...$1')
+        .replace(/(Schritt für Schritt)/gi, '$1...');
+      break;
+
+    case 'en':
+    default:
+      // English processing
+      processed = processed
+        .replace(/(Here's the (?:truth|secret|thing)[.:])(\s)/gi, '$1...$2')
+        .replace(/(But here's what)/gi, '... $1')
+        .replace(/(And that's)/gi, '... $1');
+      break;
+  }
+
+  return processed;
+}
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -90,15 +244,19 @@ serve(async (req) => {
     }
 
     // Select language, gender and voice
-    const selectedLanguage: ContentLanguage = language && voiceOptions[language] ? language : 'en';
-    const selectedGender: VoiceGender = gender || 'female';
+    const selectedLanguage: ContentLanguage = language && languagePresets[language as ContentLanguage] 
+      ? language as ContentLanguage 
+      : 'en';
+    const selectedGender: VoiceGender = gender === 'male' ? 'male' : 'female';
     const selectedVoice = voiceId || voiceOptions[selectedLanguage][selectedGender];
 
     // Select preset based on context or use dailyCoach as default
-    const selectedPreset: VoicePreset = preset && voicePresets[preset as VoicePreset] 
-      ? preset as VoicePreset 
+    const selectedPreset: PresetType = preset && languagePresets[selectedLanguage][preset as PresetType] 
+      ? preset as PresetType 
       : 'dailyCoach';
-    const voiceSettings = voicePresets[selectedPreset];
+    
+    // Get language-specific voice settings
+    const voiceSettings = languagePresets[selectedLanguage][selectedPreset];
 
     console.log(`Generating speech:
       - Text: "${text.substring(0, 60)}..."
@@ -107,15 +265,8 @@ serve(async (req) => {
       - Preset: ${selectedPreset}
       - Settings: stability=${voiceSettings.stability}, style=${voiceSettings.style}, speed=${voiceSettings.speed}`);
 
-    // Process text to enhance pauses for psychological impact
-    // Add micro-pauses around key phrases and ensure proper breathing room
-    const processedText = text
-      // Ensure ellipses create longer pauses
-      .replace(/\.{3,}/g, '... ')
-      // Add subtle pause after "Here's the truth" type phrases
-      .replace(/(Here's the (?:truth|secret|thing)[.:])(\s)/gi, '$1...$2')
-      .replace(/(But here's what)/gi, '... $1')
-      .replace(/(And that's)/gi, '... $1');
+    // Process text with language-specific enhancements
+    const processedText = processTextForLanguage(text, selectedLanguage);
 
     const response = await fetch(
       `https://api.elevenlabs.io/v1/text-to-speech/${selectedVoice}?output_format=mp3_44100_128`,
@@ -145,7 +296,7 @@ serve(async (req) => {
       throw new Error(`ElevenLabs API error: ${response.status}`);
     }
 
-    console.log('Successfully generated audio with preset:', selectedPreset);
+    console.log('Successfully generated audio with preset:', selectedPreset, 'for language:', selectedLanguage);
     const audioBuffer = await response.arrayBuffer();
 
     return new Response(audioBuffer, {
