@@ -362,6 +362,7 @@ export function DaySessionPlayer({
             onProgress={handleSlidesProgress}
             onComplete={handleMediaComplete}
             title={currentModule.title}
+            narrationKey={currentModule.id}
           />
         );
 

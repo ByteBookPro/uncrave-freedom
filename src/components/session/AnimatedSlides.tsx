@@ -5,7 +5,9 @@ import { cn } from '@/lib/utils';
 import { useTextToSpeech, VoicePreset } from '@/hooks/useTextToSpeech';
 import { useBackgroundMusic } from '@/hooks/useBackgroundMusic';
 import { ScrollArea } from '@/components/ui/scroll-area';
-
+import { useAuth } from '@/contexts/AuthContext';
+import { getLocalizedNarration } from '@/data/sessionNarrationLocalized';
+import { ContentLanguage } from '@/types/database';
 interface Slide {
   id: string;
   title: string;
@@ -81,9 +83,20 @@ export function AnimatedSlides({
   const [musicEnabled, setMusicEnabled] = useState(true);
   const [showTranscript, setShowTranscript] = useState(true);
   const [hasPlayedNarration, setHasPlayedNarration] = useState<Set<number>>(new Set());
+  const [hasPlayedLocalizedNarration, setHasPlayedLocalizedNarration] = useState(false);
   
   const { speak, stop, isLoading: isNarrationLoading, isPlaying: isNarrationPlaying, currentText } = useTextToSpeech();
   const backgroundMusic = useBackgroundMusic({ volume: 0.12 });
+  const { profile } = useAuth();
+  
+  // Get user's language
+  const userLanguage: ContentLanguage = profile?.language || 'en';
+  
+  // Get localized narration for the module (non-English languages)
+  const localizedNarration = useMemo(() => {
+    if (!narrationKey || userLanguage === 'en') return null;
+    return getLocalizedNarration(narrationKey, userLanguage);
+  }, [narrationKey, userLanguage]);
 
   // Guard against empty slides array
   if (!slides || slides.length === 0) {
@@ -107,8 +120,8 @@ export function AnimatedSlides({
   // Track if all slides have been viewed
   const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]));
 
-  // Current transcript text
-  const currentNarration = currentSlide.narration || currentSlide.content;
+  // Current transcript text - use localized narration if available
+  const currentNarration = localizedNarration || currentSlide.narration || currentSlide.content;
 
   // Start background music when component mounts and slideshow starts
   useEffect(() => {
@@ -135,8 +148,20 @@ export function AnimatedSlides({
     };
   }, []);
 
-  // Play narration when slide changes
+  // Play localized narration once at the start (for non-English)
   useEffect(() => {
+    if (!audioEnabled || hasPlayedLocalizedNarration || !localizedNarration) return;
+    if (currentIndex !== 0) return; // Only play on first slide
+    
+    const voicePreset = detectVoicePreset(currentSlide, title) || defaultVoicePreset;
+    speak(localizedNarration, { preset: voicePreset });
+    setHasPlayedLocalizedNarration(true);
+  }, [audioEnabled, localizedNarration, hasPlayedLocalizedNarration, currentIndex, currentSlide, title, defaultVoicePreset, speak]);
+
+  // Play narration when slide changes (English only - per-slide narration)
+  useEffect(() => {
+    // Skip per-slide narration if we have localized module narration
+    if (localizedNarration) return;
     if (!audioEnabled || hasPlayedNarration.has(currentIndex)) return;
     
     const narrationText = currentSlide.narration || currentSlide.content;
@@ -145,7 +170,7 @@ export function AnimatedSlides({
       speak(narrationText, { preset: voicePreset });
       setHasPlayedNarration(prev => new Set([...prev, currentIndex]));
     }
-  }, [currentIndex, audioEnabled, currentSlide, hasPlayedNarration, speak, title, defaultVoicePreset]);
+  }, [currentIndex, audioEnabled, currentSlide, hasPlayedNarration, speak, title, defaultVoicePreset, localizedNarration]);
 
   // Stop narration when component unmounts
   useEffect(() => {
