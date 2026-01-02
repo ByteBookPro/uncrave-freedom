@@ -8,6 +8,7 @@ import { BreathingCoach } from '../practices/BreathingCoach';
 import { UrgeSurfing } from '../practices/UrgeSurfing';
 import { BodyScan } from '../practices/BodyScan';
 import { TriggerChecklist } from '../TriggerChecklist';
+import { TriggerAlternatives } from '../TriggerAlternatives';
 import { 
   ArrowLeft, 
   ArrowRight,
@@ -22,7 +23,7 @@ import {
 import { cn } from '@/lib/utils';
 
 // Module types matching database schema
-type ModuleType = 'STORY_VIDEO' | 'ANIMATED_SLIDES' | 'COACH_VIDEO' | 'GUIDED_PRACTICE' | 'CHECKPOINT' | 'CRAVING_TOOL';
+type ModuleType = 'STORY_VIDEO' | 'ANIMATED_SLIDES' | 'COACH_VIDEO' | 'GUIDED_PRACTICE' | 'CHECKPOINT' | 'CRAVING_TOOL' | 'TRIGGER_ALTERNATIVES';
 type PracticeType = 'BREATHING' | 'URGE_SURFING' | 'BODY_SCAN' | 'TRIGGER_SCAN' | 'THOUGHT_REFRAME' | 'VISUALIZATION';
 
 interface SessionModule {
@@ -435,6 +436,31 @@ export function DaySessionPlayer({
               <Play className="w-4 h-4 mr-2" />
               Start Urge Surfing
             </Button>
+          </div>
+        );
+
+      case 'TRIGGER_ALTERNATIVES':
+        const alternativesCompleted = progress?.isCompleted;
+        return (
+          <div className="space-y-4">
+            {!alternativesCompleted && (
+              <div className="bg-card rounded-2xl p-4 shadow-sm border mb-4">
+                <p className="text-sm text-muted-foreground">
+                  For each trigger you identified, select the coping strategies you'll use instead of smoking.
+                </p>
+              </div>
+            )}
+            <TriggerAlternatives 
+              onComplete={() => handlePracticeComplete()}
+              showSaveButton={true}
+              compact={true}
+            />
+            {alternativesCompleted && (
+              <div className="flex items-center gap-2 text-success mt-4">
+                <Check className="w-5 h-5" />
+                <span className="font-medium">Coping strategies saved!</span>
+              </div>
+            )}
           </div>
         );
 

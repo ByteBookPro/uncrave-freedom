@@ -5,7 +5,7 @@ export interface SessionModule {
   id: string;
   title: string;
   description?: string;
-  type: 'STORY_VIDEO' | 'ANIMATED_SLIDES' | 'COACH_VIDEO' | 'GUIDED_PRACTICE' | 'CHECKPOINT' | 'CRAVING_TOOL';
+  type: 'STORY_VIDEO' | 'ANIMATED_SLIDES' | 'COACH_VIDEO' | 'GUIDED_PRACTICE' | 'CHECKPOINT' | 'CRAVING_TOOL' | 'TRIGGER_ALTERNATIVES';
   estimatedSeconds: number;
   gatingRequired: boolean;
   practiceType?: 'BREATHING' | 'URGE_SURFING' | 'BODY_SCAN' | 'TRIGGER_SCAN' | 'THOUGHT_REFRAME' | 'VISUALIZATION';
@@ -686,6 +686,14 @@ export const daySessions: DaySession[] = [
         estimatedSeconds: 180,
         gatingRequired: true,
         practiceType: 'TRIGGER_SCAN',
+      },
+      {
+        id: 'd3m2c',
+        title: "Build Your Coping Strategies",
+        description: "Choose specific alternatives for each of your triggers.",
+        type: 'TRIGGER_ALTERNATIVES',
+        estimatedSeconds: 240,
+        gatingRequired: true,
       },
       {
         id: 'd3m3',
