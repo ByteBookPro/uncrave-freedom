@@ -32,6 +32,15 @@ export function AnimatedSlides({
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [slideProgress, setSlideProgress] = useState(0);
 
+  // Guard against empty slides array
+  if (!slides || slides.length === 0) {
+    return (
+      <div className="w-full rounded-2xl overflow-hidden shadow-card p-8 bg-card text-center">
+        <p className="text-muted-foreground">No slides available</p>
+      </div>
+    );
+  }
+
   const currentSlide = slides[currentIndex];
   const totalProgress = ((currentIndex + slideProgress / 100) / slides.length) * 100;
 
