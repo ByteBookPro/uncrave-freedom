@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, User, Calendar, LogOut, Globe, Cigarette, Volume2, Play, Square, Loader2 } from 'lucide-react';
+import { ArrowLeft, User, Calendar, LogOut, Globe, Cigarette, Play, Square, Loader2, Zap, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Separator } from '@/components/ui/separator';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';
-
+import { TriggerChecklist } from '@/components/TriggerChecklist';
+import { TriggerAlternatives } from '@/components/TriggerAlternatives';
 type ContentLanguage = 'en' | 'de' | 'zh' | 'hi';
 type VoiceGender = 'female' | 'male';
 
@@ -49,6 +51,8 @@ export default function Settings() {
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [previewingVoice, setPreviewingVoice] = useState<VoicePreference | null>(null);
   const [previewAudio, setPreviewAudio] = useState<HTMLAudioElement | null>(null);
+  const [triggersOpen, setTriggersOpen] = useState(false);
+  const [alternativesOpen, setAlternativesOpen] = useState(false);
 
   const stopPreview = useCallback(() => {
     if (previewAudio) {
@@ -345,6 +349,54 @@ export default function Settings() {
                 placeholder="e.g. 10"
               />
             </div>
+          </CardContent>
+        </Card>
+
+        {/* Triggers & Coping Strategies Section */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Zap className="h-5 w-5" />
+              Triggers & Coping Strategies
+            </CardTitle>
+            <CardDescription>
+              Review and update your personal triggers and coping strategies
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            {/* My Triggers */}
+            <Collapsible open={triggersOpen} onOpenChange={setTriggersOpen}>
+              <CollapsibleTrigger asChild>
+                <Button variant="outline" className="w-full justify-between">
+                  <span>My Triggers</span>
+                  {triggersOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                </Button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="pt-4">
+                <TriggerChecklist 
+                  compact 
+                  showSaveButton 
+                  onComplete={() => setTriggersOpen(false)}
+                />
+              </CollapsibleContent>
+            </Collapsible>
+
+            {/* Coping Strategies */}
+            <Collapsible open={alternativesOpen} onOpenChange={setAlternativesOpen}>
+              <CollapsibleTrigger asChild>
+                <Button variant="outline" className="w-full justify-between">
+                  <span>My Coping Strategies</span>
+                  {alternativesOpen ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                </Button>
+              </CollapsibleTrigger>
+              <CollapsibleContent className="pt-4">
+                <TriggerAlternatives 
+                  compact 
+                  showSaveButton 
+                  onComplete={() => setAlternativesOpen(false)}
+                />
+              </CollapsibleContent>
+            </Collapsible>
           </CardContent>
         </Card>
 
