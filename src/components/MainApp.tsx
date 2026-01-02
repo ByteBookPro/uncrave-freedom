@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Shield } from 'lucide-react';
+import { Shield, Settings } from 'lucide-react';
 import { TabNavigation, TabType } from './layout/TabNavigation';
 import { TodayTab } from './tabs/TodayTab';
 import { PracticeTab } from './tabs/PracticeTab';
@@ -53,16 +53,24 @@ export function MainApp() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-md mx-auto min-h-screen relative">
-        {/* Admin link for admin users */}
-        {isAdmin && (
+        {/* Top bar with settings and admin links */}
+        <div className="fixed top-4 right-4 z-50 flex items-center gap-2">
           <Link 
-            to="/admin" 
-            className="fixed top-4 right-4 z-50 flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-full shadow-lg hover:bg-primary/90 transition-colors text-sm font-medium"
+            to="/settings" 
+            className="flex items-center justify-center w-10 h-10 bg-muted text-muted-foreground rounded-full shadow-lg hover:bg-muted/80 transition-colors"
           >
-            <Shield className="h-4 w-4" />
-            Admin
+            <Settings className="h-5 w-5" />
           </Link>
-        )}
+          {isAdmin && (
+            <Link 
+              to="/admin" 
+              className="flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-full shadow-lg hover:bg-primary/90 transition-colors text-sm font-medium"
+            >
+              <Shield className="h-4 w-4" />
+              Admin
+            </Link>
+          )}
+        </div>
 
         {/* Tab content */}
         <main className="pb-20">
