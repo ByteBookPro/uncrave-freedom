@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Play, Pause, ChevronLeft, ChevronRight, Volume2, VolumeX, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useTextToSpeech } from '@/hooks/useTextToSpeech';
 
 interface Slide {
   id: string;
@@ -9,6 +10,7 @@ interface Slide {
   content: string;
   backgroundGradient?: string;
   icon?: string;
+  narration?: string; // Optional narration text for this slide
 }
 
 interface AnimatedSlidesProps {
@@ -18,6 +20,7 @@ interface AnimatedSlidesProps {
   onProgress?: (currentSlide: number, totalSlides: number) => void;
   onComplete?: () => void;
   title?: string;
+  narrationKey?: string; // Key to look up narration in sessionNarration
 }
 
 export function AnimatedSlides({
@@ -26,11 +29,16 @@ export function AnimatedSlides({
   slideDuration = 10,
   onProgress,
   onComplete,
-  title
+  title,
+  narrationKey
 }: AnimatedSlidesProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [slideProgress, setSlideProgress] = useState(0);
+  const [audioEnabled, setAudioEnabled] = useState(true);
+  const [hasPlayedNarration, setHasPlayedNarration] = useState<Set<number>>(new Set());
+  
+  const { speak, stop, isLoading: isNarrationLoading, isPlaying: isNarrationPlaying } = useTextToSpeech();
 
   // Guard against empty slides array
   if (!slides || slides.length === 0) {
@@ -46,6 +54,31 @@ export function AnimatedSlides({
 
   // Track if all slides have been viewed
   const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]));
+
+  // Play narration when slide changes
+  useEffect(() => {
+    if (!audioEnabled || hasPlayedNarration.has(currentIndex)) return;
+    
+    const narrationText = currentSlide.narration || currentSlide.content;
+    if (narrationText && narrationText.length > 0) {
+      speak(narrationText);
+      setHasPlayedNarration(prev => new Set([...prev, currentIndex]));
+    }
+  }, [currentIndex, audioEnabled, currentSlide, hasPlayedNarration, speak]);
+
+  // Stop narration when component unmounts or audio disabled
+  useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, [stop]);
+
+  // Stop narration when audio is disabled
+  useEffect(() => {
+    if (!audioEnabled) {
+      stop();
+    }
+  }, [audioEnabled, stop]);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -199,11 +232,28 @@ export function AnimatedSlides({
             {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
           </Button>
 
-          <span className="text-sm text-muted-foreground">
+          <span className="text-sm text-muted-foreground flex items-center gap-2">
+            {isNarrationLoading && (
+              <Loader2 className="w-4 h-4 animate-spin text-primary" />
+            )}
+            {isNarrationPlaying && !isNarrationLoading && (
+              <Volume2 className="w-4 h-4 text-primary animate-pulse" />
+            )}
             {currentIndex + 1} / {slides.length}
           </span>
 
-          <div className="w-10" /> {/* Spacer for alignment */}
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setAudioEnabled(!audioEnabled)}
+            className="h-10 w-10"
+          >
+            {audioEnabled ? (
+              <Volume2 className="w-5 h-5" />
+            ) : (
+              <VolumeX className="w-5 h-5 text-muted-foreground" />
+            )}
+          </Button>
         </div>
       </div>
 
