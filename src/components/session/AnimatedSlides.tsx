@@ -159,15 +159,10 @@ export function AnimatedSlides({
   // Track if all slides have been viewed
   const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]));
 
-  // Get current narration text - per-slide or localized
+  // Get current narration text - always per-slide
   const getCurrentNarration = useCallback((): string => {
-    // For non-English with localized narration available
-    if (userLanguage !== 'en' && localizedNarration) {
-      return localizedNarration;
-    }
-    // Fall back to per-slide narration or content
     return currentSlide.narration || currentSlide.content;
-  }, [userLanguage, localizedNarration, currentSlide]);
+  }, [currentSlide]);
 
   const currentNarration = getCurrentNarration();
 
@@ -189,20 +184,30 @@ export function AnimatedSlides({
     setCurrentAudioDuration(0);
   }, []);
 
-  // Advance to next slide with 5-second pause
+  // Advance to next slide - only pause between major sections (every 3 slides)
   const advanceToNextSlide = useCallback(() => {
     if (currentIndexRef.current < slides.length - 1) {
-      // Start 5-second pause before advancing
-      setIsPaused(true);
+      const nextIndex = currentIndexRef.current + 1;
       
-      pauseTimerRef.current = setTimeout(() => {
-        setIsPaused(false);
-        const nextIndex = currentIndexRef.current + 1;
+      // Only pause between major sections (every 3 slides), not between every slide
+      const shouldPause = nextIndex % 3 === 0 && nextIndex < slides.length - 1;
+      
+      if (shouldPause) {
+        setIsPaused(true);
+        pauseTimerRef.current = setTimeout(() => {
+          setIsPaused(false);
+          setCurrentIndex(nextIndex);
+          setViewedSlides(prev => new Set([...prev, nextIndex]));
+          setSlideProgress(0);
+          onProgress?.(nextIndex + 1, slides.length);
+        }, 3000); // 3 second pause between sections
+      } else {
+        // Direct advance for continuous flow
         setCurrentIndex(nextIndex);
         setViewedSlides(prev => new Set([...prev, nextIndex]));
         setSlideProgress(0);
         onProgress?.(nextIndex + 1, slides.length);
-      }, 5000); // 5 second pause
+      }
     } else {
       // Last slide completed
       setIsPlaying(false);
@@ -216,31 +221,36 @@ export function AnimatedSlides({
       return;
     }
 
-    stopAudio();
+    // Cancel any pending requests first
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+    }
     
-    // Create new abort controller
+    // Clear any pending timers
+    if (slideTimerRef.current) {
+      clearTimeout(slideTimerRef.current);
+      slideTimerRef.current = null;
+    }
+
+    // Stop any playing audio
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current = null;
+    }
+    
+    // Create new abort controller for this slide
     abortControllerRef.current = new AbortController();
     
-    // Determine what text to narrate
-    let narrationText = currentSlide.narration || currentSlide.content;
-    
-    // For non-English: play full localized narration only on first slide
-    // then skip audio for subsequent slides (they display during the long audio)
-    if (userLanguage !== 'en' && localizedNarration && currentIndexRef.current === 0) {
-      narrationText = localizedNarration;
-    } else if (userLanguage !== 'en' && localizedNarration && currentIndexRef.current > 0) {
-      // For non-English subsequent slides, auto-advance based on estimated time
-      const estimatedTime = calculateFallbackDuration(currentSlide.content) * 1000 * getTimingMultiplier();
-      slideTimerRef.current = setTimeout(() => {
+    // Get narration text for current slide
+    const narrationText = currentSlide.narration || currentSlide.content;
+
+    if (!narrationText || narrationText.length === 0) {
+      // No narration, advance immediately with small delay
+      setTimeout(() => {
         if (isPlayingRef.current) {
           advanceToNextSlide();
         }
-      }, estimatedTime);
-      return;
-    }
-
-    if (!narrationText || narrationText.length === 0) {
-      advanceToNextSlide();
+      }, 2000);
       return;
     }
 
@@ -268,12 +278,12 @@ export function AnimatedSlides({
         
         // For text/image pairs, calculate when to advance based on 40:60 ratio
         const timingMultiplier = getTimingMultiplier();
-        if (timingMultiplier < 1.0) {
-          const advanceTime = audio.duration * timingMultiplier * 1000;
+        if (timingMultiplier < 1.0 && hasImagePair) {
+          const advanceTime = audio.duration * 0.4 * 1000; // Text slide = 40%
           slideTimerRef.current = setTimeout(() => {
-            // Don't stop audio, just advance slide visually
+            // Don't stop audio, just advance slide visually to image
             const nextIdx = currentIndexRef.current + 1;
-            if (nextIdx < slides.length) {
+            if (nextIdx < slides.length && isPlayingRef.current) {
               setCurrentIndex(nextIdx);
               setViewedSlides(prev => new Set([...prev, nextIdx]));
               setSlideProgress(0);
@@ -288,44 +298,65 @@ export function AnimatedSlides({
         setIsNarrationLoading(false);
       };
       
-      audio.onpause = () => setIsNarrationPlaying(false);
-      
-      audio.onended = () => {
-        setIsNarrationPlaying(false);
-        // Only advance if we're not doing 40:60 split (handled by timer)
-        if (getTimingMultiplier() === 1.0 || isImageSlide) {
-          setTimeout(() => {
-            if (isPlayingRef.current) {
-              advanceToNextSlide();
-            }
-          }, 800);
+      audio.onpause = () => {
+        // Only set not playing if we actually paused (not if we're seeking)
+        if (audioRef.current?.paused && !audioRef.current?.ended) {
+          setIsNarrationPlaying(false);
         }
       };
       
-      audio.onerror = () => {
+      audio.onended = () => {
         setIsNarrationPlaying(false);
         setIsNarrationLoading(false);
-        console.error('Audio playback error');
+        
+        // Clear any pending slide timer
+        if (slideTimerRef.current) {
+          clearTimeout(slideTimerRef.current);
+          slideTimerRef.current = null;
+        }
+        
+        // Advance to next slide after audio completes
+        setTimeout(() => {
+          if (isPlayingRef.current) {
+            advanceToNextSlide();
+          }
+        }, 800);
+      };
+      
+      audio.onerror = (e) => {
+        setIsNarrationPlaying(false);
+        setIsNarrationLoading(false);
+        console.error('Audio playback error:', e);
         // Fallback: advance after estimated time
         const fallbackTime = calculateFallbackDuration(narrationText) * 1000;
-        setTimeout(() => advanceToNextSlide(), fallbackTime);
+        setTimeout(() => {
+          if (isPlayingRef.current) {
+            advanceToNextSlide();
+          }
+        }, fallbackTime);
       };
       
       await audio.play();
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') {
+        console.log('Audio fetch aborted for slide', currentIndexRef.current);
+        setIsNarrationLoading(false);
         return;
       }
       console.error('Narration error:', err);
       setIsNarrationLoading(false);
       // Fallback: advance after estimated time
       const fallbackTime = calculateFallbackDuration(narrationText) * 1000;
-      setTimeout(() => advanceToNextSlide(), fallbackTime);
+      setTimeout(() => {
+        if (isPlayingRef.current) {
+          advanceToNextSlide();
+        }
+      }, fallbackTime);
     }
   }, [
-    audioEnabled, isPaused, currentSlide, userLanguage, localizedNarration,
-    title, defaultVoicePreset, fetchAndCacheAudio, userGender, stopAudio,
-    advanceToNextSlide, getTimingMultiplier, isImageSlide, slides.length, onProgress
+    audioEnabled, isPaused, currentSlide, userLanguage,
+    title, defaultVoicePreset, fetchAndCacheAudio, userGender,
+    advanceToNextSlide, getTimingMultiplier, hasImagePair, slides.length, onProgress
   ]);
 
   // Start background music when component mounts and slideshow starts
@@ -489,14 +520,12 @@ export function AnimatedSlides({
   };
 
   return (
-    <div className="w-full rounded-2xl overflow-hidden shadow-card">
-      {/* 5-second pause indicator */}
+    <div className="w-full rounded-2xl overflow-hidden shadow-card relative">
+      {/* Brief pause indicator - subtle overlay */}
       {isPaused && (
-        <div className="absolute inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-sm">
-          <div className="text-white text-center">
-            <Loader2 className="w-8 h-8 animate-spin mx-auto mb-2" />
-            <p className="text-sm">Preparing next section...</p>
-          </div>
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 bg-black/50 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-2 backdrop-blur-sm">
+          <Loader2 className="w-3 h-3 animate-spin" />
+          <span>Next section...</span>
         </div>
       )}
       
