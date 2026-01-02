@@ -255,29 +255,29 @@ export function AnimatedSlides({
       {/* Slide display */}
       <div 
         className={cn(
-          "relative aspect-video overflow-hidden",
+          "relative min-h-[240px] sm:min-h-[280px] md:aspect-video overflow-hidden",
           currentSlide.backgroundGradient || "bg-gradient-to-br from-primary/80 to-freedom/80"
         )}
         style={kenBurnsStyle}
       >
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-white rounded-full blur-3xl" />
-          <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-white rounded-full blur-3xl" />
+          <div className="absolute top-1/4 left-1/4 w-24 sm:w-32 h-24 sm:h-32 bg-white rounded-full blur-3xl" />
+          <div className="absolute bottom-1/4 right-1/4 w-28 sm:w-40 h-28 sm:h-40 bg-white rounded-full blur-3xl" />
         </div>
 
         {/* Content */}
         <div 
-          className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center text-white animate-fade-in"
+          className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-6 md:p-8 text-center text-white animate-fade-in"
           key={currentSlide.id}
         >
           {currentSlide.icon && (
-            <span className="text-5xl mb-4">{currentSlide.icon}</span>
+            <span className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4">{currentSlide.icon}</span>
           )}
-          <h3 className="text-2xl font-bold mb-4 drop-shadow-lg">
+          <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 md:mb-4 drop-shadow-lg px-2">
             {currentSlide.title}
           </h3>
-          <p className="text-lg opacity-90 max-w-md leading-relaxed drop-shadow">
+          <p className="text-sm sm:text-base md:text-lg opacity-90 max-w-xs sm:max-w-sm md:max-w-md leading-relaxed drop-shadow px-2">
             {currentSlide.content}
           </p>
         </div>
@@ -287,33 +287,33 @@ export function AnimatedSlides({
           onClick={goPrev}
           disabled={currentIndex === 0}
           className={cn(
-            "absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 backdrop-blur flex items-center justify-center transition-opacity",
+            "absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/20 backdrop-blur flex items-center justify-center transition-opacity",
             currentIndex === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-black/40"
           )}
         >
-          <ChevronLeft className="w-6 h-6 text-white" />
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         </button>
         <button
           onClick={goNext}
           disabled={currentIndex === slides.length - 1}
           className={cn(
-            "absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 backdrop-blur flex items-center justify-center transition-opacity",
+            "absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/20 backdrop-blur flex items-center justify-center transition-opacity",
             currentIndex === slides.length - 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-black/40"
           )}
         >
-          <ChevronRight className="w-6 h-6 text-white" />
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
         </button>
 
         {/* Slide indicator */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-1.5">
+        <div className="absolute bottom-2 sm:bottom-4 left-0 right-0 flex justify-center gap-1 sm:gap-1.5">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               className={cn(
-                "w-2 h-2 rounded-full transition-all",
+                "w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all",
                 index === currentIndex 
-                  ? "bg-white w-6" 
+                  ? "bg-white w-4 sm:w-6" 
                   : index < currentIndex 
                     ? "bg-white/70" 
                     : "bg-white/30"
@@ -324,9 +324,9 @@ export function AnimatedSlides({
       </div>
 
       {/* Controls */}
-      <div className="p-4 bg-card space-y-3">
+      <div className="p-3 sm:p-4 bg-card space-y-2 sm:space-y-3">
         {/* Progress bar */}
-        <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+        <div className="w-full h-1 sm:h-1.5 bg-muted rounded-full overflow-hidden">
           <div 
             className="h-full gradient-hero rounded-full transition-all duration-100"
             style={{ width: `${totalProgress}%` }}
@@ -335,62 +335,62 @@ export function AnimatedSlides({
 
         {/* Control buttons */}
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5 sm:gap-1">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setIsPlaying(!isPlaying)}
-              className="h-10 w-10"
+              className="h-9 w-9 sm:h-10 sm:w-10"
             >
-              {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
+              {isPlaying ? <Pause className="w-4 h-4 sm:w-5 sm:h-5" /> : <Play className="w-4 h-4 sm:w-5 sm:h-5 ml-0.5" />}
             </Button>
           </div>
 
-          <span className="text-sm text-muted-foreground flex items-center gap-2">
+          <span className="text-xs sm:text-sm text-muted-foreground flex items-center gap-1 sm:gap-2">
             {isNarrationLoading && (
-              <Loader2 className="w-4 h-4 animate-spin text-primary" />
+              <Loader2 className="w-3 h-3 sm:w-4 sm:h-4 animate-spin text-primary" />
             )}
             {isNarrationPlaying && !isNarrationLoading && (
-              <Volume2 className="w-4 h-4 text-primary animate-pulse" />
+              <Volume2 className="w-3 h-3 sm:w-4 sm:h-4 text-primary animate-pulse" />
             )}
             {backgroundMusic.isPlaying && (
-              <Music className="w-4 h-4 text-primary/60" />
+              <Music className="w-3 h-3 sm:w-4 sm:h-4 text-primary/60" />
             )}
             {currentIndex + 1} / {slides.length}
           </span>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-0.5 sm:gap-1">
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setShowTranscript(!showTranscript)}
-              className="h-10 w-10"
+              className="h-9 w-9 sm:h-10 sm:w-10"
               title={showTranscript ? "Hide transcript" : "Show transcript"}
             >
-              <FileText className={cn("w-5 h-5", !showTranscript && "text-muted-foreground")} />
+              <FileText className={cn("w-4 h-4 sm:w-5 sm:h-5", !showTranscript && "text-muted-foreground")} />
             </Button>
             
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setMusicEnabled(!musicEnabled)}
-              className="h-10 w-10"
+              className="h-9 w-9 sm:h-10 sm:w-10"
               title={musicEnabled ? "Mute background music" : "Enable background music"}
             >
-              <Music className={cn("w-5 h-5", !musicEnabled && "text-muted-foreground")} />
+              <Music className={cn("w-4 h-4 sm:w-5 sm:h-5", !musicEnabled && "text-muted-foreground")} />
             </Button>
             
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setAudioEnabled(!audioEnabled)}
-              className="h-10 w-10"
+              className="h-9 w-9 sm:h-10 sm:w-10"
               title={audioEnabled ? "Mute narration" : "Enable narration"}
             >
               {audioEnabled ? (
-                <Volume2 className="w-5 h-5" />
+                <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />
               ) : (
-                <VolumeX className="w-5 h-5 text-muted-foreground" />
+                <VolumeX className="w-4 h-4 sm:w-5 sm:h-5 text-muted-foreground" />
               )}
             </Button>
           </div>
@@ -398,8 +398,8 @@ export function AnimatedSlides({
 
         {/* Transcript display */}
         {showTranscript && (
-          <ScrollArea className="h-24 w-full rounded-lg bg-muted/50 p-3">
-            <p className="text-sm text-muted-foreground leading-relaxed">
+          <ScrollArea className="h-20 sm:h-24 w-full rounded-lg bg-muted/50 p-2 sm:p-3">
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
               {currentNarration}
             </p>
           </ScrollArea>

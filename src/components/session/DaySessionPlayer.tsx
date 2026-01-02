@@ -78,10 +78,13 @@ export function DaySessionPlayer({
   const [showCompletion, setShowCompletion] = useState(false);
   const [activePractice, setActivePractice] = useState<PracticeType | null>(null);
 
-  const currentModule = modules[currentModuleIndex];
+  // Safe access to current module with bounds checking
+  const safeModuleIndex = Math.min(Math.max(0, currentModuleIndex), Math.max(0, modules.length - 1));
+  const currentModule = modules.length > 0 ? modules[safeModuleIndex] : null;
   
   // Calculate overall progress
   const overallProgress = useMemo(() => {
+    if (modules.length === 0) return 0;
     const completedCount = Object.values(moduleProgress).filter(m => m.isCompleted).length;
     return (completedCount / modules.length) * 100;
   }, [moduleProgress, modules.length]);
@@ -93,6 +96,26 @@ export function DaySessionPlayer({
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  // Guard: If no modules available, show error and allow closing
+  if (!currentModule) {
+    return (
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6">
+        <div className="text-center max-w-sm">
+          <div className="w-16 h-16 rounded-full bg-muted flex items-center justify-center mx-auto mb-4">
+            <AlertCircle className="w-8 h-8 text-muted-foreground" />
+          </div>
+          <h2 className="text-xl font-bold mb-2">Session Not Available</h2>
+          <p className="text-muted-foreground mb-6">
+            Day {dayNumber} content is not available yet. Please try again later.
+          </p>
+          <Button onClick={onClose} className="w-full">
+            Back to Home
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   // Check if current module is unlocked
   const isModuleUnlocked = useCallback((index: number): boolean => {
@@ -476,23 +499,23 @@ export function DaySessionPlayer({
   return (
     <div className="min-h-screen bg-background flex flex-col">
       {/* Header */}
-      <header className="bg-card border-b sticky top-0 z-10 p-4">
-        <div className="flex items-center justify-between mb-3">
-          <Button variant="ghost" size="icon" onClick={onClose}>
-            <X className="w-5 h-5" />
+      <header className="bg-card border-b sticky top-0 z-10 p-3 sm:p-4">
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
+          <Button variant="ghost" size="icon" onClick={onClose} className="h-9 w-9 sm:h-10 sm:w-10">
+            <X className="w-4 h-4 sm:w-5 sm:h-5" />
           </Button>
-          <div className="text-center">
+          <div className="text-center flex-1 px-2">
             <p className="text-xs text-muted-foreground">Day {dayNumber}</p>
-            <p className="font-semibold text-sm">{dayTitle}</p>
+            <p className="font-semibold text-xs sm:text-sm truncate">{dayTitle}</p>
           </div>
-          <div className="w-10" />
+          <div className="w-9 sm:w-10" />
         </div>
         
         {/* Module progress */}
-        <div className="space-y-2">
-          <Progress value={overallProgress} className="h-2" />
+        <div className="space-y-1.5 sm:space-y-2">
+          <Progress value={overallProgress} className="h-1.5 sm:h-2" />
           <div className="flex justify-between text-xs text-muted-foreground">
-            <span>Module {currentModuleIndex + 1} of {modules.length}</span>
+            <span>Module {safeModuleIndex + 1} of {modules.length}</span>
             <span className="flex items-center gap-1">
               <Timer className="w-3 h-3" />
               {formatTime(totalActiveSeconds)} / {formatTime(MIN_SESSION_SECONDS)}
@@ -502,10 +525,10 @@ export function DaySessionPlayer({
       </header>
 
       {/* Content */}
-      <main className="flex-1 p-4 pb-28 overflow-y-auto">
+      <main className="flex-1 p-3 sm:p-4 pb-24 sm:pb-28 overflow-y-auto">
         {/* Module header */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
+        <div className="mb-4 sm:mb-6">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground mb-1">
             <span className="capitalize">{currentModule.type.replace('_', ' ').toLowerCase()}</span>
             <span>•</span>
             <span>{Math.ceil(currentModule.estimatedSeconds / 60)} min</span>
@@ -516,7 +539,7 @@ export function DaySessionPlayer({
               </>
             )}
           </div>
-          <h2 className="text-xl font-bold">{currentModule.title}</h2>
+          <h2 className="text-lg sm:text-xl font-bold">{currentModule.title}</h2>
         </div>
 
         {/* Module content */}
@@ -539,41 +562,43 @@ export function DaySessionPlayer({
       </main>
 
       {/* Bottom navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-card border-t p-4">
-        <div className="max-w-md mx-auto flex gap-3">
+      <footer className="fixed bottom-0 left-0 right-0 bg-card border-t p-3 sm:p-4 safe-area-pb">
+        <div className="max-w-md mx-auto flex gap-2 sm:gap-3">
           <Button 
             variant="outline"
-            size="lg"
+            size="default"
             onClick={handlePrevious}
-            disabled={currentModuleIndex === 0}
-            className="flex-1"
+            disabled={safeModuleIndex === 0}
+            className="flex-1 h-11 sm:h-12 text-sm sm:text-base"
           >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Previous
+            <ArrowLeft className="w-4 h-4 mr-1.5 sm:mr-2" />
+            <span className="hidden xs:inline">Previous</span>
+            <span className="xs:hidden">Prev</span>
           </Button>
           
           {isLastModule ? (
             <Button 
-              size="lg"
+              size="default"
               onClick={handleNext}
               disabled={!canCompleteSession()}
               className={cn(
-                "flex-1",
+                "flex-1 h-11 sm:h-12 text-sm sm:text-base",
                 canCompleteSession() && "bg-success hover:bg-success/90"
               )}
             >
-              Complete Day
-              <Check className="w-4 h-4 ml-2" />
+              <span className="hidden xs:inline">Complete Day</span>
+              <span className="xs:hidden">Complete</span>
+              <Check className="w-4 h-4 ml-1.5 sm:ml-2" />
             </Button>
           ) : (
             <Button 
-              size="lg"
+              size="default"
               onClick={handleNext}
               disabled={!canProceed()}
-              className="flex-1"
+              className="flex-1 h-11 sm:h-12 text-sm sm:text-base"
             >
               Next
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-1.5 sm:ml-2" />
             </Button>
           )}
         </div>
