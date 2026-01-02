@@ -515,12 +515,8 @@ export function DaySessionPlayer({
         {/* Module progress */}
         <div className="space-y-1.5 sm:space-y-2">
           <Progress value={overallProgress} className="h-1.5 sm:h-2" />
-          <div className="flex justify-between text-xs text-muted-foreground">
+          <div className="flex justify-center text-xs text-muted-foreground">
             <span>Module {safeModuleIndex + 1} of {modules.length}</span>
-            <span className="flex items-center gap-1">
-              <Timer className="w-3 h-3" />
-              {formatTime(totalActiveSeconds)} / {formatTime(MIN_SESSION_SECONDS)}
-            </span>
           </div>
         </div>
       </header>
