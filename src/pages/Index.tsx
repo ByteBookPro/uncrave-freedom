@@ -1,38 +1,22 @@
 import React from 'react';
 import { AppProvider, useApp } from '@/contexts/AppContext';
 import { Onboarding } from '@/components/Onboarding';
-import { Dashboard } from '@/components/Dashboard';
-import { ProgramView } from '@/components/ProgramView';
-import { DaySession } from '@/components/DaySession';
-import { CravingTool } from '@/components/CravingTool';
+import { MainApp } from '@/components/MainApp';
 
 function AppContent() {
-  const { currentView, isOnboarded } = useApp();
+  const { isOnboarded, currentView } = useApp();
 
   if (!isOnboarded || currentView === 'onboarding') {
     return <Onboarding />;
   }
 
-  switch (currentView) {
-    case 'dashboard':
-      return <Dashboard />;
-    case 'program':
-      return <ProgramView />;
-    case 'session':
-      return <DaySession />;
-    case 'craving':
-      return <CravingTool />;
-    default:
-      return <Dashboard />;
-  }
+  return <MainApp />;
 }
 
 const Index = () => {
   return (
     <AppProvider>
-      <div className="min-h-screen max-w-md mx-auto bg-background relative overflow-hidden shadow-2xl">
-        <AppContent />
-      </div>
+      <AppContent />
     </AppProvider>
   );
 };
