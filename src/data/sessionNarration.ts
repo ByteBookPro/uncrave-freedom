@@ -320,63 +320,314 @@ Congratulations, non-smoker! See you tomorrow for Day 7, where we'll focus on st
 
 Now go celebrate – you deserve it!`,
 
-  // Day 7 - Staying Smoke-Free
-  'd7m1': `Congratulations! You made it through your first smoke-free day. That's an incredible achievement.
+  // Day 7 - Staying Smoke-Free: Coping with Cravings & Withdrawal
+  'd7m1': `Welcome to Day 7 — and more importantly… welcome to your next day as a non-smoker.
+If you're feeling proud and a little shaky at the same time, that's normal.
+Pride says: "I did it."
+The shaky part says: "Can I keep doing it?"
 
-Today, we're going to focus on managing cravings. They will come, but they will pass. Remember: cravings typically last only 3 to 5 minutes. You can handle anything for 3 minutes.
+Let me tell you a quick, real-life style moment.
+Jordan wakes up, and for the first time in years there's no "where's my cigarette?" routine.
+There's a tiny emptiness… like a missing step on a staircase.
+And then — an unexpected wave hits at 10:30 AM. Not huge, just annoying.
+Jordan thinks: "What if this lasts forever?"
 
-When a craving hits, use the 5 D's: Delay – tell yourself to wait just 3 minutes. Deep breathe – take 5 slow, calming breaths. Drink water – stay hydrated and give yourself something to do. Distract yourself – do something engaging. And declare – remind yourself: I am a non-smoker.
+Here's the truth: it won't.
+What you're feeling is your brain and body adjusting.
+Withdrawal symptoms are not a sign you're failing — they're a sign you're healing.
+Today is your survival guide for early quit days.
+We're going to make cravings predictable, manageable, and smaller.`,
 
-Each craving you resist makes you stronger. Each craving that passes without a cigarette is a victory. And over time, cravings become less frequent and less intense.`,
+  'd7m2': `Let's normalize what you may be noticing.
 
-  'd7m2': `Let's practice urge surfing – a powerful mindfulness technique for riding out cravings without giving in.
+Common early symptoms can include:
+• Cravings that come and go in waves
+• Irritability or mood swings
+• Restlessness
+• Foggy focus for a few days
+• Increased appetite — because food tastes better and your mouth wants "something"
+• Cough or throat irritation — your lungs are clearing
+• Sleep changes — vivid dreams or trouble falling asleep for a bit
 
-When you feel a craving, instead of fighting it or giving in, simply observe it. Imagine the craving as a wave in the ocean. It builds, it peaks, and then it subsides – all on its own.
+Now the key reassurance:
+Most physical withdrawal peaks around the first couple of days and then steadily declines.
+Psychological triggers can pop up longer — but you already have skills for those.
 
-Close your eyes. Notice where you feel the craving in your body. Is it in your chest? Your throat? Your hands? Just observe it without judgment.
+"Day 1–3: nicotine leaving, cravings can peak."
+"Day 4–7: physical withdrawal often eases."
+"After: mostly habit cues, which we rewire."
 
-Breathe slowly and steadily. Watch the craving build. It might feel intense, but stay with it. Keep breathing.
+If you feel anything on this list, it's not a problem.
+It's a phase.
+And phases pass.`,
 
-Now notice the craving beginning to fade. It's subsiding, like a wave retreating from the shore. You didn't fight it – you surfed it. And you won.
+  'd7m3': `Quick check-in.
+In the last 24 hours, tap anything you experienced.
+No typing — just tap.
 
-Every time you successfully surf an urge, you build confidence and resilience. You can do this.`,
+If you selected irritability or mood swings:
+Your brain used nicotine like a quick "pressure valve."
+Without it, emotions can feel sharper for a few days.
+Two helpful moves:
+1) Tell people you trust: "I'm quitting — I might be a bit edgy for a week."
+2) Move your body. A brisk walk burns off stress chemistry fast.
+This usually fades within a week or two.
 
-  // Day 8 - Building New Habits
-  'd8m1': `Today is about building your new identity as a non-smoker. You're not just quitting a habit – you're becoming a different, healthier version of yourself.
+If you selected low focus:
+This is common early on because your brain is used to nicotine's stimulation.
+Do shorter work sprints. Take micro-breaks. Drink water.
+Your focus typically rebounds — and many people feel more stable later because they're not riding nicotine ups and downs.
 
-Identity change is powerful. Instead of thinking "I'm trying to quit smoking," think "I am a non-smoker." This subtle shift makes a huge difference.
+If you selected hunger:
+Totally normal. Food tastes better.
+Have "safe snacks" ready: fruit, nuts, yogurt, popcorn, sugar-free gum.
+If you want something sweet, pair it with water first.
+And remember: quitting is priority. You can fine-tune diet later.
+A few pounds is not a crisis. Smoking is the crisis you already solved.
 
-When offered a cigarette, you don't say "No thanks, I'm trying to quit." You say "No thanks, I don't smoke." See the difference? One is struggling; the other is simply stating a fact about who you are.
+If you selected cough or throat irritation:
+That can be your lungs clearing and your cilia waking up.
+Hydrate. Warm tea can help.
+It's usually a sign of recovery, not damage.
 
-Today, think about what kind of person you want to be. What does the best version of you look like? That person is a non-smoker – and that person is you, right now.`,
+If you selected sleep issues:
+Nicotine affects sleep. Quitting can cause vivid dreams for a bit.
+Try: no caffeine late, warm shower, short breathing practice before bed.
+This stabilizes.
 
-  'd8m3': `Let's practice some positive affirmations together. These might feel awkward at first, but they're powerful tools for reinforcing your new identity.
+All of these symptoms are temporary.
+A little discomfort now… for permanent freedom later.`,
 
-Repeat after me, out loud if you can:
+  'd7m4': `Now let's arm you with a complete craving plan.
+When a craving hits, don't debate it — run a script.
 
-I am free from cigarettes.
-I breathe easily and deeply.
-I am proud of my decision to quit.
-Every day, I become healthier and stronger.
-I don't need cigarettes – I never did.
-I am a non-smoker, and I love it.
+1) DELAY
+Tell yourself: "Not for the next 5 minutes."
+Urges crest and pass.
+You can delay again and again. There's no penalty for postponing the decision until the urge is gone.
 
-Say these affirmations every morning when you wake up and every night before bed. Put them on sticky notes where you'll see them. Make them part of your daily routine.
+2) DEEP BREATHE
+Breathing is your fast nervous-system remote control.
+Longer exhales tell the brain: "Stand down."
 
-Your brain believes what you tell it. Tell it you're free. Tell it you're strong. Tell it you're a non-smoker.`,
+3) DRINK WATER
+It gives your hands and mouth a harmless job.
+And it's a clean reset — especially if cravings feel "dry" or throat-based.
 
-  // Day 9 - Long-Term Success
-  'd9m1': `You've come so far. Today, let's prepare you for long-term success by identifying and defusing dangerous thoughts that could lead to relapse.
+4) DISTRACT (Do Something Else)
+Switch the channel.
+A craving is fueled by attention.
+Quick distractors:
+• 10 push-ups or jumping jacks
+• Walk to another room or outside for 2 minutes
+• Chew gum or a mint
+• Put on one song and sing along
+• Wash your face, brush your teeth
+• Organize one drawer for 3 minutes
+By the time you finish… the wave is usually smaller.
 
-Here are thoughts to watch out for: "Just one won't hurt." Yes, it will. One leads to two, which leads to a pack, which leads back to addiction.
+5) DISCUSS / DIALOG
+Talk it through.
+Text a friend, open the app support, or use self-talk:
+"I don't smoke. I'm free. This is temporary."
+Humor helps too:
+"Nice try, Nicodemon. Not today."
 
-"I've been so good – I deserve a cigarette as a reward." Rewarding yourself with poison makes no sense. Reward yourself with something that actually feels good.
+Urges are temporary. Smoking is permanent damage. Choose temporary discomfort for permanent freedom.`,
 
-"I'll just have one when I drink." Alcohol lowers inhibitions and impairs judgment. Protect yourself by having a plan for social situations.
+  'd7m5': `Now the CBT tool: thought challenging.
+A craving often comes with a sentence.
+If you believe the sentence, you relapse.
+If you challenge it, you win.
 
-When these thoughts arise, recognize them for what they are: the voice of addiction trying to pull you back. Thank the thought for sharing, then let it go. You're a non-smoker now.`,
+Common craving thoughts:
+• "Just one won't matter."
+• "I deserve it."
+• "I can't handle this feeling."
+• "I'll quit again tomorrow."
 
-  // Day 10 - Your Smoke-Free Future
+Here are the reality answers:
+"Just one" is how the loop restarts.
+One puff re-teaches the brain: "Nicotine is back."
+It's easier to have a clean rule:
+Not even one.
+
+"I deserve it."
+Yes — you deserve relief. But cigarettes don't give relief; they rent it to you with interest.
+You deserve freedom, oxygen, and calm.
+
+"I can't handle this feeling."
+You can. You've already handled hard feelings before.
+And cravings are sensations — they rise and fall.
+You don't need to like it. You just need to outlast it.
+
+"I'll quit again tomorrow."
+That's addiction bargaining.
+Your new identity is simple:
+"I don't smoke."`,
+
+  'd7m6': `Let's practice it right now.
+First, rate your current urge from 0 to 10.
+
+Now tap where you feel it most: throat, chest, jaw, hands, stomach.
+
+Now breathe: inhale 4… exhale 6…
+You are not fighting the urge.
+You're watching it.
+
+That's the lesson: urges move.
+Every wave you ride trains your brain.
+The next wave is usually smaller.`,
+
+  'd7m7': `Let's lock in motivation with reality:
+You've already avoided a stack of cigarettes.
+You've already saved real money.
+And the best part: you're building mental muscle.
+
+Here's a quick success story.
+A user named Chris said:
+"The first 3 days were the hardest. I kept doing the 5 D's and the urge surfing. By the end of week one, I could finally breathe without planning my day around smoking."
+
+That's what you're building.
+And you're closer than you think.
+
+Two final actions today.
+First: tap your one rule:
+"Not even one."
+
+Second: choose a small reward you'll give yourself tonight.
+Not food-shame. Not guilt.
+A positive reward: a movie, a bath, a treat, a small purchase with saved money.
+
+Day 7 complete.
+Tomorrow, Day 8, we build new habits and new rewards so your smoke-free life feels full — not empty.`,
+
+  // Day 8 - Building Healthy Habits & Rewards
+  'd8m1': `Welcome to Day 8.
+By now, you may notice cravings are easing — not gone, but less sharp.
+Today is powerful because we move from "stopping" to "building."
+
+Smoking wasn't only nicotine.
+It was a break. A pause. A reward. A way to manage stress or boredom.
+So we don't just remove cigarettes.
+We replace the role they played — with something that actually improves your life.`,
+
+  'd8m2': `Here's your replacement menu — pick what fits your life:
+
+STRESS MOMENTS:
+• 60-second walk
+• 10 push-ups / wall push-ups
+• One calming song
+• Stress ball / fidget
+
+BOREDOM MOMENTS:
+• Quick puzzle or phone game
+• Tidy one small area for 3 minutes
+• Read one article or a few pages
+
+MORNING ROUTINE:
+• Stretch + 5 deep breaths
+• A short walk around the building
+• A simple breakfast ritual
+
+AFTER MEALS:
+• Brush teeth
+• Dark chocolate square
+• 5-minute walk
+
+COMMUTE:
+• Audiobook / podcast
+• Gum + water
+• Breathing at red lights
+
+SOCIAL:
+• Hold a drink
+• Stand with non-smokers
+• Step away for air without smoking
+
+Choose 3 replacements you'll use most. Those become your default suggestions inside the app.`,
+
+  'd8m3': `Now we revisit your trigger plan from Day 3.
+For each trigger, tap:
+• Worked
+• Didn't try yet
+• Needs a different replacement
+
+If something worked, keep it.
+If you didn't try, no shame — start now.
+If it didn't work, adjust.
+This is not moral failure. It's product testing.
+You are testing what makes a smoke-free life easy for you.`,
+
+  'd8m4': `One of the best smoking replacements is movement.
+Not because you need to become an athlete.
+Because movement changes brain chemistry fast.
+
+Nicotine gave a quick "jolt."
+Movement gives natural endorphins and reduces cravings.
+Start small:
+A 10-minute walk during a normal craving time can erase the urge.
+If you already exercise, you may notice it gets easier as your lungs clear.
+If you don't, walking is perfect.
+
+Choose your movement level: 5 min / 10 min / 20 min daily.
+That's your simple challenge.`,
+
+  'd8m5': `Let's do a fast version together.
+March in place. Roll shoulders. Open chest.
+Then one long exhale.
+
+Now inhale 4… exhale 6… three times.`,
+
+  'd8m6': `Smoking is also tactile — hands and mouth had a job.
+So we give them a better job.
+
+Hands busy ideas:
+• Gum or mint
+• Pen or small fidget
+• Doodling for 60 seconds
+• Tea or fizzy water
+
+Now the powerful part: environment design.
+Remove cues, add cues.
+• Throw away ashtrays and lighters
+• Clean your car/home to remove smoke smell triggers
+• Put a water bottle on your desk
+• Leave shoes by the door to cue a walk
+• Create a "calm corner" for breathing instead of smoking
+
+This makes quitting easier because your environment stops whispering "smoke."`,
+
+  'd8m7': `Now: reward yourself.
+Quitting is work, and positive reinforcement is powerful.
+Use your money-saved counter to plan a treat.
+A small weekly reward works wonders.
+
+Also: identity.
+You're not a smoker "being good."
+You are a non-smoker.
+Non-smokers handle stress with skills, not smoke.
+
+One caution:
+Alcohol can be a high-risk trigger early on.
+If drinking is strongly linked to smoking for you, consider reducing it for a couple weeks,
+or only drinking with supportive non-smokers and a clear plan.
+You're not fragile — you're protecting your progress.`,
+
+  'd8m8': `Before we end today, choose ONE new habit to lock in this week.
+Pick one:
+• After meals: 5-minute walk
+• Coffee: 2-minute breathing first
+• Stress: 60-second reset + water
+• Boredom: 3-minute tidy or puzzle
+• Social: drink in hand + "I don't smoke."
+
+Now set a reminder time for it.
+Small consistency is how this becomes effortless.
+
+Day 8 complete.
+Tomorrow, Day 9, we relapse-proof social moments and the "just one" trap — so you stay free long-term.`,
+
   'd10m1': `Congratulations! You've completed the 10-day program. Take a moment to truly appreciate what you've accomplished.
 
 You didn't just quit smoking – you changed your entire relationship with cigarettes. You understand the addiction. You know your triggers. You've built new habits and a new identity.
