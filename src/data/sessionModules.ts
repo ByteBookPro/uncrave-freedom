@@ -897,52 +897,304 @@ export const daySessions: DaySession[] = [
     modules: [
       {
         id: 'd4m1',
-        title: "The Mindfulness Approach",
+        title: "Welcome to Day 4",
+        description: "Today we do something truly unique that could be a major turning point.",
         type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 240,
+        estimatedSeconds: 360,
         gatingRequired: true,
         content: {
           slides: [
-            { id: 's1', title: "A Different Exercise", content: "Today we try something powerful: smoking with complete awareness.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80", icon: "🧠" },
-            { id: 's2', title: "Break The Autopilot", content: "You've been smoking unconsciously for years. Today, we bring it into full consciousness.", backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80", icon: "✨" },
-            { id: 's3', title: "The Goal", content: "To experience what smoking actually is—without the illusions your mind has built around it.", backgroundGradient: "bg-gradient-to-br from-freedom/80 to-coral/80", icon: "🎯" },
+            {
+              id: 's1',
+              title: "A Unique Exercise",
+              content: "Today is Day 4, and we're going to do something truly unique. By the end of this session, you might experience one of the biggest mindset shifts of this journey.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "✨",
+              narration: "Today is Day 4, and we're going to do something truly unique. By the end of this session, you might experience one of the biggest mindset shifts of this journey. We're going to smoke a cigarette together, mindfully. Yes, you heard that right – I'm asking you to smoke, but in a very specific, conscious way. This exercise has helped so many people – including former smokers like me – truly see smoking for what it is. It can be a game-changer."
+            },
+            {
+              id: 's2',
+              title: "Important Setup",
+              content: "If you're not somewhere you can safely smoke right now, pause this session and come back when you're ready with a cigarette.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "⚠️",
+              narration: "Important: If you're not currently in a place where you can safely light a cigarette – for example, if you're at work or in a public space – pause this session and come back later when you can be in a comfortable, private spot, ideally with minimal distractions. Maybe step outside or near a window. Take your device with you and continue when you're ready."
+            },
+            {
+              id: 's3',
+              title: "What Is Mindfulness?",
+              content: "Mindfulness means paying attention on purpose, in the present moment, without judgment. We observe without reacting.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
+              icon: "🧘",
+              narration: "Mindfulness means paying attention on purpose, in the present moment, without judgment. So as you smoke now, you're not going to think about the next drag or anything else – you'll focus on the now: the taste, the smell, the sensation. Try to approach it almost like a scientist observing an experiment, or as if you've never smoked before and you're really curious about what this thing actually does to your body."
+            },
+            {
+              id: 's4',
+              title: "Use All Your Senses",
+              content: "We'll pay attention to taste, smell, physical sensations, and emotions. Everything. No autopilot.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "👁️",
+              narration: "During this exercise, we'll use all five senses. We'll pay attention to the taste of the smoke, the feeling in your throat and lungs, the smell around you, the visual of the smoke, even the sound of the cigarette burning. We'll also notice your emotional reactions. This is about experiencing what smoking actually is – without the illusions your mind has built around it over years of habit."
+            },
           ]
         }
       },
       {
         id: 'd4m2',
-        title: "Guided Mindful Smoking",
+        title: "The Mindful Smoking Exercise",
+        description: "A guided, conscious smoking experience to reveal the true nature of the habit.",
         type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 720,
+        estimatedSeconds: 600,
         gatingRequired: true,
         content: {
           slides: [
-            { id: 's1', title: "Get A Cigarette Ready", content: "Light your cigarette, but don't smoke yet. Just hold it.", backgroundGradient: "bg-gradient-to-br from-muted/80 to-primary/80", icon: "🚬" },
-            { id: 's2', title: "Observe The Smoke", content: "Watch the smoke rise. This is what goes into your lungs, your blood, your cells.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80", icon: "💨" },
-            { id: 's3', title: "Smell It", content: "Really smell the cigarette. The paper burning. The chemicals. Is this pleasant?", backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80", icon: "👃" },
-            { id: 's4', title: "Take One Puff", content: "Slowly inhale. Hold it. What does it actually taste like? Feel the heat.", backgroundGradient: "bg-gradient-to-br from-coral/80 to-muted/80", icon: "🌬️" },
-            { id: 's5', title: "Notice Your Body", content: "How does your throat feel? Your chest? Your heart rate? This is reality.", backgroundGradient: "bg-gradient-to-br from-muted/80 to-freedom/80", icon: "💗" },
-            { id: 's6', title: "Where Is The Pleasure?", content: "Search for genuine pleasure. Not relief. Not habit. Actual enjoyment. Is it there?", backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80", icon: "🔍" },
-            { id: 's7', title: "Continue If You Want", content: "Finish the cigarette if you choose, staying fully present. Or put it out. Either is fine.", backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80", icon: "🎭" },
-            { id: 's8', title: "What Did You Notice?", content: "Many people find that mindful smoking reveals something unexpected: there's no genuine pleasure.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80", icon: "💡" },
+            {
+              id: 's1',
+              title: "Get Your Cigarette Ready",
+              content: "Make sure you have a cigarette and lighter. Don't light it yet – just hold it in your hand and really look at it.",
+              backgroundGradient: "bg-gradient-to-br from-muted/80 to-primary/80",
+              icon: "🚬",
+              narration: "Alright. Make sure you have a cigarette and lighter with you. Do you have it? Good. Now, don't light it yet. First, just hold it in your hand. Look at it. This little white tube filled with tobacco... it's been controlling parts of your life, hasn't it? In a moment, you will light it, but unlike any cigarette you've had before, you're going to stay fully present for every single puff."
+            },
+            {
+              id: 's2',
+              title: "Light The Cigarette",
+              content: "Now light your cigarette. Watch the flame catch the paper. Watch the ember glow. Take your time.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "🔥",
+              narration: "Okay, let's begin. Light your cigarette. Watch the flame touch the paper. See the ember come to life. This is what you've done thousands of times – but today, we're really paying attention. Notice the first wisps of smoke rising from the tip. This is what will enter your body in a moment."
+            },
+            {
+              id: 's3',
+              title: "The First Puff",
+              content: "Draw the smoke slowly into your mouth. Pause. Don't inhale yet. Just hold it there. Notice the taste on your tongue.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-accent/80",
+              icon: "💨",
+              narration: "As you take your first puff, do it slowly. Draw the smoke into your mouth... now pause. Don't inhale to lungs yet, just hold it in your mouth for a second. Notice the taste on your tongue. How would you describe it? Is it pleasant, unpleasant, neutral? Is it bitter, harsh? Be completely honest with yourself."
+            },
+            {
+              id: 's4',
+              title: "Inhale and Observe",
+              content: "Now inhale gently into your lungs. Hold it for a moment. Feel the sensation in your throat and chest. Then exhale slowly.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-muted/80",
+              icon: "🫁",
+              narration: "Now inhale gently into your lungs... hold it for a moment... and exhale slowly. Watch the smoke as you breathe it out. Notice the feeling in your throat and chest. Does it burn a little? How do your lungs feel with that smoke inside? Is there any tightness, any resistance from your body?"
+            },
+            {
+              id: 's5',
+              title: "Notice Physical Sensations",
+              content: "Pay attention to your whole body. Any head rush? Lightheadedness? How does your heart feel? Your breathing?",
+              backgroundGradient: "bg-gradient-to-br from-muted/80 to-freedom/80",
+              icon: "💗",
+              narration: "Take another puff, and again pay close attention. Perhaps close your eyes if it helps you focus on the senses – just be careful with the lit cigarette. Inhale... hold... exhale. Observe any effect on your body – do you feel a head-rush or a slight lightheadedness? Any relief of tension yet, or not really? You might feel a tiny dopamine kick – that brief 'aah.' Just note it without judgment."
+            },
+            {
+              id: 's6',
+              title: "Taste and Smell",
+              content: "Focus on the taste in your mouth now. Run your tongue over your teeth. Notice the smell of the smoke around you.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-coral/80",
+              icon: "👅",
+              narration: "Now, focus on the taste in your mouth after you've exhaled. Run your tongue over your teeth. Is there a film or bitter residue? Often, smoking leaves a dry, ashy taste. Notice that. Smell the air around you now. Perhaps the smoke is curling around. How does it smell? It might be hard to notice since you're used to it, but try. Is it sweet, acrid, does it sting your nose a bit?"
+            },
+            {
+              id: 's7',
+              title: "Continue Mindfully",
+              content: "Take your time. Continue smoking at a snail's pace. With each puff, really feel it. There's no rush.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
+              icon: "⏳",
+              narration: "Take your time. Continue smoking the cigarette at a snail's pace. With each puff, really feel it. If any thoughts come, like 'This is strange' or 'I really need this' or 'I don't like this,' just note them and return to observing. Notice your breathing in between puffs – is it a bit more labored? Do you feel any urge to cough? Is any dizziness present?"
+            },
+            {
+              id: 's8',
+              title: "Where Is The Pleasure?",
+              content: "As you near the halfway point, ask yourself: Am I enjoying this? Is it as satisfying as I imagined? Or is it just... okay?",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
+              icon: "🔍",
+              narration: "As you near the halfway point of the cigarette, ask yourself: Am I enjoying this? Is it as satisfying as the image in my mind of smoking is? Or is it just okay, or even somewhat unpleasant? Sometimes we enjoy smoking without really paying attention – it's mostly the idea of it or the quick fix of nicotine. Right now, you're confronting the actual sensory reality of it."
+            },
+            {
+              id: 's9',
+              title: "You Can Stop Anytime",
+              content: "If you've observed enough, you may stub it out whenever you want. You don't need to finish it.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🛑",
+              narration: "If you haven't already, you may stub it out whenever you feel you've observed enough. You don't even need to finish it if you don't want to. If you do finish it, that's fine too – just remain mindful through the last puff and even as you extinguish it. Many people put it out around halfway because it stops being pleasant when they're truly paying attention."
+            },
+            {
+              id: 's10',
+              title: "Breathe Fresh Air",
+              content: "Now take a deep breath of fresh air. How do your lungs feel? Notice the contrast.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-accent/80",
+              icon: "🌬️",
+              narration: "Okay. Now take a deep breath of fresh air – or as fresh as your environment allows. How do your lungs feel after that cigarette? Maybe a bit tight, maybe no difference – just notice. That was probably the slowest, most conscious cigarette you've ever had. How was it?"
+            },
           ]
         }
       },
       {
         id: 'd4m3',
+        title: "Processing The Experience",
+        description: "Reflecting on what you just discovered about smoking.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 420,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "What People Typically Notice",
+              content: "'It didn't taste good.' 'My mouth feels like an ashtray.' 'I kept waiting for satisfaction and it never came.'",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "💭",
+              narration: "Let's reflect on what just happened. Many people doing this exercise report things like: 'It didn't taste good, actually it was pretty gross,' 'I realized my mouth feels dry and ashtray-like,' 'I noticed I was coughing or my body saying no,' or 'Honestly, I kept waiting for the big satisfaction hit and it just never came.' What was your experience? Did the cigarette truly relax you or taste delicious? Or was it just meh, or even unpleasant in parts?"
+            },
+            {
+              id: 's2',
+              title: "Peeling Back The Veil",
+              content: "This exercise is powerful because it removes the veil of habit. When you truly pay attention, the reality often doesn't match the hype.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "🎭",
+              narration: "This exercise is powerful because it peels back the veil of habit. When we smoke without thinking, we focus on the anticipation of relief, not the actual sensory details. But when you shine a light on the reality, it often doesn't live up to the hype that addiction has created in your mind. If you found it yucky or unsatisfying, hold onto that feeling. That is exactly what smoking is like once you remove the rose-colored glasses."
+            },
+            {
+              id: 's3',
+              title: "The Cigarette Didn't Fix Anything",
+              content: "Think about it: that cigarette didn't solve any problems. Your stressors are still there. Your boredom still exists. What did it actually give you?",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
+              icon: "🤷",
+              narration: "Let's consider something: that cigarette you just had – it didn't really fix anything, did it? If you were craving before, sure, now the craving might be gone – but in maybe 30 minutes or an hour, nicotine levels will drop and you'll want another. In terms of tangible benefits: your stressors are still there if you had any, your boredom would still be there, etc. So aside from feeding the nicotine monster, what did it actually do for you? Probably not much."
+            },
+            {
+              id: 's4',
+              title: "How Do You Feel About Another One?",
+              content: "Notice how you feel about having another cigarette right now. Are you eager for it? Or could you take it or leave it?",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "🎯",
+              narration: "Now, notice how you feel about having another one. Are you eager for it, or could you take it or leave it? Some people after this exercise say they actually don't want another cigarette right away because the taste is lingering and it wasn't great. If you feel a bit disenchanted with smoking right now – fantastic. That means the exercise is working to cut the mental ties. If you are still wanting one, that's okay – addiction is strong and this was just one step."
+            },
+            {
+              id: 's5',
+              title: "Why We Did This",
+              content: "Studies show mindfulness helps break addictions by decoupling the link between craving and behavior. You're rewiring your brain right now.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
+              icon: "🧠",
+              narration: "I'd like to share why we did this. Studies and experience show that mindfulness can effectively help break addictions by decoupling the link between craving and behavior. Instead of automatically smoking when you crave, you fully experience the craving and the act. You realize it's not as 'necessary' or amazing as your brain tricked you to believe. This approach exposes the real effects of cigarettes on your body and mind – exactly what you just did. It shines a light on the gap between perception and reality."
+            },
+            {
+              id: 's6',
+              title: "Changing Associations",
+              content: "Before: cigarette = relief and pleasure. Now: cigarette = stale taste, smoky smell, not solving anything. That's powerful change.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "🔄",
+              narration: "What we're doing here is a bit of neuro-associative conditioning too – we're changing the associations. If previously you associated a cigarette with 'ahh relief and pleasure,' now you might start associating it with 'stale taste, smoky smell, maybe lightheadedness, not actually solving anything.' This weakens the positive association and sometimes even creates a slight aversion – which is good news for your quit success."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd4m4',
         title: "Breathing Reset",
+        description: "Clear your lungs and reset with deep, conscious breathing.",
         type: 'GUIDED_PRACTICE',
         estimatedSeconds: 180,
         gatingRequired: true,
         practiceType: 'BREATHING',
       },
       {
-        id: 'd4m4',
-        title: "Reflection On Experience",
-        type: 'CHECKPOINT',
-        description: "Take a moment to process what you discovered during the mindful smoking exercise.",
-        estimatedSeconds: 120,
-        gatingRequired: false,
+        id: 'd4m5',
+        title: "Feeling The Shift",
+        description: "Processing any emotions that came up and looking forward.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 360,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "It's Okay To Feel Upset",
+              content: "You might feel a bit sad, like discovering a friend's betrayal. That means you're freeing yourself from an illusion.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
+              icon: "💔",
+              narration: "You might even feel a bit upset or sad – like discovering a friend's betrayal – because cigarettes that were your comfort are being exposed as... well, not so great. It's okay to feel that. Remind yourself: that feeling means you're freeing yourself. Cigarettes' power lies largely in the illusion of goodness. You're breaking that illusion."
+            },
+            {
+              id: 's2',
+              title: "Keep Smoking Mindfully",
+              content: "From now on, whenever you smoke, try to stay present. You'll likely find you enjoy it less and less each time.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "👁️",
+              narration: "From now on, I encourage you: whenever you smoke, smoke mindfully. You don't have to do it as slowly as we just did every time, but try at least once or twice more today to really pay attention. You'll likely continue to find that you enjoy it less and less. This will make quitting far easier because there's less and less to miss."
+            },
+            {
+              id: 's3',
+              title: "Don't Force Reduction",
+              content: "You don't need to force cutting down. But don't be surprised if you naturally don't feel like smoking as much.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "🌱",
+              narration: "However, you do not need to force a reduction. Remember, you have our full permission to smoke normally up until your planned quit day, which is coming soon on Day 6. But don't be surprised if you just don't feel like smoking that much – that's great. Let your body and mind guide you. If you think 'I don't really need one right now,' run with that. If you do smoke, continue observing."
+            },
+            {
+              id: 's4',
+              title: "A Shift In Outlook",
+              content: "Can you now imagine that quitting might not mean losing pleasure – but gaining freedom from something that wasn't serving you?",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-accent/80",
+              icon: "🌅",
+              narration: "Now, take a moment to reflect: How does this insight change your outlook? Can you now envision that a smoke-free life might not be a loss of pleasure, but perhaps not losing much at all – maybe even gaining a better taste in your mouth, fresher breath, more time, more freedom? Many realize after mindful smoking that they weren't actually giving up something valuable; they were letting go of something that wasn't serving them at all."
+            },
+            {
+              id: 's5',
+              title: "Tomorrow: Final Preparation",
+              content: "Day 5 will solidify your reasons for quitting and build your confidence for Day 6 – your last day smoking.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-primary/80",
+              icon: "📅",
+              narration: "We're nearing the big day. Tomorrow, Day 5, will be about final preparation: we'll solidify your reasons for quitting, build up your confidence, and address any lingering fears or reservations you might have about quitting. We want you mentally ready for Day 6, which will be your last day smoking."
+            },
+            {
+              id: 's6',
+              title: "Start Thinking About Your Pack",
+              content: "If you have cigarettes beyond what you'll need for the next two days, start thinking about discarding them.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "🗑️",
+              narration: "One practical note: If you have any cigarettes left beyond what you'll need for tomorrow and the final exercise on Day 6, start thinking about discarding them. You might keep just a few for the planned 'last cigarette' event. Some people like to throw away their spares now as a sign of commitment – if you feel that motivation, fantastic. If not, no pressure; you can get rid of them when we reach quit day."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd4m6',
+        title: "Day 4 Complete",
+        description: "Congratulations on completing this powerful exercise.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 240,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "You Did Something Brave",
+              content: "Day 4 was tough. It required you to face smoking in a completely new way. You did it. That takes courage.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
+              icon: "🏆",
+              narration: "Congratulate yourself. Day 4 was a tough one for some – it required you to face smoking in a new way. You did it. That's brave and it's making you stronger. Many people say this exercise was a turning point for them – the moment they started to see cigarettes for what they really are."
+            },
+            {
+              id: 's2',
+              title: "Cleanse and Rest",
+              content: "Drink some water to cleanse your palate. Take it easy for the rest of the day. You've done important work.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "💧",
+              narration: "Take it easy for the rest of the day. Drink some water to cleanse your palate if that taste is lingering – it can help. Maybe jot down in your journal what you noticed during this exercise – writing it will reinforce the realizations. For instance, 'Smoking mindfully today I noticed ___ and I felt ___.'"
+            },
+            {
+              id: 's3',
+              title: "Tomorrow: Day 5",
+              content: "Tomorrow we gear up for your independence day. You're so close to breaking free. Keep that momentum!",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "🚀",
+              narration: "Tomorrow we gear up for your independence day on Day 6. You're so close to breaking free. Keep that momentum and I'll see you on Day 5. You're doing amazing work – the fact that you're still here, still engaged, still committed, says everything about your strength. See you tomorrow!"
+            },
+          ]
+        }
       },
     ]
   },
