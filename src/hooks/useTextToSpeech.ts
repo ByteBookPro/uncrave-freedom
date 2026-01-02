@@ -1,5 +1,21 @@
 import { useState, useRef, useCallback } from 'react';
 
+// Voice presets for different content contexts
+export type VoicePreset = 
+  | 'dailyCoach'       // Default: warm, steady, supportive
+  | 'motivationLift'   // End of modules, pledges, breakthroughs
+  | 'cravingEmergency' // Urge surfing, craving moments - calm, grounding
+  | 'story'            // Narrative content, explanations
+  | 'guided';          // Breathing exercises, meditation
+
+export type VoiceGender = 'female' | 'male';
+
+export interface SpeakOptions {
+  voiceId?: string;
+  preset?: VoicePreset;
+  gender?: VoiceGender;
+}
+
 export function useTextToSpeech() {
   const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -7,8 +23,13 @@ export function useTextToSpeech() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
 
-  const speak = useCallback(async (text: string, voiceId?: string) => {
+  const speak = useCallback(async (text: string, options?: SpeakOptions | string) => {
     if (!text) return;
+
+    // Support both old signature (voiceId string) and new options object
+    const opts: SpeakOptions = typeof options === 'string' 
+      ? { voiceId: options } 
+      : options || {};
 
     setIsLoading(true);
     setError(null);
@@ -26,7 +47,11 @@ export function useTextToSpeech() {
         audioUrlRef.current = null;
       }
 
-      console.log('Requesting TTS for:', text.substring(0, 50) + '...');
+      console.log('Requesting TTS:', {
+        text: text.substring(0, 50) + '...',
+        preset: opts.preset || 'dailyCoach',
+        gender: opts.gender || 'female'
+      });
 
       const response = await fetch(
         `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/text-to-speech`,
@@ -36,7 +61,12 @@ export function useTextToSpeech() {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
           },
-          body: JSON.stringify({ text, voiceId }),
+          body: JSON.stringify({ 
+            text, 
+            voiceId: opts.voiceId,
+            preset: opts.preset || 'dailyCoach',
+            gender: opts.gender || 'female'
+          }),
         }
       );
 
@@ -61,7 +91,7 @@ export function useTextToSpeech() {
       };
 
       await audio.play();
-      console.log('Audio playback started');
+      console.log('Audio playback started with preset:', opts.preset || 'dailyCoach');
     } catch (err) {
       console.error('TTS error:', err);
       setError(err instanceof Error ? err.message : 'Failed to generate speech');
