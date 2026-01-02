@@ -1,14 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
-import { Flame, Calendar, Clock, TrendingUp, Heart, Award } from 'lucide-react';
+import { Flame, Calendar, Clock, TrendingUp, Heart, Award, Zap, Shield, ChevronDown, ChevronUp } from 'lucide-react';
 import { useCourseDays, useUserDayCompletions } from '@/hooks/useCourseData';
 import { useApp } from '@/contexts/AppContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { supabase } from '@/integrations/supabase/client';
 import { cn } from '@/lib/utils';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+
+// Trigger labels for display
+const TRIGGER_LABELS: Record<string, { label: string; emoji: string }> = {
+  stress: { label: 'Stress', emoji: '😰' },
+  anxiety: { label: 'Anxiety', emoji: '😟' },
+  boredom: { label: 'Boredom', emoji: '😑' },
+  loneliness: { label: 'Loneliness', emoji: '😔' },
+  celebration: { label: 'Celebration', emoji: '🎉' },
+  frustration: { label: 'Frustration', emoji: '😤' },
+  morning: { label: 'Waking Up', emoji: '🌅' },
+  coffee: { label: 'With Coffee', emoji: '☕' },
+  after_meal: { label: 'After Meals', emoji: '🍽️' },
+  commute: { label: 'Driving/Commute', emoji: '🚗' },
+  work_break: { label: 'Work Breaks', emoji: '⏰' },
+  evening: { label: 'Evening/Before Bed', emoji: '🌙' },
+  social: { label: 'Social Events', emoji: '👥' },
+  alcohol: { label: 'With Alcohol', emoji: '🍺' },
+  phone_call: { label: 'Phone Calls', emoji: '📞' },
+  seeing_others: { label: 'Seeing Others Smoke', emoji: '🚬' },
+};
 
 export function ProgressTab() {
   const { user } = useApp();
+  const { user: authUser } = useAuth();
   const { data: days } = useCourseDays();
   const { data: completions } = useUserDayCompletions();
+  
+  const [triggers, setTriggers] = useState<string[]>([]);
+  const [alternatives, setAlternatives] = useState<Record<string, string[]>>({});
+  const [isTriggersOpen, setIsTriggersOpen] = useState(false);
+
+  // Load triggers and alternatives
+  useEffect(() => {
+    const loadData = async () => {
+      if (!authUser) return;
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .select('triggers, trigger_alternatives')
+        .eq('id', authUser.id)
+        .single();
+
+      if (!error && data) {
+        setTriggers((data.triggers as string[]) || []);
+        setAlternatives((data.trigger_alternatives as Record<string, string[]>) || {});
+      }
+    };
+
+    loadData();
+  }, [authUser]);
 
   const completedCount = completions?.length || 0;
   const totalDays = days?.length || 10;
@@ -35,6 +83,12 @@ export function ProgressTab() {
 
   // Calculate cigarettes not smoked
   const cigsNotSmoked = daysSinceQuit * cigsPerDay;
+
+  const getTriggerDisplay = (triggerId: string) => {
+    return TRIGGER_LABELS[triggerId] || { label: triggerId, emoji: '📌' };
+  };
+
+  const totalStrategies = Object.values(alternatives).flat().length;
 
   return (
     <div className="p-4 space-y-6 pb-24">
@@ -151,6 +205,67 @@ export function ProgressTab() {
           </div>
         </Card>
       </div>
+
+      {/* Triggers & Coping Strategies Summary */}
+      {triggers.length > 0 && (
+        <Collapsible open={isTriggersOpen} onOpenChange={setIsTriggersOpen}>
+          <Card className="overflow-hidden">
+            <CollapsibleTrigger className="w-full p-4 flex items-center justify-between hover:bg-muted/50 transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-xl bg-primary/10">
+                  <Shield className="w-5 h-5 text-primary" />
+                </div>
+                <div className="text-left">
+                  <h3 className="font-semibold">Your Coping Plan</h3>
+                  <p className="text-xs text-muted-foreground">
+                    {triggers.length} triggers • {totalStrategies} strategies
+                  </p>
+                </div>
+              </div>
+              {isTriggersOpen ? (
+                <ChevronUp className="w-5 h-5 text-muted-foreground" />
+              ) : (
+                <ChevronDown className="w-5 h-5 text-muted-foreground" />
+              )}
+            </CollapsibleTrigger>
+            
+            <CollapsibleContent>
+              <div className="px-4 pb-4 space-y-3 border-t pt-3">
+                {triggers.map((triggerId) => {
+                  const display = getTriggerDisplay(triggerId);
+                  const strategies = alternatives[triggerId] || [];
+                  
+                  return (
+                    <div key={triggerId} className="space-y-1.5">
+                      <div className="flex items-center gap-2">
+                        <span className="text-lg">{display.emoji}</span>
+                        <span className="font-medium text-sm">{display.label}</span>
+                      </div>
+                      {strategies.length > 0 ? (
+                        <div className="flex flex-wrap gap-1.5 pl-7">
+                          {strategies.map((strategy, idx) => (
+                            <span
+                              key={idx}
+                              className="inline-flex items-center gap-1 px-2 py-0.5 bg-success/10 text-success text-xs rounded-full"
+                            >
+                              <Zap className="w-3 h-3" />
+                              {strategy}
+                            </span>
+                          ))}
+                        </div>
+                      ) : (
+                        <p className="text-xs text-muted-foreground pl-7 italic">
+                          No strategies set yet
+                        </p>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </CollapsibleContent>
+          </Card>
+        </Collapsible>
+      )}
 
       {/* Achievements */}
       <Card className="p-4 space-y-4">
