@@ -261,26 +261,64 @@ You've got this. Your freedom is hours away. See you on Day 6, where we will say
 
 Congratulations on completing Day 5. You've confronted your fears, made your commitment, and prepared your environment. You're not just preparing to quit – you've already become a non-smoker in your mind. Tomorrow just makes it official.`,
 
-  // Day 6 - Your Last Cigarette
-  'd6m1': `Today is the day. You're going to smoke your last cigarette ever – and you're going to do it on your terms, with intention and ceremony.
+  // Day 6 - Freedom Day: The Last Cigarette
+  'd6m1': `This is it – Day 6, your Freedom Day! Take a moment to appreciate how far you've come. By the end of this session, you will have smoked your last cigarette and embarked on a new life as a non-smoker. I am so excited for you, and maybe you're feeling a mix of excitement and nerves too. That's completely normal. Let's do this together, step by step, just like we have all week.
 
-This isn't about suffering or deprivation. By now, you understand the truth about smoking. You know it doesn't relax you, help you, or give you anything real. It only takes – your health, your money, your freedom.
+Before we begin, if you have any cigarettes or lighters around, other than the one for this final ritual, gather them up now. We are going to dispose of everything after the last cigarette. You won't be needing them ever again. Having them out of sight will make it easier going forward. So if you haven't thrown them out yet, have a trash can nearby or something to dump them in after.
 
-Today, you're taking back your power. You're choosing freedom.
+Now, the plan: We will mindfully smoke one final cigarette – your goodbye smoke – and then you will forever break free. You already practiced mindful smoking on Day 4, so you know how to do this. The difference now is the mindset: this isn't just an observation exercise, this is a farewell ceremony.`,
 
-Before your final cigarette, take a moment to reflect on how far you've come. You've learned so much about why you smoke and how to break free. You're ready for this.`,
+  'd6m2': `Ready? If you haven't lit your final cigarette yet, go ahead and light it now.
 
-  'd6m3': `This is your final cigarette ceremony.
+As you inhale, recognize this moment: this is the last time you ever have to do this. Pay attention again to the taste, the sensation – likely no better than last time, right? In fact, it might even be less enjoyable now because you know what life can be without it.
 
-Find a quiet moment alone. Hold the cigarette and really look at it. Think about all the cigarettes you've smoked over the years – thousands and thousands of them. Think about the money spent, the time lost, the health sacrificed.
+Take that first puff... and exhale slowly, watching the smoke dissipate. Think of that smoke as your old habit floating away.
 
-Now think about what you're gaining: freedom, health, money, self-respect, and more time with the people you love.
+Take another puff if you need, slowly... and as you exhale, say in your mind or aloud: "Goodbye, smoking. I'm done with you."
 
-Light this last cigarette. Smoke it mindfully, just like you did on Day 4. Notice everything – but this time, know that this is the last one. Ever.
+If any part of this cigarette tastes gross or feels off, lean into that – it only solidifies your decision. Even if it oddly tastes good, know that in mere minutes any pleasure will be gone, but your freedom will remain.
 
-When you're done, put it out with intention. You might say something like: "I am free. I am a non-smoker. This is my new beginning."
+You do not even have to finish it. The moment you feel "I'm done," then you're done. You might already feel that. If so, stub it out. Or take one or two more conscious puffs as a final test – see that it gives you nothing new – and then extinguish it.
 
-Congratulations. You have just become a non-smoker. Not someone trying to quit – a non-smoker. Own this identity. It's yours now.`,
+Alright. If you haven't already, put it out... crush it... do whatever feels symbolic – some people spit on it or break it in half to really end it, up to you! As that ember dies, a chapter of your life closes and a new one begins.
+
+Now, mark this moment: In the app, tap the button to confirm "I have smoked my last cigarette."`,
+
+  'd6m4': `Yes! CONGRATULATIONS!!! You. Are. FREE! Welcome to life as a non-smoker!
+
+Breathe in deeply right now – fill those lungs with air, clean air. Feel that? That's how it's going to be from now on, only getting better each day. You might cough a bit as your lungs start clearing out tar – that's okay, it's healing.
+
+Take a moment to relish this achievement. It's huge. Truly, this is one of the biggest positive changes you can make in your life. And you did it in less than a week of preparation, without trauma or drugs, but by your own understanding and decision. Be proud. So many people dream of being where you are right now.
+
+Let's record some details for you: Today's date and time – this is your quit date, your anniversary to celebrate. Mark it somewhere special. Maybe set a recurring reminder every month to treat yourself on this day. The app has noted it too – Smoke-Free Day 0. Day 0 meaning the very start of your new life.
+
+Now, I want to help you mentally solidify your new identity. Say to yourself now – yes, say it out loud if you can: "I am a non-smoker." Say it with conviction, with joy. This is who you are now. Any time a thought of a cigarette comes, you remind yourself, "I don't do that anymore. I'm a non-smoker." It's not "I can't smoke," it's "I don't smoke." Big difference – the first is deprivation, the second is empowerment. You are choosing not to because you don't need or want it.`,
+
+  'd6m5': `Now let's talk about what's next. The next 24 hours are important – they're your first day free. Some feelings you might experience: you could feel elated – woohoo, I did it! – or oddly you might feel a bit empty or unsure what to do at certain times, like a morning coffee with no cigarette. That's okay, refer to your list of alternatives and try one. You might get some cravings – that's expected. But remember, cravings are just your body adjusting and they will pass. You might even find they're not as strong as you feared because you've mentally disarmed them.
+
+The community and support is here for you. If you feel shaky, open the app and hit the Craving Help button. It will guide you through a 5-minute urge meditation or give you a quick task to distract you. Or hop onto the chat to talk with a coach or fellow quitters. Use those resources – they can make the difference in moments of temptation.
+
+Keep in mind some quick tips for today and the coming days: Drink plenty of water – it helps flush nicotine and it occupies you. Change up routines if needed – for example, if you always smoked after lunch, plan to immediately get up and go for a 5-minute walk or call a friend during that time. Treat yourself in healthy ways: eat a favorite snack, maybe something fruity or a nice piece of chocolate, when you would usually have a smoke, so you still feel rewarded. Take deep breaths frequently – you'll be amazed how nice it is to take deep breaths that don't trigger a cough or taste like smoke.
+
+One of my favorite suggestions: whenever you would normally have a cigarette, instead spend the 5 minutes doing something positive for yourself. Some people do a set of pushups or dance to a song. Some brush their teeth, loving the fresh feeling. Some write a few lines in a journal. The point is to replace the habit with something that makes you feel good in a genuine way.`,
+
+  'd6m6': `I want to address something: It's common today or tomorrow to have a random thought like, "Wow, normally I'd be smoking right now" or even "Can I really do this forever?" Do not let that spook you. Yes, you can do it forever – by taking it one day at a time. As the saying goes, not a single puff. The moment you think "just one won't hurt," remember that for us, one is not one – one cigarette often leads back to many. But here's the thing: you don't want one, really. That's the addiction talking if it happens. You know too much now – you know one cigarette would taste pretty bad after having quit and would just re-awaken the cycle. There's a phrase: NR=100%. It means Not Relapsing equals 100% success. If you simply don't light another cigarette, you will be successful. And you have every tool to make sure you don't need to.
+
+If you do get a strong urge, play the tape forward: imagine you do smoke one – you'd feel disappointed, it wouldn't even give you much, and you'd be back to square one. Not worth it, right? Instead, remember the joy you're feeling now having quit, and do something from your toolbox. The cravings are like a bluff – call that bluff, and they'll weaken.
+
+Take it easy today. If possible, do something nice this first day – maybe go to a movie (can't smoke in a theater, perfect!), or take a long shower and feel how clean you are becoming, or start a light exercise like a short jog or yoga to get those endorphins flowing. If you have a craving, remember it's just your body healing – maybe say "bring it on, heal me!" and use a technique. Each craving overcome is like a trophy you earn. And they will get fewer and farther between quite quickly.
+
+Also, your senses might already be sharpening – food might taste better even by tonight or tomorrow, smells become more vivid. Notice those small wins. And when you wake up tomorrow, you might notice you breathe a little easier. These are the immediate rewards of quitting. We'll track more benefits in coming days.`,
+
+  'd6m7': `Finally, let's do a quick visualization: Envision yourself later today, going to bed knowing "I didn't smoke today." You might feel a strong sense of pride and maybe disbelief, but it's real. Envision a week from now – perhaps some of the initial cravings passed, you find yourself thinking of cigarettes less often, you have more energy. Envision a month from now – you've saved a significant amount of money; maybe you've treated yourself to something nice with those savings. Your skin looks healthier, you're coughing less, you might even inspire a friend or two to consider quitting because they see you glowing. All this is happening, starting now.
+
+You have added years to your life and life to your years by quitting today. And we're going to make sure those years are wonderful and smoke-free.
+
+Alright, I'll let you go enjoy your first day without cigarettes! Remember: no more puffs, not even one. You don't do that anymore. And that is something to be incredibly happy about.
+
+Congratulations, non-smoker! See you tomorrow for Day 7, where we'll focus on staying on track and handling any cravings or withdrawal sensations that might come up. Spoiler: you're going to do great.
+
+Now go celebrate – you deserve it!`,
 
   // Day 7 - Staying Smoke-Free
   'd7m1': `Congratulations! You made it through your first smoke-free day. That's an incredible achievement.
