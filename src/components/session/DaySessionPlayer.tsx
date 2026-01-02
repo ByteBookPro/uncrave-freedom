@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { useApp } from '@/contexts/AppContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { MediaPlayer } from './MediaPlayer';
 import { AnimatedSlides } from './AnimatedSlides';
 import { BreathingCoach } from '../practices/BreathingCoach';
@@ -18,7 +19,11 @@ import {
   Play,
   Timer,
   Sparkles,
-  AlertCircle
+  AlertCircle,
+  Heart,
+  Target,
+  Cigarette,
+  Clock
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -68,7 +73,8 @@ export function DaySessionPlayer({
   onComplete,
   onClose
 }: DaySessionPlayerProps) {
-  const { addJournalEntry } = useApp();
+  const { addJournalEntry, user: appUser } = useApp();
+  const { profile } = useAuth();
   
   // Session state
   const [currentModuleIndex, setCurrentModuleIndex] = useState(0);
@@ -431,7 +437,126 @@ export function DaySessionPlayer({
         );
 
       case 'CHECKPOINT':
-        // Simple quiz-style checkpoint
+        // Rich checkpoint with user data for "Your Reasons to Quit" module
+        const isReasonsCheckpoint = currentModule.id === 'd1m2';
+        
+        if (isReasonsCheckpoint) {
+          const cigarettesPerDay = profile?.cigarettes_per_day || appUser?.cigarettesPerDay || 20;
+          const yearsSmoking = profile?.years_smoking || appUser?.yearsOfSmoking || 5;
+          const triggers = profile?.triggers || appUser?.triggers || [];
+          const reasonsToQuit = appUser?.reasonsToQuit || [];
+          
+          // Calculate stats
+          const cigarettesSmoked = cigarettesPerDay * yearsSmoking * 365;
+          const costPerCigarette = 0.50; // average
+          const moneySpent = cigarettesSmoked * costPerCigarette;
+          const minutesPerCig = 5;
+          const hoursLost = Math.round((cigarettesSmoked * minutesPerCig) / 60);
+          
+          return (
+            <div className="space-y-6">
+              {/* Personal Summary Card */}
+              <div className="bg-gradient-to-br from-primary/10 to-coral/10 rounded-2xl p-6 border border-primary/20">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-primary/70 flex items-center justify-center">
+                    <Heart className="w-6 h-6 text-primary-foreground" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-lg">{profile?.display_name || appUser?.name || 'Your'} Journey</h3>
+                    <p className="text-sm text-muted-foreground">Based on your profile</p>
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div className="bg-background/60 rounded-xl p-4 text-center">
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <Cigarette className="w-4 h-4 text-coral" />
+                      <span className="text-2xl font-bold text-coral">{cigarettesPerDay}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">cigarettes/day</p>
+                  </div>
+                  <div className="bg-background/60 rounded-xl p-4 text-center">
+                    <div className="flex items-center justify-center gap-2 mb-1">
+                      <Clock className="w-4 h-4 text-accent" />
+                      <span className="text-2xl font-bold text-accent">{yearsSmoking}</span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">years smoking</p>
+                  </div>
+                </div>
+                
+                <div className="bg-background/60 rounded-xl p-4 text-center">
+                  <p className="text-sm text-muted-foreground mb-1">That's approximately</p>
+                  <p className="text-lg font-semibold">
+                    <span className="text-coral">{cigarettesSmoked.toLocaleString()}</span> cigarettes · 
+                    <span className="text-primary ml-2">${moneySpent.toLocaleString()}</span> spent · 
+                    <span className="text-accent ml-2">{hoursLost.toLocaleString()}</span> hours
+                  </p>
+                </div>
+              </div>
+              
+              {/* Triggers Card */}
+              {triggers.length > 0 && (
+                <div className="bg-card rounded-2xl p-6 shadow-sm border">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Target className="w-5 h-5 text-accent" />
+                    <h4 className="font-semibold">Your Triggers</h4>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {triggers.map((trigger, idx) => (
+                      <span 
+                        key={idx}
+                        className="px-3 py-1.5 bg-accent/10 text-accent rounded-full text-sm font-medium"
+                      >
+                        {trigger}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {/* Reasons Card */}
+              {reasonsToQuit.length > 0 && (
+                <div className="bg-card rounded-2xl p-6 shadow-sm border">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Heart className="w-5 h-5 text-success" />
+                    <h4 className="font-semibold">Your Reasons to Quit</h4>
+                  </div>
+                  <ul className="space-y-2">
+                    {reasonsToQuit.filter(r => r.trim()).map((reason, idx) => (
+                      <li key={idx} className="flex items-start gap-2">
+                        <span className="text-success mt-0.5">✓</span>
+                        <span className="text-foreground">{reason}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {/* Motivation Message */}
+              <div className="bg-gradient-to-br from-success/10 to-freedom/10 rounded-2xl p-6 border border-success/20 text-center">
+                <Sparkles className="w-8 h-8 text-success mx-auto mb-3" />
+                <p className="text-lg font-semibold text-foreground mb-2">
+                  You're taking back control
+                </p>
+                <p className="text-sm text-muted-foreground">
+                  These reasons and triggers are your roadmap to freedom. We'll work on each one together.
+                </p>
+              </div>
+              
+              {/* Complete Button */}
+              <Button 
+                className="w-full"
+                size="lg"
+                onClick={() => handlePracticeComplete()}
+              >
+                <Check className="w-4 h-4 mr-2" />
+                I've Reflected on My Reasons
+              </Button>
+            </div>
+          );
+        }
+        
+        // Default simple checkpoint for other modules
         return (
           <div className="bg-card rounded-2xl p-6 shadow-sm border">
             <h3 className="font-semibold mb-4">{currentModule.title}</h3>
