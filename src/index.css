@@ -226,6 +226,15 @@
     animation: scale-in 0.4s ease-out;
   }
 
+  /* Safe area padding for mobile devices */
+  .safe-area-pb {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom));
+  }
+
+  .safe-area-pt {
+    padding-top: max(0.5rem, env(safe-area-inset-top));
+  }
+
   @keyframes float {
     0%, 100% {
       transform: translateY(0);
