@@ -68,6 +68,8 @@ export interface UserProfile {
   quit_date: string | null;
   subscription_status: string;
   subscription_expires_at: string | null;
+  triggers: string[] | null;
+  trigger_alternatives: Record<string, string> | null;
   created_at: string;
   updated_at: string;
 }
