@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Pause, ChevronLeft, ChevronRight, Volume2, VolumeX, Loader2, Music, FileText } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -8,6 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { useAuth } from '@/contexts/AuthContext';
 import { getLocalizedNarration } from '@/data/sessionNarrationLocalized';
 import { ContentLanguage } from '@/types/database';
+
 interface Slide {
   id: string;
   title: string;
@@ -60,12 +61,12 @@ function detectVoicePreset(slide: Slide, title?: string): VoicePreset {
   return 'dailyCoach';
 }
 
-// Calculate slide duration based on narration length
-function calculateSlideDuration(slide: Slide, baseDuration: number): number {
+// Calculate minimum slide duration (fallback when audio disabled)
+function calculateFallbackDuration(slide: Slide): number {
   const narrationText = slide.narration || slide.content;
   const wordCount = narrationText.split(/\s+/).length;
-  const estimatedDuration = Math.max(baseDuration, (wordCount / 2.2) + 3);
-  return Math.min(estimatedDuration, 120);
+  // Estimate ~2.5 words per second speaking rate
+  return Math.max(5, Math.ceil(wordCount / 2.5) + 2);
 }
 
 export function AnimatedSlides({
@@ -84,12 +85,26 @@ export function AnimatedSlides({
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [musicEnabled, setMusicEnabled] = useState(true);
   const [showTranscript, setShowTranscript] = useState(true);
-  const [hasPlayedNarration, setHasPlayedNarration] = useState<Set<number>>(new Set());
-  const [hasPlayedLocalizedNarration, setHasPlayedLocalizedNarration] = useState(false);
+  const [waitingForAudio, setWaitingForAudio] = useState(false);
+  const [audioCompleted, setAudioCompleted] = useState(false);
   
-  const { speak, stop, isLoading: isNarrationLoading, isPlaying: isNarrationPlaying, currentText } = useTextToSpeech();
+  const { speak, stop, isLoading: isNarrationLoading, isPlaying: isNarrationPlaying, audioDuration } = useTextToSpeech();
   const backgroundMusic = useBackgroundMusic({ volume: 0.12 });
   const { profile } = useAuth();
+  
+  // Refs for tracking
+  const currentIndexRef = useRef(currentIndex);
+  const isPlayingRef = useRef(isPlaying);
+  const progressTimerRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // Keep refs in sync
+  useEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
+  
+  useEffect(() => {
+    isPlayingRef.current = isPlaying;
+  }, [isPlaying]);
   
   // Get user's language
   const userLanguage: ContentLanguage = profile?.language || 'en';
@@ -111,19 +126,82 @@ export function AnimatedSlides({
 
   const currentSlide = slides[currentIndex];
   
-  // Calculate dynamic slide duration based on narration length
-  const currentSlideDuration = useMemo(() => 
-    calculateSlideDuration(currentSlide, slideDuration),
-    [currentSlide, slideDuration]
-  );
+  // Calculate slide duration based on audio or fallback
+  const currentSlideDuration = useMemo(() => {
+    if (audioDuration > 0) {
+      return audioDuration + 1; // Add 1 second buffer after audio ends
+    }
+    return calculateFallbackDuration(currentSlide);
+  }, [currentSlide, audioDuration]);
   
   const totalProgress = ((currentIndex + slideProgress / 100) / slides.length) * 100;
 
   // Track if all slides have been viewed
   const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]));
 
-  // Current transcript text - use localized narration if available
-  const currentNarration = localizedNarration || currentSlide.narration || currentSlide.content;
+  // Current transcript text - per-slide narration or localized module narration
+  const currentNarration = useMemo(() => {
+    // For English, show the current slide's narration
+    if (userLanguage === 'en' || !localizedNarration) {
+      return currentSlide.narration || currentSlide.content;
+    }
+    // For other languages, show the full localized narration
+    return localizedNarration;
+  }, [currentSlide, localizedNarration, userLanguage]);
+
+  // Advance to next slide
+  const advanceToNextSlide = useCallback(() => {
+    if (currentIndexRef.current < slides.length - 1) {
+      const nextIndex = currentIndexRef.current + 1;
+      setCurrentIndex(nextIndex);
+      setViewedSlides(prev => new Set([...prev, nextIndex]));
+      setSlideProgress(0);
+      setAudioCompleted(false);
+      onProgress?.(nextIndex + 1, slides.length);
+    } else {
+      // Last slide completed
+      setIsPlaying(false);
+      onComplete?.();
+    }
+  }, [slides.length, onProgress, onComplete]);
+
+  // Play narration for current slide
+  const playSlideNarration = useCallback(() => {
+    if (!audioEnabled) {
+      setAudioCompleted(true);
+      return;
+    }
+
+    // For non-English, play localized narration only on first slide
+    if (localizedNarration && currentIndexRef.current === 0) {
+      const voicePreset = detectVoicePreset(currentSlide, title) || defaultVoicePreset;
+      setWaitingForAudio(true);
+      speak(localizedNarration, { 
+        preset: voicePreset,
+        onEnded: () => {
+          setWaitingForAudio(false);
+          setAudioCompleted(true);
+        }
+      });
+      return;
+    }
+
+    // For English or subsequent slides, play per-slide narration
+    const narrationText = currentSlide.narration || currentSlide.content;
+    if (narrationText && narrationText.length > 0) {
+      const voicePreset = currentSlide.voicePreset || detectVoicePreset(currentSlide, title) || defaultVoicePreset;
+      setWaitingForAudio(true);
+      speak(narrationText, { 
+        preset: voicePreset,
+        onEnded: () => {
+          setWaitingForAudio(false);
+          setAudioCompleted(true);
+        }
+      });
+    } else {
+      setAudioCompleted(true);
+    }
+  }, [audioEnabled, currentSlide, speak, title, defaultVoicePreset, localizedNarration]);
 
   // Start background music when component mounts and slideshow starts
   useEffect(() => {
@@ -150,34 +228,31 @@ export function AnimatedSlides({
     };
   }, []);
 
-  // Play localized narration once at the start (for non-English)
+  // Play narration when slide changes and playing
   useEffect(() => {
-    if (!audioEnabled || hasPlayedLocalizedNarration || !localizedNarration) return;
-    if (currentIndex !== 0) return; // Only play on first slide
-    
-    const voicePreset = detectVoicePreset(currentSlide, title) || defaultVoicePreset;
-    speak(localizedNarration, { preset: voicePreset });
-    setHasPlayedLocalizedNarration(true);
-  }, [audioEnabled, localizedNarration, hasPlayedLocalizedNarration, currentIndex, currentSlide, title, defaultVoicePreset, speak]);
-
-  // Play narration when slide changes (English only - per-slide narration)
-  useEffect(() => {
-    // Skip per-slide narration if we have localized module narration
-    if (localizedNarration) return;
-    if (!audioEnabled || hasPlayedNarration.has(currentIndex)) return;
-    
-    const narrationText = currentSlide.narration || currentSlide.content;
-    if (narrationText && narrationText.length > 0) {
-      const voicePreset = currentSlide.voicePreset || detectVoicePreset(currentSlide, title) || defaultVoicePreset;
-      speak(narrationText, { preset: voicePreset });
-      setHasPlayedNarration(prev => new Set([...prev, currentIndex]));
+    if (isPlaying) {
+      playSlideNarration();
     }
-  }, [currentIndex, audioEnabled, currentSlide, hasPlayedNarration, speak, title, defaultVoicePreset, localizedNarration]);
+  }, [currentIndex, isPlaying]);
+
+  // Handle play/pause state changes
+  useEffect(() => {
+    if (!isPlaying) {
+      stop();
+      if (progressTimerRef.current) {
+        clearInterval(progressTimerRef.current);
+        progressTimerRef.current = null;
+      }
+    }
+  }, [isPlaying, stop]);
 
   // Stop narration when component unmounts
   useEffect(() => {
     return () => {
       stop();
+      if (progressTimerRef.current) {
+        clearInterval(progressTimerRef.current);
+      }
     };
   }, [stop]);
 
@@ -185,33 +260,48 @@ export function AnimatedSlides({
   useEffect(() => {
     if (!audioEnabled) {
       stop();
+      setAudioCompleted(true);
     }
   }, [audioEnabled, stop]);
 
+  // Auto-advance when audio completes (audio-driven transitions)
   useEffect(() => {
-    if (!isPlaying) return;
+    if (!isPlaying || !audioCompleted) return;
 
-    const progressInterval = setInterval(() => {
-      setSlideProgress((prev) => {
-        if (prev >= 100) {
-          if (currentIndex < slides.length - 1) {
-            const nextIndex = currentIndex + 1;
-            setCurrentIndex(nextIndex);
-            setViewedSlides(prevViewed => new Set([...prevViewed, nextIndex]));
-            onProgress?.(nextIndex + 1, slides.length);
-            return 0;
-          } else {
-            setIsPlaying(false);
-            onComplete?.();
-            return 100;
-          }
+    // Small delay after audio ends before advancing
+    const timer = setTimeout(() => {
+      if (isPlayingRef.current) {
+        advanceToNextSlide();
+      }
+    }, 800);
+
+    return () => clearTimeout(timer);
+  }, [audioCompleted, isPlaying, advanceToNextSlide]);
+
+  // Fallback timer for when audio is disabled
+  useEffect(() => {
+    if (!isPlaying || audioEnabled) return;
+
+    const fallbackDuration = calculateFallbackDuration(currentSlide);
+    
+    progressTimerRef.current = setInterval(() => {
+      setSlideProgress(prev => {
+        const increment = 100 / (fallbackDuration * 10);
+        if (prev + increment >= 100) {
+          advanceToNextSlide();
+          return 0;
         }
-        return prev + (100 / (currentSlideDuration * 10));
+        return prev + increment;
       });
     }, 100);
 
-    return () => clearInterval(progressInterval);
-  }, [isPlaying, currentIndex, slides.length, currentSlideDuration, onProgress, onComplete]);
+    return () => {
+      if (progressTimerRef.current) {
+        clearInterval(progressTimerRef.current);
+        progressTimerRef.current = null;
+      }
+    };
+  }, [isPlaying, audioEnabled, currentSlide, advanceToNextSlide]);
 
   // Check completion when all slides viewed
   useEffect(() => {
@@ -223,12 +313,7 @@ export function AnimatedSlides({
   const goToSlide = (index: number) => {
     // Stop current audio before navigating
     stop();
-    // Clear played narration for new slide so it plays again
-    setHasPlayedNarration(prev => {
-      const newSet = new Set(prev);
-      newSet.delete(index);
-      return newSet;
-    });
+    setAudioCompleted(false);
     setCurrentIndex(index);
     setSlideProgress(0);
     setViewedSlides(prev => new Set([...prev, index]));

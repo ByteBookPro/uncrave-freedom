@@ -17,6 +17,7 @@ export interface SpeakOptions {
   preset?: VoicePreset;
   gender?: VoiceGender;
   language?: ContentLanguage;
+  onEnded?: () => void;
 }
 
 export function useTextToSpeech() {
@@ -25,9 +26,11 @@ export function useTextToSpeech() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [currentText, setCurrentText] = useState<string>('');
+  const [audioDuration, setAudioDuration] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const audioUrlRef = useRef<string | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const onEndedRef = useRef<(() => void) | null>(null);
 
   // Get user's voice preference from profile
   const getUserVoiceGender = (): VoiceGender => {
@@ -48,6 +51,9 @@ export function useTextToSpeech() {
     const opts: SpeakOptions = typeof options === 'string' 
       ? { voiceId: options } 
       : options || {};
+
+    // Store onEnded callback
+    onEndedRef.current = opts.onEnded || null;
 
     // Use user's preferences if not explicitly specified
     const gender = opts.gender || getUserVoiceGender();
@@ -75,6 +81,7 @@ export function useTextToSpeech() {
     setIsPlaying(false);
     setError(null);
     setCurrentText(text);
+    setAudioDuration(0);
 
     // Create new abort controller for this request
     abortControllerRef.current = new AbortController();
@@ -118,9 +125,18 @@ export function useTextToSpeech() {
       const audio = new Audio(audioUrl);
       audioRef.current = audio;
 
+      audio.onloadedmetadata = () => {
+        setAudioDuration(audio.duration);
+      };
       audio.onplay = () => setIsPlaying(true);
       audio.onpause = () => setIsPlaying(false);
-      audio.onended = () => setIsPlaying(false);
+      audio.onended = () => {
+        setIsPlaying(false);
+        // Call the onEnded callback if provided
+        if (onEndedRef.current) {
+          onEndedRef.current();
+        }
+      };
       audio.onerror = () => {
         setError('Failed to play audio');
         setIsPlaying(false);
@@ -171,6 +187,9 @@ export function useTextToSpeech() {
       audioUrlRef.current = null;
     }
     
+    // Clear the onEnded callback
+    onEndedRef.current = null;
+    
     setIsPlaying(false);
     setIsLoading(false);
   }, []);
@@ -183,6 +202,11 @@ export function useTextToSpeech() {
     }
   }, [isPlaying, pause, resume]);
 
+  // Get current playback time
+  const getCurrentTime = useCallback(() => {
+    return audioRef.current?.currentTime || 0;
+  }, []);
+
   return {
     speak,
     pause,
@@ -193,5 +217,7 @@ export function useTextToSpeech() {
     isPlaying,
     error,
     currentText,
+    audioDuration,
+    getCurrentTime,
   };
 }
