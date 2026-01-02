@@ -253,16 +253,32 @@ export function AnimatedSlides({
   };
 
   // Get text position classes based on slide config
-  const getTextPositionClasses = (position?: string) => {
+  const getTextPositionClasses = (position?: string, hasImage?: boolean) => {
+    if (hasImage) {
+      // For image slides, use safe positioning with adequate padding
+      switch (position) {
+        case 'top':
+          return 'items-center justify-start pt-4 xs:pt-6 sm:pt-8';
+        case 'top-left':
+          return 'items-start justify-start pt-4 xs:pt-6 sm:pt-8 pl-3 xs:pl-4 sm:pl-6 text-left';
+        case 'bottom':
+          return 'items-center justify-end pb-10 xs:pb-12 sm:pb-14';
+        case 'bottom-left':
+          return 'items-start justify-end pb-10 xs:pb-12 sm:pb-14 pl-3 xs:pl-4 sm:pl-6 text-left';
+        default:
+          return 'items-center justify-center';
+      }
+    }
+    // For gradient slides
     switch (position) {
       case 'top':
         return 'items-center justify-start pt-6 sm:pt-8 md:pt-12';
       case 'top-left':
         return 'items-start justify-start pt-6 sm:pt-8 md:pt-12 pl-4 sm:pl-6 md:pl-8 text-left';
       case 'bottom':
-        return 'items-center justify-end pb-12 sm:pb-14 md:pb-16';
+        return 'items-center justify-end pb-14 sm:pb-16 md:pb-20';
       case 'bottom-left':
-        return 'items-start justify-end pb-12 sm:pb-14 md:pb-16 pl-4 sm:pl-6 md:pl-8 text-left';
+        return 'items-start justify-end pb-14 sm:pb-16 md:pb-20 pl-4 sm:pl-6 md:pl-8 text-left';
       default:
         return 'items-center justify-center';
     }
@@ -273,21 +289,27 @@ export function AnimatedSlides({
       {/* Slide display */}
       <div 
         className={cn(
-          "relative min-h-[300px] sm:min-h-[360px] md:aspect-video overflow-hidden",
+          "relative overflow-hidden",
+          // Use aspect ratio for consistent sizing across devices
+          currentSlide.backgroundImage 
+            ? "aspect-[4/5] xs:aspect-[3/4] sm:aspect-[16/10] md:aspect-video" 
+            : "min-h-[280px] xs:min-h-[320px] sm:min-h-[360px] md:aspect-video",
           !currentSlide.backgroundImage && (currentSlide.backgroundGradient || "bg-gradient-to-br from-primary/80 to-freedom/80")
         )}
-        style={kenBurnsStyle}
       >
-        {/* Background image if provided */}
+        {/* Background image if provided - object-contain to show full image */}
         {currentSlide.backgroundImage && (
-          <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ 
-              backgroundImage: `url(${currentSlide.backgroundImage})`,
-            }}
-          >
-            {/* Subtle overlay for text readability */}
-            <div className="absolute inset-0 bg-black/20" />
+          <div className="absolute inset-0 bg-black">
+            <img 
+              src={currentSlide.backgroundImage}
+              alt={currentSlide.title}
+              className="w-full h-full object-contain"
+              style={{ 
+                objectPosition: 'center center',
+              }}
+            />
+            {/* Gradient overlay for text readability at edges */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
           </div>
         )}
         
@@ -302,59 +324,80 @@ export function AnimatedSlides({
         {/* Content - positioned based on slide config */}
         <div 
           className={cn(
-            "absolute inset-0 flex flex-col p-4 sm:p-6 md:p-8 text-white animate-fade-in",
-            getTextPositionClasses(currentSlide.textPosition)
+            "absolute inset-0 flex flex-col p-3 xs:p-4 sm:p-6 md:p-8 text-white animate-fade-in",
+            getTextPositionClasses(currentSlide.textPosition, !!currentSlide.backgroundImage)
           )}
           key={currentSlide.id}
         >
           {currentSlide.icon && !currentSlide.backgroundImage && (
-            <span className="text-3xl sm:text-4xl md:text-5xl mb-2 sm:mb-3 md:mb-4">{currentSlide.icon}</span>
+            <span className="text-3xl xs:text-4xl sm:text-5xl mb-2 sm:mb-3 md:mb-4">{currentSlide.icon}</span>
           )}
-          {/* Hide embedded text if image has its own text baked in */}
-          {!currentSlide.backgroundImage && (
-            <>
-              <h3 className="text-lg sm:text-xl md:text-2xl font-bold mb-2 sm:mb-3 md:mb-4 drop-shadow-lg px-2 max-w-md">
+          
+          {/* Title and content - show on all slides including image slides */}
+          {currentSlide.backgroundImage ? (
+            // Image slide: compact text overlay
+            <div className="max-w-[90%] xs:max-w-[85%] sm:max-w-md bg-black/40 backdrop-blur-sm rounded-lg p-2 xs:p-3 sm:p-4">
+              <h3 className="text-sm xs:text-base sm:text-lg md:text-xl font-bold drop-shadow-lg leading-tight">
                 {currentSlide.title}
               </h3>
-              <p className="text-sm sm:text-base md:text-lg opacity-90 max-w-xs sm:max-w-sm md:max-w-md leading-relaxed drop-shadow px-2">
+              <p className="text-xs xs:text-sm sm:text-base opacity-90 leading-snug mt-1 xs:mt-1.5 drop-shadow line-clamp-3 xs:line-clamp-none">
+                {currentSlide.content}
+              </p>
+            </div>
+          ) : (
+            // Gradient slide: larger text
+            <>
+              <h3 className="text-lg xs:text-xl sm:text-2xl font-bold mb-2 sm:mb-3 md:mb-4 drop-shadow-lg px-2 max-w-md">
+                {currentSlide.title}
+              </h3>
+              <p className="text-sm xs:text-base sm:text-lg opacity-90 max-w-xs sm:max-w-sm md:max-w-md leading-relaxed drop-shadow px-2">
                 {currentSlide.content}
               </p>
             </>
           )}
         </div>
 
+        {/* Ken Burns animation for images */}
+        {currentSlide.backgroundImage && isPlaying && (
+          <style>{`
+            .animate-ken-burns {
+              animation: kenBurns ${currentSlideDuration}s ease-in-out;
+            }
+          `}</style>
+        )}
+
         {/* Slide navigation arrows */}
         <button
           onClick={goPrev}
           disabled={currentIndex === 0}
           className={cn(
-            "absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/30 backdrop-blur flex items-center justify-center transition-opacity z-10",
+            "absolute left-1 xs:left-2 top-1/2 -translate-y-1/2 w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 backdrop-blur flex items-center justify-center transition-opacity z-10",
             currentIndex === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-black/50"
           )}
         >
-          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+          <ChevronLeft className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-white" />
         </button>
         <button
           onClick={goNext}
           disabled={currentIndex === slides.length - 1}
           className={cn(
-            "absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/30 backdrop-blur flex items-center justify-center transition-opacity z-10",
+            "absolute right-1 xs:right-2 top-1/2 -translate-y-1/2 w-8 h-8 xs:w-9 xs:h-9 sm:w-10 sm:h-10 rounded-full bg-black/40 backdrop-blur flex items-center justify-center transition-opacity z-10",
             currentIndex === slides.length - 1 ? "opacity-30 cursor-not-allowed" : "hover:bg-black/50"
           )}
         >
-          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+          <ChevronRight className="w-4 h-4 xs:w-5 xs:h-5 sm:w-6 sm:h-6 text-white" />
         </button>
 
         {/* Slide indicator */}
-        <div className="absolute bottom-2 sm:bottom-4 left-0 right-0 flex justify-center gap-1 sm:gap-1.5 z-10">
+        <div className="absolute bottom-2 xs:bottom-3 sm:bottom-4 left-0 right-0 flex justify-center gap-1 xs:gap-1.5 z-10 flex-wrap px-4">
           {slides.map((_, index) => (
             <button
               key={index}
               onClick={() => goToSlide(index)}
               className={cn(
-                "w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all",
+                "w-1.5 h-1.5 xs:w-2 xs:h-2 rounded-full transition-all",
                 index === currentIndex 
-                  ? "bg-white w-4 sm:w-6" 
+                  ? "bg-white w-4 xs:w-5 sm:w-6" 
                   : index < currentIndex 
                     ? "bg-white/70" 
                     : "bg-white/30"
