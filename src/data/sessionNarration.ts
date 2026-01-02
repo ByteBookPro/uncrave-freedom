@@ -53,24 +53,46 @@ Alright – that's all for Day 1. I hope you're feeling inspired and encouraged.
 
 Thank you for being here today. Tomorrow's a new day on this journey – I'll see you then!`,
 
-  // Day 2 - Understanding Your Addiction
-  'd2m1': `Today, we're going to understand exactly how nicotine has been controlling you. Knowledge is power, and once you understand the mechanics of addiction, it loses much of its grip on you.
+  // Day 2 - Why Do I Smoke? Understanding Addiction & Beliefs
+  'd2m1': `Welcome back! Day 2 – great to see you here. Today we're going to answer a fundamental question: Why do you smoke? More specifically, what do you think you're getting from cigarettes? Understanding this is key, because once we unravel the illusion of smoking, the whole habit starts to lose its grip on you.
 
-Here's what happens when you smoke: Nicotine reaches your brain within 10 seconds of inhaling. It triggers the release of dopamine, creating that brief feeling of pleasure or relief. But here's the trap – this feeling fades quickly, usually within 20 to 30 minutes.
+Let's start by examining the common reasons people smoke: "I smoke to relax or relieve stress" – this is probably the number one belief. But here's the surprising truth: nicotine actually raises your baseline stress levels. The cigarette temporarily eases withdrawal, so you feel relief – but that relief is only bringing you back to the baseline of a non-smoker. Studies show smokers actually have higher stress overall. It's like wearing tight shoes just for the relief of taking them off.
 
-As nicotine levels drop, you start feeling irritable, anxious, or uncomfortable. Your brain interprets this as a craving, and you reach for another cigarette. The cycle repeats, over and over, day after day.
+"I need a cigarette to focus" – nicotine can give a short-term jolt, but as it wears off, withdrawal kicks in and concentration drops. Non-smokers manage to concentrate just fine without nicotine.
 
-The cruel irony? You're smoking to relieve the discomfort that smoking itself created. Non-smokers don't experience this cycle of craving and relief – they simply feel normal all the time.
+"I smoke because I enjoy it" – yes, nicotine triggers dopamine, creating brief pleasure. But notice: is the whole cigarette enjoyable, or just the first puff? Most smokers find the best part is lighting up – after that, you're mostly feeding the addiction.
 
-Understanding this cycle is the first step to breaking free from it.`,
+The takeaway: most "benefits" you think you get from smoking are either illusions or can be achieved in healthier ways.`,
 
-  'd2m2': `Let's look deeper into the addiction cycle. Nicotine is one of the most addictive substances known to science – as addictive as heroin or cocaine.
+  'd2m2': `Now let's look at what actually happens inside your brain when you smoke. Within 10 seconds of inhaling, nicotine reaches your brain. It binds to nicotinic receptors and triggers dopamine release. Your brain says "that was nice, do it again."
 
-But here's the good news: the physical withdrawal from nicotine is actually quite mild. Most people describe it as a slight empty feeling, like mild hunger. The real challenge isn't physical – it's psychological.
+But nicotine doesn't stick around. Your body starts clearing it within minutes. Those receptors get irritated when empty – they start screaming "feed me more nicotine!" This is withdrawal. That subtle tension builds, and you interpret it as "I need a cigarette."
 
-Over years of smoking, you've built strong mental associations. Coffee equals cigarette. Stress equals cigarette. Finishing a meal equals cigarette. These associations feel automatic, but they're learned behaviors – and anything learned can be unlearned.
+So you smoke again, the discomfort goes away, dopamine gives you a pat on the back. The cycle continues. This is the trap. This is addiction.
 
-Over the coming days, we'll work on breaking these associations one by one. You'll discover that you can enjoy coffee, handle stress, and finish meals without ever needing a cigarette.`,
+The key insight: smoking doesn't give you anything positive long-term – it mostly relieves the symptoms it created. It's like someone tapping your shoulder incessantly – smoking just tells them to stop for a moment, but they'll start again soon.
+
+Please don't take this as scolding. It's empowerment. When you see cigarettes for what they are – a delivery system for an addictive drug – you take away their power. It's not you that's weak. Nicotine is very good at creating dependency. You were duped by a clever trap. Now you're waking up.`,
+
+  'd2m3': `Let's talk about why other quit methods often fail and why this approach works.
+
+Cold turkey has about 5-10% success rate – you have cravings but no mental strategy to handle them.
+
+Nicotine patches or gum soften withdrawal, but many relapse when stopping because the mental habit remains unchanged. Plus, some end up using NRT while still smoking.
+
+Vaping removes tar but keeps you addicted – often at higher nicotine levels because you can vape continuously. We don't want to swap one addiction for another.
+
+Behavioral programs like this have the highest success because they tackle both the physical AND psychological aspects. Studies show evidence-based quit programs significantly increase success rates.
+
+That's why this works: by the time you smoke your last cigarette, you won't just be physically ready – you'll be mentally ready. You won't feel deprived. You'll feel like you're escaping a trap.`,
+
+  'd2m4': `Today's assignment: notice and question your reasons each time you smoke. Did the cigarette actually solve your problem, or just make you feel momentarily better? Be curious. Curiosity is your tool.
+
+Don't worry if cigarettes become less satisfying – that's the goal. We're aligning your heart and mind so they both agree: "I don't actually want to smoke." When that clicks, quitting becomes relief, not battle.
+
+Tomorrow, we dive into habits and triggers – why you smoke when you do, and how to break those patterns. You'll see the strings that have been pulling on you, and we'll start cutting them one by one.
+
+Day 2 complete! You now understand nicotine addiction's true nature. That knowledge is power – it's already changing how you see cigarettes. You were caught in a trap designed by people with billions of dollars. Now you're waking up. Soon, you'll be free.`,
 
   // Day 3 - Know Your Triggers
   'd3m1': `Today is about understanding your triggers – the specific situations, emotions, and routines that make you reach for a cigarette.
