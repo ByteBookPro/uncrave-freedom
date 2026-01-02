@@ -94,22 +94,66 @@ Tomorrow, we dive into habits and triggers – why you smoke when you do, and ho
 
 Day 2 complete! You now understand nicotine addiction's true nature. That knowledge is power – it's already changing how you see cigarettes. You were caught in a trap designed by people with billions of dollars. Now you're waking up. Soon, you'll be free.`,
 
-  // Day 3 - Know Your Triggers
-  'd3m1': `Today is about understanding your triggers – the specific situations, emotions, and routines that make you reach for a cigarette.
+  // Day 3 - Breaking the Habit Loop: Identifying Triggers and Routines
+  'd3m1': `Welcome to Day 3! You're nearly halfway to quit day. How are you feeling? By now, you might have started to notice some of your smoking patterns more clearly. Maybe you caught yourself thinking, "I really don't enjoy this as much as I thought," or you simply became aware, "Oh, I always reach for a cigarette when I start the car." That's fantastic – that awareness means you're already breaking free, bit by bit.
 
-Every habit follows what scientists call the habit loop: there's a cue or trigger, followed by the routine or the behavior itself, and then the reward.
+Today we're going to map out your smoking habit – essentially shine a spotlight on the habit loops that keep you smoking, so we can begin to break them.
 
-For smoking, your triggers might include finishing a meal, feeling stressed, taking a work break, or drinking coffee in the morning. The routine is reaching for and smoking a cigarette. And the reward? That brief relief from the nicotine withdrawal that was building up.
+Every habit, including smoking, follows a loop: Trigger – Behavior – Reward. Something triggers you, you perform the behavior (smoking), and you get some sort of reward (or relief). That reward reinforces the habit, so next time the trigger happens, your brain goes, "I know what to do!" and craves a cigarette. Over years, these loops can become almost automatic, like reflexes.
 
-Today, you'll identify your personal triggers. Once you know them, you can start planning alternative responses. The trigger doesn't have to lead to smoking – you can choose a different response that gives you a healthier reward.`,
+Here's something important to understand: none of these triggers force you to smoke – it just feels that way because the connection is so ingrained. You weren't born needing a cigarette with your morning coffee. Your brain learned that association over thousands of repetitions. And the amazing thing is, these connections can be retrained or broken.`,
 
-  'd3m3': `Now that you know your triggers, let's explore alternative behaviors you can use instead of smoking.
+  'd3m2': `Let's identify your triggers. Triggers can be different for everyone, but there are definitely patterns. Let me walk you through the common ones:
 
-When a craving hits, try the 4 D's: Delay – wait just 3 to 5 minutes. Most cravings pass quickly. Drink water – it helps flush toxins and gives you something to do. Deep breathe – take 5 slow, deep breaths. Distract yourself – call a friend, take a short walk, or do a quick puzzle.
+Waking up / Morning routine: Many smokers light up first thing in the morning. The trigger is simply waking up or having that first cup of coffee. The brain was in withdrawal overnight, so the reward is a dopamine rush that says "Okay, day started." It's very habitual – you might even feel like you can't fully wake up without that cigarette. Spoiler: You absolutely can, and after a week or so of not smoking, you'll likely find you wake up with more energy than when you smoked, because your body isn't fighting off smoke effects.
 
-For specific triggers, create specific alternatives. If you usually smoke with morning coffee, try drinking tea instead, or changing where you sit. If stress is a trigger, practice the breathing exercise we'll teach you. If boredom triggers smoking, keep a small fidget toy or stress ball handy.
+Meals: Finishing a meal is a classic trigger – you feel full and satisfied from food, and a cigarette feels like the cherry on top to complete the experience. This is partly habit and partly a conditioned physiological response. But non-smokers feel just as satisfied after meals without a cigarette – it's all in what you're used to. We'll find a new "cherry on top" for you.
 
-Remember: you're not depriving yourself. You're replacing a harmful habit with healthier alternatives.`,
+Stress / Anxiety: Something stressful happens – an email from the boss, an argument, bad news – and boom, craving hits. The trigger is the stress, the routine is smoking, and the perceived reward is relaxation. The challenge is, when stressed, we're on autopilot. You feel upset and almost before you know it, you're lighting up. Breaking this loop means we need to insert a pause and a new coping skill when stress hits.
+
+Boredom / Idle time: Nothing to do, so you smoke to fill time. The trigger is simply lack of stimulation. The reward is mild – you're just less bored. This one is actually one of the easier loops to break because it's not strongly chemically driven; it's more about finding alternative activities.
+
+Social cues: Seeing someone else smoke, being offered a cigarette, or certain social patterns like at a pub with friends. The trigger is either visual or social anxiety/bonding. The reward is feeling included or the ritual of camaraderie. We'll strategize on how to handle these without feeling left out.
+
+Routines tied to places or activities: Driving is a big one, as is talking on the phone for some, or taking a work break and going to the smoking area. Our brains are context-dependent. If you've always done a behavior in a certain context, that context itself becomes a trigger.`,
+
+  'd3m3': `Now let's brainstorm alternatives. For the triggers you identified, I want you to think of one alternative for each – something you could do instead of smoking when that trigger happens.
+
+For stress, try the 5-5-5 breathing exercise as an alternative. Next time you feel stressed, take a moment and do this: inhale for 5 seconds, hold for 5, exhale for 5, maybe do it a few times. The reward? Your heart rate slows, your mind clears a bit, and you feel in control. That's a real form of relaxation, not just withdrawal relief. If you repeat that, soon your brain learns "when I'm stressed, I breathe and feel better" instead of "I smoke and feel better."
+
+If your trigger is finishing a meal, and your alternative is to immediately get up and start doing dishes or go brush your teeth, try that. The slight urge for a cigarette after eating usually passes in just a few minutes. Brushing your teeth has a nice reward: fresh taste in your mouth, and most people don't want to smoke right after that.
+
+For morning coffee, maybe you decide to switch the order – delay that first cigarette by doing something right after coffee. Or change your coffee routine: if you always smoke on your porch with coffee, try having coffee in a different spot or doing a crossword while you drink. The idea is to break the association.
+
+I want to emphasize: You don't have to implement all these alternatives right now. We're not making you quit today. But you now have a toolbox started.`,
+
+  'd3m4': `Let me share a trick called Urge Surfing. Cravings are like waves in the ocean. They rise, crest, and then they fall. If you don't act on them, they typically peak within a few minutes and then diminish. It might feel longer, but truly, most intense urges last 3-5 minutes.
+
+If you can "surf" that wave – ride it out by doing something else, or even just acknowledge it mindfully – you'll come out the other side and realize you didn't need to smoke. Every time you do that, you weaken the neural link that says "urge = must smoke." You strengthen your confidence that "I can handle this."
+
+Even now, you can try: when an urge hits, delay a few minutes before smoking and do something else – drink water, send a text. You might be surprised that sometimes the urge goes away and you might even forget to smoke for a while.`,
+
+  'd3m5': `Let's practice urge surfing right now. Find a comfortable position. When you feel a craving – or even just imagine one – instead of fighting it or giving in, simply observe it. Imagine the craving as a wave in the ocean. It builds, it peaks, and then it subsides – all on its own.
+
+Notice where you feel the craving in your body. Is it in your chest? Your throat? Your hands? Just observe it without judgment. Breathe slowly and steadily. Watch the craving build. It might feel intense, but stay with it. Keep breathing.
+
+Notice how the intensity changes. It rises... and then, naturally, it begins to fall. You don't have to do anything except breathe and observe. The wave passes on its own. This is the skill that will carry you through quit day and beyond.`,
+
+  'd3m6': `Now let's talk about not avoiding life. Some programs say, "avoid triggers when you quit – don't drink coffee, avoid social events, don't go where others are smoking." We don't want to shrink your life; we want you to be free to live normally without cigarettes.
+
+Our approach is different: face those triggers but with new strategies. If your friends smoke, you're not going to abandon your friends – instead, maybe you'll let them know you're quitting and step away when they smoke, or have something to keep your hands busy.
+
+If you usually smoke on your commute, perhaps stock your car with gum, or an audiobook that keeps you engaged. The first time doing any of these things without smoking will feel weird – that's okay. The second time will be easier, and after a few weeks, you won't even think about it.
+
+You are essentially becoming a scientist of your own behavior this week – observing triggers, testing new responses. Each time you resist an old trigger or do something different, you are rewiring your brain for the better.`,
+
+  'd3m7': `To recap Day 3: You've identified your smoking triggers and brainstormed alternatives. You now see the habit loops you've been stuck in – and you have the knowledge to start breaking them. Awareness breaks the automaticity, and choice steps in.
+
+Action for today: Keep an eye on those triggers. When you catch one, say to yourself, "I'm feeling the urge because [trigger] happened. I don't actually need a cigarette, but I want one out of habit." If you're up for it, try one of your alternative behaviors at least once today or tomorrow.
+
+Tomorrow is a special day – we are going to delve into mindfulness and actually use a cigarette as part of an exercise. Sounds intriguing? It is. It's often a turning point for people in this program. We'll effectively turn a cigarette into a tool for quitting. So make sure you have a couple of cigarettes handy for tomorrow's session.
+
+You're doing fantastic. This is the groundwork that will make your actual quit much smoother than any attempt before. See you on Day 4!`,
 
   // Day 4 - Mindful Smoking
   'd4m1': `Today is pivotal. We're going to do something that might sound strange: you're going to smoke mindfully.

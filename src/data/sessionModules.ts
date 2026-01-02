@@ -571,60 +571,311 @@ export const daySessions: DaySession[] = [
   // Days 3-10 follow similar structure...
   {
     dayNumber: 3,
-    title: "Know Your Triggers",
-    subtitle: "Mapping Your Habit Loops",
+    title: "Breaking the Habit Loop",
+    subtitle: "Identifying Triggers and Routines",
     modules: [
       {
         id: 'd3m1',
-        title: "The Habit Loop Explained",
+        title: "Welcome to Day 3",
+        description: "Understanding why you smoke when you do, and how habits form.",
         type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 300,
+        estimatedSeconds: 360,
         gatingRequired: true,
         content: {
           slides: [
-            { id: 's1', title: "Cue → Routine → Reward", content: "Every habit follows this pattern. Understanding yours is the first step to breaking free.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80", icon: "🔄" },
-            { id: 's2', title: "Your Smoking Cues", content: "Coffee. Stress. After meals. Phone calls. These aren't needs—they're associations your brain has learned.", backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80", icon: "☕" },
-            { id: 's3', title: "The Fake Reward", content: "Remember: the 'reward' is just relief from withdrawal. The same relief non-smokers feel all the time.", backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80", icon: "🎁" },
-            { id: 's4', title: "Breaking Associations", content: "Over the next days, we'll systematically break these false connections.", backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80", icon: "⛓️‍💥" },
+            {
+              id: 's1',
+              title: "Day 3: Breaking the Habit Loop",
+              content: "Today we map out your smoking habit – shining a spotlight on the loops that keep you smoking, so we can begin to break them.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "🔄",
+              narration: "Welcome to Day 3! You're nearly halfway to quit day. How are you feeling? By now, you might have started to notice some of your smoking patterns more clearly. Maybe you caught yourself thinking, 'I really don't enjoy this as much as I thought,' or you simply became aware, 'Oh, I always reach for a cigarette when I start the car.' That's fantastic – that awareness means you're already breaking free, bit by bit. Today we're going to map out your smoking habit – essentially shine a spotlight on the habit loops that keep you smoking, so we can begin to break them."
+            },
+            {
+              id: 's2',
+              title: "The Habit Loop",
+              content: "Every habit follows a loop: Trigger → Behavior → Reward. Something triggers you, you smoke, and you get relief. That relief reinforces the habit.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "🔁",
+              narration: "Every habit, including smoking, follows a loop: Trigger – Behavior – Reward. Something triggers you, you perform the behavior – smoking – and you get some sort of reward or relief. That reward reinforces the habit, so next time the trigger happens, your brain goes, 'I know what to do!' and craves a cigarette. Over years, these loops can become almost automatic, like reflexes. You don't even think about it – your hand just reaches for the pack."
+            },
+            {
+              id: 's3',
+              title: "Your Triggers Are Learned",
+              content: "Your brain has learned to associate certain situations with smoking. Coffee, stress, after meals – these aren't needs, they're learned associations.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
+              icon: "🧠",
+              narration: "Here's something important to understand: none of these triggers force you to smoke – it just feels that way because the connection is so ingrained. You weren't born needing a cigarette with your morning coffee. Your brain learned that association over thousands of repetitions. And the amazing thing is, these connections can be retrained or broken. For every trigger, we can create a new routine or no routine at all – just experiencing the moment without a cigarette – and still get a reward. That's what we're building toward."
+            },
           ]
         }
       },
       {
         id: 'd3m2',
-        title: "Trigger Identification",
+        title: "Understanding Your Triggers",
+        description: "Exploring the common situations where you reach for a cigarette.",
         type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 420,
+        estimatedSeconds: 480,
         gatingRequired: true,
         content: {
           slides: [
-            { id: 's1', title: "Common Triggers", content: "Let's explore the situations where you typically reach for a cigarette.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80", icon: "📋" },
-            { id: 's2', title: "Morning Routine", content: "The first cigarette of the day feels 'needed' only because you've gone hours without nicotine during sleep.", backgroundGradient: "bg-gradient-to-br from-coral/80 to-accent/80", icon: "🌅" },
-            { id: 's3', title: "Stress Response", content: "Cigarettes don't reduce stress—they add to it. You'll feel genuinely calmer as a non-smoker.", backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80", icon: "😰" },
-            { id: 's4', title: "Social Situations", content: "Many smokers feel less confident without cigarettes. But that confidence was always yours—not the cigarette's.", backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80", icon: "👥" },
-            { id: 's5', title: "After Meals", content: "This is pure association. Food doesn't create nicotine craving—habit does.", backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80", icon: "🍽️" },
+            {
+              id: 's1',
+              title: "Let's Identify Your Triggers",
+              content: "Triggers can be emotional, environmental, social, or routine-based. Let's explore each category.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "📋",
+              narration: "Let's identify your triggers. Triggers can be different for everyone, but there are definitely patterns. They fall into categories: Emotional triggers like stress, anxiety, boredom, or loneliness. Environmental triggers like waking up, having coffee, finishing meals, driving, or taking work breaks. Social triggers like being around other smokers or at parties. And routine-based triggers tied to certain times of day. Let's talk through a few common ones."
+            },
+            {
+              id: 's2',
+              title: "Morning Routine Trigger",
+              content: "Many smokers light up first thing. The trigger is waking up – your brain was in withdrawal overnight, so the 'reward' is a dopamine rush.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-accent/80",
+              icon: "🌅",
+              narration: "Waking up or your morning routine: Many smokers light up first thing in the morning. The trigger is simply waking up or having that first cup of coffee. The brain was in withdrawal overnight, so the reward is a dopamine rush that says 'Okay, day started.' It's very habitual – you might even feel like you can't fully wake up without that cigarette. Spoiler: You absolutely can, and after a week or so of not smoking, you'll likely find you wake up with more energy than when you smoked, because your body isn't fighting off smoke effects."
+            },
+            {
+              id: 's3',
+              title: "Meals as Triggers",
+              content: "Finishing a meal is a classic trigger. But non-smokers feel just as satisfied after meals without a cigarette – it's all about what you're used to.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80",
+              icon: "🍽️",
+              narration: "Meals: Finishing a meal is a classic trigger – you feel full and satisfied from food, and a cigarette feels like the cherry on top to complete the experience. This is partly habit and partly a conditioned physiological response. But non-smokers feel just as satisfied after meals without a cigarette – it's all in what you're used to. We'll find a new 'cherry on top' for you, whether it's a short walk, a piece of fruit, or simply taking a deep breath and relaxing."
+            },
+            {
+              id: 's4',
+              title: "Stress and Anxiety",
+              content: "When stressed, you're on autopilot. You feel upset and almost before you know it, you're lighting up. We need to insert a pause.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "😰",
+              narration: "Stress and Anxiety: We touched on this yesterday – something stressful happens, an email from the boss, an argument, bad news, and boom, craving hits. The trigger is the stress, the routine is smoking, and the perceived reward is relaxation – which, as we know, is really just relief of nicotine withdrawal plus a deep-breathing moment. The challenge is, when stressed, we're on autopilot. You feel upset and almost before you know it, you're lighting up. Breaking this loop means we need to insert a pause and a new coping skill when stress hits."
+            },
+            {
+              id: 's5',
+              title: "Boredom and Idle Time",
+              content: "Nothing to do, so you smoke to fill time. This is actually one of the easier loops to break because it's not strongly chemically driven.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-muted/80",
+              icon: "😴",
+              narration: "Boredom and Idle time: Nothing to do, so you smoke to fill time. The trigger is simply lack of stimulation. The reward is mild – you're just less bored. This one is actually one of the easier loops to break because it's not strongly chemically driven; it's more about finding alternative activities. A puzzle on your phone, a quick stretch, a glass of water – anything to occupy that moment."
+            },
+            {
+              id: 's6',
+              title: "Social Cues",
+              content: "Seeing someone smoke, being offered a cigarette, feeling included in the ritual – these are powerful but can be managed.",
+              backgroundGradient: "bg-gradient-to-br from-muted/80 to-primary/80",
+              icon: "👥",
+              narration: "Social cues: Seeing someone else smoke, being offered a cigarette, or certain social patterns like at a pub with friends. The trigger is either visual – seeing it – or social bonding. The reward is feeling included or the ritual of camaraderie. We'll strategize on how to handle these without feeling left out – like having a drink in hand or stepping out with friends but not smoking. You don't have to give up your social life. You just need new responses."
+            },
+            {
+              id: 's7',
+              title: "Routine-Based Triggers",
+              content: "Driving, phone calls, 3pm coffee break – your brain is context-dependent. That context itself becomes the trigger.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "🚗",
+              narration: "Routines tied to places or activities: Driving is a big one, as is talking on the phone for some, or taking a work break and going to the smoking area. Our brains are context-dependent. If you've always done a behavior in a certain context, that context itself becomes a trigger. Ever notice how a certain time of day, like 3pm, you automatically reach for a smoke even if you're not desperate for one? That's the habit clock in your brain. But clocks can be reset."
+            },
           ]
         }
       },
       {
         id: 'd3m3',
-        title: "Urge Surfing Deep Dive",
+        title: "Creating Alternative Responses",
+        description: "For every trigger, we create a new, healthier response.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 420,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Brainstorming Alternatives",
+              content: "For each trigger you identified, we'll create an alternative action – something you can do instead of smoking.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
+              icon: "💡",
+              narration: "Now let's do an exercise: for the triggers you've identified, I want you to brainstorm one alternative for each – something you could do instead of smoking when that trigger happens. I'll help with suggestions. These might seem small or even silly, but they are powerful. By choosing an alternate response to a trigger, you're essentially training your brain with a new habit loop: Trigger → New Behavior → New Reward."
+            },
+            {
+              id: 's2',
+              title: "Stress → Deep Breathing",
+              content: "When stressed, try 5-5-5 breathing: inhale 5 seconds, hold 5, exhale 5. Your heart rate slows, your mind clears – real relaxation.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🧘",
+              narration: "Let's say your trigger is stress, and you choose the 5-5-5 breathing exercise as an alternative. Next time you feel stressed, you take a moment and do this: inhale for 5 seconds, hold for 5, exhale for 5, maybe do it a few times. The reward? Your heart rate slows, your mind clears a bit, and you feel in control. That's a real form of relaxation, not just withdrawal relief. If you repeat that, soon your brain learns 'when I'm stressed, I breathe and feel better' instead of 'I smoke and feel better.' And the breathing is actually addressing the stress in a healthier way."
+            },
+            {
+              id: 's3',
+              title: "After Meals → New Rituals",
+              content: "Immediately do dishes or brush your teeth. The urge passes in minutes, and a fresh minty mouth makes smoking unappealing.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-accent/80",
+              icon: "🪥",
+              narration: "If your trigger is finishing a meal, and your alternative is to immediately get up and start doing dishes or go brush your teeth, try that. The slight urge for a cigarette after eating usually passes in just a few minutes. Brushing your teeth has a nice reward: fresh taste in your mouth, and most people don't want to smoke right after that because it ruins the minty fresh feeling. Win-win: you keep your teeth clean and skip the smoke."
+            },
+            {
+              id: 's4',
+              title: "Morning Coffee → Change the Context",
+              content: "Switch your routine: different spot, different mug, add a crossword. Even small changes break the association.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "☕",
+              narration: "For morning coffee, maybe you decide to switch the order – delay that first cigarette by doing something right after coffee. Or change your coffee routine: if you always smoke on your porch with coffee, try having coffee in a different spot or doing a crossword while you drink. The idea is to break the association. Even a small change can help, like using a mug that requires two hands so you're not having a free hand for a cigarette."
+            },
+            {
+              id: 's5',
+              title: "Boredom → Get Moving",
+              content: "Walk around, stretch, do a quick puzzle, or drink water. Boredom triggers are the easiest to break with simple alternatives.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-muted/80",
+              icon: "🚶",
+              narration: "For boredom, the alternatives are endless: take a short walk, do some stretches, play a quick game on your phone, drink a glass of water, text a friend. Boredom triggers are actually the easiest to break because there's no strong chemical pull – you just need something to do. Keep a few go-to activities in mind for those idle moments."
+            },
+            {
+              id: 's6',
+              title: "Social Situations → Stay Engaged",
+              content: "Keep a drink in hand, step outside but don't smoke, tell friends you're quitting. You're not missing out – you're leveling up.",
+              backgroundGradient: "bg-gradient-to-br from-muted/80 to-primary/80",
+              icon: "🥤",
+              narration: "For social situations, you don't have to avoid your friends or stop going out. Instead: keep a drink in hand so your hands are occupied. Step outside with smokers if you want the social break, but don't light up – just enjoy the conversation. Let your friends know you're quitting so they can support you. You might be surprised how many will cheer you on. You're not missing out on anything – you're leveling up."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd3m4',
+        title: "Urge Surfing Introduction",
+        description: "Learn to ride out cravings like waves – they peak and then pass.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 300,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Introducing Urge Surfing",
+              content: "Cravings are like waves in the ocean. They rise, crest, and fall. If you don't act on them, they pass on their own.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "🌊",
+              narration: "Speaking of cravings subsiding, let me share a trick: Urge Surfing. Cravings are like waves in the ocean. They rise, crest, and then they fall. If you don't act on them, they typically peak within a few minutes and then diminish. It might feel longer, but truly, most intense urges last 3-5 minutes. If you can 'surf' that wave – ride it out by doing something else, or even just acknowledge it mindfully – you'll come out the other side and realize you didn't need to smoke."
+            },
+            {
+              id: 's2',
+              title: "3-5 Minutes",
+              content: "Most intense urges last only 3-5 minutes. If you can ride that wave, it passes. Every time you do this, the urges get weaker.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "⏱️",
+              narration: "Here's the science: cravings peak quickly and then fade. If you can distract yourself or simply observe the craving without acting on it for just a few minutes, it will pass. And here's the magic – every time you do that, you weaken the neural link that says 'urge = must smoke.' You strengthen your confidence that 'I can handle this.' Each wave you surf makes the next one smaller."
+            },
+            {
+              id: 's3',
+              title: "Delay and Distract",
+              content: "When an urge hits, delay a few minutes before smoking. Drink water, send a text, take a walk. You might forget to smoke entirely.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-accent/80",
+              icon: "📱",
+              narration: "Even now, before you've quit, you can try this: when an urge hits, delay a few minutes before smoking and do something else – drink water, send a text, take a short walk. You might be surprised that sometimes the urge goes away and you might even forget to smoke for a while. We'll practice more urge surfing once you've quit, but starting to notice this pattern now is incredibly valuable."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd3m5',
+        title: "Urge Surfing Practice",
+        description: "Guided practice to ride out cravings mindfully.",
         type: 'GUIDED_PRACTICE',
         estimatedSeconds: 240,
         gatingRequired: true,
         practiceType: 'URGE_SURFING',
       },
       {
-        id: 'd3m4',
-        title: "Alternative Behaviors",
+        id: 'd3m6',
+        title: "Not Avoiding Life",
+        description: "We don't shrink your life – we change your response to it.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 360,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Face Triggers, Don't Avoid Them",
+              content: "Some programs say avoid triggers entirely. We say face them with new strategies. Your life shouldn't shrink – your response changes.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "💪",
+              narration: "Now let's talk about not avoiding life. Some programs say, 'avoid triggers when you quit – don't drink coffee, avoid social events, don't go where others are smoking.' We don't want to shrink your life; we want you to be free to live normally without cigarettes. So our approach is different: face those triggers but with new strategies."
+            },
+            {
+              id: 's2',
+              title: "Keep Your Friends",
+              content: "If your friends smoke, you're not abandoning them. Step away when they smoke, keep your hands busy, or just enjoy the fresh air.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
+              icon: "🤝",
+              narration: "For example, if your friends smoke, you're not going to abandon your friends – instead, maybe you'll let them know you're quitting and step away when they smoke, or have something to keep your hands busy like a stress ball, a fidget gadget, even just a bottle of water to sip. You can still be social. You can still be you. You're just doing it smoke-free."
+            },
+            {
+              id: 's3',
+              title: "Transform Your Commute",
+              content: "If you smoke while driving, stock your car with gum, podcasts, or audiobooks. Transform the trigger into something better.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "🚗",
+              narration: "If you usually smoke on your commute, perhaps stock your car with gum, or an audiobook that keeps you engaged. The first time doing any of these things without smoking will feel weird – that's okay. The second time will be easier, and after a few weeks, you won't even think about it. You might actually start looking forward to your commute for the podcast time, not the cigarette."
+            },
+            {
+              id: 's4',
+              title: "Shake Up Your Routine",
+              content: "Small changes disrupt autopilot: rearrange furniture, take breaks in new spots, change the order of your morning routine.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-accent/80",
+              icon: "🔀",
+              narration: "One more note on routine changes: Some people find it helpful to shake up their routine around quit day. For instance, if you always wake up and sit in the same chair to smoke, maybe rearrange your furniture or make that chair less inviting. Or if you always take a break at 10am to smoke, plan to take that break in a non-smoking area with a coffee instead. These are little hacks to disrupt the autopilot."
+            },
+            {
+              id: 's5',
+              title: "You're Rewiring Your Brain",
+              content: "Each time you resist a trigger or try something different, you're creating new neural pathways. Your brain can change.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-primary/80",
+              icon: "✨",
+              narration: "You are essentially becoming a scientist of your own behavior this week – observing triggers, testing new responses. And guess what? This kind of self-awareness and adaptability is a skill that goes beyond quitting smoking – it can apply to any habit change in your life. Each time you resist an old trigger or do something different, you are literally rewiring your brain for the better. That's neuroplasticity in action."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd3m7',
+        title: "Day 3 Wrap-Up",
+        description: "Summary and your assignment for today.",
         type: 'ANIMATED_SLIDES',
         estimatedSeconds: 300,
         gatingRequired: true,
         content: {
           slides: [
-            { id: 's1', title: "New Responses", content: "For every trigger, we can create a new, healthier response.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80", icon: "🔄" },
-            { id: 's2', title: "Stress → Breathe", content: "Three deep breaths give you more calm than any cigarette ever did.", backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80", icon: "🧘" },
-            { id: 's3', title: "Coffee → Enjoy", content: "Without smoke, coffee actually tastes better. Enjoy it fully.", backgroundGradient: "bg-gradient-to-br from-freedom/80 to-accent/80", icon: "☕" },
-            { id: 's4', title: "Boredom → Move", content: "A quick walk, stretch, or dance gives you energy cigarettes never could.", backgroundGradient: "bg-gradient-to-br from-accent/80 to-primary/80", icon: "🚶" },
+            {
+              id: 's1',
+              title: "What You've Learned",
+              content: "You've identified your triggers and brainstormed alternatives. You see the habit loops that kept you stuck – and now you can break them.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
+              icon: "📚",
+              narration: "To recap Day 3: You've identified your smoking triggers and brainstormed alternatives. You now see the habit loops you've been stuck in – and you have the knowledge to start breaking them. Awareness breaks the automaticity, and choice steps in. You're no longer on autopilot. You're taking control."
+            },
+            {
+              id: 's2',
+              title: "Your Assignment Today",
+              content: "Watch for triggers. When one hits, say: 'I'm feeling the urge because [trigger] happened. I don't need a cigarette – I want one out of habit.'",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "📝",
+              narration: "Action for today: Keep an eye on those triggers. When you catch one, say to yourself, 'I'm feeling the urge because this trigger happened. I don't actually need a cigarette, but I want one out of habit.' Just that awareness is powerful. If you're up for it, try one of your alternative behaviors at least once today or tomorrow. Even if you go right back to smoking after, that's fine – the experience will teach you that you can do something else."
+            },
+            {
+              id: 's3',
+              title: "Tomorrow: Day 4",
+              content: "Tomorrow is special – we'll use a cigarette as part of a mindful exercise. Have a couple cigarettes ready. Trust me on this.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-coral/80",
+              icon: "🔮",
+              narration: "Tomorrow is a special day – we are going to delve into mindfulness and actually use a cigarette as part of an exercise. Sounds intriguing? It is. It's often a turning point for people in this program. We'll effectively turn a cigarette into a tool for quitting – wild, huh? So make sure you have a couple of cigarettes handy for tomorrow's session – yes, I'm telling you to have cigarettes ready for a quit program! Trust me on this."
+            },
+            {
+              id: 's4',
+              title: "Day 3 Complete!",
+              content: "You're doing fantastic. This groundwork will make your actual quit much smoother than any attempt before. See you on Day 4!",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
+              icon: "🎉",
+              narration: "You're doing fantastic. You've come a long way in understanding your habit. This is the groundwork that will make your actual quit much smoother than any attempt before. Get some rest, reflect a bit in your journal if you like – maybe list your top triggers and your new strategies again, to cement them. And I'll see you on Day 4 for a really eye-opening experience. Congratulations on completing Day 3!"
+            },
           ]
         }
       },
