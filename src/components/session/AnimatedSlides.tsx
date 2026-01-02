@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
-import { Play, Pause, ChevronLeft, ChevronRight, Volume2, VolumeX, Loader2 } from 'lucide-react';
+import { Play, Pause, ChevronLeft, ChevronRight, Volume2, VolumeX, Loader2, Music } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useTextToSpeech, VoicePreset } from '@/hooks/useTextToSpeech';
+import { useBackgroundMusic } from '@/hooks/useBackgroundMusic';
 
 interface Slide {
   id: string;
@@ -83,9 +84,11 @@ export function AnimatedSlides({
   const [isPlaying, setIsPlaying] = useState(autoPlay);
   const [slideProgress, setSlideProgress] = useState(0);
   const [audioEnabled, setAudioEnabled] = useState(true);
+  const [musicEnabled, setMusicEnabled] = useState(true);
   const [hasPlayedNarration, setHasPlayedNarration] = useState<Set<number>>(new Set());
   
   const { speak, stop, isLoading: isNarrationLoading, isPlaying: isNarrationPlaying } = useTextToSpeech();
+  const backgroundMusic = useBackgroundMusic({ volume: 0.12 });
 
   // Guard against empty slides array
   if (!slides || slides.length === 0) {
@@ -109,6 +112,31 @@ export function AnimatedSlides({
   // Track if all slides have been viewed
   const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]));
 
+  // Start background music when component mounts and slideshow starts
+  useEffect(() => {
+    if (isPlaying && musicEnabled) {
+      backgroundMusic.play('calm');
+    } else if (!musicEnabled) {
+      backgroundMusic.stop();
+    }
+  }, [isPlaying, musicEnabled]);
+
+  // Duck music when narration is playing, unduck when it stops
+  useEffect(() => {
+    if (isNarrationPlaying) {
+      backgroundMusic.duck();
+    } else {
+      backgroundMusic.unduck();
+    }
+  }, [isNarrationPlaying]);
+
+  // Stop music when component unmounts
+  useEffect(() => {
+    return () => {
+      backgroundMusic.stop();
+    };
+  }, []);
+
   // Play narration when slide changes with appropriate voice preset
   useEffect(() => {
     if (!audioEnabled || hasPlayedNarration.has(currentIndex)) return;
@@ -119,7 +147,8 @@ export function AnimatedSlides({
       const voicePreset = currentSlide.voicePreset || detectVoicePreset(currentSlide, title) || defaultVoicePreset;
       
       console.log(`Playing narration for slide ${currentIndex + 1} with preset: ${voicePreset}`);
-      speak(narrationText, { preset: voicePreset, gender: 'female' });
+      // Don't pass gender - let useTextToSpeech use user's preference from profile
+      speak(narrationText, { preset: voicePreset });
       setHasPlayedNarration(prev => new Set([...prev, currentIndex]));
     }
   }, [currentIndex, audioEnabled, currentSlide, hasPlayedNarration, speak, title, defaultVoicePreset]);
@@ -282,14 +311,16 @@ export function AnimatedSlides({
 
         {/* Control buttons */}
         <div className="flex items-center justify-between">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setIsPlaying(!isPlaying)}
-            className="h-10 w-10"
-          >
-            {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
-          </Button>
+          <div className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsPlaying(!isPlaying)}
+              className="h-10 w-10"
+            >
+              {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5 ml-0.5" />}
+            </Button>
+          </div>
 
           <span className="text-sm text-muted-foreground flex items-center gap-2">
             {isNarrationLoading && (
@@ -298,21 +329,37 @@ export function AnimatedSlides({
             {isNarrationPlaying && !isNarrationLoading && (
               <Volume2 className="w-4 h-4 text-primary animate-pulse" />
             )}
+            {backgroundMusic.isPlaying && (
+              <Music className="w-4 h-4 text-primary/60" />
+            )}
             {currentIndex + 1} / {slides.length}
           </span>
 
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setAudioEnabled(!audioEnabled)}
-            className="h-10 w-10"
-          >
-            {audioEnabled ? (
-              <Volume2 className="w-5 h-5" />
-            ) : (
-              <VolumeX className="w-5 h-5 text-muted-foreground" />
-            )}
-          </Button>
+          <div className="flex items-center gap-1">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setMusicEnabled(!musicEnabled)}
+              className="h-10 w-10"
+              title={musicEnabled ? "Mute background music" : "Enable background music"}
+            >
+              <Music className={cn("w-5 h-5", !musicEnabled && "text-muted-foreground")} />
+            </Button>
+            
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setAudioEnabled(!audioEnabled)}
+              className="h-10 w-10"
+              title={audioEnabled ? "Mute narration" : "Enable narration"}
+            >
+              {audioEnabled ? (
+                <Volume2 className="w-5 h-5" />
+              ) : (
+                <VolumeX className="w-5 h-5 text-muted-foreground" />
+              )}
+            </Button>
+          </div>
         </div>
       </div>
 

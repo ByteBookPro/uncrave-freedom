@@ -55,30 +55,38 @@ export default function Settings() {
     
     setIsSaving(true);
     try {
+      const updates = {
+        display_name: displayName || null,
+        language,
+        voice_preference: voicePreference,
+        cigarettes_per_day: cigarettesPerDay === '' ? null : cigarettesPerDay,
+        years_smoking: yearsSmoking === '' ? null : yearsSmoking,
+      };
+      
       const { error } = await supabase
         .from('profiles')
-        .update({
-          display_name: displayName || null,
-          language,
-          voice_preference: voicePreference,
-          cigarettes_per_day: cigarettesPerDay === '' ? null : cigarettesPerDay,
-          years_smoking: yearsSmoking === '' ? null : yearsSmoking,
-        })
+        .update(updates)
         .eq('id', user.id);
 
       if (error) throw error;
 
+      // Force a page reload to refresh the profile in AuthContext
+      // This ensures the TTS hook gets the updated voice preference
       toast({
         title: 'Settings saved',
         description: 'Your profile has been updated successfully.',
       });
+      
+      // Small delay to show toast, then reload to refresh profile
+      setTimeout(() => {
+        window.location.reload();
+      }, 500);
     } catch (error) {
       toast({
         title: 'Error',
         description: 'Failed to save settings. Please try again.',
         variant: 'destructive',
       });
-    } finally {
       setIsSaving(false);
     }
   };
