@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { useApp } from '@/contexts/AppContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { programDays } from '@/data/programContent';
 import { getNarration } from '@/data/sessionNarration';
 import { useTextToSpeech } from '@/hooks/useTextToSpeech';
+import type { ContentLanguage } from '@/types/database';
 import { 
   ArrowLeft, 
   ArrowRight,

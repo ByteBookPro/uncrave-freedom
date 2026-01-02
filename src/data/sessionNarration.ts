@@ -402,7 +402,16 @@ Remember: you are not giving up anything. You are gaining everything – health,
 Congratulations, graduate. Welcome to your smoke-free future.`,
 };
 
-// Get narration for a module, with fallback
-export function getNarration(moduleId: string, fallbackContent?: string): string {
+// Get narration for a module, with language support
+import { getLocalizedNarration } from './sessionNarrationLocalized';
+import type { ContentLanguage } from '@/types/database';
+
+export function getNarration(moduleId: string, fallbackContent?: string, language: ContentLanguage = 'en'): string {
+  // Try localized version first
+  const localized = getLocalizedNarration(moduleId, language, fallbackContent);
+  if (localized) {
+    return localized;
+  }
+  // Fall back to English
   return sessionNarration[moduleId] || fallbackContent || '';
 }
