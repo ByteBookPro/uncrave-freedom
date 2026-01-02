@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, User, Calendar, LogOut, Globe, Cigarette, Volume2 } from 'lucide-react';
+import { ArrowLeft, User, Calendar, LogOut, Globe, Cigarette, Volume2, Play, Square, Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -13,6 +13,14 @@ import { supabase } from '@/integrations/supabase/client';
 import { format } from 'date-fns';
 
 type ContentLanguage = 'en' | 'de' | 'zh' | 'hi';
+type VoiceGender = 'female' | 'male';
+
+const sampleTexts: Record<ContentLanguage, string> = {
+  en: "Hello! I'm your personal coach, here to guide you on your journey to a smoke-free life.",
+  de: "Hallo! Ich bin dein persönlicher Coach und begleite dich auf deinem Weg in ein rauchfreies Leben.",
+  zh: "你好！我是你的私人教练，将在你迈向无烟生活的旅程中为你提供指导。",
+  hi: "नमस्ते! मैं आपका व्यक्तिगत कोच हूँ, धूम्रपान-मुक्त जीवन की आपकी यात्रा में आपका मार्गदर्शन करने के लिए यहाँ हूँ।"
+};
 type VoicePreference = 'calm_female' | 'energetic_male';
 
 const languageLabels: Record<ContentLanguage, string> = {
@@ -39,6 +47,80 @@ export default function Settings() {
   const [yearsSmoking, setYearsSmoking] = useState<number | ''>('');
   const [isSaving, setIsSaving] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const [previewingVoice, setPreviewingVoice] = useState<VoicePreference | null>(null);
+  const [previewAudio, setPreviewAudio] = useState<HTMLAudioElement | null>(null);
+
+  const stopPreview = useCallback(() => {
+    if (previewAudio) {
+      previewAudio.pause();
+      previewAudio.src = '';
+      setPreviewAudio(null);
+    }
+    setPreviewingVoice(null);
+  }, [previewAudio]);
+
+  const playVoicePreview = useCallback(async (voice: VoicePreference) => {
+    // Stop any current preview
+    stopPreview();
+    
+    setPreviewingVoice(voice);
+    
+    try {
+      const gender: VoiceGender = voice === 'calm_female' ? 'female' : 'male';
+      const sampleText = sampleTexts[language];
+      
+      const response = await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/text-to-speech`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+          },
+          body: JSON.stringify({
+            text: sampleText,
+            gender,
+            language,
+            preset: 'dailyCoach'
+          }),
+        }
+      );
+
+      if (!response.ok) throw new Error('TTS failed');
+
+      const audioBlob = await response.blob();
+      const audioUrl = URL.createObjectURL(audioBlob);
+      const audio = new Audio(audioUrl);
+      
+      audio.onended = () => {
+        URL.revokeObjectURL(audioUrl);
+        setPreviewingVoice(null);
+        setPreviewAudio(null);
+      };
+      
+      audio.onerror = () => {
+        URL.revokeObjectURL(audioUrl);
+        setPreviewingVoice(null);
+        setPreviewAudio(null);
+        toast({
+          title: 'Preview failed',
+          description: 'Could not play voice preview.',
+          variant: 'destructive',
+        });
+      };
+      
+      setPreviewAudio(audio);
+      await audio.play();
+    } catch (error) {
+      console.error('Voice preview error:', error);
+      setPreviewingVoice(null);
+      toast({
+        title: 'Preview failed',
+        description: 'Could not generate voice preview.',
+        variant: 'destructive',
+      });
+    }
+  }, [language, stopPreview, toast]);
 
   useEffect(() => {
     if (profile) {
@@ -168,26 +250,62 @@ export default function Settings() {
               </Select>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="voice">Narrator Voice</Label>
-              <Select value={voicePreference} onValueChange={(val) => setVoicePreference(val as VoicePreference)}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.entries(voiceLabels).map(([code, { name, description }]) => (
-                    <SelectItem key={code} value={code}>
-                      <div className="flex items-center gap-2">
-                        <Volume2 className="h-4 w-4" />
+            <div className="space-y-3">
+              <Label>Narrator Voice</Label>
+              <div className="space-y-2">
+                {Object.entries(voiceLabels).map(([code, { name, description }]) => {
+                  const isSelected = voicePreference === code;
+                  const isPreviewing = previewingVoice === code;
+                  
+                  return (
+                    <div 
+                      key={code}
+                      className={`flex items-center justify-between p-3 rounded-lg border transition-colors cursor-pointer ${
+                        isSelected 
+                          ? 'border-primary bg-primary/5' 
+                          : 'border-border hover:border-primary/50'
+                      }`}
+                      onClick={() => setVoicePreference(code as VoicePreference)}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
+                          isSelected ? 'border-primary' : 'border-muted-foreground'
+                        }`}>
+                          {isSelected && <div className="w-2 h-2 rounded-full bg-primary" />}
+                        </div>
                         <div>
-                          <span className="font-medium">{name}</span>
-                          <span className="text-muted-foreground ml-2 text-sm">— {description}</span>
+                          <p className="font-medium">{name}</p>
+                          <p className="text-sm text-muted-foreground">{description}</p>
                         </div>
                       </div>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-9 w-9"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (isPreviewing) {
+                            stopPreview();
+                          } else {
+                            playVoicePreview(code as VoicePreference);
+                          }
+                        }}
+                        disabled={previewingVoice !== null && !isPreviewing}
+                      >
+                        {isPreviewing ? (
+                          previewAudio ? (
+                            <Square className="h-4 w-4" />
+                          ) : (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          )
+                        ) : (
+                          <Play className="h-4 w-4" />
+                        )}
+                      </Button>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </CardContent>
         </Card>
