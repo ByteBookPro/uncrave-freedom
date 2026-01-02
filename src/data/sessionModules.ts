@@ -10,7 +10,7 @@ export interface SessionModule {
   gatingRequired: boolean;
   practiceType?: 'BREATHING' | 'URGE_SURFING' | 'BODY_SCAN' | 'TRIGGER_SCAN' | 'THOUGHT_REFRAME' | 'VISUALIZATION';
   content?: {
-    slides?: Array<{ id: string; title: string; content: string; backgroundGradient?: string; icon?: string }>;
+    slides?: Array<{ id: string; title: string; content: string; backgroundGradient?: string; icon?: string; narration?: string }>;
     videoUrl?: string;
     transcript?: string;
     practiceConfig?: Record<string, unknown>;
