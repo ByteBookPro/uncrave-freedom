@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Button } from '@/components/ui/button';
 import { Play, Pause, ChevronLeft, ChevronRight, Volume2, VolumeX, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { useTextToSpeech } from '@/hooks/useTextToSpeech';
+import { useTextToSpeech, VoicePreset } from '@/hooks/useTextToSpeech';
 
 interface Slide {
   id: string;
@@ -11,16 +11,62 @@ interface Slide {
   backgroundGradient?: string;
   icon?: string;
   narration?: string; // Optional narration text for this slide
+  voicePreset?: VoicePreset; // Optional voice preset for this slide
 }
 
 interface AnimatedSlidesProps {
   slides: Slide[];
   autoPlay?: boolean;
-  slideDuration?: number; // seconds per slide
+  slideDuration?: number; // base seconds per slide (auto-adjusts for narration length)
   onProgress?: (currentSlide: number, totalSlides: number) => void;
   onComplete?: () => void;
   title?: string;
   narrationKey?: string; // Key to look up narration in sessionNarration
+  defaultVoicePreset?: VoicePreset;
+}
+
+// Detect voice preset based on slide content
+function detectVoicePreset(slide: Slide, title?: string): VoicePreset {
+  const text = `${slide.title} ${slide.content} ${slide.narration || ''}`.toLowerCase();
+  
+  // Breathing, meditation, guided exercises
+  if (text.includes('breathe') || text.includes('breathing') || text.includes('inhale') || 
+      text.includes('exhale') || text.includes('close your eyes') || text.includes('meditation')) {
+    return 'guided';
+  }
+  
+  // Craving/urge surfing content
+  if (text.includes('craving') || text.includes('urge') || text.includes('emergency') ||
+      text.includes('waves') || text.includes('surf')) {
+    return 'cravingEmergency';
+  }
+  
+  // Motivational content, endings, pledges
+  if (text.includes('congratulation') || text.includes('you did it') || text.includes('freedom') ||
+      text.includes('commit') || text.includes('promise') || text.includes('celebrate') ||
+      text.includes('you can do') || text.includes('proud')) {
+    return 'motivationLift';
+  }
+  
+  // Personal stories
+  if (text.includes('let me tell you') || text.includes('story') || text.includes('imagine') ||
+      text.includes('picture') || text.includes('i know what') || text.includes('sarah') ||
+      text.includes('years ago')) {
+    return 'story';
+  }
+  
+  // Default to daily coach
+  return 'dailyCoach';
+}
+
+// Calculate slide duration based on narration length (~150 words per minute)
+function calculateSlideDuration(slide: Slide, baseDuration: number): number {
+  const narrationText = slide.narration || slide.content;
+  const wordCount = narrationText.split(/\s+/).length;
+  // Average speaking rate: ~150 words per minute = 2.5 words per second
+  // Add buffer for pauses and processing
+  const estimatedDuration = Math.max(baseDuration, (wordCount / 2.2) + 3);
+  return Math.min(estimatedDuration, 120); // Cap at 2 minutes per slide
 }
 
 export function AnimatedSlides({
@@ -30,7 +76,8 @@ export function AnimatedSlides({
   onProgress,
   onComplete,
   title,
-  narrationKey
+  narrationKey,
+  defaultVoicePreset = 'dailyCoach'
 }: AnimatedSlidesProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
@@ -50,21 +97,32 @@ export function AnimatedSlides({
   }
 
   const currentSlide = slides[currentIndex];
+  
+  // Calculate dynamic slide duration based on narration length
+  const currentSlideDuration = useMemo(() => 
+    calculateSlideDuration(currentSlide, slideDuration),
+    [currentSlide, slideDuration]
+  );
+  
   const totalProgress = ((currentIndex + slideProgress / 100) / slides.length) * 100;
 
   // Track if all slides have been viewed
   const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]));
 
-  // Play narration when slide changes
+  // Play narration when slide changes with appropriate voice preset
   useEffect(() => {
     if (!audioEnabled || hasPlayedNarration.has(currentIndex)) return;
     
     const narrationText = currentSlide.narration || currentSlide.content;
     if (narrationText && narrationText.length > 0) {
-      speak(narrationText);
+      // Determine the voice preset for this slide
+      const voicePreset = currentSlide.voicePreset || detectVoicePreset(currentSlide, title) || defaultVoicePreset;
+      
+      console.log(`Playing narration for slide ${currentIndex + 1} with preset: ${voicePreset}`);
+      speak(narrationText, { preset: voicePreset, gender: 'female' });
       setHasPlayedNarration(prev => new Set([...prev, currentIndex]));
     }
-  }, [currentIndex, audioEnabled, currentSlide, hasPlayedNarration, speak]);
+  }, [currentIndex, audioEnabled, currentSlide, hasPlayedNarration, speak, title, defaultVoicePreset]);
 
   // Stop narration when component unmounts or audio disabled
   useEffect(() => {
@@ -100,12 +158,13 @@ export function AnimatedSlides({
             return 100;
           }
         }
-        return prev + (100 / (slideDuration * 10));
+        // Use dynamic duration for progress calculation
+        return prev + (100 / (currentSlideDuration * 10));
       });
     }, 100);
 
     return () => clearInterval(progressInterval);
-  }, [isPlaying, currentIndex, slides.length, slideDuration, onProgress, onComplete]);
+  }, [isPlaying, currentIndex, slides.length, currentSlideDuration, onProgress, onComplete]);
 
   // Check completion when all slides viewed
   useEffect(() => {
@@ -133,9 +192,9 @@ export function AnimatedSlides({
     }
   };
 
-  // Ken Burns animation styles
+  // Ken Burns animation styles - use dynamic duration
   const kenBurnsStyle = {
-    animation: isPlaying ? `kenBurns ${slideDuration}s ease-in-out` : 'none',
+    animation: isPlaying ? `kenBurns ${currentSlideDuration}s ease-in-out` : 'none',
   };
 
   return (
