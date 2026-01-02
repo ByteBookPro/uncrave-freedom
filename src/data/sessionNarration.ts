@@ -155,28 +155,58 @@ Tomorrow is a special day – we are going to delve into mindfulness and actuall
 
 You're doing fantastic. This is the groundwork that will make your actual quit much smoother than any attempt before. See you on Day 4!`,
 
-  // Day 4 - Mindful Smoking
-  'd4m1': `Today is pivotal. We're going to do something that might sound strange: you're going to smoke mindfully.
+  // Day 4 - Mindful Smoking: Experiencing the Truth
+  'd4m1': `Today is Day 4, and we're going to do something truly unique. By the end of this session, you might experience one of the biggest mindset shifts of this journey. We're going to smoke a cigarette together, mindfully.
 
-Usually, smoking is automatic. You light up without really thinking, scroll through your phone, or chat with someone. You barely notice the cigarette at all.
+Yes, you heard that right – I'm asking you to smoke, but in a very specific, conscious way. This exercise has helped so many people – including former smokers like me – truly see smoking for what it is. It can be a game-changer.
 
-Today, we're going to change that. You're going to pay complete attention to every aspect of smoking – the smell, the taste, the sensation in your throat and lungs, how your body feels afterward.
+Important: If you're not currently in a place where you can safely light a cigarette, pause this session and come back later when you can be in a comfortable, private spot, ideally with minimal distractions. Maybe step outside or near a window. Take your device with you and press play when you're ready.
 
-This isn't about judgment. It's about really experiencing what you've been doing on autopilot for years. Many people find that when they truly pay attention, smoking isn't nearly as enjoyable as they imagined. The romance fades, and reality sets in.`,
+Mindfulness means paying attention on purpose, in the present moment, without judgment. So as you smoke now, you're not going to think about the next drag or anything else – you'll focus on the now: the taste, the smell, the sensation. Try to approach it almost like a scientist observing an experiment, or as if you've never smoked before and you're really curious about it.`,
 
-  'd4m2': `Find a quiet place where you can smoke without distractions. Put your phone away. This exercise takes about 10 minutes, and it's one of the most powerful in the entire program.
+  'd4m2': `Alright. Make sure you have a cigarette and lighter with you. Do you have it? Good. Now, don't light it yet. First, just hold it in your hand. Look at it. This little white tube filled with tobacco... it's been controlling parts of your life, hasn't it? In a moment, you will light it, but unlike any cigarette you've had before, you're going to stay fully present for every puff.
 
-Before you light up, pause. Notice how you're feeling right now. Are you anxious to smoke? Excited? Just going through the motions?
+Okay, let's begin. Light your cigarette. As you take your first puff, do it slowly. Draw the smoke into your mouth... now pause. Don't inhale to lungs yet, just hold it in your mouth for a second. Notice the taste on your tongue. How would you describe it? Is it pleasant, unpleasant, neutral? Is it bitter, harsh? Be honest with yourself.
 
-Now, look at the cigarette in your hand. Really look at it. This small paper tube filled with dried leaves and chemicals has had so much power over your life. Notice the smell before you even light it.
+Now inhale gently into your lungs... hold it for a moment... and exhale slowly. Watch the smoke as you breathe it out. Notice the feeling in your throat and chest. Does it burn a little? How do your lungs feel with that smoke inside?
 
-As you light the cigarette, pay attention to the flame, the first wisps of smoke. Take that first drag slowly. Really taste it. What does it actually taste like? Not what you expect it to taste like – what does it actually taste like?
+Take another puff, and again pay close attention. Perhaps close your eyes if it helps you focus on the senses. Inhale... hold... exhale. Observe any effect on your body – do you feel a head-rush or a slight lightheadedness? Any relief of tension yet, or not really?
 
-Notice the sensation as the smoke fills your lungs. Is it pleasant? Does it burn? How does your body respond?
+Now, focus on the taste in your mouth after you've exhaled. Run your tongue over your teeth. Is there a film or bitter residue? Often, smoking leaves a dry, ashy taste. Notice that. Smell the air around you now. Perhaps the smoke is curling around. How does it smell?
 
-Continue smoking slowly, noticing every sensation. How do you feel halfway through? How do you feel at the end? Do you feel better, worse, or just different than before you started?
+Take your time. Continue smoking the cigarette at a snail's pace. With each puff, really feel it. If any thoughts come, just note them and return to observing. As you near the halfway point, ask yourself: Am I enjoying this? Is it as satisfying as the image in my mind of smoking is? Or is it just okay, or even somewhat unpleasant?
 
-This awareness is powerful. Write down what you noticed.`,
+If you've observed enough, you may stub it out whenever you want. You don't even need to finish it. Now take a deep breath of fresh air. How do your lungs feel after that cigarette?`,
+
+  'd4m3': `Let's reflect on what just happened. That was probably the slowest, most conscious cigarette you've ever had. How was it?
+
+Many people doing this exercise report things like: "It didn't taste good, actually it was pretty gross," "I realized my mouth feels dry and ashtray-like," "I noticed I was coughing or my body saying no," or "Honestly, I kept waiting for the big satisfaction hit and it just never came."
+
+Think about your experience. Did the cigarette truly relax you or taste delicious? Or was it just meh, or even unpleasant in parts? If it was still enjoyable, was it as enjoyable as you expected, or kind of underwhelming?
+
+This exercise is powerful because it peels back the veil of habit. When we smoke without thinking, we focus on the anticipation of relief, not the actual sensory details. But when you shine a light on the reality, it often doesn't live up to the hype that addiction has created in your mind.
+
+If you found it yucky or unsatisfying, hold onto that feeling. That is exactly what smoking is like once you remove the rose-colored glasses.
+
+Let's consider something: that cigarette you just had – it didn't really fix anything, did it? If you were craving before, sure, now the craving might be gone – but in maybe 30 minutes or an hour, nicotine levels will drop and you'll want another. In terms of tangible benefits: your stressors are still there if you had any. So aside from feeding the nicotine monster, what did it actually do for you? Probably not much.
+
+What we're doing here is neuro-associative conditioning – we're changing the associations. If previously you associated a cigarette with "ahh relief and pleasure," now you might start associating it with "stale taste, smoky smell, maybe lightheadedness, not actually solving anything." This weakens the positive association – which is good news for your quit success.`,
+
+  'd4m5': `You might even feel a bit upset or sad – like discovering a friend's betrayal – because cigarettes that were your comfort are being exposed as... well, not so great. It's okay to feel that. Remind yourself: that means you're freeing yourself. Cigarettes' power lies largely in the illusion of goodness. You're breaking that illusion.
+
+From now on, I encourage you: whenever you smoke, smoke mindfully. You don't have to do it as slowly as we just did every time, but try at least once or twice more today to really pay attention. You'll likely continue to find that you enjoy it less and less. This will make quitting far easier because there's less and less to miss.
+
+However, you do not need to force a reduction. Remember, you have our full permission to smoke normally up until your planned quit day, which is coming soon on Day 6. But don't be surprised if you just don't feel like smoking that much – that's great.
+
+Now, take a moment to reflect: How does this insight change your outlook? Can you now envision that a smoke-free life might not be a loss of pleasure, but perhaps not losing much at all – maybe even gaining a better taste in your mouth, fresher breath, more time, more freedom? Many realize after mindful smoking that they weren't actually giving up something valuable; they were letting go of something that wasn't serving them at all.
+
+One practical note: If you have any cigarettes left beyond what you'll need for tomorrow and the final exercise on Day 6, start thinking about discarding them. You might keep just a few for the planned "last cigarette" event. Some people like to throw away their spares now as a sign of commitment – if you feel that motivation, fantastic.`,
+
+  'd4m6': `Congratulate yourself. Day 4 was a tough one for some – it required you to face smoking in a new way. You did it. That's brave and it's making you stronger.
+
+Take it easy for the rest of the day. Drink some water to cleanse your palate if that taste is lingering – it can help. Maybe jot down in your journal what you noticed during this exercise – writing it will reinforce the realizations. For instance, "Smoking mindfully today I noticed ___ and I felt ___."
+
+Tomorrow we gear up for your independence day on Day 6. You're so close to breaking free. Keep that momentum and I'll see you on Day 5. You're doing amazing work!`,
 
   // Day 5 - Reframing Your Mind
   'd5m1': `Today, we're going to challenge the beliefs that keep you smoking. Many smokers hold onto myths that make quitting seem impossible or undesirable. Let's examine these myths and replace them with truth.
