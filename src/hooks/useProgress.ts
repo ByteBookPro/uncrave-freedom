@@ -103,7 +103,7 @@ export function useProgress() {
         duration_seconds: durationSeconds,
         intensity_before: intensityBefore,
         intensity_after: intensityAfter,
-        metadata_json: metadata || {}
+        metadata_json: (metadata || {}) as unknown as Record<string, never>
       }]);
 
     if (!error) {

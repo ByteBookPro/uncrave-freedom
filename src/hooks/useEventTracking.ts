@@ -27,7 +27,7 @@ export function useEventTracking() {
       await supabase.from('events').insert([{
         user_id: user?.id || null,
         event_type: eventType,
-        payload_json: payload
+        payload_json: payload as unknown as Record<string, never>
       }]);
     } catch (error) {
       console.error('Failed to track event:', error);
