@@ -295,6 +295,157 @@ Mindfulness मतलब: इस पल पर ध्यान, बिना jud
 आप बहुत करीब हैं।
 आज खुद को शाबाशी दीजिए। आपने एक brave काम किया।
 कल मिलते हैं।`,
+
+  // Day 5 Hindi narration - Quit Day Preparation
+  'd5m1': `नमस्ते—Day 5 में स्वागत है।
+आज का दिन बहुत महत्वपूर्ण है, क्योंकि हम "छोड़ने" को एक डरावनी घटना नहीं… बल्कि एक स्मार्ट, तैयार निर्णय बना देंगे।
+
+बहुत-से लोग quitting को टालते हैं क्योंकि दिमाग एक ही लाइन चलाता है:
+"अभी नहीं… अगले हफ्ते… थोड़ा और सही…"
+और फिर हफ्ते बदलते रहते हैं, लेकिन आदत वही रहती है।
+
+चलो एक छोटी-सी कहानी से शुरू करें—यह किसी एक व्यक्ति की नहीं, कई लोगों के अनुभवों का मिश्रण है।
+मान लीजिए अमन हर रविवार सोचता है: "सोमवार से बंद।"
+फिर सोमवार आता है—काम का दबाव।
+वह कहता है: "अच्छा, इस प्रोजेक्ट के बाद।"
+फिर प्रोजेक्ट के बाद कोई पार्टी, फिर तनाव, फिर "बस एक।"
+और यही "कल" उसे महीनों तक वहीं रखता है।
+
+आज हम "कल" को हटाकर "योजना" लाते हैं।
+क्योंकि quitting का असली दुश्मन craving नहीं—अनिश्चितता है।
+जब plan साफ़ होता है, दिमाग शांत होता है।`,
+
+  'd5m2': `अब एक बात समझिए:
+Withdrawal कोई खतरा नहीं है।
+यह बस शरीर और दिमाग का री-कैलिब्रेशन है—जैसे सिस्टम अपडेट।
+Cravings अक्सर लहरों जैसी होती हैं—उठती हैं, peak करती हैं, और फिर घटती हैं।
+आपका काम जीवन भर लड़ना नहीं है।
+आपका काम कुछ लहरों को skill से पार करना है।
+
+अब आज का मुख्य अभ्यास: Fear → Plan.
+आपको किस चीज़ का सबसे ज्यादा डर लगता है?
+
+तेज़ cravings
+तनाव
+social situation
+"बस एक" वाला विचार
+नींद/चिड़चिड़ापन
+खालीपन / boredom
+
+अब उसी डर के लिए एक plan चुनिए—typing नहीं, बस tap.
+उदाहरण:
+अगर डर "cravings" है → Urge Surfing + 2 मिनट breathing
+अगर डर "stress" है → 4–6 breathing + 60 सेकंड walk
+अगर डर "social" है → एक लाइन चुनो: "मैं नहीं पीता/पीती" + हाथ में drink
+अगर डर "बस एक" है → Play-the-tape-forward + pledge tap`,
+
+  'd5m3': `बहुत बढ़िया।
+अब हम इसे "सिर्फ सोच" नहीं रहने देंगे—हम practice करेंगे।
+
+चलो 2 मिनट का calming अभ्यास—यह आपके nervous system को यह संदेश देगा: "हम safe हैं।"
+
+Inhale 4… Exhale 6…
+धीरे-धीरे।
+
+अब एक छोटा सा check-in:
+एक बार rating दीजिए—अभी craving कितनी है?
+और फिर अपने आप से कहिए:
+"मैं cravings को handle कर सकता/सकती हूँ। मेरे पास plan है।"`,
+
+  'd5m4': `आज हम identity shift भी सेट करेंगे।
+क्योंकि quitting तब आसान होती है जब आप "लड़" नहीं रहे—बस अपने नए identity के साथ चल रहे हैं।
+
+यह लाइन सुनिए—धीरे:
+"मैं धूम्रपान नहीं करता/करती।"
+"मैं कोशिश कर रहा/रही हूँ" नहीं।
+"मैं कम कर रहा/रही हूँ" नहीं।
+बस: मैं नहीं करता/करती।
+
+यह लाइन दिमाग को clear instruction देती है।
+
+आज का छोटा काम:
+अगर आज आप smoke करें, तो guilt नहीं।
+बस याद रखिए—कल Day 6 turning point है।
+आज आपका काम है तैयारी और भरोसा।
+
+आप बहुत करीब हैं।
+कल हम door बंद करेंगे—साफ़, शांत तरीके से।
+Day 6 में मिलते हैं।`,
+
+  // Day 6 Hindi narration - Freedom Day
+  'd6m1': `Day 6 में स्वागत है।
+आज को आप एक "नया जन्मदिन" मान सकते हैं—आपकी आज़ादी का दिन।
+आज हम उस दरवाज़े को बंद करेंगे जो सालों से थोड़ा खुला था:
+"Just in case… बस एक…"
+
+आज हम उसे साफ़ तरीके से बंद करेंगे।
+
+सबसे पहले—आपके लिए दो रास्ते हैं।
+एक चुनिए:
+"मैं अभी भी पी रहा/रही हूँ" OR "मैंने पहले ही बंद कर दिया है"`,
+
+  'd6m2': `अगर आपने अभी भी पीना जारी रखा है:
+
+आज आपकी "आख़िरी सिगरेट" का ritual होगा—लेकिन drama नहीं, mindfulness के साथ।
+सिगरेट जलाइए।
+पहला puff धीरे।
+
+अब observe करें:
+Taste कैसा है?
+Throat में क्या feel हो रहा है?
+Chest में tightness?
+Aftertaste?
+
+आपका लक्ष्य "खुद को torture" करना नहीं है।
+आपका लक्ष्य reality देखना है—वही reality जो Day 4 से शुरू हुई थी।
+
+अब जब आप तैयार हों, सिगरेट बुझा दीजिए।
+आपको finish करने की जरूरत नहीं।
+
+धीरे से अपने आप से कहिए:
+"मैं धूम्रपान नहीं करता/करती।"
+
+अगर आपने पहले ही बंद कर दिया है:
+
+आज हम "last break ritual" करेंगे—ताकि दिमाग सीख ले: "मैं pause ले सकता/सकती हूँ बिना निकोटीन।"
+बैठिए।
+Inhale 4… Exhale 6…
+
+अब अपने आप से कहिए:
+"मैं non-smoker हूँ।"`,
+
+  'd6m3': `अब celebration—हल्की, वास्तविक, grounded।
+आपका शरीर healing mode में चला जाता है।
+सांस धीरे-धीरे सहज लगती है, smell/taste बदलते हैं, और सबसे बड़ा बदलाव:
+आपके दिमाग का वो background noise कम होता है—
+"अगली सिगरेट कब?"
+
+आज cravings आ सकती हैं—और वो normal है।
+लेकिन अब आपके पास emergency button है।
+
+चलो हम उसे एक बार practice करते हैं:
+Intensity slider 0–10 चुनिए।
+Trigger tag चुनिए (stress, coffee, after meal, social, boredom…)
+फिर 90 सेकंड breathing।
+
+अब फिर intensity rate करें।
+आप देखेंगे—हर बार नहीं, पर बहुत बार यह नीचे आती है।
+और जब नीचे आती है, आपका confidence ऊपर जाता है।`,
+
+  'd6m4': `आज की सबसे important line:
+Not even one.
+क्योंकि एक सिगरेट दरवाज़ा फिर खोलने की कोशिश करती है।
+और हम दरवाज़ा बंद रखेंगे—शांति से।
+
+अंत में, एक declaration:
+"मैं एक non-smoker हूँ"
+बटन दबाइए।
+अगर संभव हो तो एक बार aloud बोलिए भी।
+
+बहुत-बहुत बधाई।
+आज आप ने सिर्फ छोड़ा नहीं—आपने पहचान बदल दी।
+कल Day 7 में हम cravings को और आसान बनाने वाले tools "ऑटो-पायलट" में डालेंगे।
+आप शानदार कर रहे हैं।`,
 };
 
 // Chinese (简体中文) narration for Day 1-2
@@ -536,6 +687,126 @@ const chineseNarration: Record<string, string> = {
 
 明天第5天，我们会做最后的准备：信心、恐惧、以及迎接第6天的关键转折。
 你离自由很近了。明天见。`,
+
+  // Day 5 Chinese narration - Quit Day Preparation
+  'd5m1': `欢迎来到第5天。
+今天我们要做的，是把"戒烟"从一件可怕的事，变成一个清晰、可执行、很安全的计划。
+
+很多人不是不想戒，而是一直在拖：
+"等忙完这阵… 等压力小一点… 下周再说…"
+结果生活永远有压力，"下周"永远不会自动到来。
+
+先讲一个常见情境（这是很多人经历的组合故事）：
+小周每次下定决心都说"下周开始"。
+但下周一来，就有项目、应酬、情绪。
+于是又变成"等这阵过去"。
+然后又是"就一根"。
+就这样，一年过去了。
+
+今天我们不再跟"未来"讨价还价。
+我们只做一件事：把你的担心变成计划。`,
+
+  'd5m2': `先记住：戒断不是危险。
+它更像"系统恢复"，像你的身体在重新校准。
+渴求通常像海浪：上来、到顶、再下去。
+你不需要打一场终身战争。你只需要学会"冲浪"。
+
+今天的核心练习：Fear → Plan
+你最担心什么？
+
+强烈渴求
+压力
+社交场合
+"就一根"的想法
+睡眠/烦躁
+无聊/空虚
+
+选好后，系统会给你对应方案（只需点选，不打字）：
+例如：
+担心渴求 → 冲动冲浪 + 2分钟呼吸
+担心压力 → 4–6呼吸 + 60秒走动
+担心社交 → 选择一句话："我不抽了" + 手里拿饮料
+担心"就一根" → "播放后果影片（play the tape forward）" + 轻触誓言`,
+
+  'd5m3': `非常好。现在我们要"练一次"，让身体记住：我能稳住自己。
+
+吸气4秒… 呼气6秒…
+呼气更长，会让神经系统更快"降档"。
+
+计时结束后：
+你会看到一个关键事实：
+你可以改变状态，而不靠香烟。`,
+
+  'd5m4': `最后，做一个"身份切换"。
+戒烟最轻松的方式，是从"我在努力戒"变成：
+"我不抽烟。"
+不是"我不能"，不是"我尽量"。
+就是——"我不抽。"
+
+今天的任务很简单：保持计划、保持信心。
+明天第6天，我们会做出一个干净的转折。
+你非常接近自由了。明天见。`,
+
+  // Day 6 Chinese narration - Freedom Day
+  'd6m1': `欢迎来到第6天。
+你可以把今天当作你的"自由日"。
+很多人一直留着一条缝："也许以后… 就一根…"
+今天我们把那扇门关上——干净、安静、坚定。
+
+先选你的路径：
+"我还在抽" / "我已经停了"`,
+
+  'd6m2': `如果你还在抽：
+
+今天是"最后一支烟"的仪式，但不是戏剧化，而是正念。
+
+点烟。第一口慢慢来。
+观察：味道、喉咙、胸口、余味、气味。
+不评判，只观察。
+
+现在，如果你愿意，可以不用抽完。
+你可以把它熄掉。
+然后点一下："我结束了"
+
+对自己说：
+"我不抽烟。"
+
+如果你已经停了：
+
+我们做一个"最后一次休息仪式"，让大脑学会：暂停不需要尼古丁。
+
+坐好。
+吸气4秒，呼气6秒。
+
+然后对自己说：
+"我不抽烟。"`,
+
+  'd6m3': `今天，你的身体开始更认真地修复。
+呼吸会慢慢更顺，味觉嗅觉会改变，最重要的是：
+你脑子里那条"下一根什么时候"的后台噪音开始减少。
+
+当然，今天可能还会有渴求。正常。
+我们现在练一次"紧急按钮"。
+
+先选强度0–10。
+再选触发标签（压力/咖啡/饭后/社交/无聊…）
+然后跟随90秒呼吸。
+
+再评一次强度。
+你在训练你的大脑：渴求 ≠ 行动。`,
+
+  'd6m4': `今天最重要的规则：
+一根也不抽。
+因为"一根"会重新打开那扇门。
+
+最后，做一个宣告：
+"我是非吸烟者"
+点下去。
+如果可以，轻声说出来。
+
+恭喜你。
+你不仅停止了行为，你在建立一种新的身份。
+明天第7天，我们会把应对渴求的技能做得更自动、更轻松。你做得非常棒。`,
 };
 
 // German (Deutsch) narration for Day 1-2
@@ -767,6 +1038,125 @@ Du wirst merken, dass der „Zauber" schwächer wird – und damit wird das Aufh
 
 Morgen Tag 5: finale Vorbereitung – Vertrauen, Angst, letzte mentale Hürden.
 Du bist nah dran. Bis morgen.`,
+
+  // Day 5 German narration - Quit Day Preparation
+  'd5m1': `Willkommen zu Tag 5.
+Heute machen wir etwas Entscheidendes: Wir verwandeln „Aufhören" von einem großen Angst-Thema in einen klaren, machbaren Plan.
+
+Viele Menschen wollen aufhören, aber sie verschieben es:
+„Nach dieser stressigen Woche… nach dem Projekt… nach dem Urlaub…"
+Und dann kommt das Leben – und es gibt immer einen neuen Grund zu warten.
+
+Kurze Geschichte (eine typische Mischung aus vielen Erfahrungen):
+Tom sagt jeden Sonntag: „Montag höre ich auf."
+Montag kommt – Stress.
+Dann: „Nach dem Meeting."
+Dann: „Nach dem Wochenende."
+Und plötzlich sind Monate vorbei.
+
+Heute stoppen wir das Verhandeln.
+Wir machen Angst konkret – und daraus wird Plan.`,
+
+  'd5m2': `Wichtig: Entzug ist keine Gefahr.
+Es ist ein Rebalancing, ein System-Reset.
+Verlangen kommt oft in Wellen: hoch, Peak, runter.
+Du brauchst keinen Endloskampf. Du brauchst Skills für ein paar Wellen.
+
+Jetzt die Hauptübung: Angst → Plan
+Wovor hast du am meisten Angst?
+
+starke Cravings
+Stress
+soziale Situationen
+„nur eine"
+Schlaf/Reizbarkeit
+Langeweile/Leere
+
+Super. Jetzt bekommst du passende Gegenpläne – nur auswählen:
+Beispiele:
+Cravings → Urge Surfing + 2 Minuten Atmung
+Stress → 4–6 Atmung + 60 Sekunden gehen
+Social → eine Satzkarte wählen: „Nein danke, ich rauche nicht."
+„nur eine" → Play-the-tape-forward + Pledge-Tap`,
+
+  'd5m3': `Jetzt üben wir kurz, damit dein Körper merkt: „Ich kann mich regulieren."
+
+Einatmen 4… Ausatmen 6…
+Länger ausatmen = Nervensystem runterfahren.
+
+Du siehst: Du kannst deinen Zustand verändern – ohne Zigarette.
+
+Und jetzt der Identitäts-Satz, der alles leichter macht:
+„Ich rauche nicht."
+Nicht: „Ich versuche."
+Nicht: „Ich darf nicht."
+Sondern: „Ich rauche nicht."`,
+
+  'd5m4': `Heute brauchst du nicht perfekt zu sein.
+Heute brauchst du nur eines: Klarheit + Plan.
+Morgen Tag 6 ist der Wendepunkt.
+Du bist nah dran. Bis morgen.`,
+
+  // Day 6 German narration - Freedom Day
+  'd6m1': `Willkommen zu Tag 6.
+Heute ist dein Freiheitstag.
+Viele halten eine Tür einen Spalt offen: „Vielleicht irgendwann… nur eine…"
+Heute schließen wir diese Tür – ruhig, sauber, endgültig.
+
+Wähle deinen Weg:
+„Ich rauche noch" ODER „Ich habe schon aufgehört"`,
+
+  'd6m2': `Wenn du noch rauchst:
+
+Heute ist deine „letzte Zigarette" – achtsam, ohne Drama.
+
+Zünde sie an.
+Nimm einen langsamen Zug.
+Beobachte: Geschmack, Hals, Brust, Nachgeschmack, Geruch.
+Nicht urteilen. Nur sehen.
+
+Du musst sie nicht zu Ende rauchen.
+Wenn du willst, drück sie bei der Hälfte aus.
+Dann tippe: „Ich bin fertig."
+
+Sag dir:
+„Ich rauche nicht."
+
+Wenn du schon aufgehört hast:
+
+Wir machen ein „letzte-Pause"-Ritual: Dein Gehirn lernt, dass Pause ohne Nikotin geht.
+
+Setz dich hin.
+Atme: Ein 4… Aus 6…
+
+Dann sag:
+„Ich rauche nicht."`,
+
+  'd6m3': `Ab heute startet dein Körper sichtbar in Reparatur.
+Atmen wird schrittweise leichter. Geruch und Geschmack verändern sich.
+Und das Beste: Der mentale Hintergrundlärm „Wann kann ich wieder?" wird leiser.
+
+Ja, heute können Cravings auftauchen. Normal.
+Darum üben wir jetzt den Notfall-Button.
+
+Wähle Intensität 0–10.
+Wähle Trigger-Tag (Stress, Kaffee, nach dem Essen, Social, Langeweile …)
+Dann 90 Sekunden Atmung.
+
+Bewerte erneut.
+Du trainierst dein Gehirn: Verlangen ist kein Befehl.`,
+
+  'd6m4': `Die wichtigste Regel ab heute:
+Nicht einmal eine.
+Weil „eine" die Tür wieder öffnet.
+
+Zum Abschluss: Deine Erklärung.
+„Ich bin Nichtraucher:in"
+Tippe. Wenn du kannst, sag es einmal laut.
+
+Herzlichen Glückwunsch.
+Du hast nicht nur Verhalten beendet – du hast Identität aufgebaut.
+Morgen Tag 7 machen wir deine Tools noch automatischer, damit du dich frei fühlst. Sehr stark.`,
 };
 
 // Combined localized narrations
