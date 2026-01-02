@@ -35,51 +35,65 @@ export const daySessions: DaySession[] = [
         title: "Welcome to Your Freedom Journey",
         description: "Introduction to the program and what to expect over 10 days.",
         type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 240, // 4:00
+        estimatedSeconds: 360, // 6:00 - more time for rich content
         gatingRequired: true,
         content: {
           slides: [
             {
               id: 's1',
               title: "Hello & Welcome!",
-              content: "Today marks Day 1 of your journey to becoming completely smoke-free. Take a moment to appreciate this decision – you've taken the first step toward a healthier, happier you. Congratulations!",
+              content: "Today marks Day 1 of your journey to becoming completely smoke-free. Take a moment to appreciate this decision – you've taken the first step toward a healthier, happier you.",
               backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
-              icon: "👋"
+              icon: "👋",
+              narration: "Hello, and welcome. I'm so glad you're here. Today marks Day 1 of your journey to becoming completely smoke-free. Before we go any further, I want you to pause and really appreciate this moment. You made a choice. You chose to be here. That might sound simple, but it's not. Every single person who has ever quit smoking started exactly where you are right now – making that first decision to try. So congratulations. Seriously. Give yourself credit. You've already done something that millions of smokers never do: you've taken action."
             },
             {
               id: 's2',
-              title: "Walking Together",
-              content: "Over the next 10 days, we're going to walk this path together. And here's something unusual you'll love: you don't have to quit smoking today.",
+              title: "You're Not Alone",
+              content: "I know what it's like to feel trapped by cigarettes. The constant planning around smoke breaks, the guilt after each one, the fear of quitting. I've been there.",
               backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
-              icon: "🤝"
+              icon: "🤝",
+              narration: "I know what it's like. I really do. I know what it feels like to wake up in the morning and reach for a cigarette before your feet even touch the floor. I know the way you plan your entire day around smoke breaks – meetings, car rides, dinners, all scheduled around when you can slip away to light up. I know the guilt that washes over you after every single cigarette, that voice in your head that says 'I should quit' while your hand is already reaching for the pack. And I know the fear. The fear that you can't do it. That you've tried before and failed. That you're somehow different, weaker, more addicted than everyone else. You're not. And over the next 10 days, I'm going to prove it to you."
             },
             {
               id: 's3',
               title: "Keep Smoking (For Now)",
-              content: "For the first few days of this program, you can keep smoking as usual. Sounds odd, right? But this is exactly how our method works.",
+              content: "Here's something unusual: you don't have to quit today. For the first few days, you can keep smoking. This is exactly how our method works.",
               backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
-              icon: "🚬"
+              icon: "🚬",
+              narration: "Now here's where things get interesting. And maybe a little surprising. You don't have to quit smoking today. In fact, for the first few days of this program, I want you to keep smoking. Yes, you heard that right. Keep smoking as you normally do. I know that sounds backwards. Every other quit-smoking program tells you to throw away your cigarettes on day one, white-knuckle through the cravings, and rely on pure willpower. And how well has that worked? Not very well, right? Because willpower eventually runs out. You can only fight so hard for so long before you break. Our method is completely different."
             },
             {
               id: 's4',
-              title: "Changing Your Mind First",
-              content: "We first change the way you think and feel about smoking, and then quitting becomes much easier. No shock to your system, no sudden withdrawals on Day 1.",
+              title: "The Real Secret",
+              content: "We change the way you think and feel about smoking first. Then quitting becomes natural, almost effortless. No willpower required.",
               backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
-              icon: "🧠"
+              icon: "🧠",
+              narration: "Here's the secret that changed everything for me, and for the millions of people who have successfully quit using this approach: we don't start by changing your behavior. We start by changing your mind. Think about it. Right now, somewhere in your brain, smoking is connected to positive things – relaxation, stress relief, social connection, pleasure after a meal. These associations are powerful. They've been built up over years, maybe decades, of smoking. If you try to quit while those associations are still there, you'll feel like you're giving something up. You'll feel deprived. And eventually, you'll go back. But what if we could rewire those associations first? What if, by the time you smoke your last cigarette, you actually don't want to smoke anymore? That's exactly what we're going to do."
             },
             {
               id: 's5',
-              title: "No Willpower Required",
-              content: "We're not going to force you to quit by sheer willpower – instead, we'll gently remove your desire to smoke at its root.",
+              title: "A Personal Story",
+              content: "Let me tell you about Sarah. She smoked for 23 years. Two packs a day. She'd tried to quit 11 times. She thought she was hopeless.",
               backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
-              icon: "✨"
+              icon: "💫",
+              narration: "Let me tell you about someone I'll call Sarah. Sarah started smoking when she was 16. By the time she found this program, she was 39 years old and smoking two packs a day. Twenty-three years. Forty cigarettes daily. She'd tried to quit eleven times. Cold turkey, nicotine patches, gum, prescription medications, hypnotherapy – she'd tried it all. Each time, she'd last a few days, maybe a few weeks, and then something would happen. Stress at work. A fight with her husband. A night out with friends. And she'd smoke 'just one.' Just one turned into just a few. And before she knew it, she was right back where she started, only now with added shame and the conviction that she simply couldn't quit. She was, as she put it, 'a hopeless case.' But she wasn't. And neither are you."
             },
             {
               id: 's6',
-              title: "Freedom Without Misery",
-              content: "Imagine that: freedom from smoking without feeling deprived or miserable. It might sound too good to be true, and you might be a bit skeptical – that's okay!",
+              title: "Sarah's Transformation",
+              content: "On Day 11, Sarah woke up and didn't want a cigarette. Not because she was fighting the urge – because the urge wasn't there. She was free.",
               backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
-              icon: "🕊️"
+              icon: "🦋",
+              narration: "Sarah completed this 10-day program, just like you're starting today. And something remarkable happened. On Day 11, she woke up, and for the first time in 23 years, she didn't want a cigarette. Not because she was fighting the urge with willpower. Not because she was distracting herself or chewing gum or wearing a patch. The urge simply wasn't there. She said it felt like waking up from a strange dream, like she'd been under some kind of spell, and now she was finally awake. It's been three years now. She hasn't smoked a single cigarette. And she doesn't miss it. Not even a little. That's what's possible. That's what I want for you. And it starts right here, right now, today."
+            },
+            {
+              id: 's7',
+              title: "Freedom Without Misery",
+              content: "Imagine quitting without feeling deprived. Without the constant battle. Without the misery. That's not a fantasy – that's what this method delivers.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🕊️",
+              narration: "I want you to imagine something. Imagine quitting smoking and not feeling deprived. Not feeling like you're missing out on something. Not white-knuckling through every meal, every coffee break, every stressful moment, telling yourself 'I can't have a cigarette.' Instead, imagine thinking 'I don't want a cigarette.' Those two phrases might sound similar, but they're worlds apart. 'I can't' is restriction. It's deprivation. It's misery. 'I don't want to' is freedom. And that's what this program delivers. Freedom. Real freedom. The kind where you walk past other smokers and feel relief that you're not them anymore. The kind where you can handle stress, enjoy meals, and live your life without ever needing to light up. I know it might sound too good to be true right now. And that's okay. You don't need to believe me yet. Just stay with me for the next 10 days, and let me show you."
             },
           ]
         }
@@ -114,45 +128,51 @@ export const daySessions: DaySession[] = [
           slides: [
             {
               id: 's1',
-              title: "15-20 Minutes Daily",
-              content: "Each day, you'll spend about 15 to 20 minutes with me. We'll have a little chat about a specific aspect of smoking or quitting.",
+              title: "Your Daily Commitment",
+              content: "Each day, you'll spend about 15-20 minutes with me. That's it. Less time than you spend smoking each day.",
               backgroundGradient: "bg-gradient-to-br from-muted/80 to-primary/80",
-              icon: "⏰"
+              icon: "⏰",
+              narration: "Here's what the next 10 days will look like. Each day, you'll spend about 15 to 20 minutes with me. That's it. Think about that for a second. You probably spend more time than that smoking every single day. The time you spend walking outside, finding a spot, lighting up, actually smoking, and coming back in – it adds up. So we're asking for less time than your cigarettes already take. But in that time, we're going to do something powerful. We're going to have a conversation. A real conversation about smoking, about addiction, about freedom. I'll share insights that will completely change how you see cigarettes. And slowly, session by session, your mind will shift."
             },
             {
               id: 's2',
               title: "Interactive Learning",
-              content: "You'll see slides with key points, do short exercises, and watch animations that make the ideas come alive. Think of it as a fun coaching session each day.",
+              content: "Videos, animations, interactive exercises – each session is designed to engage you and make the learning stick.",
               backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
-              icon: "🎯"
+              icon: "🎯",
+              narration: "These sessions aren't lectures. They're experiences. You'll watch videos that illustrate key concepts in ways that really stick. You'll do interactive exercises that make you think and reflect. You'll practice breathing techniques that you can use whenever cravings hit. And most importantly, you'll have moments of real insight – those 'aha' moments where everything suddenly clicks into place. I've seen people have these breakthroughs and literally laugh out loud because they finally see how ridiculous the whole trap of smoking really is. That's what we're building toward. Not just knowledge, but genuine understanding that changes you at your core."
             },
             {
               id: 's3',
               title: "Days 1-5: Understanding",
-              content: "We'll cover why we smoke, how nicotine hooks us, what triggers your cravings, and clever ways to break the habit loop that's kept you smoking.",
+              content: "The first half is about understanding. Why you smoke. How nicotine works. What triggers your cravings. This knowledge is your foundation.",
               backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
-              icon: "🔍"
+              icon: "🔍",
+              narration: "The first five days are all about understanding. We're going to explore why you really smoke – and I promise, the reasons aren't what you think. We'll dive into how nicotine actually works in your brain, and you'll see that you've been caught in an incredibly clever trap. We'll identify your personal triggers – the specific situations, emotions, and routines that make you reach for a cigarette. And we'll learn powerful techniques from psychology that help you break the mental associations that keep you stuck. By the end of Day 5, you'll see smoking in a completely new light. The fog will start to lift. And you'll be ready for what comes next."
             },
             {
               id: 's4',
-              title: "The Shift",
-              content: "By Day 5, you'll start noticing a big shift in how you view cigarettes. Many people say it's like a switch flips in their mind.",
+              title: "The Mental Shift",
+              content: "Something magical happens around Day 5. People describe it like a switch flipping – suddenly, cigarettes look different.",
               backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
-              icon: "💡"
+              icon: "💡",
+              narration: "People who go through this program often describe a moment – usually around Day 5 – where something shifts. It's hard to put into words, but many describe it like a switch flipping in their mind. One day, cigarettes feel like a friend, a companion, something you need. And then suddenly, it's like you wake up and see them for what they really are: a trap. A scam. Something that's been taking from you while pretending to give. This shift doesn't happen through willpower. It happens through understanding. When you truly see the trick that's been played on you, you can't unsee it. And that's when quitting stops being hard and starts being exciting. Because you're not giving something up – you're escaping from a prison."
             },
             {
               id: 's5',
               title: "Day 6: Your Last Cigarette",
-              content: "On Day 6, you'll smoke your last cigarette – and it will feel empowering, not scary. The cigarette goes from being a 'friend' to something you don't need.",
+              content: "On Day 6, you'll smoke your final cigarette. But here's the beautiful part: by then, you'll actually want to.",
               backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
-              icon: "🚫"
+              icon: "🚫",
+              narration: "On Day 6, if you follow along with the program, you'll smoke your last cigarette. Now, I know that might sound scary right now. Your mind might be screaming 'I'm not ready!' or 'That's too soon!' That's completely normal. That's the addiction talking. But here's what's beautiful: by the time you reach Day 6, you won't be dreading that last cigarette – you'll be looking forward to it. Because by then, you'll understand. You'll see cigarettes for what they really are. And putting out that final cigarette won't feel like loss or deprivation. It will feel like breaking chains. It will feel like freedom. It will feel like the beginning of the rest of your life."
             },
             {
               id: 's6',
-              title: "Days 7-10: Solidifying Freedom",
-              content: "We'll spend the final days helping you solidify your smoke-free life – handling any cravings, building healthier habits, and ensuring you feel confident forever.",
+              title: "Days 7-10: Building Your New Life",
+              content: "The final days cement your transformation. You'll learn to handle any situation, any emotion, any temptation – without ever needing a cigarette again.",
               backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80",
-              icon: "🏆"
+              icon: "🏆",
+              narration: "After Day 6, you're a non-smoker. But we don't stop there. Days 7 through 10 are about solidifying your new identity and making sure you stay free forever. We'll practice handling the situations that used to trigger you – stress, social events, that after-meal moment. You'll build new, healthier habits to fill the space cigarettes used to occupy. And you'll develop an unshakeable confidence in your ability to handle any craving that comes your way. By Day 10, you won't just be someone who quit smoking. You'll be someone who is genuinely, completely, joyfully free. Someone who doesn't miss cigarettes because there's nothing to miss. That's the promise of this program. And I'm going to help you get there."
             },
           ]
         }
@@ -162,44 +182,49 @@ export const daySessions: DaySession[] = [
         title: "Why This Works",
         description: "Understand the science behind our approach and why it's different.",
         type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 300, // 5:00
+        estimatedSeconds: 360, // 6:00
         gatingRequired: true,
         content: {
           slides: [
             {
               id: 's1',
-              title: "Proven By Science",
-              content: "Using a supportive quit-smoking app can make you nearly 1.5–2 times more likely to quit successfully compared to going it alone. You've given yourself a real advantage.",
+              title: "The Science Is Clear",
+              content: "Studies show this method makes you 2x more likely to quit successfully. But more importantly, people who quit this way don't miss smoking.",
               backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
-              icon: "📊"
+              icon: "📊",
+              narration: "I want to share some numbers with you, because I know you might be skeptical. Clinical studies have shown that using a supportive, structured program like this can make you nearly twice as likely to quit successfully compared to going it alone. That's not marketing – that's science. But honestly, the statistics aren't even the most important part. What matters more is the quality of your quit. There's a big difference between someone who quits smoking but spends years feeling deprived and missing cigarettes, and someone who quits and genuinely doesn't want to smoke anymore. This method doesn't just help you quit – it helps you quit happy. It helps you quit in a way where you feel liberated, not deprived. And that's why it lasts."
             },
             {
               id: 's2',
-              title: "No Judgment Here",
-              content: "We're not going to lecture you about how bad smoking is – you already know it's unhealthy. Instead, we respect you and your decision to quit.",
+              title: "No Lectures Here",
+              content: "I'm not going to tell you smoking is bad. You already know that. Instead, I'm going to show you something that will change everything.",
               backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
-              icon: "🤗"
+              icon: "🤗",
+              narration: "Here's what I'm not going to do. I'm not going to lecture you about how smoking causes cancer, heart disease, strokes, and a hundred other health problems. You already know that. Every smoker knows that. It's printed right on the pack. And has knowing that made you quit? No. Because information alone doesn't change behavior. If it did, no one would smoke, no one would overeat, and everyone would exercise daily. The problem isn't that you don't know smoking is bad. The problem is that knowing isn't enough. We need something deeper. We need to change the way you feel about smoking, not just the way you think about it. And that's what this program does. It reaches the parts of your mind that willpower and logic can't touch."
             },
             {
               id: 's3',
-              title: "A Clean Slate",
-              content: "If you've tried to quit before and relapsed, you're not alone. Many smokers try multiple times before succeeding. Let's wipe that slate clean. You are here now.",
+              title: "If You've Failed Before",
+              content: "The average successful quitter has tried 6-7 times before. Past failures aren't weakness – they're practice. This time will be different.",
               backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
-              icon: "🔄"
+              icon: "🔄",
+              narration: "If you've tried to quit before and didn't make it, I want you to hear something important. You are not a failure. The average successful quitter has tried six to seven times before finally succeeding for good. Six to seven times. So if you've tried once or twice or ten times, you're not behind – you're right on track. Each attempt taught you something. Each attempt got you closer. The problem wasn't you – it was probably the method. Willpower-based approaches are designed to fail because they treat cigarettes as something you want but can't have. That's a recipe for misery and relapse. This method is different. We're not going to fight your desire to smoke. We're going to remove it. Once the desire is gone, there's nothing to fight. Quitting becomes almost automatic."
             },
             {
               id: 's4',
-              title: "Feel the Excitement",
-              content: "Take a deep breath. Feel a little excitement – you are at the start of something great. By the end of these 10 days, you will be free.",
+              title: "The Moment Everything Changes",
+              content: "There's a moment in this program where it all clicks. Where you see through the illusion. That moment changes everything.",
               backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
-              icon: "🎉"
+              icon: "🎉",
+              narration: "I want to prepare you for something wonderful that's going to happen during this program. At some point – maybe during a session, maybe while you're smoking a cigarette, maybe while you're just going about your day – you're going to have a moment of clarity. It's like suddenly seeing a magic trick from behind the scenes. You'll realize: 'Wait, cigarettes don't actually give me anything. They just take. They create the problem they pretend to solve. I've been conned.' And in that moment, everything changes. The cigarette in your hand suddenly looks different. Not like a friend. Not like a comfort. Like... nothing. Just a paper tube filled with dried leaves and chemicals that's been stealing your money, your health, and your freedom while pretending to help. That moment of clarity is coming for you. I can't tell you exactly when it will hit. But when it does, you'll know. And you'll never see smoking the same way again."
             },
             {
               id: 's5',
-              title: "Picture Your Freedom",
-              content: "No more being chained to the need to light up, no more worrying about when you can smoke next, no more guilt or hiding. Instead, freedom.",
+              title: "Your Future Self",
+              content: "Close your eyes. Picture yourself in two weeks. Free. Breathing deeply. Proud. That person is waiting for you to take this journey.",
               backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
-              icon: "🕊️"
+              icon: "🕊️",
+              narration: "I want you to take a deep breath right now. Actually do it. In through your nose, filling your lungs completely, then slowly out through your mouth. Good. Now, I want you to imagine yourself two weeks from now. You wake up in the morning, and the first thing you notice is... nothing. No urge to smoke. No planning your first cigarette of the day. Just... peace. You make your morning coffee, and you drink it without needing to smoke. You eat breakfast, and there's no cigarette to follow. The whole day stretches before you, and at no point do you feel like you're missing something or fighting an urge. Because you're not. You're simply free. That person – that future version of you – is real. They're waiting for you on the other side of these 10 days. And getting there is going to be so much easier than you think. All you have to do is show up, follow the program, and stay open to change. That's it. The rest will happen naturally."
             },
           ]
         }
@@ -224,38 +249,43 @@ export const daySessions: DaySession[] = [
           slides: [
             {
               id: 's1',
-              title: "We're Here For You",
-              content: "You have resources at your fingertips – support whenever you need to vent or ask for tips. Quitting is one of the most important things you'll ever do, but you're not alone.",
+              title: "You Have Support",
+              content: "You're not doing this alone. We're here with you, every step of the way, through every craving, every doubt, every victory.",
               backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
-              icon: "❤️"
+              icon: "❤️",
+              narration: "Before we wrap up today, I want you to know something important: you are not alone in this. I know that quitting can feel isolating sometimes. Your friends might still smoke. Your family might not understand what you're going through. You might feel like you have to fight this battle by yourself. But you don't. Throughout this program, you have support available whenever you need it. Having a rough moment? There's help available. Need to vent about a craving? We're here. Want to celebrate a victory? We want to hear about it. This journey is yours, but you don't have to walk it alone. Thousands of people have gone through this program before you, and thousands more will come after. You're part of something bigger. A community of people who are reclaiming their freedom, one day at a time."
             },
             {
               id: 's2',
-              title: "Today's Simple Task",
-              content: "Commit to this process. Tell yourself: 'I am doing this. I'm giving myself these 10 days to change my life.' That's it.",
+              title: "Your One Task Today",
+              content: "Just one thing: commit. Say to yourself, 'I am doing this. I'm giving myself these 10 days.' That's all you need to do.",
               backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
-              icon: "✅"
+              icon: "✅",
+              narration: "Okay, so what do you need to do today? Just one thing. Make a commitment. Not a commitment to never smoke again – we're not there yet. Just a commitment to give yourself these 10 days. That's it. Say it out loud if you can. Say: 'I am doing this. I am giving myself these 10 days to change my life.' Write it down somewhere. Put it as a reminder on your phone. Tell someone you trust. Making a commitment out loud or in writing activates something in our brains. It makes it real. It transforms a vague intention into a concrete decision. And decisions have power. So right now, commit. Not forever. Just 10 days. You can do anything for 10 days. And these 10 days might just be the most important of your life."
             },
             {
               id: 's3',
-              title: "Keep Smoking Today",
-              content: "You don't need to change anything else right now. You can smoke as you normally do today – just be sure to come back for Day 2 tomorrow.",
+              title: "Keep Smoking – With Awareness",
+              content: "You can smoke as usual today. But start noticing. How does each cigarette make you feel? Really feel?",
               backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
-              icon: "📅"
+              icon: "📅",
+              narration: "Here's what I want you to do between now and tomorrow's session. Keep smoking as you normally do. Don't try to cut down. Don't feel guilty about it. But – and this is important – start paying attention. When you smoke your next cigarette, really notice it. Before you light up, check in with yourself: how are you feeling? After you smoke, check in again: how are you feeling now? Better? Worse? The same? Most of us smoke on autopilot. We light up without thinking, smoke without noticing, and before we know it, the cigarette is gone. Starting today, I want you to turn off the autopilot. Just observe. Be curious. You might be surprised by what you discover."
             },
             {
               id: 's4',
-              title: "You've Already Won",
-              content: "By starting this program, you've already done one of the hardest parts – you made the decision to try. Give yourself credit for that.",
+              title: "Celebrate This Moment",
+              content: "By starting this program, you've already done something most smokers never do. You've taken action. That takes real courage.",
               backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
-              icon: "🏅"
+              icon: "🏅",
+              narration: "Before we finish today, I want you to really let this sink in: you've already accomplished something significant. You might not feel like it. You might be thinking, 'I haven't quit yet. I haven't done anything.' But that's not true. You made a decision. You sought out help. You started Day 1 of a program that's going to change your life. Do you know how many smokers think about quitting and never take any action? Most of them. For every person who starts a quit-smoking program, there are dozens who just keep smoking and thinking 'someday.' But you? You're here. Today. That takes courage. That takes initiative. That's something to be proud of. So give yourself a moment of real appreciation. You deserve it."
             },
             {
               id: 's5',
-              title: "See You Tomorrow!",
-              content: "Tomorrow, we'll dive into understanding why we smoke – and bust some myths that have been holding you back. It's going to be eye-opening and empowering!",
+              title: "What's Coming Tomorrow",
+              content: "Tomorrow, we uncover the truth about nicotine addiction. What you learn will shock you – and start setting you free.",
               backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
-              icon: "🌅"
+              icon: "🌅",
+              narration: "Tomorrow, in Day 2, we're going to dive deep into understanding your addiction. And I have to tell you, what you're going to learn is going to blow your mind. We'll explore exactly how nicotine works in your brain, why it's so addictive, and – here's the good news – why breaking free is actually much easier than you think. You'll discover that the entire structure of addiction is built on an illusion. And once you see through that illusion, it starts to crumble. I can't wait to share this with you. So please, come back tomorrow. Set a reminder if you need to. Make it a priority. Each day builds on the last, and Day 2 is where we really start pulling back the curtain on the magic trick that's been fooling you for years. Thank you for being here today. I'm honored to be part of your journey. See you tomorrow."
             },
           ]
         }
