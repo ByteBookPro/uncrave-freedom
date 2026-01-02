@@ -4,16 +4,31 @@ import { TodayTab } from './tabs/TodayTab';
 import { PracticeTab } from './tabs/PracticeTab';
 import { ProgressTab } from './tabs/ProgressTab';
 import { SupportTab } from './tabs/SupportTab';
-import { DaySession } from './DaySession';
+import { DaySessionPlayer } from './session/DaySessionPlayer';
 import { useApp } from '@/contexts/AppContext';
+import { daySessions } from '@/data/sessionModules';
 
 export function MainApp() {
   const [activeTab, setActiveTab] = useState<TabType>('today');
-  const { currentView, setCurrentView } = useApp();
+  const { currentView, setCurrentView, selectedDay, completeDay } = useApp();
 
   // If in session view, show the full session experience
   if (currentView === 'session') {
-    return <DaySession />;
+    const session = daySessions.find(s => s.dayNumber === selectedDay);
+    if (!session) {
+      setCurrentView('dashboard');
+      return null;
+    }
+    
+    return (
+      <DaySessionPlayer
+        dayNumber={session.dayNumber}
+        dayTitle={session.title}
+        modules={session.modules}
+        onComplete={() => completeDay(selectedDay)}
+        onClose={() => setCurrentView('dashboard')}
+      />
+    );
   }
 
   const renderTabContent = () => {
