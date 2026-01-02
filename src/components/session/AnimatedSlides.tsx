@@ -90,6 +90,7 @@ export function AnimatedSlides({
   const [completedSlides, setCompletedSlides] = useState<Set<number>>(new Set());
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const [viewedSlides, setViewedSlides] = useState<Set<number>>(new Set([0]));
+  const [slideDurations, setSlideDurations] = useState<Record<number, number>>({});
   
   const backgroundMusic = useBackgroundMusic({ volume: 0.12 });
   const { profile } = useAuth();
@@ -164,7 +165,7 @@ export function AnimatedSlides({
           setViewedSlides(prev => new Set([...prev, nextIndex]));
           setSlideProgress(0);
           onProgress?.(nextIndex + 1, slides.length);
-        }, 3000);
+        }, 2000);
       } else {
         setCurrentIndex(nextIndex);
         setViewedSlides(prev => new Set([...prev, nextIndex]));
@@ -307,6 +308,31 @@ export function AnimatedSlides({
     
     return () => clearInterval(interval);
   }, [isPlaying]);
+  
+  // Track audio duration for current slide when it becomes known
+  useEffect(() => {
+    if (narration.duration > 0 && !slideDurations[currentIndex]) {
+      setSlideDurations(prev => ({ ...prev, [currentIndex]: Math.ceil(narration.duration) }));
+    }
+  }, [narration.duration, currentIndex, slideDurations]);
+  
+  // Calculate actual total duration from known slide durations
+  const actualTotalSeconds = useMemo(() => {
+    const knownDurations = Object.values(slideDurations);
+    const avgDuration = knownDurations.length > 0 
+      ? knownDurations.reduce((a, b) => a + b, 0) / knownDurations.length 
+      : totalEstimatedSeconds / slides.length;
+    
+    let total = 0;
+    for (let i = 0; i < slides.length; i++) {
+      total += slideDurations[i] || avgDuration;
+    }
+    // Add 2 seconds per section pause (every 3 slides, except last)
+    const pauseCount = Math.floor((slides.length - 1) / 3);
+    total += pauseCount * 2;
+    
+    return Math.ceil(total);
+  }, [slideDurations, slides.length, totalEstimatedSeconds]);
   
   // Format time for display
   const formatTime = (seconds: number): string => {
@@ -557,7 +583,7 @@ export function AnimatedSlides({
             )}
             <span className="font-mono">{formatTime(elapsedSeconds)}</span>
             <span className="text-muted-foreground/50">/</span>
-            <span className="font-mono text-muted-foreground/70">{formatTime(totalEstimatedSeconds)}</span>
+            <span className="font-mono text-muted-foreground/70">{formatTime(actualTotalSeconds)}</span>
           </div>
 
           <div className="flex items-center gap-0.5 sm:gap-1">
