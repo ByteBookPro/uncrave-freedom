@@ -271,21 +271,21 @@ export function DaySessionPlayer({
         return (
           <BreathingCoach
             onComplete={(before, after) => handlePracticeComplete({ intensityBefore: before, intensityAfter: after })}
-            onClose={() => setActivePractice(null)}
+            onCancel={() => setActivePractice(null)}
           />
         );
       case 'URGE_SURFING':
         return (
           <UrgeSurfing
             onComplete={(before, after) => handlePracticeComplete({ intensityBefore: before, intensityAfter: after })}
-            onClose={() => setActivePractice(null)}
+            onCancel={() => setActivePractice(null)}
           />
         );
       case 'BODY_SCAN':
         return (
           <BodyScan
             onComplete={() => handlePracticeComplete()}
-            onClose={() => setActivePractice(null)}
+            onCancel={() => setActivePractice(null)}
           />
         );
       default:
