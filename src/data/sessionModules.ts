@@ -1530,55 +1530,358 @@ export const daySessions: DaySession[] = [
       },
     ]
   },
-  // Remaining days with similar comprehensive structure
   {
     dayNumber: 6,
-    title: "Your Last Cigarette",
-    subtitle: "The Final Goodbye",
+    title: "Freedom Day",
+    subtitle: "The Last Cigarette and Your New Beginning",
     modules: [
       {
         id: 'd6m1',
-        title: "Preparing for Freedom",
+        title: "Welcome to Freedom Day",
+        description: "This is it – the day you've been preparing for!",
         type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 300,
+        estimatedSeconds: 420,
         gatingRequired: true,
         content: {
           slides: [
-            { id: 's1', title: "Today Is The Day", content: "Today, you'll smoke your last cigarette. Not with regret—with celebration.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80", icon: "🎯" },
-            { id: 's2', title: "You're Ready", content: "Over the past 5 days, you've seen through the illusions. You know cigarettes give you nothing.", backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80", icon: "✨" },
-            { id: 's3', title: "No Sacrifice", content: "You're not giving up a friend. You're escaping a captor. This is liberation.", backgroundGradient: "bg-gradient-to-br from-freedom/80 to-accent/80", icon: "🕊️" },
-            { id: 's4', title: "What To Expect", content: "The next few days may have mild physical sensations. They're tiny—like a slight itch. Mental cravings are just old habits calling.", backgroundGradient: "bg-gradient-to-br from-accent/80 to-primary/80", icon: "📋" },
+            {
+              id: 's1',
+              title: "This Is It!",
+              content: "Day 6, your Freedom Day! Take a moment to appreciate how far you've come. By the end of this session, you will have smoked your last cigarette.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
+              icon: "🎯",
+              narration: "This is it – Day 6, your Freedom Day! Take a moment to appreciate how far you've come. By the end of this session, you will have smoked your last cigarette and embarked on a new life as a non-smoker. I am so excited for you, and maybe you're feeling a mix of excitement and nerves too. That's completely normal. Let's do this together, step by step, just like we have all week."
+            },
+            {
+              id: 's2',
+              title: "Prepare Your Space",
+              content: "If you have any extra cigarettes or lighters, gather them now. We'll dispose of everything after your final cigarette.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🧹",
+              narration: "Before we begin, if you have any cigarettes or lighters around, other than the one for this final ritual, gather them up now. We are going to dispose of everything after the last cigarette. You won't be needing them ever again. Having them out of sight will make it easier going forward. So if you haven't thrown them out yet, have a trash can nearby or something to dump them in after."
+            },
+            {
+              id: 's3',
+              title: "The Plan",
+              content: "We will mindfully smoke one final cigarette – your goodbye smoke – and then you will forever break free.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-accent/80",
+              icon: "📋",
+              narration: "Now, the plan: We will mindfully smoke one final cigarette – your goodbye smoke – and then you will forever break free. You already practiced mindful smoking on Day 4, so you know how to do this. The difference now is the mindset: this isn't just an observation exercise, this is a farewell ceremony."
+            },
+            {
+              id: 's4',
+              title: "Everything Led to This",
+              content: "Every day of this journey – the understanding, the practices, the mindset shifts – has prepared you for this moment.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "✨",
+              narration: "Think of everything you've done in the last few days: you've reflected on why you smoke, learned how nicotine tricks you, identified all your triggers, practiced new responses, and even looked smoking straight in the eye with that mindful exercise. The changes happening in your mindset are HUGE. Everything has led to this moment."
+            },
+            {
+              id: 's5',
+              title: "A Mix of Emotions",
+              content: "Excited? Nervous? Both are natural. This is a big moment – and you're ready for it.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
+              icon: "💫",
+              narration: "You might be feeling a mix of excitement and nerves right now. That's completely natural – this is a big moment in your life. But I want you to know: you are ready. Everything you've learned and practiced has prepared you. This isn't the end of something – it's the beginning of your new, free life."
+            },
           ]
         }
       },
       {
         id: 'd6m2',
-        title: "The Goodbye Ritual",
+        title: "The Final Cigarette Ceremony",
+        description: "Light your last cigarette and say goodbye forever.",
         type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 480,
+        estimatedSeconds: 600,
         gatingRequired: true,
         content: {
           slides: [
-            { id: 's1', title: "Your Last Cigarette", content: "Light your final cigarette. This is not sad—it's a celebration of your freedom.", backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80", icon: "🚬" },
-            { id: 's2', title: "Smoke It Mindfully", content: "Notice everything. The smell, taste, how it makes you feel. Really experience it.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80", icon: "🧘" },
-            { id: 's3', title: "Thank It", content: "Thank this cigarette for showing you the truth—that there's nothing here you need.", backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80", icon: "🙏" },
-            { id: 's4', title: "Release It", content: "As you finish, feel the relief. Not of nicotine—of freedom. You never have to do this again.", backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80", icon: "💨" },
-            { id: 's5', title: "You Are Free", content: "Put it out. Throw away your cigarettes. You are now a non-smoker. Congratulations.", backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80", icon: "🎉" },
-            { id: 's6', title: "What Now?", content: "Tomorrow begins your first full day of freedom. We'll be here every step of the way.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80", icon: "🌅" },
+            {
+              id: 's1',
+              title: "Ready? Light It Now",
+              content: "If you haven't lit your final cigarette yet, go ahead and light it now.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
+              icon: "🔥",
+              narration: "Ready? If you haven't lit your final cigarette yet, go ahead and light it now. This is the last time you ever have to do this."
+            },
+            {
+              id: 's2',
+              title: "The Last Time",
+              content: "As you inhale, recognize this moment: this is the last time you ever have to do this.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "🚬",
+              narration: "As you inhale, recognize this moment: this is the last time you ever have to do this. Pay attention again to the taste, the sensation – likely no better than last time, right? In fact, it might even be less enjoyable now because you know what life can be without it. Take that first puff... and exhale slowly, watching the smoke dissipate. Think of that smoke as your old habit floating away."
+            },
+            {
+              id: 's3',
+              title: "Say Goodbye",
+              content: "As you exhale, say in your mind or aloud: \"Goodbye, smoking. I'm done with you.\"",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80",
+              icon: "👋",
+              narration: "Take another puff if you need, slowly... and as you exhale, say in your mind or aloud: 'Goodbye, smoking. I'm done with you.' If any part of this cigarette tastes gross or feels off, lean into that – it only solidifies your decision. Even if it oddly tastes good, know that in mere minutes any pleasure will be gone, but your freedom will remain."
+            },
+            {
+              id: 's4',
+              title: "You Don't Have to Finish",
+              content: "The moment you feel \"I'm done,\" you're done. Stub it out when you're ready.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "✋",
+              narration: "You do not even have to finish it. The moment you feel 'I'm done,' then you're done. You might already feel that. If so, stub it out. Or take one or two more conscious puffs as a final test – see that it gives you nothing new – and then extinguish it."
+            },
+            {
+              id: 's5',
+              title: "Extinguish It Forever",
+              content: "Put it out... crush it... do whatever feels symbolic. As that ember dies, a new chapter begins.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
+              icon: "💪",
+              narration: "Alright. If you haven't already, put it out... crush it... do whatever feels symbolic – some people spit on it or break it in half to really end it, up to you! As that ember dies, a chapter of your life closes and a new one begins."
+            },
+            {
+              id: 's6',
+              title: "Confirm Your Freedom",
+              content: "Now, mark this moment: tap the button to confirm your last cigarette.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "✅",
+              narration: "Now, mark this moment: In the app, tap the button to confirm 'I have smoked my last cigarette.' This is your quit timestamp – your anniversary to celebrate. Mark it somewhere special. Maybe set a recurring reminder every month to treat yourself on this day."
+            },
           ]
         }
       },
       {
         id: 'd6m3',
+        title: "Mark Your Victory",
+        description: "Confirm that you have smoked your last cigarette.",
+        type: 'CHECKPOINT',
+        estimatedSeconds: 120,
+        gatingRequired: true,
+        content: {
+          checkpointType: 'COMMITMENT',
+          title: "I Have Smoked My Last Cigarette",
+          description: "Tap the button below to confirm this moment and mark your quit date.",
+          promptText: "I confirm that I have smoked my last cigarette. I am now a non-smoker.",
+        }
+      },
+      {
+        id: 'd6m4',
+        title: "Congratulations, Non-Smoker!",
+        description: "Welcome to your new life as a non-smoker.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 480,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "🎉 CONGRATULATIONS! 🎉",
+              content: "You. Are. FREE! Welcome to life as a non-smoker!",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🎊",
+              narration: "Yes! CONGRATULATIONS!!! You. Are. FREE! Welcome to life as a non-smoker! Breathe in deeply right now – fill those lungs with air, clean air. Feel that? That's how it's going to be from now on, only getting better each day. You might cough a bit as your lungs start clearing out tar – that's okay, it's healing."
+            },
+            {
+              id: 's2',
+              title: "This Is Huge",
+              content: "This is one of the biggest positive changes you can make in your life. And you did it.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
+              icon: "🏆",
+              narration: "Take a moment to relish this achievement. It's huge. Truly, this is one of the biggest positive changes you can make in your life. And you did it in less than a week of preparation, without trauma or drugs, but by your own understanding and decision. Be proud. So many people dream of being where you are right now."
+            },
+            {
+              id: 's3',
+              title: "Your New Identity",
+              content: "Say it now: \"I am a non-smoker.\" Say it with conviction, with joy. This is who you are.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "🦋",
+              narration: "I want to help you mentally solidify your new identity. Say to yourself now – yes, say it out loud if you can: 'I am a non-smoker.' Say it with conviction, with joy. This is who you are now. Any time a thought of a cigarette comes, you remind yourself, 'I don't do that anymore. I'm a non-smoker.' It's not 'I can't smoke,' it's 'I don't smoke.' Big difference – the first is deprivation, the second is empowerment. You are choosing not to because you don't need or want it."
+            },
+            {
+              id: 's4',
+              title: "Clear Your Space",
+              content: "Throw away any remaining cigarettes now. Chuck those lighters and ashtrays. No easy access temptations.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "🗑️",
+              narration: "At this point, it's also time to make sure you've cleared out everything. Throw away any remaining cigarettes right now. If you still had an open pack, toss it. If there's a cigarette behind your ear or in your car, go get it and trash it. Go on, I'll wait. Also chuck those lighters and ashtrays. We want no 'easy access' temptations lying around. It's part of making the decision final – and trust me, it feels good to have a cleaner space."
+            },
+            {
+              id: 's5',
+              title: "Your Quit Date",
+              content: "Today is your quit date – your anniversary to celebrate. This is Day 0 of your smoke-free life.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-success/80",
+              icon: "📅",
+              narration: "Let's record some details for you: Today's date and time – this is your quit date, your anniversary to celebrate. Day 0 meaning the very start of your new life. The app has noted it. Every month on this day, treat yourself to something special. You've earned it."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd6m5',
+        title: "What Comes Next",
+        description: "Tips for your first 24 hours and beyond.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 480,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "The Next 24 Hours",
+              content: "Some feelings you might experience: elation, emptiness at certain times, occasional cravings. All normal.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
+              icon: "⏰",
+              narration: "Now let's talk about what's next. The next 24 hours are important – they're your first day free. Some feelings you might experience: you could feel elated – woohoo, I did it! – or oddly you might feel a bit empty or unsure what to do at certain times, like a morning coffee with no cigarette. That's okay, refer to your list of alternatives and try one. You might get some cravings – that's expected. But remember, cravings are just your body adjusting and they will pass. You might even find they're not as strong as you feared because you've mentally disarmed them."
+            },
+            {
+              id: 's2',
+              title: "Your Support System",
+              content: "The community and support is here for you. If you feel shaky, open the app and hit the Craving Help button.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🤝",
+              narration: "The community and support is here for you. If you feel shaky, open the app and hit the Craving Help button. It will guide you through a 5-minute urge meditation or give you a quick task to distract you. Or hop onto the chat to talk with a coach or fellow quitters. Use those resources – they can make the difference in moments of temptation."
+            },
+            {
+              id: 's3',
+              title: "Quick Tips",
+              content: "Drink plenty of water. Change up routines. Treat yourself in healthy ways. Take deep breaths frequently.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-accent/80",
+              icon: "💡",
+              narration: "Keep in mind some quick tips for today and the coming days: Drink plenty of water – it helps flush nicotine and it occupies you. Change up routines if needed – for example, if you always smoked after lunch, plan to immediately get up and go for a 5-minute walk or call a friend during that time. Treat yourself in healthy ways: eat a favorite snack, maybe something fruity or a nice piece of chocolate, when you would usually have a smoke, so you still feel rewarded. Take deep breaths frequently – you'll be amazed how nice it is to take deep breaths that don't trigger a cough or taste like smoke."
+            },
+            {
+              id: 's4',
+              title: "Replace the Habit",
+              content: "Whenever you would normally have a cigarette, spend the 5 minutes doing something positive for yourself.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-coral/80",
+              icon: "🔄",
+              narration: "One of my favorite suggestions: whenever you would normally have a cigarette, instead spend the 5 minutes doing something positive for yourself. Some people do a set of pushups or dance to a song. Some brush their teeth, loving the fresh feeling. Some write a few lines in a journal. The point is to replace the habit with something that makes you feel good in a genuine way."
+            },
+            {
+              id: 's5',
+              title: "The \"Just One\" Trap",
+              content: "\"Just one won't hurt\" is the addiction talking. You know too much now. One would just re-awaken the cycle.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
+              icon: "⚠️",
+              narration: "I want to address something: It's common today or tomorrow to have a random thought like, 'Wow, normally I'd be smoking right now' or even 'Can I really do this forever?' Do not let that spook you. Yes, you can do it forever – by taking it one day at a time. As the saying goes, not a single puff. The moment you think 'just one won't hurt,' remember that for us, one is not one – one cigarette often leads back to many. But here's the thing: you don't want one, really. That's the addiction talking if it happens. You know too much now – you know one cigarette would taste pretty bad after having quit and would just re-awaken the cycle."
+            },
+            {
+              id: 's6',
+              title: "Play the Tape Forward",
+              content: "If you get a strong urge, imagine smoking one – you'd feel disappointed, and you'd be back to square one. Not worth it.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "🎬",
+              narration: "If you do get a strong urge, play the tape forward: imagine you do smoke one – you'd feel disappointed, it wouldn't even give you much, and you'd be back to square one. Not worth it, right? Instead, remember the joy you're feeling now having quit, and do something from your toolbox. The cravings are like a bluff – call that bluff, and they'll weaken. There's a phrase: NR=100%. It means Not Relapsing equals 100% success. If you simply don't light another cigarette, you will be successful."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd6m6',
+        title: "Celebrate Your First Day",
+        description: "Positive activities and the benefits starting already.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 420,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Do Something Nice Today",
+              content: "Go to a movie, take a long shower, start a light exercise. Treat this day as special.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
+              icon: "🎬",
+              narration: "Take it easy today. If possible, do something nice this first day – maybe go to a movie (can't smoke in a theater, perfect!), or take a long shower and feel how clean you are becoming, or start a light exercise like a short jog or yoga to get those endorphins flowing."
+            },
+            {
+              id: 's2',
+              title: "Cravings Are Trophies",
+              content: "If you have a craving, remember it's just your body healing. Each craving overcome is like a trophy you earn.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "🏅",
+              narration: "If you have a craving, remember it's just your body healing – maybe say 'bring it on, heal me!' and use a technique. Each craving overcome is like a trophy you earn. And they will get fewer and farther between quite quickly."
+            },
+            {
+              id: 's3',
+              title: "Your Senses Are Returning",
+              content: "Food might taste better even by tonight. Smells become more vivid. Notice these small wins.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80",
+              icon: "👃",
+              narration: "Also, your senses might already be sharpening – food might taste better even by tonight or tomorrow, smells become more vivid. Notice those small wins. And when you wake up tomorrow, you might notice you breathe a little easier. These are the immediate rewards of quitting. We'll track more benefits in coming days."
+            },
+            {
+              id: 's4',
+              title: "Visualize Tonight",
+              content: "Envision yourself later today, going to bed knowing \"I didn't smoke today.\" Feel that pride.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-coral/80",
+              icon: "🌙",
+              narration: "Finally, let's do a quick visualization: Envision yourself later today, going to bed knowing 'I didn't smoke today.' You might feel a strong sense of pride and maybe disbelief, but it's real. Envision a week from now – perhaps some of the initial cravings passed, you find yourself thinking of cigarettes less often, you have more energy."
+            },
+            {
+              id: 's5',
+              title: "A Month From Now",
+              content: "You've saved significant money. Your skin looks healthier. You might inspire a friend or two to quit.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-success/80",
+              icon: "💰",
+              narration: "Envision a month from now – you've saved a significant amount of money; maybe you've treated yourself to something nice with those savings. Your skin looks healthier, you're coughing less, you might even inspire a friend or two to consider quitting because they see you glowing. All this is happening, starting now."
+            },
+            {
+              id: 's6',
+              title: "Years Added to Your Life",
+              content: "You have added years to your life and life to your years by quitting today.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "❤️",
+              narration: "You have added years to your life and life to your years by quitting today. And we're going to make sure those years are wonderful and smoke-free."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd6m7',
+        title: "Day 6 Complete",
+        description: "Final congratulations and what's next.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 300,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Go Enjoy Your First Day!",
+              content: "No more puffs, not even one. You don't do that anymore. And that is something to be incredibly happy about.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
+              icon: "🌟",
+              narration: "Alright, I'll let you go enjoy your first day without cigarettes! Remember: no more puffs, not even one. You don't do that anymore. And that is something to be incredibly happy about."
+            },
+            {
+              id: 's2',
+              title: "Continue Tomorrow",
+              content: "We'll focus on staying on track and handling any cravings. Spoiler: you're going to do great.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "📅",
+              narration: "We'll talk more in the next sessions about keeping your momentum and dealing with situations, so definitely continue the daily sessions through Day 10 – they will cement this victory so it lasts for life. The worst thing would be to think 'I'm done, I don't need the rest.' Stay with us; there's important reinforcement and strategies ahead."
+            },
+            {
+              id: 's3',
+              title: "Congratulations, Non-Smoker!",
+              content: "You're free, and the rest of the program is here to ensure you stay that way. See you on Day 7!",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
+              icon: "🎉",
+              narration: "Congratulations, non-smoker! See you tomorrow for Day 7, where we'll focus on staying on track and handling any cravings or withdrawal sensations that might come up. Spoiler: you're going to do great. Now go celebrate – you deserve it!"
+            },
+          ]
+        }
+      },
+      {
+        id: 'd6m8',
         title: "Freedom Breathing",
+        description: "Celebrate with a deep breathing practice to mark your fresh start.",
         type: 'GUIDED_PRACTICE',
         estimatedSeconds: 240,
         gatingRequired: true,
         practiceType: 'BREATHING',
       },
       {
-        id: 'd6m4',
-        title: "Celebration Practice",
+        id: 'd6m9',
+        title: "Body Celebration",
+        description: "A body scan to feel your body beginning to heal.",
         type: 'GUIDED_PRACTICE',
         estimatedSeconds: 180,
         gatingRequired: true,
