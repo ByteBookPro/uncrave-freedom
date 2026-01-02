@@ -19,9 +19,16 @@ export function MainApp() {
   // If in session view, show the full session experience
   if (currentView === 'session') {
     const session = daySessions.find(s => s.dayNumber === selectedDay);
-    if (!session) {
-      setCurrentView('dashboard');
-      return null;
+    
+    // If session not found or no modules, safely redirect to dashboard
+    if (!session || !session.modules || session.modules.length === 0) {
+      // Use setTimeout to avoid state update during render
+      setTimeout(() => setCurrentView('dashboard'), 0);
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="animate-spin w-8 h-8 border-4 border-primary border-t-transparent rounded-full" />
+        </div>
+      );
     }
     
     return (
