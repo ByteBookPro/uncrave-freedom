@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Shield } from 'lucide-react';
 import { TabNavigation, TabType } from './layout/TabNavigation';
 import { TodayTab } from './tabs/TodayTab';
 import { PracticeTab } from './tabs/PracticeTab';
@@ -6,10 +8,12 @@ import { ProgressTab } from './tabs/ProgressTab';
 import { SupportTab } from './tabs/SupportTab';
 import { DaySessionPlayer } from './session/DaySessionPlayer';
 import { useApp } from '@/contexts/AppContext';
+import { useAuth } from '@/contexts/AuthContext';
 import { daySessions } from '@/data/sessionModules';
 
 export function MainApp() {
   const [activeTab, setActiveTab] = useState<TabType>('today');
+  const { isAdmin } = useAuth();
   const { currentView, setCurrentView, selectedDay, completeDay } = useApp();
 
   // If in session view, show the full session experience
@@ -49,6 +53,17 @@ export function MainApp() {
   return (
     <div className="min-h-screen bg-background">
       <div className="max-w-md mx-auto min-h-screen relative">
+        {/* Admin link for admin users */}
+        {isAdmin && (
+          <Link 
+            to="/admin" 
+            className="fixed top-4 right-4 z-50 flex items-center gap-2 px-3 py-2 bg-primary text-primary-foreground rounded-full shadow-lg hover:bg-primary/90 transition-colors text-sm font-medium"
+          >
+            <Shield className="h-4 w-4" />
+            Admin
+          </Link>
+        )}
+
         {/* Tab content */}
         <main className="pb-20">
           {renderTabContent()}
