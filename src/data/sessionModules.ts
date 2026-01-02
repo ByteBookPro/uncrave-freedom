@@ -14,6 +14,11 @@ export interface SessionModule {
     videoUrl?: string;
     transcript?: string;
     practiceConfig?: Record<string, unknown>;
+    // Checkpoint-specific content
+    checkpointType?: 'GOODBYE_LETTER' | 'REFLECTION' | 'COMMITMENT';
+    title?: string;
+    description?: string;
+    promptText?: string;
   };
 }
 
@@ -1208,56 +1213,320 @@ export const daySessions: DaySession[] = [
   },
   {
     dayNumber: 5,
-    title: "Reframing Your Mind",
-    subtitle: "Cognitive Restructuring",
+    title: "Preparing for Quit Day",
+    subtitle: "Reframing & Commitment",
     modules: [
       {
         id: 'd5m1',
-        title: "Common Smoking Myths",
+        title: "Welcome to Day 5",
+        description: "The eve of your quit day – you've made it this far!",
         type: 'ANIMATED_SLIDES',
         estimatedSeconds: 360,
         gatingRequired: true,
         content: {
           slides: [
-            { id: 's1', title: "Myth: I Enjoy Smoking", content: "Do you enjoy the taste? The smell? The coughing? Or just the relief from withdrawal?", backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80", icon: "🤔" },
-            { id: 's2', title: "Myth: It Helps Me Relax", content: "Nicotine is a stimulant. The 'relaxation' is just relief from the stress smoking itself caused.", backgroundGradient: "bg-gradient-to-br from-coral/80 to-accent/80", icon: "😌" },
-            { id: 's3', title: "Myth: It Helps Me Concentrate", content: "It just relieves the concentration loss caused by withdrawal. Non-smokers focus fine.", backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80", icon: "🎯" },
-            { id: 's4', title: "Myth: I'm Too Stressed To Quit", content: "Smoking adds stress—constant worry about when, where, cost, health. Quitting removes stress.", backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80", icon: "😰" },
-            { id: 's5', title: "Myth: I'll Gain Weight", content: "Some do, many don't. And even if true, the health benefits of quitting far outweigh any weight gain.", backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80", icon: "⚖️" },
-            { id: 's6', title: "Myth: It's Too Hard", content: "When you truly understand that smoking gives you nothing, quitting is a relief, not a sacrifice.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80", icon: "💪" },
+            {
+              id: 's1',
+              title: "The Eve of Your Freedom",
+              content: "Day 5 – you've made it to the eve of your quit day! Give yourself a hearty pat on the back.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
+              icon: "🎉",
+              narration: "Day 5 – you've made it to the eve of your quit day! Give yourself a hearty pat on the back. Seriously, think of everything you've done in the last few days: you've reflected on why you smoke, learned how nicotine tricks you, identified all your triggers, practiced new responses, and even looked smoking straight in the eye with that mindful exercise. The changes happening in your mindset are HUGE."
+            },
+            {
+              id: 's2',
+              title: "Notice the Shift",
+              content: "How do you feel about quitting now compared to Day 1? Something's different, isn't it?",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "🔄",
+              narration: "Take a moment now to notice: how do you feel about quitting, right now, compared to when you started Day 1? Many of my students – and I hope you too – often say by Day 5, something's different. Maybe you're actually excited to quit, not scared. Maybe you can't wait to be done with cigarettes, whereas before you couldn't imagine life without them. Perhaps you even already consider yourself 'basically done' with smoking – like it's lost its power over you."
+            },
+            {
+              id: 's3',
+              title: "It's Okay to Have Doubts",
+              content: "If you still have some worries or don't feel 100% confident – that's okay and completely normal.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-accent/80",
+              icon: "💭",
+              narration: "If you still have some worries or don't feel 100% confident – that's okay and normal. We're going to address those right now, and firm up your commitment. By the end of today's session, you'll be fully ready to step into Day 6 as a non-smoker. Let's tackle some common fears or doubts head on."
+            },
           ]
         }
       },
       {
         id: 'd5m2',
-        title: "Your New Beliefs",
+        title: "Confronting Your Fears",
+        description: "Let's tackle the common fears that hold people back from quitting.",
         type: 'ANIMATED_SLIDES',
-        estimatedSeconds: 300,
+        estimatedSeconds: 480,
         gatingRequired: true,
         content: {
           slides: [
-            { id: 's1', title: "The Truth About Cigarettes", content: "Cigarettes give you nothing—not relaxation, not pleasure, not help. Only temporary relief from their own withdrawal.", backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80", icon: "✨" },
-            { id: 's2', title: "You're Not Giving Up Anything", content: "You're not sacrificing pleasure. You're escaping a trap. There's nothing to 'give up.'", backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80", icon: "🎉" },
-            { id: 's3', title: "Freedom Is Coming", content: "Imagine never needing a cigarette again. Never worrying about running out. Never feeling controlled.", backgroundGradient: "bg-gradient-to-br from-freedom/80 to-accent/80", icon: "🕊️" },
-            { id: 's4', title: "You Are Already A Non-Smoker", content: "The mindset shift is everything. You're not 'trying to quit.' You're becoming who you really are.", backgroundGradient: "bg-gradient-to-br from-accent/80 to-primary/80", icon: "👤" },
+            {
+              id: 's1',
+              title: "Fear #1: Withdrawal & Cravings",
+              content: "\"Will I go crazy without cigarettes? What if I can't handle the cravings?\"",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-primary/80",
+              icon: "😰",
+              narration: "Fear #1: Withdrawal and Cravings. You might be thinking, 'Will I go crazy without cigarettes? What if I get irritable or can't handle the cravings?' First, remember that a lot of withdrawal is psychological. You have removed a lot of the psychological desire already. In fact, a survey of thousands of QuitSure users found that the majority did not experience severe withdrawal after quitting, and many had none or only mild symptoms. That's because their mental game was strong – just like yours is becoming."
+            },
+            {
+              id: 's2',
+              title: "Withdrawal Is Temporary",
+              content: "Nicotine leaves your body in 2-3 days. Physical symptoms peak around day 2-3, then get better quickly.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-accent/80",
+              icon: "📉",
+              narration: "Physically, nicotine leaves your body pretty quickly – about 2-3 days for most of it to be gone. The worst physical symptoms, if any, usually peak around day 2 or 3 after quitting, then get better. Those symptoms can be things like irritability, restlessness, trouble sleeping, or cough as your lungs clear. Not fun, but temporary. You can handle a few days of feeling off, right? Especially knowing it's the feeling of healing."
+            },
+            {
+              id: 's3',
+              title: "You've Got the Tools",
+              content: "Deep breathing, mindfulness, water, distraction, support – you're equipped. Cravings last minutes, not forever.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-success/80",
+              icon: "🧰",
+              narration: "We have a whole session on coping with cravings from Day 7 onward, but you've already got tools: deep breathing, mindfulness, drinking water, distracting yourself, reaching out for support. Cravings last minutes, not forever – you can surf them like we discussed. And every single hour that passes after quitting, you're closer to freedom and your body is recovering. Think of it this way: you've likely endured worse things than nicotine withdrawal in life. People often find the anticipation is scarier than the reality."
+            },
+            {
+              id: 's4',
+              title: "Fear #2: What If I Fail?",
+              content: "\"What if I slip up or can't do it? I've tried before...\"",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-coral/80",
+              icon: "😔",
+              narration: "Fear #2: Failure – 'What if I slip up or can't do it?' I hear you. Maybe you've tried before and went back, and you're worried that'll happen again. Let's reframe failure. A slip or relapse is not a moral failure or the end of the road – it's a sign that something in the plan needs adjusting. However, I want you to visualize success, not failure. You have every reason to succeed now."
+            },
+            {
+              id: 's5',
+              title: "95% Success Rate",
+              content: "You have about a 95% chance of success if you complete this program fully. Those are fantastic odds!",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
+              icon: "📊",
+              narration: "Unlike past attempts, you have a whole arsenal of strategies and a different mindset. You're not quitting by willpower alone; you're doing it smartly. Remember, you have about a 95% chance of success if you complete this program fully. Those are fantastic odds! So instead of 'what if I fail?', try on the thought: 'What if I succeed?' – because it's very likely you will. In fact, you're already succeeding by making it this far."
+            },
+            {
+              id: 's6',
+              title: "If You Ever Slip...",
+              content: "Get right back on track. No shame, no guilt. Treat it as a tiny bump and keep going forward.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
+              icon: "🔁",
+              narration: "But let's say worst case scenario in the future you had a cigarette. We're not planning to, but hypothetically – you know what you'd do? Stop again. Use it as a learning experience, figure out what trigger got you, improve your strategy, and get right back on track. No shame, no guilt, no 'oh I failed might as well go back to a pack a day.' Nope. You'd treat it as a tiny bump and keep going forward. So truly, nothing is going to stop you from becoming and staying a non-smoker except you. And you are determined."
+            },
           ]
         }
       },
       {
         id: 'd5m3',
-        title: "Body Scan Awareness",
-        type: 'GUIDED_PRACTICE',
-        estimatedSeconds: 300,
+        title: "More Fears Addressed",
+        description: "Losing a coping mechanism, weight gain, and identity change.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 420,
         gatingRequired: true,
-        practiceType: 'BODY_SCAN',
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Fear #3: Losing My Coping Mechanism",
+              content: "\"How will I handle stress without my smokes? Cigarettes have been there for me...\"",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "🤝",
+              narration: "Fear #3: Losing a friend or coping mechanism. We often personify smoking as a friend or crutch. Part of you might think, 'When I'm quit, how will I handle stress or sadness without my smokes? Cigarettes have been there for me.' It's true – cigarettes have been your quick fix in tough times. But also think: they were causing stress too and certainly causing you harm while pretending to help."
+            },
+            {
+              id: 's2',
+              title: "You Have Better Friends Now",
+              content: "Breathing techniques, supportive people, healthier coping mechanisms – you haven't lost anything.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-success/80",
+              icon: "🧘",
+              narration: "Now, you have new friends: supportive breathing techniques, maybe supportive people or this app's community, healthier coping mechanisms like a walk or a meditation. And you haven't lost anything – cigarettes weren't actually helping you solve problems or truly comforting you. They might have numbed you or given a distraction, but you have better ways now. Consider writing a little breakup note to cigarettes – in fact, let's do that as an exercise in a moment, because it's a powerful closure technique."
+            },
+            {
+              id: 's3',
+              title: "Fear #4: Weight Gain",
+              content: "Not everyone gains weight. If you do, it's often 5-10 lbs – manageable and worth it for your health.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-accent/80",
+              icon: "⚖️",
+              narration: "Fear #4: Weight gain or other side effects. This comes up – nicotine can suppress appetite a bit and many worry they'll overeat. We will talk in later sessions about handling this, but a quick note: not everyone gains weight. If you do, it's often 5-10 lbs that can be managed with a bit of exercise and mindful eating. We'd much rather you be 5 lbs heavier and not smoking than vice versa, right?"
+            },
+            {
+              id: 's4',
+              title: "Your Senses Return",
+              content: "Improved circulation, better taste and smell – these are manageable changes, all signs of healing.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-freedom/80",
+              icon: "👃",
+              narration: "We'll give tips to keep your mouth and hands busy with low-calorie substitutes – water, carrots, gum. As for other things – improved circulation can give a bit more energy, taste and smell improve so food might seem more delicious (hence the need to be mindful). These are all manageable changes. They're signs of healing, not problems."
+            },
+            {
+              id: 's5',
+              title: "Fear #5: Losing Part of Myself",
+              content: "Smoking isn't who you are – it's something you did. Your identity can be so much more.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-primary/80",
+              icon: "🦋",
+              narration: "If you've smoked for years or decades, quitting might feel like losing part of yourself or a comfort. We reframe: smoking isn't who you are, it's something you did. Your identity can be so much more – perhaps an identity of a strong, healthy person or a role model for others. You're not losing something precious; you're shedding a burden that was weighing you down."
+            },
+          ]
+        }
       },
       {
         id: 'd5m4',
-        title: "Urge Surfing Practice",
+        title: "Visualizing Success",
+        description: "Let's create a powerful vision of your smoke-free future.",
         type: 'GUIDED_PRACTICE',
-        estimatedSeconds: 180,
+        estimatedSeconds: 300,
         gatingRequired: true,
-        practiceType: 'URGE_SURFING',
+        practiceType: 'VISUALIZATION',
+      },
+      {
+        id: 'd5m5',
+        title: "The Goodbye Letter",
+        description: "Write a farewell to cigarettes – this powerful exercise provides closure.",
+        type: 'CHECKPOINT',
+        estimatedSeconds: 360,
+        gatingRequired: true,
+        content: {
+          checkpointType: 'GOODBYE_LETTER',
+          title: "Your Goodbye Letter",
+          description: "Write a short letter addressed to your cigarettes. Thank them if you want, acknowledge the harm, and firmly say goodbye.",
+          promptText: "Dear Cigarettes...",
+        }
+      },
+      {
+        id: 'd5m6',
+        title: "Your Commitment Pledge",
+        description: "Make a firm commitment to yourself – this is your promise.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 360,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Time to Commit",
+              content: "Now, let's solidify your commitment. Tomorrow is your Quit Day – the first day of your smoke-free life.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-success/80",
+              icon: "📝",
+              narration: "Now, let's solidify your commitment. Tomorrow is your Quit Day – the first day of your smoke-free life. I want you to make it official. You've written your goodbye letter. Now comes your pledge to yourself."
+            },
+            {
+              id: 's2',
+              title: "Your Pledge",
+              content: "\"I promise myself that from tomorrow onward, I will not smoke. I will stay committed to being free.\"",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-freedom/80",
+              icon: "✋",
+              narration: "This is a promise to yourself. It can be short and simple. Something like: 'I promise myself that from tomorrow onward, I will not smoke a single cigarette. I will stay committed to being free. No matter what life throws at me, I will not turn back to smoking, because I deserve this freedom.' You can phrase it in your own words. The important thing is that you commit with full conviction."
+            },
+            {
+              id: 's3',
+              title: "Say It Out Loud",
+              content: "Declare it: \"I am done with smoking. I am a non-smoker now.\" Say it with conviction!",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-accent/80",
+              icon: "🗣️",
+              narration: "Say it out loud if you can – yes, I'm asking you to talk to yourself out loud: 'I am done with smoking. I am a non-smoker now.' Declare it. That commitment is gold. It's the kind of firm decision that carries people through any challenges. You are not 'trying' to quit. You ARE quitting. In fact, you've quit – you just have to get rid of the remaining cigarettes from your life tomorrow and never look back."
+            },
+            {
+              id: 's4',
+              title: "The Power of Decision",
+              content: "You're not \"trying\" to quit. You ARE quitting. In fact, you've already quit in your mind.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-primary/80",
+              icon: "💪",
+              narration: "Wonderful. That commitment is everything. You're not 'trying' to quit. You ARE quitting. In fact, you've quit – you just have to get rid of the remaining cigarettes from your life tomorrow and never look back. This decision, made with full conviction, is what separates those who succeed from those who struggle."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd5m7',
+        title: "Preparing for Tomorrow",
+        description: "Practical steps for quit day and what to expect.",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 420,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "Logistics for Quit Day",
+              content: "Tomorrow, we'll guide you through your last cigarette ritual. Think about when you want to do it.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-coral/80",
+              icon: "📋",
+              narration: "Let's talk logistics for Quit Day (Day 6): At the usual time for your session, we will guide you through your last cigarette ritual. Many people choose a specific cigarette of the day to be their last – for example, 'the morning one' or 'the after lunch one,' so that after that point, they won't smoke again. Think about when you want to do it. Ensure you don't smoke earlier than planned, because we want to mark it consciously."
+            },
+            {
+              id: 's2',
+              title: "Clear Your Environment",
+              content: "Tonight or tomorrow, throw out all cigarettes, lighters, ashtrays. No \"just in case\" – slam that door shut.",
+              backgroundGradient: "bg-gradient-to-br from-coral/80 to-freedom/80",
+              icon: "🗑️",
+              narration: "If you have any cigarettes left, aside from the one or few for tomorrow, plan to dispose of them. I strongly encourage you: tonight or tomorrow, throw out all cigarettes, lighters, ashtrays. Keeping any 'just in case' is keeping the door cracked open. We want that door slammed shut. If you have half a pack left, you might do something symbolic – soak them in water and throw them out, crush them, or have a little 'farewell' ceremony."
+            },
+            {
+              id: 's3',
+              title: "Create a Fresh Start",
+              content: "Clean your car, wash your jackets, remove the stale smoke smell. Create a clean space for your clean life.",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "✨",
+              narration: "It's time to remove all traces from your environment – clean your car if it's full of smoke smell, maybe wash your jackets, so you don't have that stale smell triggering you. Create a fresh, clean space for your fresh, clean life."
+            },
+            {
+              id: 's4',
+              title: "Visualize Tonight",
+              content: "Picture your life as a non-smoker. The money saved, the health gained, the freedom earned.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-accent/80",
+              icon: "🌙",
+              narration: "Tonight, visualize one more time your life as a non-smoker. The money saved – perhaps think of something you'll treat yourself with using that money. In a week or a month of not buying cigarettes, you'll have a nice chunk – plan a reward, you earned it! Think of your health – maybe even take a slightly longer walk tonight and notice how your breathing feels."
+            },
+            {
+              id: 's5',
+              title: "The Ultimate Reframe",
+              content: "You're not \"giving up\" smoking – you're getting rid of it. You're not losing a friend – you're kicking out an enemy.",
+              backgroundGradient: "bg-gradient-to-br from-accent/80 to-primary/80",
+              icon: "🔄",
+              narration: "One more important reframe: After tomorrow, you are not 'giving up' smoking – you are getting rid of smoking. You're not losing a friend, you're kicking out an enemy. Any time your brain tries to say 'I miss it,' remind yourself of all the things you won't miss: the cough, the expense, the anxiety of running low, the smell, the guilt, the control it had on you. You're giving up nothing of value; you're gaining everything."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd5m8',
+        title: "Day 5 Complete",
+        description: "You're ready for your independence day!",
+        type: 'ANIMATED_SLIDES',
+        estimatedSeconds: 300,
+        gatingRequired: true,
+        content: {
+          slides: [
+            {
+              id: 's1',
+              title: "You're Ready",
+              content: "I can genuinely feel how much you've transformed in these 5 days. You are ready for this.",
+              backgroundGradient: "bg-gradient-to-br from-success/80 to-primary/80",
+              icon: "🌟",
+              narration: "Alright champion, you're ready. I can genuinely feel how much you've transformed in these 5 days. We are honored to be by your side in this. You've confronted your fears, made your commitment, and prepared your environment."
+            },
+            {
+              id: 's2',
+              title: "Rest Well Tonight",
+              content: "Tomorrow is a big day – it's celebration time. Feel proud, feel determined, feel excited.",
+              backgroundGradient: "bg-gradient-to-br from-primary/80 to-freedom/80",
+              icon: "😴",
+              narration: "Rest well tonight. Tomorrow is a big day – it's celebration time. You might feel a little nervous excitement – that's natural – but mostly, feel proud and determined. This isn't an ending; it's the beginning of your new life."
+            },
+            {
+              id: 's3',
+              title: "Your Freedom Awaits",
+              content: "Your freedom is hours away. Tomorrow, you say a final goodbye to smoking and hello to the new you!",
+              backgroundGradient: "bg-gradient-to-br from-freedom/80 to-success/80",
+              icon: "🎯",
+              narration: "You've got this. Your freedom is hours away. See you on Day 6, where we will say a final goodbye to smoking and hello to the new you! Congratulations on completing Day 5 – you're not just preparing to quit; you've already become a non-smoker in your mind. Tomorrow just makes it official."
+            },
+          ]
+        }
+      },
+      {
+        id: 'd5m9',
+        title: "Closing Breathing Practice",
+        description: "End with a calming practice to prepare for tomorrow.",
+        type: 'GUIDED_PRACTICE',
+        estimatedSeconds: 240,
+        gatingRequired: true,
+        practiceType: 'BREATHING',
       },
     ]
   },
