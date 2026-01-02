@@ -5,21 +5,53 @@ export const sessionNarration: Record<string, string> = {
 
 Over the next 10 days, we're going to walk this path together. And here's something unusual you'll love: you don't have to quit smoking today. In fact, for the first few days of this program, you can keep smoking as usual.
 
-This program is different from anything you've tried before. We won't rely on willpower or make you suffer through cravings. Instead, we'll work on changing how you think and feel about smoking. By the time you reach Day 6, you'll actually want to quit – it will feel natural and empowering, not scary.
+Sounds odd, right? But this is exactly how our method works – we first change the way you think and feel about smoking, and then quitting becomes much easier. No shock to your system, no sudden withdrawals on Day 1. We're not going to force you to quit by sheer willpower – instead, we'll gently remove your desire to smoke at its root.
 
-So relax, take a deep breath, and let's begin this transformative journey together.`,
+Imagine that: freedom from smoking without feeling deprived or miserable. It might sound too good to be true, and you might be a bit skeptical – that's okay! By the end of this program, you'll see exactly why it works, backed by science and personal experience.`,
 
-  'd1m3': `Here's what to expect over the next 10 days:
+  'd1m2': `First, let's talk about you. Everyone has their own reasons for quitting. What are yours?
 
-In the first few days, we'll explore why you smoke, how nicotine works in your brain, and what triggers your cravings. You'll learn proven techniques from psychology to reframe your thoughts and break the habit loop that's kept you smoking.
+Maybe you're quitting for your family – perhaps to be around for your children or future grandchildren. Maybe it's for your health – to breathe easier, to feel your body heal. It could be financial – cigarettes are expensive, and you'd rather save that money for something rewarding. Or perhaps you're just tired of being controlled by an addiction, tired of planning your day around smoke breaks or feeling guilty after each cigarette.
 
-By Day 5, you'll start noticing a significant shift in how you view cigarettes. The romance will fade, and you'll see them for what they really are.
+Whatever your reasons, hold them close. Write them down now in the app. These are your personal motivators. Through this journey, we'll remind you of them, and you can remind yourself too – especially on the tougher days. Quitting is ultimately a gift you're giving yourself, and these reasons are the bows on top of that gift.`,
 
-On Day 6, you'll smoke your last cigarette – and it will feel empowering, not scary. You'll be ready.
+  'd1m3': `Now, let's set some expectations for this 10-day program. Each day, you'll spend about 15 to 20 minutes with me. We'll have a little chat – like this – about a specific aspect of smoking or quitting.
 
-Days 7 through 10 will help you solidify your new smoke-free identity and prepare you for a lifetime of freedom.
+You'll see some slides with key points, do a few short exercises like the one you just did, and watch a couple of quick animations that make the ideas come alive. Think of it as a fun class or coaching session each day – one that leaves you feeling better and more confident.
 
-Remember: you don't need willpower. You just need to show up each day and trust the process.`,
+Over the next few days, we'll cover topics like why we smoke, how nicotine hooks us, what triggers your cravings, and clever ways to break the habit loop that's kept you smoking. You'll learn proven techniques from psychology – like how to reframe your thoughts and practice mindfulness – but don't worry, we'll keep it very practical and relatable.
+
+By Day 5, you'll start noticing a big shift in how you view cigarettes. Many people say it's like a switch flips in their mind – the cigarette suddenly goes from being a "friend" or a crutch to something you realize you don't really need or want.
+
+Then, on Day 6, if you follow along, you'll smoke your last cigarette. Yes, the last one you ever smoke – and it will feel empowering, not scary. After that, we'll spend Days 7 through 10 helping you solidify your new smoke-free life – handling any cravings that pop up, building healthier habits in place of smoking, and making sure you feel confident moving forward as a non-smoker forever.`,
+
+  'd1m4': `Did you know that using a supportive quit-smoking app can make you nearly 1.5–2 times more likely to quit successfully compared to going it alone? It's true – you've given yourself a real advantage by choosing to do this.
+
+Also, you should know: no judgment lives here. We're not going to dwell on lecturing you about how bad smoking is – you already know it's unhealthy. Every smoker does, right? Instead, we respect you and your decision to quit. You won't hear any guilt-trips.
+
+If you've never tried to quit before, you might have been hesitant because everyone says "quitting is so hard." Or if you have tried, maybe people made you feel bad for "failing." Let's wipe that slate clean. You are here now, and that's what matters. We believe in you, and we're going to make this as comfortable as possible.
+
+Take a deep breath. Feel a little excitement – you are at the start of something great. By the end of these 10 days, you will be free from this habit that has held onto you for so long. Picture it: no more being chained to the need to light up, no more worrying about when you can smoke next, no more guilt or hiding. Instead, freedom – the freedom to live your life without cigarettes.`,
+
+  'd1m5': `Now, I want you to visualize something positive. Close your eyes if you're comfortable, or keep them open and watch the screen visuals.
+
+Imagine it's 10 days from now. It's the morning of Day 11, and you wake up... as a non-smoker. You have no desire to smoke. Perhaps you take a deep breath of fresh air and it fills your lungs and you feel clear and energized.
+
+How does your body feel? Maybe you notice your breathing is easier or food tastes better. How does your mind feel? You might feel proud of yourself – rightfully so! – and a sense of calm knowing you aren't dependent on nicotine anymore.
+
+Visualize walking outside and not needing to carry cigarettes, or spending time with loved ones and being fully present, not sneaking away to smoke. That's the future we're aiming for, and it's not far away.`,
+
+  'd1m6': `Finally, I want you to know that we're here for you. Along with these sessions, you have resources at your fingertips – a chat button to ask questions or seek support anytime, and a community of others on this journey too. Don't hesitate to use those if you need to vent or ask for tips.
+
+Today's task is simple: commit to this process. You've already started and you deserve to see the finish. Tell yourself, "I am doing this. I'm giving myself these 10 days to change my life." That's it. You don't need to change anything else right now. You can smoke as you normally do today – just be sure to come back for Day 2 tomorrow.
+
+You might even find that after each session, you start seeing your smoking habit in a new light. That's the idea! By planting new thoughts and perspectives, we gradually crowd out the old ones that kept you hooked.
+
+You can do this. In fact, by starting this program, you've already done one of the hardest parts – you made the decision to try. Give yourself credit for that. Over the next 24 hours, pay attention to those reasons you listed for quitting. Maybe put a sticky note of your #1 reason somewhere you'll see it, or set it as your phone wallpaper.
+
+Alright – that's all for Day 1. I hope you're feeling inspired and encouraged. Tomorrow, we'll dive into understanding why we smoke – and bust some myths that have been holding you back. It's going to be eye-opening and empowering.
+
+Thank you for being here today. Tomorrow's a new day on this journey – I'll see you then!`,
 
   // Day 2 - Understanding Your Addiction
   'd2m1': `Today, we're going to understand exactly how nicotine has been controlling you. Knowledge is power, and once you understand the mechanics of addiction, it loses much of its grip on you.

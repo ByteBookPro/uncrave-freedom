@@ -288,6 +288,14 @@ export function DaySessionPlayer({
             onCancel={() => setActivePractice(null)}
           />
         );
+      case 'VISUALIZATION':
+        // Visualization uses BodyScan component for now (guided meditation style)
+        return (
+          <BodyScan
+            onComplete={() => handlePracticeComplete()}
+            onCancel={() => setActivePractice(null)}
+          />
+        );
       default:
         return null;
     }
