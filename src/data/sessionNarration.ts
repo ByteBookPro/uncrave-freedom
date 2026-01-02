@@ -208,18 +208,58 @@ Take it easy for the rest of the day. Drink some water to cleanse your palate if
 
 Tomorrow we gear up for your independence day on Day 6. You're so close to breaking free. Keep that momentum and I'll see you on Day 5. You're doing amazing work!`,
 
-  // Day 5 - Reframing Your Mind
-  'd5m1': `Today, we're going to challenge the beliefs that keep you smoking. Many smokers hold onto myths that make quitting seem impossible or undesirable. Let's examine these myths and replace them with truth.
+  // Day 5 - Preparing for Quit Day: Reframing and Commitment
+  'd5m1': `Day 5 – you've made it to the eve of your quit day! Give yourself a hearty pat on the back. Seriously, think of everything you've done in the last few days: you've reflected on why you smoke, learned how nicotine tricks you, identified all your triggers, practiced new responses, and even looked smoking straight in the eye with that mindful exercise. The changes happening in your mindset are HUGE.
 
-Myth: Smoking helps me relax. Truth: Smoking creates the tension it then relieves. Non-smokers don't need cigarettes to feel calm – they just feel calm naturally.
+Take a moment now to notice: how do you feel about quitting, right now, compared to when you started Day 1? Many of my students – and I hope you too – often say by Day 5, something's different. Maybe you're actually excited to quit, not scared. Maybe you can't wait to be done with cigarettes, whereas before you couldn't imagine life without them. Perhaps you even already consider yourself "basically done" with smoking – like it's lost its power over you.
 
-Myth: I enjoy smoking. Truth: You enjoy the relief from nicotine withdrawal. There's nothing inherently enjoyable about inhaling toxic smoke.
+If you still have some worries or don't feel 100% confident – that's okay and normal. We're going to address those right now, and firm up your commitment. By the end of today's session, you'll be fully ready to step into Day 6 as a non-smoker.`,
 
-Myth: Quitting is too hard – I've tried before. Truth: This program is different. You're not using willpower to fight cravings. You're changing your entire relationship with cigarettes.
+  'd5m2': `Let's tackle some common fears or doubts head on:
 
-Myth: I'll always miss smoking. Truth: Happy ex-smokers don't miss cigarettes at all. They feel liberated, not deprived.
+Fear #1: Withdrawal and Cravings. You might be thinking, "Will I go crazy without cigarettes? What if I get irritable or can't handle the cravings?" First, remember that a lot of withdrawal is psychological. You have removed a lot of the psychological desire already. In fact, a survey of thousands of QuitSure users found that the majority did not experience severe withdrawal after quitting, and many had none or only mild symptoms. That's because their mental game was strong – just like yours is becoming.
 
-Today, identify your own beliefs about smoking and challenge each one.`,
+Physically, nicotine leaves your body pretty quickly – about 2-3 days for most of it to be gone. The worst physical symptoms, if any, usually peak around day 2 or 3 after quitting, then get better. Those symptoms can be things like irritability, restlessness, trouble sleeping, or cough as your lungs clear. Not fun, but temporary. You can handle a few days of feeling off, right? Especially knowing it's the feeling of healing.
+
+We also have a whole session on coping with cravings tomorrow (Day 7 and onward), but you've already got tools: deep breathing, mindfulness, drinking water, distracting yourself, reaching out for support. Cravings last minutes, not forever – you can surf them like we discussed. And every single hour that passes after quitting, you're closer to freedom and your body is recovering.
+
+Also, think of it this way: you've likely endured worse things than nicotine withdrawal in life. People often find the anticipation is scarier than the reality. And with your new perspective, those cravings might come more as a whisper than a scream. You've taken away their power by debunking the "smoking solves this" myth.`,
+
+  'd5m3': `Fear #2: Failure – "What if I slip up or can't do it?" I hear you. Maybe you've tried before and went back, and you're worried that'll happen again. Let's reframe failure. A slip or relapse is not a moral failure or the end of the road – it's a sign that something in the plan needs adjusting. However, I want you to visualize success, not failure. You have every reason to succeed now.
+
+Unlike past attempts, you have a whole arsenal of strategies and a different mindset. You're not quitting by willpower alone; you're doing it smartly. Remember earlier we said you have about a 95% chance of success if you complete this program fully. Those are fantastic odds! So instead of "what if I fail?", try on the thought: "What if I succeed?" – because it's very likely you will. In fact, you're already succeeding by making it this far. Tomorrow, when you extinguish that last cigarette, you've succeeded. After that, it's just maintaining, which we will help you with.
+
+But let's say worst case scenario in the future you had a cigarette. We're not planning to, but hypothetically – you know what you'd do? Stop again. Use it as a learning experience (figure out what trigger got you, improve your strategy) and get right back on track. No shame, no guilt, no "oh I failed might as well go back to a pack a day." Nope. You'd treat it as a tiny bump and keep going forward. So truly, nothing is going to stop you from becoming and staying a non-smoker except you. And you are determined.
+
+Fear #3: Losing a friend / coping mechanism. We often personify smoking as a friend or crutch. Part of you might think, "When I'm quit, how will I handle stress or sadness without my smokes? Cigarettes have been there for me." It's true – cigarettes have been your quick fix in tough times. But also think: they were causing stress too and certainly causing you harm while pretending to help. Now, you have new friends: supportive breathing techniques, maybe supportive people or this app's community, healthier coping mechanisms like a walk or a meditation. And you haven't lost anything – cigarettes weren't actually helping you solve problems or truly comforting you (they might have numbed you or given a distraction, but you have better ways now).
+
+Fear #4: Weight gain or other side effects. This comes up – nicotine can suppress appetite a bit and many worry they'll overeat. We will talk in later sessions about handling this, but a quick note: not everyone gains weight. If you do, it's often 5-10 lbs that can be managed with a bit of exercise and mindful eating. We'd much rather you be 5 lbs heavier and not smoking than vice versa, right? But we'll give tips to keep your mouth and hands busy with low-calorie substitutes (water, carrots, etc.). As for other things – improved circulation can give a bit more energy, taste and smell improve so food might seem more delicious (hence the need to be mindful). These are all manageable changes.`,
+
+  'd5m5': `First, the letter. You can type it out in the app as I talk you through, or write it on paper if you prefer later. Address it to your cigarettes (or to nicotine, or the smoking habit – however you want). Tell them what you need to say. Common themes: thanking it for the times it thought it helped, acknowledging what it actually did (the harm, the hold it had), and firmly saying goodbye.
+
+For example: "Dear cigarettes, we've been together for many years. You were with me in stress and in celebration. But you also stole my health, my money, and my freedom. You made me think I needed you, but I've learned I don't. I'm grateful I had a chance to learn from this relationship, but now it's over. I'm leaving you for good. I choose life, health, and true freedom. Goodbye forever."
+
+That's just one style. Make yours personal. Take your time, finish up your thoughts... and done. How do you feel after writing that? Some feel emotional – it's okay, this is a big step. Some feel relief or even triumph. Keep that letter (it's saved in your journal). If you ever waver, read it again to remind yourself why you broke up with smoking.`,
+
+  'd5m6': `Now, the pledge. This is a promise to yourself. It can be short and simple. Something like: "I promise myself that from tomorrow onward, I will not smoke a single cigarette. I will stay committed to being free. No matter what life throws at me, I will not turn back to smoking, because I deserve this freedom."
+
+You can phrase it in your own words or even record a voice memo of you saying it. The important thing is that you commit with full conviction. Say it out loud if you can – yes, I'm asking you to talk to yourself out loud: I am done with smoking. I am a non-smoker now. Declare it.
+
+Wonderful. That commitment is gold. It's the kind of firm decision that carries people through any challenges. You are not "trying" to quit. You ARE quitting. In fact, you've quit – you just have to get rid of the remaining cigarettes from your life tomorrow and never look back.`,
+
+  'd5m7': `Let's talk logistics for Quit Day (Day 6): At the usual time for your session, we will guide you through your last cigarette ritual. Many people choose a specific cigarette of the day to be their last – for example, "the morning one" or "the after lunch one," so that after that point, they won't smoke again. Think about when you want to do it. For instance, maybe you want your last cigarette to be first thing in the morning so that the rest of the day you can focus on being quit, or maybe just before this session time. It's up to you, but ensure you don't smoke earlier than planned, because we want to mark it consciously.
+
+If you have any cigarettes left, aside from the one or few for tomorrow, plan to dispose of them. I strongly encourage you: tonight or tomorrow, throw out all cigarettes, lighters, ashtrays. Keeping any "just in case" is keeping the door cracked open. We want that door slammed shut. If you have half a pack left, you might do something symbolic – soak them in water and throw them out, crush them, or as some do, have a little "farewell" ceremony. It's time to remove all traces from your environment – clean your car if it's full of smoke smell, maybe wash your jackets, so you don't have that stale smell triggering you. Create a fresh, clean space for your fresh, clean life.
+
+Tonight, visualize one more time your life as a non-smoker. The money saved – perhaps think of something you'll treat yourself with using that money (in a week or a month of not buying cigarettes, you'll have a nice chunk – plan a reward, you earned it!). Think of your health – maybe even take a slightly longer walk tonight and notice "I'm already breathing easier" or "This is going to feel so good when my stamina increases."
+
+One more important reframe: After tomorrow, you are not "giving up" smoking – you are getting rid of smoking. You're not losing a friend, you're kicking out an enemy. Any time your brain tries to say "I miss it," remind yourself of all the things you won't miss: the cough, the expense, the anxiety of running low, the smell, the guilt, the control it had on you. You're giving up nothing of value; you're gaining everything.`,
+
+  'd5m8': `Alright champion, you're ready. I can genuinely feel how much you've transformed in these 5 days. We are honored to be by your side in this. Rest well tonight. Tomorrow is a big day – it's celebration time. You might feel a little nervous excitement – that's natural – but mostly, feel proud and determined.
+
+You've got this. Your freedom is hours away. See you on Day 6, where we will say a final goodbye to smoking and hello to the new you!
+
+Congratulations on completing Day 5. You've confronted your fears, made your commitment, and prepared your environment. You're not just preparing to quit – you've already become a non-smoker in your mind. Tomorrow just makes it official.`,
 
   // Day 6 - Your Last Cigarette
   'd6m1': `Today is the day. You're going to smoke your last cigarette ever – and you're going to do it on your terms, with intention and ceremony.
