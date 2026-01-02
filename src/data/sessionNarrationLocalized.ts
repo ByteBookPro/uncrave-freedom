@@ -610,6 +610,245 @@ Caution: Alcohol early weeks में high-risk हो सकता है।
 अब उसका reminder सेट करें। Consistency से effortless बनता है।
 
 Day 8 complete. कल Day 9 में "just one" trap और social moments को relapse-proof करेंगे।`,
+
+  // Day 9 Hindi narration - Relapse-Proof
+  'd9m1': `Day 9 में स्वागत है।
+अब तक आपने एक बड़ा काम कर दिया: आपने prove किया कि आप बिना सिगरेट के जी सकते हैं।
+आज हम अगला step करते हैं:
+आपकी freedom को resilient बनाना—ताकि surprise भी आए, तो आप stable रहें।
+
+एक common moment देखिए।
+नेहा ठीक चल रही है… फिर वो पुराने smoking spot के पास से गुजरती है।
+एक familiar smell आती है।
+और दिमाग फुसफुसाता है: "एक से क्या होगा… अच्छा लगेगा।"
+यह इसलिए नहीं कि नेहा फिर smoker बनना चाहती है—
+बस इसलिए कि दिमाग पुराने associations shortcut की तरह सेव कर लेता है।
+
+आज का core skill:
+Shortcut आए तो आप automatic रूप से बेहतर route चुनें।`,
+
+  'd9m2': `Relapse अक्सर willpower की कमी नहीं होता।
+Relapse अक्सर एक predictable situation होता है:
+• stress spike
+• alcohol (inhibition कम)
+• social pressure
+• celebration: "मैंने deserve किया"
+• anger/conflict
+• थकान
+• अकेलापन
+• nostalgia
+
+आज हम इन्हें "if-then" plans में बदलेंगे:
+अगर X हुआ… तो मैं Y करूँगा/करूँगी।
+No debate. बस execution.`,
+
+  'd9m3': `अब इसे personal बनाते हैं।
+Top 3 high-risk moments tap करें—जहाँ "बस एक" वाला विचार सबसे जल्दी आता है।
+No typing. सिर्फ tap.
+
+Perfect. अब हम इन्हें flight-simulator की तरह rehearse करेंगे।
+क्योंकि rehearsal से confidence automatic बनता है।`,
+
+  'd9m4': `Social situations में trigger सिर्फ nicotine नहीं—belonging और ritual होता है।
+इसलिए हमें awkward बने बिना "ना" कहना सीखना है।
+
+तीन simple scripts:
+A) "No thanks—मैं धूम्रपान नहीं करता/करती।"
+B) "मैं ठीक हूँ, मैंने छोड़ दिया है।"
+C) "नहीं, मैं अपनी streak रख रहा/रही हूँ।" (हल्का, confident)
+
+अब body language upgrade:
+Smile, eye contact, और हाथ busy रखें—drink, gum, phone, straw.
+Hands busy = urge छोटा.
+
+अब quick practice:
+कल्पना कीजिए कोई अभी offer कर रहा है। अपना script tap करें.
+
+Great. यही आपका default है।`,
+
+  'd9m5': `Alcohol early दिनों में tricky हो सकता है क्योंकि inhibition कम हो जाती है और पुराने routines active हो जाते हैं।
+इसका मतलब ये नहीं कि आपको हमेशा के लिए alcohol छोड़ना है।
+मतलब ये है कि आप अपनी freedom protect करेंगे जब तक वो नई है।
+
+अगले 2 हफ्तों के लिए एक plan चुनिए:
+1) "मैं 14 दिन alcohol skip करूँगा/करूँगी।"
+2) "अगर पिया, तो 1–2 तक limit और non-smokers के साथ।"
+3) "अगर पिया, तो gum + drink हाथ में, craving बढ़े तो मैं निकल जाऊँगा/जाऊँगी।"
+
+Smart. यही जीतने का तरीका है।`,
+
+  'd9m6': `Stress दिमाग का #1 बहाना है door खोलने का।
+इसलिए हम नया reflex डालते हैं:
+Stress आए… तो 90 सेकंड reset.
+
+Rule:
+Emotional spike के पहले 90 सेकंड में कोई बड़ा decision नहीं।
+
+Step 1: नाम दें:
+"Stress आया है।" "Anger आया है।"
+Naming brain को शांत करता है।
+
+Step 2: Breathing downshift:
+Inhale 4… Exhale 6…
+
+Step 3: एक action:
+पानी, walk, face wash, stretch, music.
+एक चुनिए।
+
+Great. अब stress → smoking नहीं, stress → skill.`,
+
+  'd9m7': `यह हिस्सा ध्यान से सुनिए।
+संभावना है कि आपको slip नहीं होगा—आप अच्छा कर रहे हैं।
+लेकिन plan होना आपको weak नहीं, strong बनाता है।
+
+अगर कभी slip हो जाए—एक puff या एक cigarette—तो आपका job guilt नहीं।
+Guilt cycle बढ़ाता है।
+आपका job है clean recovery protocol.
+
+10 मिनट का recovery plan:
+1) तुरंत रोकें। "अब हो गया" को "चलो फिर जारी" मत बनने दें।
+2) 60 सेकंड breathing—panic कम करें।
+3) App में "मैं वापस track पर हूँ" tap करें।
+4) Trigger चुनें: stress / alcohol / social / fatigue / conflict.
+5) अगले 24 घंटों का protection move चुनें:
+   • alcohol avoid
+   • extra walk
+   • extra breathing
+   • smoking spots avoid
+6) Identity line:
+   "मैं धूम्रपान नहीं करता/करती। यह moment था। मैं free हूँ।"
+
+याद रखें:
+Slip एक bump है। Relapse एक decision है।
+और आप वो decision नहीं लेते। आप course correct करते हैं।`,
+
+  'd9m8': `सबसे powerful anti-relapse tool:
+Play the tape forward.
+
+"बस एक" दिमाग की 10 सेकंड की movie है—quick relief.
+पर वह बाकी scenes छुपाती है—loop, guilt, bargaining.
+
+तो पूरी movie देखें:
+Path A: एक… फिर दूसरा… फिर "कल quit"… फिर हफ्ते निकल गए।
+Path B: आप breathe करते हैं, delay करते हैं, wave ride करते हैं—और कल proud उठते हैं।
+
+आपको willpower नहीं—सही movie चाहिए।`,
+
+  'd9m9': `अब अपना relapse-proof card बनाइए।
+Tap करके confirm करें:
+• मेरे top triggers
+• मेरा social script
+• मेरा alcohol plan
+• मेरा 90-sec reset action
+• मेरा emergency tool
+• मेरा rule: "Not even one."
+
+Save कर दीजिए।
+Confidence feeling नहीं—plan है।
+
+Day 9 complete.
+कल Day 10: long-term identity lock + maintenance plan + celebration.`,
+
+  // Day 10 Hindi narration - Make It Permanent
+  'd10m1': `Day 10 में स्वागत है।
+आज बड़ा दिन है।
+Journey खत्म नहीं होती—नई ज़िंदगी शुरू होती है।
+
+बहुत ex-smokers एक बात कहते हैं:
+एक दिन आप realize करते हैं कि एक घंटे तक सिगरेट याद ही नहीं आई…
+फिर आधा दिन…
+और फिर control खत्म हो जाता है—आपकी तरफ, आपके जीवन की तरफ।
+Freedom quiet हो जाती है। Normal. Easy.
+
+आज हम उस future को intentionally मजबूत करेंगे।`,
+
+  'd10m2': `आइए brain को gains पर anchor करें।
+आपने कोई "दोस्त" नहीं खोया।
+आपने ज़िंदगी पर लगने वाला tax हटाया।
+
+आपको मिलता है:
+• baseline शांत (कम nicotine-tension)
+• समय के साथ बेहतर सांस
+• control की मजबूत भावना
+• समय और पैसे
+• fresh smell, cleaner environment
+• confidence जो बाकी life में भी फैलता है
+
+पहले दिनों/हफ्तों में कई लोग notice करते हैं:
+खाने का स्वाद बेहतर, सुबह clearer, और lungs साफ़ होने पर cough बदलना।
+समय के साथ cravings rare हो जाती हैं और stamina बेहतर लगता है।
+सबसे बड़ा फायदा: addiction schedule से आज़ादी।`,
+
+  'd10m3': `Long-term की सबसे आसान strategy: identity.
+Brain को clarity पसंद है।
+
+Smoker negotiate करता है।
+Non-smoker नहीं।
+
+आपका code:
+"मैं धूम्रपान नहीं करता/करती। Not even one."
+
+बार-बार दोहराने से debate खत्म होती है। और debate नहीं—तो torture नहीं।`,
+
+  'd10m4': `अब simple maintenance plan बनाते हैं—3 हिस्से:
+
+Part 1: Prevention — daily छोटा habit. चुनिए:
+• 2 मिनट breathing
+• 10 मिनट walk
+• सोने से पहले body scan
+• trigger time पर पानी
+
+Part 2: Emergency — craving आए तो go-to. चुनिए:
+• 5D script
+• urge surfing
+• 90-sec reset + water
+• app support/call
+
+Part 3: Rewards — milestones.
+दो milestones चुनिए:
+• 7 days
+• 14 days
+• 30 days
+• 90 days
+• 6 months
+• 1 year
+
+हर milestone के लिए reward cards से चुनिए:
+• छोटा purchase
+• dinner/movie
+• massage/spa
+• trip fund
+• hobby gear
+• family के लिए कुछ
+
+Save plan.`,
+
+  'd10m5': `अब एक minute success rehearsal.
+अगर comfortable हों तो आँखें बंद कर लें।
+
+Trigger imagine करें: coffee, stress, offer.
+Wave आती है।
+आप plan चलाते हैं:
+Delay. Breathe. Water. Move. "Not even one."
+
+Mental rehearsal real life easy बनाता है।`,
+
+  'd10m6': `खत्म करने से पहले, इसे महसूस कीजिए:
+आपने addiction loop rewire किया।
+यह छोटा नहीं है।
+
+अब अपना final statement tap करें:
+"मैं एक non-smoker हूँ।"
+
+और अगर कभी डगमगाएँ,
+अपने relapse-proof card पर लौटें,
+emergency tool चलाएँ,
+और याद रखें:
+Cravings temporary हैं। Freedom बढ़ती जाती है।
+
+बधाई हो।
+आप "quit" नहीं कर रहे—आप done हैं।
+Day 10 complete.`,
 };
 
 // Chinese (简体中文) narration for Day 1-2
@@ -1147,6 +1386,233 @@ const chineseNarration: Record<string, string> = {
 设定一个提醒。小的坚持 = 大的轻松。
 
 第8天完成。明天第9天，我们将重点做社交场合和"就一根"的想法——防止复发。`,
+
+  // Day 9 Chinese narration - Relapse-Proof
+  'd9m1': `欢迎来到第9天。
+你已经完成了一件大事：证明自己可以不靠香烟生活。
+今天我们做下一步：让自由更"抗打"。
+即使生活给你惊喜，你也能稳住。
+
+一个常见场景：
+美雅状态很好……直到路过旧吸烟点。
+熟悉的味道一来，大脑低语："就一根会很舒服。"
+这不代表她想回去当吸烟者。
+只是大脑把旧关联存成了"快捷方式"。
+
+今天的核心技能是：
+快捷方式出现时，你自动走更好的路。`,
+
+  'd9m2': `复吸通常不是意志力差。
+它往往来自可预测的情境：
+• 压力飙升
+• 酒精降低自控
+• 社交压力
+• 庆祝"我值得"
+• 争吵/愤怒
+• 疲惫
+• 孤独
+• 怀旧
+
+今天我们把它们变成If-Then：
+如果X发生……我就做Y。
+不辩论，直接执行。`,
+
+  'd9m3': `把它变成你的计划。
+请点选你最容易出现"就一根"的Top 3情境。
+不打字，只点选。
+
+很好。接下来我们像飞行模拟器一样演练。
+因为演练会让反应自动化。`,
+
+  'd9m4': `社交触发不只是尼古丁，而是"融入感"和"仪式感"。
+我们要做到：拒绝不尴尬，甚至更自信。
+
+选一句最像你的回应：
+A) "不用了，谢谢。我不抽烟。"
+B) "我已经戒了。"
+C) "不了，我要保持我的连续天数。"（轻松自信）
+
+再加一个小技巧：手要有事情做。
+拿饮料、拿口香糖、拿手机、拿吸管。
+手忙起来，渴求就小很多。
+
+现在快速练一次：想象有人现在递烟给你。
+点选你要用的那句回应。
+
+很好。它就是你的默认脚本。`,
+
+  'd9m5': `早期酒精容易触发旧回路，因为它会降低抑制。
+这不是说你永远不能喝酒。
+而是说：自由还新，我们先保护它。
+
+为接下来两周选一个计划：
+1) "14天不喝酒。"
+2) "如果喝，只喝1–2杯，并尽量和不抽烟的人待一起。"
+3) "如果喝，手里永远有饮料+口香糖，渴求变强就离开。"
+
+很好。聪明的人会降低风险，来换更强的稳定。`,
+
+  'd9m6': `压力是大脑最常用的借口来重新开门。
+所以我们植入新的反射：压力一来，先重置90秒。
+
+规则：情绪爆发的前90秒，我不做任何决定。
+
+第一步：命名它。
+"压力来了。" "愤怒来了。"
+命名会让大脑冷静。
+
+第二步：呼吸降档。
+吸气4秒…呼气6秒…
+
+第三步：一个动作。
+喝水、走动、洗脸、拉伸、听歌。
+请选择你的一个动作。
+
+很好。从今天开始：压力 → 技能，而不是压力 → 香烟。`,
+
+  'd9m7': `这部分很重要，但请放心。
+很多人不会失误——你做得很好。
+但准备好恢复方案，会让你更强大。
+
+如果发生失误：一口、或一支。
+你的任务不是自责。
+自责会喂养循环。
+你的任务是"干净恢复流程"。
+
+10分钟恢复计划：
+1) 立刻停止，不把它变成"既然抽了就继续"。
+2) 呼吸60秒，先把慌降下来。
+3) 在应用里点"我回到正轨"。
+4) 选择触发源：压力/酒精/社交/疲劳/冲突。
+5) 选择未来24小时的保护动作：
+   • 避免酒精
+   • 多走一走
+   • 多做呼吸
+   • 避开吸烟地点
+6) 重复身份句：
+   "我不抽烟。那只是一个瞬间。我仍然自由。"
+
+记住：失误是颠簸，复吸是决定继续。
+你不会做那个决定。
+你会纠正航线。`,
+
+  'd9m8': `最强的防复吸工具：把电影放完整。
+"就一根"只给你看10秒的舒服。
+它不让你看后面的剧情：循环、讨价还价、内疚。
+
+所以我们看全片：
+路径A：一根→再一根→"明天再戒"→几周又没了。
+路径B：你呼吸、延迟、冲浪→明天醒来更骄傲。
+
+你不需要硬扛意志力。
+你需要正确的电影。`,
+
+  'd9m9': `现在创建你的"防复吸卡片"。
+请点选确认：
+• 我的Top触发点
+• 我的社交拒绝脚本
+• 我的酒精计划
+• 我的90秒重置动作
+• 我的紧急工具
+• 我的规则：一根也不抽
+
+保存。
+自信不是感觉，自信是计划。
+
+第9天完成。明天第10天：长期身份锁定 + 维护计划 + 庆祝。`,
+
+  // Day 10 Chinese narration - Make It Permanent
+  'd10m1': `欢迎来到第10天。
+这是一个重要的时刻。
+不是因为旅程结束，而是因为新生活开始。
+
+很多成功戒烟的人描述过：
+有一天你发现自己一小时没想烟……
+半天没想烟……
+然后你意识到：它不再控制你了。
+自由会变得安静、正常、轻松。
+
+今天我们让那个未来更确定。`,
+
+  'd10m2': `把注意力放在"获得"上。
+你没有失去朋友。
+你移除了生活中的一项税。
+
+你正在获得：
+• 更平稳的情绪底盘（少了尼古丁驱动的紧张）
+• 呼吸逐步更顺
+• 更强的掌控感
+• 更多时间
+• 更多钱
+• 更清新的环境与气味
+• 这种自信会扩散到生活其他领域
+
+在接下来的日子与周里，很多人会感觉：味觉更好、早晨更清醒、咳嗽变化、渴求变少。
+随着时间推移，渴求会变得稀少，生活更自由。`,
+
+  'd10m3': `最简单的长期策略就是身份。
+大脑喜欢清晰。
+
+吸烟者会讨价还价。
+非吸烟者不会。
+
+你的守则是：
+"我不抽烟。一根也不抽。"
+
+重复它，辩论会消失。
+没有辩论，就没有折磨。`,
+
+  'd10m4': `我们做一个简单维护计划：预防、紧急、奖励。
+
+第一部分：预防（每日小习惯）选一个：
+• 2分钟呼吸
+• 10分钟走路
+• 睡前身体扫描
+• 触发时段喝水
+
+第二部分：紧急（渴求来了怎么办）选一个：
+• 5D脚本
+• 冲动冲浪
+• 90秒重置+喝水
+• 应用内支持/联系
+
+第三部分：奖励（里程碑）选两个：
+• 7天 / 14天 / 30天 / 90天 / 6个月 / 1年
+
+为每个里程碑选奖励（卡片，不打字）：
+• 小礼物
+• 看电影/吃饭
+• 按摩/放松
+• 旅行基金
+• 爱好装备
+• 给家人买点东西
+
+保存计划。`,
+
+  'd10m5': `我们做一分钟成功彩排。
+如果你愿意，轻轻闭眼。
+
+想象一个触发：咖啡、压力、有人递烟。
+海浪来了。
+你执行计划：延迟、呼吸、喝水、走动、选择"一根也不抽"。
+
+彩排会让真实生活更轻松。`,
+
+  'd10m6': `结束前，请认真感受：
+你重写了一个成瘾回路。
+这不是小事。
+
+现在点选你的最终宣言：
+"我是非吸烟者。"
+
+如果以后某天你动摇：
+打开你的防复吸卡片，执行紧急工具。
+记住：渴求是暂时的，自由会叠加。
+
+恭喜你。
+你不是在"戒"。
+你已经结束了。
+第10天完成。`,
 };
 
 // German (Deutsch) narration for Day 1-2
@@ -1773,6 +2239,240 @@ Das ist nicht Schwäche — das ist klug.`,
 Setze eine Erinnerung. Kleine Konstanz = große Leichtigkeit.
 
 Tag 8 erledigt. Morgen Tag 9 machen wir Social-Situationen und den „nur eine"-Gedanken rückfall-sicher.`,
+
+  // Day 9 German narration - Relapse-Proof
+  'd9m1': `Willkommen zu Tag 9.
+Du hast bereits bewiesen: Du kannst ohne Zigaretten leben.
+Heute machen wir den nächsten Schritt:
+Wir machen deine Freiheit robust — auch wenn das Leben Überraschungen liefert.
+
+Ein typischer Moment:
+Lea ist okay… dann läuft sie an einem alten Rauch-Spot vorbei.
+Ein vertrauter Geruch — und das Gehirn flüstert: „Eine wäre doch nett."
+Nicht weil Lea wieder Raucherin sein will,
+sondern weil das Gehirn alte Verknüpfungen als Abkürzungen speichert.
+
+Heute geht es um eine Fähigkeit:
+Wenn die Abkürzung auftaucht, nimmst du automatisch die bessere Route.`,
+
+  'd9m2': `Rückfall ist meist kein Willenskraftproblem.
+Er passiert oft in vorhersehbaren Situationen:
+• Stress-Spike
+• Alkohol senkt Hemmungen
+• Sozialer Druck
+• Feiern: „Ich hab's verdient"
+• Wut/Konflikt
+• Müdigkeit
+• Einsamkeit
+• Nostalgie
+
+Heute machen wir daraus If-Then-Pläne:
+Wenn X passiert… dann mache ich Y.
+Kein Verhandeln. Nur Ausführen.`,
+
+  'd9m3': `Jetzt wird es persönlich.
+Tippe deine Top 3 Situationen an, in denen „nur eine" am ehesten auftaucht.
+Kein Tippen — nur antippen.
+
+Perfekt. Jetzt proben wir wie im Flugsimulator.
+Proben macht Reaktion automatisch.`,
+
+  'd9m4': `Social Trigger sind groß — nicht wegen Nikotin,
+sondern wegen Zugehörigkeit und Ritual.
+
+Wähle einen Satz, der zu dir passt:
+A) „Nein danke — ich rauche nicht."
+B) „Ich bin raus. Ich bin fertig mit Zigaretten."
+C) „Nee. Ich halte meinen Streak." (locker, selbstbewusst)
+
+Jetzt das Upgrade: Körpersprache.
+Lächeln, Blickkontakt, und Hände sofort beschäftigen:
+Getränk, Kaugummi, Handy, Strohhalm.
+Beschäftigte Hände = kleineres Verlangen.
+
+Kurze Probe: Stell dir vor, jemand bietet dir jetzt eine an.
+Tippe den Satz, den du nutzen wirst.
+
+Sehr gut. Das ist jetzt dein Default.`,
+
+  'd9m5': `Alkohol kann in den ersten Wochen tricky sein,
+weil er Hemmungen senkt und alte Routinen aktiviert.
+Das heißt nicht: nie wieder Alkohol.
+Es heißt: Freiheit ist noch frisch — wir schützen sie.
+
+Wähle für die nächsten zwei Wochen einen Plan:
+1) „14 Tage kein Alkohol."
+2) „Wenn Alkohol, dann max. 1–2 und bei Nichtraucher:innen bleiben."
+3) „Wenn Alkohol, dann Kaugummi + Getränk in der Hand; bei starkem Verlangen gehe ich."
+
+Stark. So gewinnen kluge Menschen: Risiko senken, Stabilität aufbauen.`,
+
+  'd9m6': `Stress ist die #1 Ausrede des Gehirns, die Tür wieder zu öffnen.
+Darum installieren wir einen neuen Reflex:
+Wenn Stress kommt… 90 Sekunden Reset.
+
+Regel:
+In den ersten 90 Sekunden eines Emotions-Spikes treffe ich keine Entscheidungen.
+
+Schritt 1: Benennen.
+„Stress ist da." „Wut ist da."
+Benennen beruhigt das Gehirn.
+
+Schritt 2: Atmung runterfahren.
+Ein 4… aus 6…
+
+Schritt 3: Eine Aktion.
+Wasser, kurzer Walk, Gesicht waschen, Dehnen, Musik.
+Wähle deine eine Aktion.
+
+Sehr gut. Ab jetzt: Stress → Skill, nicht Stress → Zigarette.`,
+
+  'd9m7': `Dieser Teil ist wichtig — und beruhigend.
+Viele rutschen nicht aus, wenn sie den Prozess folgen. Du machst das gut.
+Aber einen Plan zu haben macht dich stärker.
+
+Wenn es je passiert: ein Zug oder eine Zigarette.
+Dein Job ist nicht Schuld.
+Schuld füttert den Kreislauf.
+Dein Job ist ein sauberes Recovery-Protokoll.
+
+10-Minuten-Plan:
+1) Sofort stoppen. Nicht aus „jetzt ist eh egal" weitermachen.
+2) 60 Sekunden atmen — Panik runter.
+3) In der App „Ich bin wieder auf Kurs" tippen.
+4) Trigger wählen: Stress / Alkohol / Social / Müdigkeit / Konflikt.
+5) Schutz-Move für 24 Stunden wählen:
+   • Alkohol meiden
+   • Extra-Walk
+   • Extra-Atmung
+   • Rauch-Spots meiden
+6) Identitätssatz:
+   „Ich rauche nicht. Das war ein Moment. Ich bin weiterhin frei."
+
+Merke:
+Ausrutscher = Buckel. Rückfall = Entscheidung weiterzumachen.
+Diese Entscheidung triffst du nicht. Du korrigierst den Kurs.`,
+
+  'd9m8': `Das stärkste Anti-Rückfall-Tool:
+Play the tape forward.
+
+„Nur eine" ist ein 10-Sekunden-Film: kurze Erleichterung.
+Er versteckt die nächsten Szenen: Loop, Verhandeln, schlechtes Gefühl.
+
+Wir spielen den ganzen Film:
+Weg A: eine… dann noch eine… dann „morgen wieder"… Wochen verloren.
+Weg B: du atmest, verzögerst, surfst die Welle… und wachst morgen stolz auf.
+
+Du brauchst keine Helden-Willenskraft.
+Du brauchst den richtigen Film.`,
+
+  'd9m9': `Erstelle jetzt deine Rückfall-sicher-Karte.
+Tippe zur Bestätigung:
+• meine Top-Trigger
+• mein Social-Satz
+• mein Alkohol-Plan
+• meine 90-Sekunden-Reset-Aktion
+• mein Notfall-Tool
+• meine Regel: „Nicht einmal eine."
+
+Speichern.
+Selbstvertrauen ist kein Gefühl — es ist ein Plan.
+
+Tag 9 geschafft.
+Morgen Tag 10: Identität fixieren, Maintenance-Plan, Abschluss und Feier.`,
+
+  // Day 10 German narration - Make It Permanent
+  'd10m1': `Willkommen zu Tag 10.
+Ein großer Moment.
+Nicht weil es endet — sondern weil es beginnt.
+
+Viele Ex-Raucher:innen beschreiben:
+Eines Tages merkst du, du hast eine Stunde nicht daran gedacht…
+dann einen halben Tag…
+und plötzlich ist es nicht mehr der Boss.
+Freiheit wird still. Normal. Leicht.
+
+Heute machen wir dieses Zukunftsbild wahrscheinlicher — absichtlich.`,
+
+  'd10m2': `Wir verankern dein Gehirn in Gewinnen.
+Du hast keinen „Freund" verloren.
+Du hast eine Steuer auf dein Leben entfernt.
+
+Du gewinnst:
+• ruhigere Baseline (weniger nikotin-getriebene Spannung)
+• mit der Zeit bessere Atmung
+• stärkeres Kontrollgefühl
+• mehr Zeit
+• mehr Geld
+• frischere Umgebung und Geruch
+• Selbstvertrauen, das in andere Lebensbereiche überspringt
+
+In den nächsten Tagen und Wochen merken viele: Essen schmeckt intensiver, Morgen klarer, Cravings seltener.
+Mit der Zeit wird die rauchfreie Identität normal.`,
+
+  'd10m3': `Die einfachste Langzeitstrategie ist Identität.
+Das Gehirn liebt Klarheit.
+
+Ein Raucher verhandelt.
+Ein Nichtraucher nicht.
+
+Dein Code:
+„Ich rauche nicht. Nicht einmal eine."
+
+Wiederholung beendet die Debatte.
+Keine Debatte = kein innerer Kampf.`,
+
+  'd10m4': `Wir bauen deinen Maintenance-Plan: Prävention, Notfall, Belohnung.
+
+Teil 1 Prävention — tägliche Mini-Gewohnheit, wähle eine:
+• 2 Minuten Atmung
+• 10 Minuten Walk
+• Body Scan vor dem Schlaf
+• Wasser zu Trigger-Zeiten
+
+Teil 2 Notfall — wenn Craving kommt, dein Go-To:
+• 5 D's Skript
+• Urge Surfing
+• 90-Sekunden Reset + Wasser
+• App-Support/Kontakt
+
+Teil 3 Belohnung — Meilensteine, wähle zwei:
+• 7 Tage / 14 Tage / 30 Tage / 90 Tage / 6 Monate / 1 Jahr
+
+Belohnungen per Karten wählen:
+• kleiner Kauf
+• Essen/Kino
+• Massage/Spa
+• Reisefonds
+• Hobby-Equipment
+• etwas für Familie
+
+Speichern.`,
+
+  'd10m5': `Eine Minute Erfolgsprobe.
+Wenn du magst, schließ kurz die Augen.
+
+Stell dir einen Trigger vor: Kaffee, Stress, Angebot.
+Welle kommt.
+Du führst den Plan aus:
+Delay. Atmen. Wasser. Bewegung. „Nicht einmal eine."
+
+Diese Probe macht echte Momente leichter.`,
+
+  'd10m6': `Bevor wir schließen, nimm das wirklich an:
+Du hast einen Sucht-Loop umprogrammiert.
+Das ist groß.
+
+Tippe jetzt deine finale Aussage:
+„Ich bin Nichtraucher:in."
+
+Und falls du irgendwann wackelst:
+Öffne deine Rückfall-sicher-Karte, starte dein Notfall-Tool, und erinnere dich:
+Cravings sind temporär. Freiheit wächst.
+
+Glückwunsch.
+Du „hörst nicht auf" — du bist fertig.
+Tag 10 geschafft.`,
 };
 
 // Combined localized narrations

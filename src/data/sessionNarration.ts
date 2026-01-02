@@ -628,29 +628,275 @@ Small consistency is how this becomes effortless.
 Day 8 complete.
 Tomorrow, Day 9, we relapse-proof social moments and the "just one" trap — so you stay free long-term.`,
 
-  'd10m1': `Congratulations! You've completed the 10-day program. Take a moment to truly appreciate what you've accomplished.
+  // Day 9 - Relapse-Proof Your Life
+  'd9m1': `Welcome to Day 9.
+By now, you've done something huge: you proved you can live without cigarettes.
+And today we do the next important step:
+We make your freedom resilient — even when life throws surprises.
 
-You didn't just quit smoking – you changed your entire relationship with cigarettes. You understand the addiction. You know your triggers. You've built new habits and a new identity.
+Here's a common moment.
+Maya is doing fine… then she walks past an old smoking spot.
+A familiar smell hits.
+And suddenly her brain whispers: "One would feel nice."
+Not because she wants to be a smoker again.
+But because the brain stores old associations like shortcuts.
 
-You are a non-smoker. Not someone who quit, not someone who's trying – a non-smoker. This is who you are now.
+This day is about one skill:
+When the shortcut appears, you take a better route automatically.`,
 
-The journey ahead is bright. In just a few weeks, your lung function will improve. In a few months, your risk of heart disease drops significantly. In a year, you'll have saved thousands of dollars.
+  'd9m2': `Relapse usually isn't about a lack of willpower.
+It's usually about a predictable situation:
+• Stress spike
+• Alcohol lowering inhibitions
+• Social pressure
+• Celebration: "I earned it"
+• Anger or conflict
+• Fatigue
+• Loneliness
+• Nostalgia
 
-But the biggest reward is freedom. You're no longer controlled by a substance. You wake up without cravings. You live your life on your terms.
+The goal today is to turn these into "if-then" plans.
+If X happens… then I do Y.
+No debating. No drama. Just execution.`,
 
-I am so proud of you. You've done something incredible. Now go live your beautiful, smoke-free life.`,
+  'd9m3': `Let's make this personal.
+Tap your top 3 high-risk moments — the ones most likely to trigger "just one."
+No typing. Just tap.
 
-  'd10m3': `This is your graduation certificate from the UnCrave program.
+Great. The app will prioritize tools for those moments.
+Now we rehearse them like a flight simulator.
+Because rehearsal turns confidence into automatic behavior.`,
 
-On this day, you have successfully completed the 10-day journey to becoming smoke-free. You have learned the truth about nicotine addiction, identified your triggers, changed your beliefs, and built a new identity as a non-smoker.
+  'd9m4': `Social moments are one of the biggest triggers — not because you need nicotine,
+but because your brain wants belonging and ritual.
 
-You have proven that you don't need willpower to quit. You needed understanding, and you found it. You needed support, and you showed up for yourself every single day.
+Here are three simple scripts.
+Pick the one that feels most like you.
 
-The journey doesn't end here – it continues for the rest of your life. But now you have the tools, the knowledge, and the confidence to live that life free from cigarettes.
+A) "No thanks — I don't smoke."
+B) "I'm good. I'm done with cigarettes."
+C) "Nah. I'm keeping my streak." (light + confident)
 
-Remember: you are not giving up anything. You are gaining everything – health, freedom, money, self-respect, and precious time with the people you love.
+Now we upgrade it with body language:
+Smile, steady eye contact, and immediately do something with your hands:
+Hold a drink. Hold gum. Hold your phone. Hold a straw.
+Hands busy = craving smaller.
 
-Congratulations, graduate. Welcome to your smoke-free future.`,
+Now, quick practice:
+Imagine someone offers you a cigarette right now.
+Tap the script you'll use.
+
+Great. That's now your default.`,
+
+  'd9m5': `Alcohol can be tricky early on, because it lowers inhibition and activates old routines.
+This isn't about never drinking again.
+It's about protecting your freedom while it's still new.
+
+Pick one plan for the next two weeks:
+
+1) "I'll skip alcohol for 14 days."
+2) "If I drink, I'll limit to 1–2 and stay with non-smokers."
+3) "If I drink, I'll always have gum + a drink in hand and I leave if cravings spike."
+
+Perfect.
+This is how smart people win: they reduce risk while building strength.`,
+
+  'd9m6': `Stress is the #1 excuse the brain uses to re-open the door.
+So we install a new reflex:
+When stress hits… you reset your nervous system for 90 seconds.
+
+Here's your rule:
+I never make decisions during the first 90 seconds of an emotional spike.
+
+Step 1: Name it.
+"Stress is here." or "Anger is here."
+Naming calms the brain.
+
+Step 2: Downshift breathing.
+Inhale 4… exhale 6…
+Long exhale tells your body: safe.
+
+Step 3: One action.
+Drink water.
+Walk to another room.
+Wash your face.
+Then return.
+
+Great.
+Now stress doesn't lead to smoking.
+Stress leads to skill.`,
+
+  'd9m7': `Now let's cover this carefully.
+Most people won't slip if they follow the process — and you're doing great.
+But planning for it makes you stronger, not weaker.
+
+If you ever slip — one puff, one cigarette — your job is NOT guilt.
+Guilt feeds the cycle.
+Your job is a clean recovery protocol.
+
+Here's the 10-minute recovery plan:
+1) Stop immediately. Don't turn it into "since I started, I'll continue."
+2) Breathe for 60 seconds. Lower the panic.
+3) Tap "I'm back on track" inside the app.
+4) Identify the trigger: stress / alcohol / social / fatigue / conflict.
+5) Choose one protection move for the next 24 hours:
+   • avoid alcohol
+   • extra walk
+   • extra breathing
+   • avoid smoking spots
+6) Repeat the identity line:
+   "I don't smoke. That was a moment. I'm still free."
+
+And remember:
+A slip is a bump. A relapse is a decision to keep going.
+You don't do that.
+You correct course.`,
+
+  'd9m8': `Now the most powerful anti-relapse tool:
+Play the tape forward.
+
+When "just one" appears, your brain is showing you a 10-second movie:
+a hit of relief.
+But it hides the next scenes: the loop restarting, the bargaining, the guilt.
+
+So we play the full movie.
+Path A: one cigarette… then another… then "I'll quit again"… then weeks lost.
+Path B: you breathe… you delay… you ride the wave… and you wake up proud tomorrow.
+
+You don't need willpower.
+You need the right movie.`,
+
+  'd9m9': `Let's create your relapse-proof card.
+Tap to confirm:
+• My top triggers
+• My social script
+• My alcohol plan
+• My 90-second reset action
+• My emergency tool
+• My rule: "Not even one."
+
+Save it.
+And remember: confidence isn't a feeling — it's a plan.
+
+Day 9 complete.
+Tomorrow is Day 10 — the final day — where we lock in your long-term identity and build a simple maintenance plan.`,
+
+  // Day 10 - Make It Permanent
+  'd10m1': `Welcome to Day 10.
+This is a big moment.
+Not because the journey ends — but because your new life begins.
+
+Here's a scene many ex-smokers describe:
+One morning you realize you didn't think about cigarettes for an hour…
+then half a day… then you forget they used to control you.
+Freedom becomes quiet.
+Normal.
+Easy.
+
+Today we make that future more likely — on purpose.`,
+
+  'd10m2': `Let's anchor your brain in gains.
+You didn't lose a "friend."
+You removed a tax on your life.
+
+What you gain:
+• More calm baseline (less nicotine-driven tension)
+• Better breathing over time
+• Stronger sense of control
+• More time
+• More money
+• Cleaner environment, fresher smell
+• Confidence that spreads into other areas
+
+In the first days and weeks, many people notice:
+food tastes richer, mornings feel clearer, cough can change as lungs clear.
+Over months, you often feel stamina improve and cravings become rare.
+
+The main benefit: you're no longer managed by an addiction schedule.`,
+
+  'd10m3': `The simplest long-term strategy is identity.
+Your brain loves clarity.
+
+A smoker negotiates.
+A non-smoker doesn't.
+
+So your code is:
+"I don't smoke. Not even one."
+
+Say it internally when needed.
+And here's the secret:
+As you repeat it, the debate disappears.
+And when there's no debate, there's no torture.`,
+
+  'd10m4': `Now we build a simple maintenance plan.
+Three parts: prevention, emergency, and rewards.
+
+Part 1: Prevention — daily tiny habit.
+Pick one:
+• 2 minutes breathing
+• 10-minute walk
+• body scan before sleep
+• drink water at trigger times
+
+Part 2: Emergency — your go-to when a craving hits.
+Pick one:
+• 5 D's script
+• urge surfing
+• 90-second reset + water
+• call/support inside the app
+
+Part 3: Rewards — milestones that your brain can feel.
+Pick two milestones:
+• 7 days
+• 14 days
+• 30 days
+• 90 days
+• 6 months
+• 1 year
+
+Now choose a reward for each milestone.
+No typing — pick from cards:
+• small purchase
+• dinner / movie
+• massage / spa
+• trip fund
+• hobby gear
+• something for family
+
+Save this plan.`,
+
+  'd10m5': `Let's rehearse success.
+Close your eyes if comfortable.
+
+Imagine a trigger: coffee, stress, a friend offering a cigarette.
+You feel a wave.
+Now you run your plan:
+You delay.
+You breathe.
+You drink water.
+You move.
+You choose "not even one."
+
+This mental rehearsal makes real life easier.`,
+
+  'd10m6': `Before we finish, I want you to take this in:
+You did something millions want to do and feel scared to start.
+You rewired an addiction loop.
+That's not small.
+
+Now tap your final statement:
+"I am a non-smoker."
+
+And if you ever forget how far you've come,
+open your relapse-proof card, run your emergency tool, and remember:
+Cravings are temporary.
+Freedom compounds.
+
+Congratulations.
+You're not "quitting."
+You're done.
+
+End of Day 10.`,
 };
 
 // Get narration for a module, with language support
