@@ -45,19 +45,30 @@ const voicePresets = {
   },
 };
 
-// Voice options - warm, supportive voices
-const voiceOptions = {
-  // Primary: Sarah - warm mezzo-soprano, neutral accent, supportive
-  female: 'EXAVITQu4vr4xnSDxMaL',  // Sarah
-  // Alternative: George - warm baritone, calm, authoritative
-  male: 'JBFqnCBsd6RMkjVDRZzb',    // George
-  // Backup voices
-  femaleAlt: 'XrExE9yKIg1WjnnlVkGX', // Matilda - warm, nurturing
-  maleAlt: 'onwK4e9ZLuTAKqWW03F9',   // Daniel - calm, reassuring
+// Voice options by language and gender
+// Using multilingual voices that support all 4 languages
+const voiceOptions: Record<string, Record<string, string>> = {
+  en: {
+    female: 'EXAVITQu4vr4xnSDxMaL',  // Sarah - warm mezzo-soprano
+    male: 'JBFqnCBsd6RMkjVDRZzb',    // George - warm baritone
+  },
+  de: {
+    female: 'EXAVITQu4vr4xnSDxMaL',  // Sarah (multilingual)
+    male: 'JBFqnCBsd6RMkjVDRZzb',    // George (multilingual)
+  },
+  zh: {
+    female: 'EXAVITQu4vr4xnSDxMaL',  // Sarah (multilingual)
+    male: 'JBFqnCBsd6RMkjVDRZzb',    // George (multilingual)
+  },
+  hi: {
+    female: 'EXAVITQu4vr4xnSDxMaL',  // Sarah (multilingual)
+    male: 'JBFqnCBsd6RMkjVDRZzb',    // George (multilingual)
+  },
 };
 
 type VoicePreset = keyof typeof voicePresets;
 type VoiceGender = 'female' | 'male';
+type ContentLanguage = 'en' | 'de' | 'zh' | 'hi';
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -66,7 +77,7 @@ serve(async (req) => {
   }
 
   try {
-    const { text, voiceId, preset, gender } = await req.json();
+    const { text, voiceId, preset, gender, language } = await req.json();
     const ELEVENLABS_API_KEY = Deno.env.get('ELEVENLABS_API_KEY_1') || Deno.env.get('ELEVENLABS_API_KEY');
 
     if (!ELEVENLABS_API_KEY) {
@@ -78,9 +89,10 @@ serve(async (req) => {
       throw new Error('Text is required');
     }
 
-    // Select voice based on gender preference or use provided voiceId
+    // Select language, gender and voice
+    const selectedLanguage: ContentLanguage = language && voiceOptions[language] ? language : 'en';
     const selectedGender: VoiceGender = gender || 'female';
-    const selectedVoice = voiceId || voiceOptions[selectedGender];
+    const selectedVoice = voiceId || voiceOptions[selectedLanguage][selectedGender];
 
     // Select preset based on context or use dailyCoach as default
     const selectedPreset: VoicePreset = preset && voicePresets[preset as VoicePreset] 
@@ -91,6 +103,7 @@ serve(async (req) => {
     console.log(`Generating speech:
       - Text: "${text.substring(0, 60)}..."
       - Voice: ${selectedVoice} (${selectedGender})
+      - Language: ${selectedLanguage}
       - Preset: ${selectedPreset}
       - Settings: stability=${voiceSettings.stability}, style=${voiceSettings.style}, speed=${voiceSettings.speed}`);
 
