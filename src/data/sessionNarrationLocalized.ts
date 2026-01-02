@@ -446,6 +446,170 @@ Not even one.
 आज आप ने सिर्फ छोड़ा नहीं—आपने पहचान बदल दी।
 कल Day 7 में हम cravings को और आसान बनाने वाले tools "ऑटो-पायलट" में डालेंगे।
 आप शानदार कर रहे हैं।`,
+
+  // Day 7 Hindi - Staying Smoke-Free
+  'd7m1': `Day 7 में आपका स्वागत है—और इससे भी ज़्यादा, आपका स्वागत है आपके अगले दिन के रूप में: एक non-smoker।
+अगर आपको गर्व भी महसूस हो रहा है और थोड़ा "unsettled" भी—तो यह बिल्कुल normal है।
+गर्व कहता है: "मैंने कर दिखाया।"
+और दिमाग की छोटी आवाज़ कहती है: "क्या मैं इसे जारी रख पाऊँगा/पाऊँगी?"
+
+एक छोटा सा real-life moment सुनिए।
+रोहन उठता है, और पहली बार सालों में "पहले सिगरेट" वाला autopilot नहीं चलता।
+अंदर थोड़ा खालीपन—जैसे कोई आदत वाला कदम मिस हो गया हो।
+फिर 10:30 बजे अचानक एक wave आती है—बहुत बड़ी नहीं, बस चुभती हुई।
+रोहन सोचता है: "क्या ये हमेशा रहेगा?"
+
+सच यह है: नहीं।
+यह आपके शरीर और दिमाग का adjustment है।
+Withdrawal के लक्षण आपकी failure नहीं—आपकी healing हैं।
+आज का दिन आपका survival guide है—पहले quit दिनों के लिए।
+आज cravings predictable होंगी, manageable होंगी, और छोटी होंगी।`,
+
+  'd7m2': `आइए, जो आप महसूस कर रहे हैं उसे normal बना दें।
+
+Common symptoms:
+• Cravings — लहरों में आती-जाती हैं
+• Irritability / mood swings
+• Restlessness
+• कुछ दिन focus foggy लगना
+• भूख बढ़ना — क्योंकि खाना ज़्यादा tasty लगता है और मुंह "कुछ" चाहता है
+• Cough या throat irritation — lungs साफ़ हो रहे हैं
+• नींद में बदलाव — vivid dreams या थोड़ी परेशानी
+
+सबसे जरूरी reassurance:
+अक्सर physical withdrawal पहले कुछ दिनों में peak करता है और फिर धीरे-धीरे घटता है।
+Psychological triggers कभी-कभी बाद में भी आ सकते हैं—लेकिन उनके लिए आपके पास skills हैं।
+
+जो भी हो रहा है—यह phase है।
+Phase गुजरता है।`,
+
+  'd7m3': `Quick check-in.
+पिछले 24 घंटों में जो भी महसूस हुआ, उसे tap कीजिए। No typing.
+
+अगर आपने irritability/mood swings चुना:
+निकोटीन आपके दिमाग के लिए fast "pressure valve" था।
+अब बिना निकोटीन, emotions कुछ दिनों के लिए sharp लग सकते हैं।
+दो उपाय:
+1) अपने close लोगों को बता दें: "मैं quit कर रहा/रही हूँ—कुछ दिन edgy हो सकता/सकती हूँ।"
+2) शरीर चलाइए: brisk walk, stairs, हल्का exercise—यह stress chemistry जल्दी घटाता है।
+
+अगर आपने low focus चुना:
+छोटे काम-स्प्रिंट करें, micro-break लें, पानी पिएँ।
+
+अगर आपने hunger चुना:
+Normal. Safe snacks रखें: फल, मेवे, दही, पॉपकॉर्न।
+
+सब temporary है।
+अभी का discomfort—future की permanent freedom के लिए।`,
+
+  'd7m4': `अब आपका complete craving plan.
+Craving आए तो debate नहीं—script चलाइए।
+
+1) DELAY — खुद से कहिए: "अगले 5 मिनट नहीं।"
+2) DEEP BREATHE — Long exhale दिमाग को signal देता है: "शांत हो जाओ।"
+3) DRINK WATER — हाथ-मुंह को harmless job मिलता है।
+4) DISTRACT — 10 push-ups, 2 मिनट walk, gum या mint, एक गाना।
+5) DISCUSS / DIALOG — किसी को message करें या self-talk: "मैं नहीं पीता/पीती। यह temporary है।"
+
+Urges temporary हैं. Smoking permanent नुकसान है.`,
+
+  'd7m5': `CBT का core tool: thought challenging.
+Craving के साथ एक sentence आता है।
+अगर आप sentence पर विश्वास करते हैं, slip हो सकती है।
+अगर आप उसे challenge करते हैं, आप जीतते हैं।
+
+"बस एक से क्या होगा?" — loop फिर शुरू करता है। Rule: Not even one.
+"मैं deserve करता/करती हूँ।" — आप freedom deserve करते हैं।
+"मैं नहीं झेल सकता/सकती।" — आप झेल सकते हैं। Craving sensation है—उठती, गिरती।
+
+आपकी identity अब: "मैं धूम्रपान नहीं करता/करती।"`,
+
+  'd7m6': `अब practice करते हैं।
+पहले urge 0–10 रेट कीजिए।
+अब body map में tap करें: throat, chest, jaw, hands, stomach.
+अब inhale 4… exhale 6…
+आप urge से लड़ नहीं रहे। आप उसे देख रहे हैं।
+
+यही lesson है: urges move करती हैं।
+हर wave जो आप ride करते हैं, brain को train करती है।`,
+
+  'd7m7': `Motivation reality से आती है:
+आपने पहले ही कई cigarettes avoid की हैं।
+आपने पैसे बचाए हैं।
+और सबसे बड़ा—आपने mental muscle बनाया है।
+
+आज के दो last कदम:
+पहला: अपना one rule tap करें: "Not even one."
+दूसरा: आज रात के लिए एक छोटा reward चुनिए।
+
+Day 7 complete.
+कल Day 8: हम new habits और new rewards बनाएँगे।`,
+
+  // Day 8 Hindi - Building Healthy Habits
+  'd8m1': `Day 8 में स्वागत है।
+अब cravings कुछ कम sharp लग सकती हैं—पूरी तरह नहीं, पर आसान।
+आज का focus है: "stop" से "build" की तरफ जाना।
+
+Smoking सिर्फ निकोटीन नहीं थी।
+वो pause थी, break थी, reward थी, boredom का इलाज थी।
+तो हम cigarettes हटाकर खाली जगह नहीं छोड़ेंगे—
+हम उसकी जगह ऐसी चीज़ रखेंगे जो सच में आपकी life improve करे।`,
+
+  'd8m2': `यह आपकी replacement menu है:
+
+STRESS: 60-sec walk, wall push-ups, एक calming song
+BOREDOM: quick puzzle, 3 मिनट tidy, 2–3 pages पढ़ना
+MORNING: stretch + 5 deep breaths, short walk
+AFTER MEALS: brush, dark chocolate, 5-min walk
+COMMUTE: audiobook/podcast, gum + water
+SOCIAL: drink हाथ में, non-smokers के साथ खड़े हों
+
+3 replacements चुनिए। ये आपके default बनेंगे।`,
+
+  'd8m3': `अब Day 3 के trigger plan पर वापस आते हैं।
+हर trigger के लिए tap करें: Worked / अभी try नहीं किया / नया replacement चाहिए
+
+जो काम करे, उसे जारी रखें।
+जो नहीं किया—आज शुरू करें।
+जो नहीं चला—adjust करें।
+यह moral test नहीं, testing है।`,
+
+  'd8m4': `Movement cravings घटाता है, mood बेहतर करता है।
+Craving time पर 10 मिनट walk अक्सर urge kill कर देता है।
+Movement level चुनिए: 5 / 10 / 20 minutes daily.`,
+
+  'd8m5': `अब साथ में quick version:
+March in place, shoulders roll, chest open… फिर long exhale.
+अब inhale 4… exhale 6… तीन बार।`,
+
+  'd8m6': `Smoking tactile थी—हाथ और मुंह को job मिलता था।
+अब उन्हें बेहतर job दें: gum/mint, pen/fidget, tea या fizzy water.
+
+Environment design:
+• ashtrays, lighters हटाएँ
+• car/home deep clean करें
+• desk पर water bottle रखें
+• "calm corner" बनाएँ—breathing के लिए`,
+
+  'd8m7': `Reward खुद को दें—weekly treat plan करें।
+आप saved money counter से motivation बना सकते हैं।
+
+Identity: आप smoker "trying" नहीं हैं—आप non-smoker हैं।
+
+Caution: Alcohol early weeks में high-risk हो सकता है।
+अगर alcohol + smoking strongly linked है, तो कुछ हफ्ते कम करें।
+यह fragility नहीं—smart protection है।`,
+
+  'd8m8': `आज खत्म करने से पहले, इस हफ्ते के लिए ONE habit चुनिए:
+• After meals: 5-min walk
+• Coffee: 2-min breathing first
+• Stress: 60-sec reset + water
+• Boredom: 3-min tidy/puzzle
+• Social: drink + "मैं नहीं पीता/पीती"
+
+अब उसका reminder सेट करें। Consistency से effortless बनता है।
+
+Day 8 complete. कल Day 9 में "just one" trap और social moments को relapse-proof करेंगे।`,
 };
 
 // Chinese (简体中文) narration for Day 1-2
@@ -1157,6 +1321,282 @@ Tippe. Wenn du kannst, sag es einmal laut.
 Herzlichen Glückwunsch.
 Du hast nicht nur Verhalten beendet – du hast Identität aufgebaut.
 Morgen Tag 7 machen wir deine Tools noch automatischer, damit du dich frei fühlst. Sehr stark.`,
+
+  // Day 7 German - Staying Smoke-Free
+  'd7m1': `Willkommen zu Tag 7 — und vor allem: willkommen zu einem weiteren Tag als Nichtraucher:in.
+Wenn du stolz bist und gleichzeitig etwas wackelig: normal.
+Stolz sagt: „Ich hab's geschafft."
+Die kleine Stimme fragt: „Kann ich das halten?"
+
+Ein kurzer, typischer Moment:
+Jonas wacht auf, und zum ersten Mal fehlt dieses Autopilot-Ritual „erste Zigarette".
+Da ist ein Mini-Leeregefühl — wie eine Stufe, die fehlt.
+Und dann kommt um 10:30 eine Welle — nicht riesig, aber nervig.
+Jonas denkt: „Bleibt das jetzt für immer?"
+
+Nein.
+Das ist Anpassung.
+Entzugssymptome sind kein Beweis fürs Scheitern — sie sind ein Zeichen von Heilung.
+Heute ist dein Survival-Guide für die ersten rauchfreien Tage.
+Wir machen Cravings vorhersehbar, handhabbar und kleiner.`,
+
+  'd7m2': `Wir normalisieren, was du möglicherweise spürst.
+
+Häufige frühe Symptome:
+• Cravings, die in Wellen kommen und gehen
+• Reizbarkeit oder Stimmungsschwankungen
+• Unruhe
+• Neblige Konzentration für ein paar Tage
+• Mehr Appetit — Essen schmeckt besser, Mund will „Beschäftigung"
+• Husten oder Halskratzen — die Lunge räumt auf
+• Schlafveränderungen — lebhafte Träume, Einschlafprobleme
+
+Die wichtigste Beruhigung:
+Körperlicher Entzug ist oft in den ersten Tagen am stärksten und nimmt dann ab.
+Psychologische Trigger können länger auftauchen — aber dafür hast du Skills.
+
+„Tag 1–3: Nikotin verlässt den Körper, Cravings können peaken."
+„Tag 4–7: körperlicher Entzug lässt oft nach."
+„Danach: vor allem Gewohnheits-Cues, die wir umprogrammieren."
+
+Das ist eine Phase. Sie geht vorbei.`,
+
+  'd7m3': `Kurzer Check-in: Was hast du in den letzten 24 Stunden gespürt?
+Kein Tippen — einfach antippen.
+
+Wenn du Reizbarkeit/Stimmungsschwankungen gewählt hast:
+Nikotin war wie ein schneller „Druckablass".
+Ohne Nikotin können Gefühle ein paar Tage intensiver sein.
+Zwei Moves:
+1) Sag Menschen, denen du vertraust: „Ich höre auf — ich bin evtl. eine Woche etwas dünnhäutig."
+2) Bewegung: zügiger Spaziergang baut Stresschemie schnell ab.
+Das klingt meist innerhalb von 1–2 Wochen ab.
+
+Wenn du Konzentrationsprobleme gewählt hast:
+Frühphase ist typisch.
+Arbeite in kurzen Sprints, mach Mikro-Pausen, trink Wasser.
+Konzentration kommt zurück — und wird oft stabiler, weil du nicht mehr auf der Nikotin-Achterbahn bist.
+
+Wenn du Hunger gewählt hast:
+Normal. Essen schmeckt besser.
+Halte „sichere Snacks" bereit: Obst, Nüsse, Joghurt, Popcorn, zuckerfreier Kaugummi.
+Wenn Süßes ruft: erst Wasser, dann eine kleine Portion.
+Und: Priorität ist nicht rauchen. Ernährung kann später feinjustiert werden.
+
+Wenn Husten/Halskratzen:
+Das kann Reinigung sein — ein gutes Zeichen.
+Hydrieren, warmer Tee hilft.
+Meist wird's in den nächsten Wochen besser.
+
+Wenn Schlafprobleme:
+Nikotin beeinflusst Schlaf.
+Kurzfristig: lebhafte Träume oder Einschlafprobleme.
+Weniger Koffein spät, warme Dusche, kurze Atemübung vor dem Schlaf.
+Das stabilisiert sich.
+
+Alles ist vorübergehend.
+Kurzes Unbehagen jetzt — für dauerhafte Freiheit später.`,
+
+  'd7m4': `Jetzt dein kompletter Craving-Plan.
+Wenn Verlangen kommt: nicht diskutieren — Skript starten.
+
+1) DELAY
+„Nicht in den nächsten 5 Minuten."
+Cravings peaken und fallen.
+Du kannst immer wieder verzögern, bis die Welle weg ist.
+
+2) DEEP BREATHE
+Atmung ist deine Fernbedienung fürs Nervensystem.
+Länger ausatmen = Alarm runter.
+
+3) DRINK WATER
+Hände und Mund bekommen einen harmlosen Job.
+Und es resetet dieses „trockene" Cravinggefühl.
+
+4) DISTRACT
+Aufmerksamkeit weg = Fuel weg.
+Schnelle Distraktoren:
+• 10 Liegestütze / Hampelmänner
+• 2 Minuten gehen
+• Kaugummi / Minze
+• Ein Song + mitsummen
+• Gesicht waschen / Zähne putzen
+• Eine Schublade 3 Minuten ordnen
+Oft ist die Welle danach deutlich kleiner.
+
+5) DISCUSS / DIALOG
+Text an Freund:in, App-Support, oder Selbstgespräch:
+„Ich rauche nicht. Das ist temporär."
+Humor wirkt:
+„Nice try, Nicodemon. Nicht heute."
+
+Cravings sind temporär. Rauchen richtet dauerhaften Schaden an. Wähle temporäres Unbehagen für dauerhafte Freiheit.`,
+
+  'd7m5': `CBT-Kern: automatische Gedanken prüfen.
+Craving kommt oft mit einem Satz.
+Wenn du ihn glaubst, wird's gefährlich.
+Wenn du ihn challengest, gewinnst du.
+
+Typische Sätze:
+• „Nur eine schadet nicht."
+• „Ich hab's verdient."
+• „Ich halte das nicht aus."
+• „Morgen höre ich wieder auf."
+
+Realitätsantworten:
+„Nur eine" startet die Schleife neu. Das Gehirn lernt: Nikotin ist zurück.
+Darum ist eine klare Regel am leichtesten: nicht einmal eine.
+
+„Ich hab's verdient."
+Ja: du verdienst Erleichterung. Aber Zigaretten verkaufen dir Erleichterung nur auf Kredit.
+Du verdienst Freiheit.
+
+„Ich halte das nicht aus."
+Doch. Cravings sind Empfindungen. Sie steigen und fallen.
+Du musst sie nicht mögen — nur überstehen.
+
+„Morgen."
+Das ist Sucht-Verhandeln.
+Deine Identität ist: „Ich rauche nicht."`,
+
+  'd7m6': `Wir üben jetzt.
+Bewerte dein aktuelles Verlangen 0–10.
+
+Tippe, wo du es am stärksten fühlst: Hals, Brust, Kiefer, Hände, Bauch.
+
+Atme: ein 4… aus 6…
+Du kämpfst nicht. Du beobachtest.
+
+Das ist der Beweis: Verlangen bewegt sich.
+Jede gerittene Welle trainiert dein Gehirn — die nächste wird meist kleiner.`,
+
+  'd7m7': `Motivation mit Fakten:
+Du hast bereits viele Zigaretten nicht geraucht.
+Du hast Geld gespart.
+Und du baust mentale Muskelkraft auf.
+
+Kurze Erfolgsgeschichte:
+Chris sagte:
+„Die ersten 3 Tage waren hart. Ich hab die 5 D's und Urge Surfing genutzt. Nach einer Woche war ich endlich nicht mehr Sklave meines Rauch-Zeitplans."
+
+Genau dahin gehst du.
+
+Zwei letzte Schritte heute:
+1) Tippe deine Regel: „Nicht einmal eine."
+
+2) Wähle eine kleine Belohnung für heute Abend — Film, Bad, kleiner Kauf aus dem gesparten Geld.
+
+Tag 7 geschafft.
+Morgen Tag 8: Wir füllen dein Leben mit neuen Gewohnheiten und neuen Belohnungen, damit es sich voll anfühlt — nicht leer.`,
+
+  // Day 8 German - Building Healthy Habits
+  'd8m1': `Willkommen zu Tag 8.
+Viele merken jetzt: Cravings werden weniger scharf.
+Heute gehen wir von „aufhören" zu „aufbauen".
+
+Rauchen war nicht nur Nikotin.
+Es war Pause, Reset, Belohnung, Langeweile-Killer.
+Wir entfernen Zigaretten nicht, um ein Loch zu lassen.
+Wir ersetzen ihre Rolle durch etwas, das dein Leben wirklich verbessert.`,
+
+  'd8m2': `Hier ist dein Menü:
+
+STRESS:
+• 60-Sekunden Walk
+• Wall-Push-ups
+• ein beruhigender Song
+• Stressball / Fidget
+
+LANGEWEILE:
+• kleines Puzzle/Spiel
+• 3 Minuten aufräumen
+• ein paar Seiten lesen
+
+MORGEN:
+• Dehnen + 5 tiefe Atemzüge
+• kurzer Walk
+• kleines Frühstücks-Ritual
+
+NACH DEM ESSEN:
+• Zähne putzen
+• Stück dunkle Schokolade
+• 5 Minuten gehen
+
+PENDELN:
+• Hörbuch/Podcast
+• Kaugummi + Wasser
+• Atmen an roten Ampeln
+
+SOCIAL:
+• Getränk in der Hand
+• bei Nichtraucher:innen stehen
+• frische Luft ohne Zigarette
+
+Wähle 3 Ersatz-Routinen. Die App priorisiert diese Vorschläge für dich.`,
+
+  'd8m3': `Jetzt checken wir deinen Trigger-Plan.
+Tippe pro Trigger:
+Funktioniert / Noch nicht probiert / anderes Replacement nötig
+
+Wenn's funktioniert: behalten.
+Wenn nicht probiert: heute starten.
+Wenn nicht passt: wechseln.
+Das ist kein Moraltest — es ist Design deiner rauchfreien Routine.`,
+
+  'd8m4': `Bewegung ist eines der besten Replacements.
+Nicht weil du Sportprofi sein musst.
+Sondern weil es schnell Endorphine bringt und Cravings senkt.
+
+Klein starten:
+10 Minuten gehen zur üblichen Craving-Zeit kann den Impuls komplett kippen.
+Gehen funktioniert für fast alle.
+
+Bewegungslevel wählen: 5 / 10 / 20 Min täglich.
+Perfekt — simple Challenge.`,
+
+  'd8m5': `Schnell gemeinsam:
+Im Stand marschieren, Schultern kreisen, Brust öffnen… dann langer Ausatmer.
+
+Jetzt dreimal: ein 4… aus 6…`,
+
+  'd8m6': `Rauchen ist taktil — Hände und Mund hatten „Arbeit".
+Jetzt gib ihnen bessere Arbeit:
+• Kaugummi/Minze
+• Stift/Fidget
+• 60 Sekunden kritzeln
+• Tee oder Sprudel
+
+Umgebung designen:
+• Aschenbecher/Feuerzeuge weg
+• Auto/Wohnung reinigen, Rauchgeruch entfernen
+• Wasserflasche sichtbar am Schreibtisch
+• Schuhe an die Tür als Walk-Cue
+• „Calm Corner" zum Atmen/Lesen statt Rauchen
+
+Das macht quitting leichter, weil deine Umgebung nicht mehr „Rauch!" flüstert.`,
+
+  'd8m7': `Belohne dich. Positive Verstärkung hilft enorm.
+Nutze den Geld-Counter für wöchentliche kleine Treats.
+
+Identität:
+Du bist kein Raucher, der „brav" ist.
+Du bist Nichtraucher:in.
+
+Achtung:
+Alkohol kann in den ersten Wochen ein starker Trigger sein.
+Wenn Alkohol + Rauchen eng gekoppelt sind, reduziere kurzzeitig oder trinke nur mit Plan und Support.
+Das ist nicht Schwäche — das ist klug.`,
+
+  'd8m8': `Zum Schluss: Wähle ONE Gewohnheit, die du diese Woche fest machst:
+• Nach dem Essen: 5 Minuten gehen
+• Kaffee: erst 2 Minuten atmen
+• Stress: 60-Sekunden Reset + Wasser
+• Langeweile: 3 Minuten aufräumen/Puzzle
+• Social: Getränk + „Ich rauche nicht."
+
+Setze eine Erinnerung. Kleine Konstanz = große Leichtigkeit.
+
+Tag 8 erledigt. Morgen Tag 9 machen wir Social-Situationen und den „nur eine"-Gedanken rückfall-sicher.`,
 };
 
 // Combined localized narrations
