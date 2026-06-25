@@ -13,6 +13,7 @@ interface NarrationState {
   progress: number;
   duration: number;
   isComplete: boolean;
+  needsUserGesture: boolean;
 }
 
 // In-memory cache for audio during session
