@@ -39,7 +39,7 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
   const abortControllerRef = useRef<AbortController | null>(null);
   const onEndedCallbackRef = useRef<(() => void) | null>(null);
   const currentSlideIdRef = useRef<string | null>(null);
-  const progressIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const progressIntervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   
   // Cleanup audio element only (not abort controller)
   const cleanupAudioElement = useCallback(() => {
