@@ -268,32 +268,48 @@ serve(async (req) => {
     // Process text with language-specific enhancements
     const processedText = processTextForLanguage(text, selectedLanguage);
 
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${selectedVoice}?output_format=mp3_44100_128`,
-      {
-        method: 'POST',
-        headers: {
-          'xi-api-key': ELEVENLABS_API_KEY,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: processedText,
-          model_id: 'eleven_multilingual_v2',
-          voice_settings: {
-            stability: voiceSettings.stability,
-            similarity_boost: voiceSettings.similarity_boost,
-            style: voiceSettings.style,
-            use_speaker_boost: true,
-            speed: voiceSettings.speed,
+    // Retry with exponential backoff on 429 (ElevenLabs concurrent-request limit is 2)
+    const maxAttempts = 5;
+    let response: Response | null = null;
+    let lastErrorText = '';
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+      response = await fetch(
+        `https://api.elevenlabs.io/v1/text-to-speech/${selectedVoice}?output_format=mp3_44100_128`,
+        {
+          method: 'POST',
+          headers: {
+            'xi-api-key': ELEVENLABS_API_KEY,
+            'Content-Type': 'application/json',
           },
-        }),
-      }
-    );
+          body: JSON.stringify({
+            text: processedText,
+            model_id: 'eleven_multilingual_v2',
+            voice_settings: {
+              stability: voiceSettings.stability,
+              similarity_boost: voiceSettings.similarity_boost,
+              style: voiceSettings.style,
+              use_speaker_boost: true,
+              speed: voiceSettings.speed,
+            },
+          }),
+        }
+      );
 
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('ElevenLabs API error:', response.status, errorText);
-      throw new Error(`ElevenLabs API error: ${response.status}`);
+      if (response.ok) break;
+
+      lastErrorText = await response.text();
+      console.error(`ElevenLabs API error (attempt ${attempt + 1}):`, response.status, lastErrorText);
+
+      // Retry only on 429 (concurrency) or 5xx
+      if (response.status !== 429 && response.status < 500) break;
+
+      // Backoff: 600ms, 1.2s, 2.4s, 4.8s + jitter
+      const delay = 600 * Math.pow(2, attempt) + Math.floor(Math.random() * 400);
+      await new Promise((r) => setTimeout(r, delay));
+    }
+
+    if (!response || !response.ok) {
+      throw new Error(`ElevenLabs API error: ${response?.status ?? 'no-response'}`);
     }
 
     console.log('Successfully generated audio with preset:', selectedPreset, 'for language:', selectedLanguage);
