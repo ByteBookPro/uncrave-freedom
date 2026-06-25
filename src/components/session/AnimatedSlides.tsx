@@ -81,7 +81,8 @@ export function AnimatedSlides({
   totalEstimatedSeconds = 600
 }: AnimatedSlidesProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(autoPlay);
+  const [hasInteracted, setHasInteracted] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false); // gated by hasInteracted; never autoplay before user gesture
   const [slideProgress, setSlideProgress] = useState(0);
   const [audioEnabled, setAudioEnabled] = useState(true);
   const [musicEnabled, setMusicEnabled] = useState(true);
