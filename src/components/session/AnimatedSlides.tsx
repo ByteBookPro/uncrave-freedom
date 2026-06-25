@@ -106,7 +106,7 @@ export function AnimatedSlides({
   });
   
   // Refs for timers
-  const pauseTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const pauseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isPlayingRef = useRef(isPlaying);
   const currentIndexRef = useRef(currentIndex);
   const audioEnabledRef = useRef(audioEnabled);

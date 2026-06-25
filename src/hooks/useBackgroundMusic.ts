@@ -27,7 +27,7 @@ export function useBackgroundMusic(options: UseBackgroundMusicOptions = {}) {
   const [volume, setVolume] = useState(initialVolume);
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const fadeIntervalRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Clean up on unmount
   useEffect(() => {
