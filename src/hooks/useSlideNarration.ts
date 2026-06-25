@@ -13,6 +13,7 @@ interface NarrationState {
   progress: number;
   duration: number;
   isComplete: boolean;
+  needsUserGesture: boolean;
 }
 
 // In-memory cache for audio during session
@@ -33,6 +34,7 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
     progress: 0,
     duration: 0,
     isComplete: false,
+    needsUserGesture: false,
   });
   
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -81,6 +83,7 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
       progress: 0,
       duration: 0,
       isComplete: false,
+      needsUserGesture: false,
     });
   }, [fullCleanup]);
   
@@ -244,9 +247,19 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
         setState(prev => ({ ...prev, isLoading: false, isPlaying: false }));
       };
       
-      // Start playback
-      await audio.play();
-      
+      // Start playback — catch autoplay block
+      try {
+        await audio.play();
+        setState(prev => ({ ...prev, needsUserGesture: false }));
+      } catch (playErr) {
+        if (playErr instanceof Error && playErr.name === 'NotAllowedError') {
+          console.warn('Autoplay blocked, waiting for user gesture');
+          setState(prev => ({ ...prev, needsUserGesture: true, isLoading: false, isPlaying: false }));
+          return;
+        }
+        throw playErr;
+      }
+
     } catch (err) {
       if (err instanceof Error && err.name === 'AbortError') {
         console.log('Narration aborted for slide:', slideId);
@@ -256,6 +269,18 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
       setState(prev => ({ ...prev, isLoading: false }));
     }
   }, [language, gender, cleanupAudioElement]);
+
+  // Manual resume after autoplay block — call from a user gesture handler
+  const unlock = useCallback(async () => {
+    if (audioRef.current && audioRef.current.paused) {
+      try {
+        await audioRef.current.play();
+        setState(prev => ({ ...prev, needsUserGesture: false }));
+      } catch (e) {
+        console.error('Unlock failed:', e);
+      }
+    }
+  }, []);
   
   // Pause current audio
   const pause = useCallback(() => {
@@ -284,5 +309,6 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
     pause,
     resume,
     stop,
+    unlock,
   };
 }
