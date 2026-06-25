@@ -309,5 +309,6 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
     pause,
     resume,
     stop,
+    unlock,
   };
 }
