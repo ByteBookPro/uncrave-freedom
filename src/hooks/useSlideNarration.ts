@@ -83,6 +83,7 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
       progress: 0,
       duration: 0,
       isComplete: false,
+      needsUserGesture: false,
     });
   }, [fullCleanup]);
   
