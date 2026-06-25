@@ -402,11 +402,36 @@ export function AnimatedSlides({
     }
   };
 
+  // Handle initial start (user gesture unlocks audio)
+  const handleStart = useCallback(() => {
+    setHasInteracted(true);
+    setIsPlaying(true);
+    // If a previous play() was blocked by autoplay policy, unlock it now
+    narrationRef.current.unlock?.();
+  }, []);
+
   return (
     <div className="w-full rounded-2xl overflow-hidden shadow-card relative">
+      {/* Tap-to-begin overlay (required for audio autoplay policy) */}
+      {(!hasInteracted || narration.needsUserGesture) && (
+        <button
+          onClick={handleStart}
+          className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-black/70 backdrop-blur-md text-white animate-fade-in"
+          aria-label="Begin session"
+        >
+          <div className="w-20 h-20 rounded-full bg-white/15 border border-white/30 flex items-center justify-center mb-4 hover:scale-110 transition-transform">
+            <Play className="w-9 h-9 ml-1" fill="currentColor" />
+          </div>
+          <p className="text-base font-medium tracking-wide">
+            {hasInteracted ? 'Tap to resume' : 'Tap to begin'}
+          </p>
+          <p className="text-xs opacity-70 mt-1">Audio narration ready</p>
+        </button>
+      )}
+
       {/* Brief pause indicator */}
       {isPaused && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 bg-black/50 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-2 backdrop-blur-sm">
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-40 bg-black/50 text-white text-xs px-3 py-1.5 rounded-full flex items-center gap-2 backdrop-blur-sm">
           <Loader2 className="w-3 h-3 animate-spin" />
           <span>Next section...</span>
         </div>
