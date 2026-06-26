@@ -287,11 +287,16 @@ export type Database = {
       profiles: {
         Row: {
           cigarettes_per_day: number | null
+          cigarettes_per_pack: number | null
           created_at: string
+          current_day: number | null
           display_name: string | null
           id: string
           language: Database["public"]["Enums"]["content_language"]
+          onboarded: boolean | null
+          price_per_pack: number | null
           quit_date: string | null
+          reasons_to_quit: string[] | null
           subscription_expires_at: string | null
           subscription_status: string | null
           trigger_alternatives: Json | null
@@ -302,11 +307,16 @@ export type Database = {
         }
         Insert: {
           cigarettes_per_day?: number | null
+          cigarettes_per_pack?: number | null
           created_at?: string
+          current_day?: number | null
           display_name?: string | null
           id: string
           language?: Database["public"]["Enums"]["content_language"]
+          onboarded?: boolean | null
+          price_per_pack?: number | null
           quit_date?: string | null
+          reasons_to_quit?: string[] | null
           subscription_expires_at?: string | null
           subscription_status?: string | null
           trigger_alternatives?: Json | null
@@ -317,11 +327,16 @@ export type Database = {
         }
         Update: {
           cigarettes_per_day?: number | null
+          cigarettes_per_pack?: number | null
           created_at?: string
+          current_day?: number | null
           display_name?: string | null
           id?: string
           language?: Database["public"]["Enums"]["content_language"]
+          onboarded?: boolean | null
+          price_per_pack?: number | null
           quit_date?: string | null
+          reasons_to_quit?: string[] | null
           subscription_expires_at?: string | null
           subscription_status?: string | null
           trigger_alternatives?: Json | null
