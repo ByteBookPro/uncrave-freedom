@@ -66,7 +66,7 @@ export const daySessions: DaySession[] = [
               id: 's2',
               title: "A New Journey Begins",
               content: "Today marks Day 1 of your journey to becoming completely smoke-free.",
-              backgroundImage: "/assets/day1/slide1-journey-begins.jpg",
+              backgroundImage: "/__l5e/assets-v1/b79561c8-6a41-4265-9c5a-022dece6c86f/slide1-journey-begins.jpg",
               textPosition: 'bottom',
               narration: "Before we go any further, I want you to pause and really appreciate this moment. You made a choice. You chose to be here. That might sound simple, but it's not. Every single person who has ever quit smoking started exactly where you are right now – making that first decision to try. So congratulations. Seriously. Give yourself credit. You've already done something that millions of smokers never do: you've taken action."
             },
@@ -82,7 +82,7 @@ export const daySessions: DaySession[] = [
               id: 's4',
               title: "You're Not Alone",
               content: "You're not weaker or more addicted than everyone else. And over the next 10 days, I'm going to prove it.",
-              backgroundImage: "/assets/day1/slide2-not-alone.jpg",
+              backgroundImage: "/__l5e/assets-v1/4b864420-6fb5-44b9-95a2-bccaf990e87b/slide2-not-alone.jpg",
               textPosition: 'bottom',
               narration: "I know the guilt that washes over you after every single cigarette, that voice in your head that says 'I should quit' while your hand is already reaching for the pack. And I know the fear. The fear that you can't do it. That you've tried before and failed. That you're somehow different, weaker, more addicted than everyone else. You're not. And over the next 10 days, I'm going to prove it to you."
             },
@@ -98,7 +98,7 @@ export const daySessions: DaySession[] = [
               id: 's6',
               title: "Rewiring Your Mind",
               content: "What if, by the time you smoke your last cigarette, you actually don't want to smoke anymore?",
-              backgroundImage: "/assets/day1/slide3-real-secret.jpg",
+              backgroundImage: "/__l5e/assets-v1/33406848-171c-4ff6-842a-18ca6b6adcac/slide3-real-secret.jpg",
               textPosition: 'bottom',
               narration: "Think about it. Right now, somewhere in your brain, smoking is connected to positive things – relaxation, stress relief, social connection, pleasure after a meal. These associations are powerful. They've been built up over years, maybe decades. If you try to quit while those associations are still there, you'll feel like you're giving something up. But what if we could rewire those associations first? What if, by the time you smoke your last cigarette, you actually don't want to smoke anymore? That's exactly what we're going to do. No willpower required."
             },
@@ -114,7 +114,7 @@ export const daySessions: DaySession[] = [
               id: 's8',
               title: "A Hopeless Case?",
               content: "Cold turkey, patches, gum, medications, hypnotherapy – she'd tried it all. Each time, she'd go back.",
-              backgroundImage: "/assets/day1/slide4-sarah-story.jpg",
+              backgroundImage: "/__l5e/assets-v1/9ceea350-3a5b-42b1-a204-e6e1f50e3d2c/slide4-sarah-story.jpg",
               textPosition: 'bottom',
               narration: "Cold turkey, nicotine patches, gum, prescription medications, hypnotherapy – she'd tried it all. Each time, she'd last a few days, maybe a few weeks, and then something would happen. Stress at work. A fight with her husband. A night out with friends. And she'd smoke 'just one.' Just one turned into just a few. And before she knew it, she was right back where she started, only now with added shame and the conviction that she simply couldn't quit. She was, as she put it, 'a hopeless case.' But she wasn't. And neither are you."
             },
@@ -130,7 +130,7 @@ export const daySessions: DaySession[] = [
               id: 's10',
               title: "Three Years Free",
               content: "She said it felt like waking up from a strange dream. That's what's possible for you.",
-              backgroundImage: "/assets/day1/slide5-transformation.jpg",
+              backgroundImage: "/__l5e/assets-v1/80b23f26-98e1-4028-b012-14ec30a81be1/slide5-transformation.jpg",
               textPosition: 'bottom',
               narration: "She said it felt like waking up from a strange dream, like she'd been under some kind of spell, and now she was finally awake. It's been three years now. She hasn't smoked a single cigarette. And she doesn't miss it. Not even a little. That's what's possible. That's what I want for you. And it starts right here, right now, today."
             },
@@ -146,7 +146,7 @@ export const daySessions: DaySession[] = [
               id: 's12',
               title: "Real Freedom",
               content: "'I can't have a cigarette' is misery. 'I don't want a cigarette' is freedom.",
-              backgroundImage: "/assets/day1/slide6-freedom.jpg",
+              backgroundImage: "/__l5e/assets-v1/e0447c90-c03a-42ab-a7d7-7ff2ece80723/slide6-freedom.jpg",
               textPosition: 'bottom',
               narration: "Instead, imagine thinking 'I don't want a cigarette.' Those two phrases might sound similar, but they're worlds apart. 'I can't' is restriction. It's deprivation. It's misery. 'I don't want to' is freedom. And that's what this program delivers. Freedom. Real freedom. The kind where you walk past other smokers and feel relief that you're not them anymore. I know it might sound too good to be true right now. And that's okay. You don't need to believe me yet. Just stay with me for the next 10 days, and let me show you."
             },
