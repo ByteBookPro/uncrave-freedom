@@ -181,7 +181,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
           await supabase
             .from('user_day_completions')
             .upsert(
-              { user_id: authUser.id, day_id: dayRow.id },
+              { user_id: authUser.id, day_id: dayRow.id, total_duration_seconds: 0 },
               { onConflict: 'user_id,day_id', ignoreDuplicates: true }
             );
         }
