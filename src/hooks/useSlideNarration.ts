@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { ContentLanguage } from '@/types/database';
 import { VoicePreset } from '@/hooks/useTextToSpeech';
+import { getNarrationUrl } from '@/data/narrationManifest';
 
 interface UseSlideNarrationOptions {
   language: ContentLanguage;
@@ -140,46 +141,47 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
         console.log('Using cached audio:', cacheKey);
         audioUrl = cached.url;
       } else {
-        console.log('Fetching audio:', cacheKey);
-        
-        const response = await fetch(
-          `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/text-to-speech`,
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
-            },
-            body: JSON.stringify({ 
-              text, 
-              preset,
-              gender,
-              language
-            }),
-            signal: controller.signal
+        // 1) Try pre-generated bundled CDN audio first (instant, no API call).
+        const prebuiltUrl = await getNarrationUrl(language, text);
+        if (prebuiltUrl) {
+          console.log('Using bundled narration:', prebuiltUrl);
+          audioUrl = prebuiltUrl;
+          // Skip blob caching — CDN handles caching via HTTP headers.
+        } else {
+          console.log('Fetching audio (live TTS):', cacheKey);
+
+          const response = await fetch(
+            `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/text-to-speech`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
+              },
+              body: JSON.stringify({ text, preset, gender, language }),
+              signal: controller.signal,
+            }
+          );
+
+          if (controller.signal.aborted) {
+            console.log('Fetch aborted for slide:', slideId);
+            return;
           }
-        );
 
-        // Check if aborted during fetch
-        if (controller.signal.aborted) {
-          console.log('Fetch aborted for slide:', slideId);
-          return;
-        }
-        
-        // Check if still current slide
-        if (currentSlideIdRef.current !== slideId) {
-          console.log('Slide changed during fetch, ignoring:', slideId);
-          return;
-        }
+          if (currentSlideIdRef.current !== slideId) {
+            console.log('Slide changed during fetch, ignoring:', slideId);
+            return;
+          }
 
-        if (!response.ok) {
-          throw new Error(`TTS API error: ${response.status}`);
-        }
+          if (!response.ok) {
+            throw new Error(`TTS API error: ${response.status}`);
+          }
 
-        const blob = await response.blob();
-        audioUrl = URL.createObjectURL(blob);
-        audioCache.set(cacheKey, { url: audioUrl, blob });
-        console.log('Cached audio:', cacheKey);
+          const blob = await response.blob();
+          audioUrl = URL.createObjectURL(blob);
+          audioCache.set(cacheKey, { url: audioUrl, blob });
+          console.log('Cached audio:', cacheKey);
+        }
       }
       
       // Final check before playing
