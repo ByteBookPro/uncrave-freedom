@@ -7,7 +7,15 @@ import { MainApp } from '@/components/MainApp';
 import { Loader2 } from 'lucide-react';
 
 function AppContent() {
-  const { isOnboarded, currentView } = useApp();
+  const { isOnboarded, currentView, isHydrating } = useApp();
+
+  if (isHydrating) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <Loader2 className="w-8 h-8 animate-spin text-primary" />
+      </div>
+    );
+  }
 
   if (!isOnboarded || currentView === 'onboarding') {
     return <Onboarding />;
