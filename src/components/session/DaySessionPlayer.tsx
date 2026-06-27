@@ -26,6 +26,7 @@ import {
   Clock
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import slideImageManifest from '@/data/slideImageManifest.json';
 
 // Module types matching database schema
 type ModuleType = 'STORY_VIDEO' | 'ANIMATED_SLIDES' | 'COACH_VIDEO' | 'GUIDED_PRACTICE' | 'CHECKPOINT' | 'CRAVING_TOOL' | 'TRIGGER_ALTERNATIVES';
@@ -383,11 +384,18 @@ export function DaySessionPlayer({
           />
         );
 
-      case 'ANIMATED_SLIDES':
+      case 'ANIMATED_SLIDES': {
+        const rawSlides = currentModule.content?.slides || [];
+        const manifest = slideImageManifest as Record<string, { url: string }>;
+        const hydratedSlides = rawSlides.map((s) => {
+          const key = `d${dayNumber}-${currentModule.id}-${s.id}`;
+          const generated = manifest[key]?.url;
+          return generated ? { ...s, backgroundImage: generated } : s;
+        });
         return (
           <AnimatedSlides
-            slides={currentModule.content?.slides || []}
-            slideDuration={Math.floor(currentModule.estimatedSeconds / (currentModule.content?.slides?.length || 1))}
+            slides={hydratedSlides}
+            slideDuration={Math.floor(currentModule.estimatedSeconds / (hydratedSlides.length || 1))}
             onProgress={handleSlidesProgress}
             onComplete={handleMediaComplete}
             title={currentModule.title}
@@ -395,6 +403,7 @@ export function DaySessionPlayer({
             totalEstimatedSeconds={currentModule.estimatedSeconds}
           />
         );
+      }
 
       case 'GUIDED_PRACTICE':
         const practiceCompleted = progress?.practiceCompleted;
