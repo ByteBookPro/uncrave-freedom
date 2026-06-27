@@ -25,13 +25,16 @@ import crypto from "node:crypto";
 import { execSync } from "node:child_process";
 import { daySessions } from "../src/data/sessionModules";
 
-const GEMINI_KEY = process.env.GEMINI_API_KEY;
-if (!GEMINI_KEY) {
-  console.error("GEMINI_API_KEY is required");
-  process.exit(1);
-}
+/**
+ * Calls our deployed `gemini-image` edge function (which holds the user's
+ * GEMINI_API_KEY in Supabase secrets), so this script does not need a
+ * Gemini key in the local environment.
+ */
+const SUPABASE_URL = process.env.SUPABASE_URL || "https://gbqratkoykehwofkuttk.supabase.co";
+const SUPABASE_ANON_KEY =
+  process.env.SUPABASE_ANON_KEY ||
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdicXJhdGtveWtlaHdvZmt1dHRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcxNjk1NjMsImV4cCI6MjA4Mjc0NTU2M30.4IRIihN09QjEqmWd9zxZBmGCcEBdbM3yScGVEYD0zt8";
 
-const MODEL = process.env.GEMINI_IMAGE_MODEL || "gemini-2.5-flash-image";
 const MANIFEST_PATH = path.resolve("src/data/slideImageManifest.json");
 const FORCE = process.argv.includes("--force");
 const dayArgIdx = process.argv.indexOf("--day");
@@ -60,31 +63,29 @@ function hashText(s: string) {
 }
 
 async function generateImage(prompt: string): Promise<Buffer> {
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL}:generateContent?key=${GEMINI_KEY}`;
+  const url = `${SUPABASE_URL}/functions/v1/gemini-image`;
   for (let attempt = 1; attempt <= 4; attempt++) {
     const res = await fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: prompt }] }],
-        generationConfig: { responseModalities: ["IMAGE", "TEXT"] },
-      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+        apikey: SUPABASE_ANON_KEY,
+      },
+      body: JSON.stringify({ prompt }),
     });
     if (res.status === 429 || res.status >= 500) {
-      const wait = 1500 * attempt;
+      const wait = 2000 * attempt;
       console.warn(`  ↻ ${res.status}, retrying in ${wait}ms`);
       await new Promise((r) => setTimeout(r, wait));
       continue;
     }
-    if (!res.ok) throw new Error(`Gemini ${res.status}: ${await res.text()}`);
+    if (!res.ok) throw new Error(`edge ${res.status}: ${(await res.text()).slice(0, 300)}`);
     const json: any = await res.json();
-    const parts = json?.candidates?.[0]?.content?.parts ?? [];
-    const imgPart = parts.find((p: any) => p.inline_data || p.inlineData);
-    const inline = imgPart?.inline_data || imgPart?.inlineData;
-    if (!inline?.data) throw new Error("Gemini returned no image: " + JSON.stringify(json).slice(0, 400));
-    return Buffer.from(inline.data, "base64");
+    if (!json.base64) throw new Error("no image: " + JSON.stringify(json).slice(0, 300));
+    return Buffer.from(json.base64, "base64");
   }
-  throw new Error("Gemini exhausted retries");
+  throw new Error("exhausted retries");
 }
 
 function uploadToCdn(filePath: string, filename: string): string {
