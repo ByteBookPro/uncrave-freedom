@@ -26,14 +26,15 @@ import { execSync } from "node:child_process";
 import { daySessions } from "../src/data/sessionModules";
 
 /**
- * Calls our deployed `gemini-image` edge function (which holds the user's
- * GEMINI_API_KEY in Supabase secrets), so this script does not need a
- * Gemini key in the local environment.
+ * Calls the Lovable AI Gateway (gemini-3.1-flash-image / Nano Banana 2)
+ * directly with LOVABLE_API_KEY — no user-supplied Gemini key required.
  */
-const SUPABASE_URL = process.env.SUPABASE_URL || "https://gbqratkoykehwofkuttk.supabase.co";
-const SUPABASE_ANON_KEY =
-  process.env.SUPABASE_ANON_KEY ||
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdicXJhdGtveWtlaHdvZmt1dHRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjcxNjk1NjMsImV4cCI6MjA4Mjc0NTU2M30.4IRIihN09QjEqmWd9zxZBmGCcEBdbM3yScGVEYD0zt8";
+const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
+if (!LOVABLE_API_KEY) {
+  console.error("LOVABLE_API_KEY is required in the sandbox env");
+  process.exit(1);
+}
+const IMAGE_MODEL = process.env.SLIDE_IMAGE_MODEL || "google/gemini-3.1-flash-image";
 
 const MANIFEST_PATH = path.resolve("src/data/slideImageManifest.json");
 const FORCE = process.argv.includes("--force");
@@ -63,16 +64,19 @@ function hashText(s: string) {
 }
 
 async function generateImage(prompt: string): Promise<Buffer> {
-  const url = `${SUPABASE_URL}/functions/v1/gemini-image`;
+  const url = "https://ai.gateway.lovable.dev/v1/images/generations";
+  const body = IMAGE_MODEL.startsWith("openai/")
+    ? { model: IMAGE_MODEL, prompt, size: "1024x1024", quality: "low", n: 1 }
+    : { model: IMAGE_MODEL, messages: [{ role: "user", content: prompt }], modalities: ["image", "text"] };
+
   for (let attempt = 1; attempt <= 4; attempt++) {
     const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-        apikey: SUPABASE_ANON_KEY,
+        Authorization: `Bearer ${LOVABLE_API_KEY}`,
       },
-      body: JSON.stringify({ prompt }),
+      body: JSON.stringify(body),
     });
     if (res.status === 429 || res.status >= 500) {
       const wait = 2000 * attempt;
@@ -80,10 +84,11 @@ async function generateImage(prompt: string): Promise<Buffer> {
       await new Promise((r) => setTimeout(r, wait));
       continue;
     }
-    if (!res.ok) throw new Error(`edge ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    if (!res.ok) throw new Error(`gateway ${res.status}: ${(await res.text()).slice(0, 300)}`);
     const json: any = await res.json();
-    if (!json.base64) throw new Error("no image: " + JSON.stringify(json).slice(0, 300));
-    return Buffer.from(json.base64, "base64");
+    const b64 = json?.data?.[0]?.b64_json;
+    if (!b64) throw new Error("no image: " + JSON.stringify(json).slice(0, 300));
+    return Buffer.from(b64, "base64");
   }
   throw new Error("exhausted retries");
 }
