@@ -276,7 +276,7 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
       console.error('Narration error for slide:', slideId, err);
       setState(prev => ({ ...prev, isLoading: false }));
     }
-  }, [language, gender, cleanupAudioElement]);
+  }, [language, gender, voice, voiceKey, isDefaultVoice, cleanupAudioElement]);
 
   // Manual resume after autoplay block — call from a user gesture handler
   const unlock = useCallback(async () => {
