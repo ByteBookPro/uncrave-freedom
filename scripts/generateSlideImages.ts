@@ -66,17 +66,15 @@ function hashText(s: string) {
 }
 
 async function generateImage(prompt: string): Promise<Buffer> {
-  const url = "https://ai.gateway.lovable.dev/v1/images/generations";
-  const body = IMAGE_MODEL.startsWith("openai/")
-    ? { model: IMAGE_MODEL, prompt, size: "1024x1024", quality: "low", n: 1 }
-    : { model: IMAGE_MODEL, messages: [{ role: "user", content: prompt }], modalities: ["image", "text"] };
+  const url = "https://api.openai.com/v1/images/generations";
+  const body = { model: IMAGE_MODEL, prompt, size: IMAGE_SIZE, quality: IMAGE_QUALITY, n: 1 };
 
   for (let attempt = 1; attempt <= 4; attempt++) {
     const res = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        Authorization: `Bearer ${OPENAI_API_KEY}`,
       },
       body: JSON.stringify(body),
     });
@@ -86,7 +84,7 @@ async function generateImage(prompt: string): Promise<Buffer> {
       await new Promise((r) => setTimeout(r, wait));
       continue;
     }
-    if (!res.ok) throw new Error(`gateway ${res.status}: ${(await res.text()).slice(0, 300)}`);
+    if (!res.ok) throw new Error(`openai ${res.status}: ${(await res.text()).slice(0, 300)}`);
     const json: any = await res.json();
     const b64 = json?.data?.[0]?.b64_json;
     if (!b64) throw new Error("no image: " + JSON.stringify(json).slice(0, 300));
