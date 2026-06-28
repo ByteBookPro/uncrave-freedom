@@ -2,3 +2,7 @@ project_id = "gbqratkoykehwofkuttk"
 
 [functions.text-to-speech]
 verify_jwt = false
+
+[functions.openai-image]
+verify_jwt = false
+
