@@ -1,1 +1,72 @@
-{}
+{
+  "d1-d1m1-s1": {
+    "hash": "f68d30bb95e4",
+    "url": "/__l5e/assets-v1/73f9a4b9-2434-4dc7-b990-2aac2d8ef6f4/d1-d1m1-s1.png",
+    "updatedAt": "2026-06-28T18:15:32.136Z"
+  },
+  "d1-d1m1-s2": {
+    "hash": "0a86ecd61915",
+    "url": "/__l5e/assets-v1/749569d3-b89a-4cc4-ae7a-da1919a9e9db/d1-d1m1-s2.png",
+    "updatedAt": "2026-06-28T18:15:52.303Z"
+  },
+  "d1-d1m1-s3": {
+    "hash": "560193aeceef",
+    "url": "/__l5e/assets-v1/7ddb6933-a9cc-4c9b-a538-b1721755b3ba/d1-d1m1-s3.png",
+    "updatedAt": "2026-06-28T18:16:14.756Z"
+  },
+  "d1-d1m1-s4": {
+    "hash": "e2fb6055d251",
+    "url": "/__l5e/assets-v1/8d844490-1165-4c9b-993a-e196d095b10a/d1-d1m1-s4.png",
+    "updatedAt": "2026-06-28T18:16:40.004Z"
+  },
+  "d1-d1m1-s5": {
+    "hash": "3e3f2532e887",
+    "url": "/__l5e/assets-v1/8522f1e6-81fe-4734-a3c3-e28e9d2eba0d/d1-d1m1-s5.png",
+    "updatedAt": "2026-06-28T18:17:03.503Z"
+  },
+  "d1-d1m1-s6": {
+    "hash": "2178a885e1e3",
+    "url": "/__l5e/assets-v1/9bcb3372-4579-4fc0-b576-b4881da8ce2e/d1-d1m1-s6.png",
+    "updatedAt": "2026-06-28T18:17:22.146Z"
+  },
+  "d1-d1m1-s7": {
+    "hash": "b62b877930f1",
+    "url": "/__l5e/assets-v1/f86d47da-9212-4d38-a807-e0fe80fea81d/d1-d1m1-s7.png",
+    "updatedAt": "2026-06-28T18:17:42.518Z"
+  },
+  "d1-d1m1-s8": {
+    "hash": "59a0469790a0",
+    "url": "/__l5e/assets-v1/d6ab92c1-f6a4-414b-95b4-4326a35bca29/d1-d1m1-s8.png",
+    "updatedAt": "2026-06-28T18:18:03.822Z"
+  },
+  "d1-d1m1-s9": {
+    "hash": "51110a64ff52",
+    "url": "/__l5e/assets-v1/8f9e3c18-87f2-45e3-a1bb-0ebec3f6e3da/d1-d1m1-s9.png",
+    "updatedAt": "2026-06-28T18:18:23.321Z"
+  },
+  "d1-d1m1-s10": {
+    "hash": "a7bd58f06cc1",
+    "url": "/__l5e/assets-v1/f5219173-ed0b-4f63-9d86-2c80daac844b/d1-d1m1-s10.png",
+    "updatedAt": "2026-06-28T18:18:46.395Z"
+  },
+  "d1-d1m1-s11": {
+    "hash": "9646151a4bee",
+    "url": "/__l5e/assets-v1/7a85ca5e-c431-4321-b5d5-46d1eefb53c3/d1-d1m1-s11.png",
+    "updatedAt": "2026-06-28T18:19:09.221Z"
+  },
+  "d1-d1m1-s12": {
+    "hash": "b26d439b4c49",
+    "url": "/__l5e/assets-v1/7ff21aad-69d0-4a3d-ac53-54184833bb34/d1-d1m1-s12.png",
+    "updatedAt": "2026-06-28T18:19:30.087Z"
+  },
+  "d1-d1m2-s1": {
+    "hash": "fa1a3053987a",
+    "url": "/__l5e/assets-v1/54839b48-b4c6-4044-b72b-89f5e1710800/d1-d1m2-s1.png",
+    "updatedAt": "2026-06-28T18:19:54.946Z"
+  },
+  "d1-d1m3-s1": {
+    "hash": "8866ac7c5746",
+    "url": "/__l5e/assets-v1/beef3c2e-e58f-4d3d-831b-650cd7a9c61f/d1-d1m3-s1.png",
+    "updatedAt": "2026-06-28T18:20:17.171Z"
+  }
+}

@@ -15,7 +15,9 @@ import { TriggerChecklist } from '@/components/TriggerChecklist';
 import { TriggerAlternatives } from '@/components/TriggerAlternatives';
 type ContentLanguage = 'en' | 'de' | 'zh' | 'hi';
 type VoiceGender = 'female' | 'male';
-type VoicePreference = 'calm_female' | 'energetic_male';
+type VoicePreference =
+  | 'calm_female' | 'energetic_male' // legacy values still accepted
+  | 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer';
 
 // Sample texts for voice preview - short, engaging intro in each language
 const sampleTexts: Record<ContentLanguage, string> = {
@@ -32,10 +34,23 @@ const languageLabels: Record<ContentLanguage, { name: string; native: string }> 
   hi: { name: 'Hindi', native: 'हिन्दी' }
 };
 
-const voiceLabels: Record<VoicePreference, { name: string; description: string }> = {
-  calm_female: { name: 'Calm Coach', description: 'Warm, soothing female voice' },
-  energetic_male: { name: 'Energetic Coach', description: 'Motivating, upbeat male voice' }
+// All 6 OpenAI natural voices. Descriptions tuned for cessation-coach context.
+const voiceLabels: Record<Exclude<VoicePreference, 'calm_female' | 'energetic_male'>, { name: string; description: string; gender: VoiceGender }> = {
+  nova:    { name: 'Nova',    description: 'Warm, grounded female — calm coach (recommended)', gender: 'female' },
+  shimmer: { name: 'Shimmer', description: 'Bright, encouraging female — motivational lift',    gender: 'female' },
+  fable:   { name: 'Fable',   description: 'Soft British female — storyteller, intimate',       gender: 'female' },
+  onyx:    { name: 'Onyx',    description: 'Deep, steady male — therapeutic anchor',            gender: 'male'   },
+  echo:    { name: 'Echo',    description: 'Crisp, confident male — energetic mentor',           gender: 'male'   },
+  alloy:   { name: 'Alloy',   description: 'Neutral, balanced — versatile narrator',             gender: 'male'   },
 };
+
+// Normalize legacy preference values to a 6-voice key for selection state.
+function normalizeVoicePref(v: string | null | undefined): keyof typeof voiceLabels {
+  if (v === 'energetic_male') return 'onyx';
+  if (v === 'calm_female' || !v) return 'nova';
+  if (v in voiceLabels) return v as keyof typeof voiceLabels;
+  return 'nova';
+}
 
 export default function Settings() {
   const navigate = useNavigate();
@@ -44,12 +59,12 @@ export default function Settings() {
   
   const [displayName, setDisplayName] = useState('');
   const [language, setLanguage] = useState<ContentLanguage>('en');
-  const [voicePreference, setVoicePreference] = useState<VoicePreference>('calm_female');
+  const [voicePreference, setVoicePreference] = useState<keyof typeof voiceLabels>('nova');
   const [cigarettesPerDay, setCigarettesPerDay] = useState<number | ''>('');
   const [yearsSmoking, setYearsSmoking] = useState<number | ''>('');
   const [isSaving, setIsSaving] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const [previewingVoice, setPreviewingVoice] = useState<VoicePreference | null>(null);
+  const [previewingVoice, setPreviewingVoice] = useState<keyof typeof voiceLabels | null>(null);
   const [previewingLanguage, setPreviewingLanguage] = useState<ContentLanguage | null>(null);
   const [previewAudio, setPreviewAudio] = useState<HTMLAudioElement | null>(null);
   const [triggersOpen, setTriggersOpen] = useState(false);
@@ -68,7 +83,7 @@ export default function Settings() {
   // Play a TTS preview with given parameters
   const playPreview = useCallback(async (
     previewLang: ContentLanguage,
-    gender: VoiceGender,
+    voice: keyof typeof voiceLabels,
     onStart: () => void,
     onEnd: () => void
   ) => {
@@ -88,7 +103,7 @@ export default function Settings() {
           },
           body: JSON.stringify({
             text: sampleText,
-            gender,
+            voice,
             language: previewLang,
             preset: 'dailyCoach'
           }),
@@ -131,23 +146,21 @@ export default function Settings() {
     }
   }, [stopPreview, toast]);
 
-  // Preview a specific language
+  // Preview a specific language (uses currently-selected voice)
   const playLanguagePreview = useCallback((lang: ContentLanguage) => {
-    const gender: VoiceGender = voicePreference === 'calm_female' ? 'female' : 'male';
     playPreview(
       lang,
-      gender,
+      voicePreference,
       () => setPreviewingLanguage(lang),
       () => setPreviewingLanguage(null)
     );
   }, [voicePreference, playPreview]);
 
-  // Preview a specific voice type
-  const playVoicePreview = useCallback((voice: VoicePreference) => {
-    const gender: VoiceGender = voice === 'calm_female' ? 'female' : 'male';
+  // Preview a specific voice (uses currently-selected language)
+  const playVoicePreview = useCallback((voice: keyof typeof voiceLabels) => {
     playPreview(
       language,
-      gender,
+      voice,
       () => setPreviewingVoice(voice),
       () => setPreviewingVoice(null)
     );
@@ -157,7 +170,7 @@ export default function Settings() {
     if (profile) {
       setDisplayName(profile.display_name || '');
       setLanguage((profile.language as ContentLanguage) || 'en');
-      setVoicePreference(((profile as any).voice_preference as VoicePreference) || 'calm_female');
+      setVoicePreference(normalizeVoicePref((profile as any).voice_preference));
       setCigarettesPerDay(profile.cigarettes_per_day || '');
       setYearsSmoking(profile.years_smoking || '');
     }
@@ -339,7 +352,7 @@ export default function Settings() {
                           ? 'border-primary bg-primary/5' 
                           : 'border-border hover:border-primary/50'
                       }`}
-                      onClick={() => setVoicePreference(code as VoicePreference)}
+                      onClick={() => setVoicePreference(code as keyof typeof voiceLabels)}
                     >
                       <div className="flex items-center gap-3">
                         <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
@@ -361,7 +374,7 @@ export default function Settings() {
                           if (isPreviewing) {
                             stopPreview();
                           } else {
-                            playVoicePreview(code as VoicePreference);
+                            playVoicePreview(code as keyof typeof voiceLabels);
                           }
                         }}
                         disabled={(previewingVoice !== null || previewingLanguage !== null) && !isPreviewing}

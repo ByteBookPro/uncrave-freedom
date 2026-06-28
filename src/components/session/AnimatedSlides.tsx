@@ -98,12 +98,16 @@ export function AnimatedSlides({
   
   // Get user's language and voice preference
   const userLanguage: ContentLanguage = profile?.language || 'en';
-  const userGender = (profile as any)?.voice_preference === 'energetic_male' ? 'male' : 'female';
+  const voicePref = (profile as any)?.voice_preference;
+  const SIX_VOICES = ['alloy','echo','fable','onyx','nova','shimmer'] as const;
+  const userVoice = SIX_VOICES.includes(voicePref) ? (voicePref as typeof SIX_VOICES[number]) : undefined;
+  const userGender: 'male' | 'female' = voicePref === 'energetic_male' ? 'male' : 'female';
   
   // Use the slide narration hook
   const narration = useSlideNarration({
     language: userLanguage,
     gender: userGender,
+    voice: userVoice,
   });
   
   // Refs for timers
