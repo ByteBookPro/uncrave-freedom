@@ -3,9 +3,13 @@ import { ContentLanguage } from '@/types/database';
 import { VoicePreset } from '@/hooks/useTextToSpeech';
 import { getNarrationUrl } from '@/data/narrationManifest';
 
+export type OpenAIVoiceName = 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer';
+
 interface UseSlideNarrationOptions {
   language: ContentLanguage;
   gender: 'male' | 'female';
+  /** Optional explicit OpenAI voice — overrides gender. */
+  voice?: OpenAIVoiceName;
 }
 
 interface NarrationState {
@@ -21,13 +25,16 @@ interface NarrationState {
 const audioCache = new Map<string, { url: string; blob: Blob }>();
 
 // Generate a cache key from text and settings
-function getCacheKey(text: string, language: ContentLanguage, preset: string, gender: string): string {
+function getCacheKey(text: string, language: ContentLanguage, preset: string, voiceKey: string): string {
   const textHash = text.substring(0, 100).replace(/\s+/g, '_').substring(0, 50);
-  return `${language}_${preset}_${gender}_${textHash}`;
+  return `${language}_${preset}_${voiceKey}_${textHash}`;
 }
 
 export function useSlideNarration(options: UseSlideNarrationOptions) {
-  const { language, gender } = options;
+  const { language, gender, voice } = options;
+  // Default voices use bundled CDN narration (pre-generated). Custom voices skip the manifest.
+  const voiceKey = voice || gender;
+  const isDefaultVoice = !voice;
   
   const [state, setState] = useState<NarrationState>({
     isLoading: false,
@@ -131,7 +138,7 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
     
     try {
       const preset = voicePreset || 'dailyCoach';
-      const cacheKey = getCacheKey(text, language, preset, gender);
+      const cacheKey = getCacheKey(text, language, preset, voiceKey);
       
       // Check cache first
       const cached = audioCache.get(cacheKey);
@@ -141,12 +148,11 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
         console.log('Using cached audio:', cacheKey);
         audioUrl = cached.url;
       } else {
-        // 1) Try pre-generated bundled CDN audio first (instant, no API call).
-        const prebuiltUrl = await getNarrationUrl(language, text);
+        // 1) Bundled CDN narration only works for the default voice (what we pre-generated).
+        const prebuiltUrl = isDefaultVoice ? await getNarrationUrl(language, text) : null;
         if (prebuiltUrl) {
           console.log('Using bundled narration:', prebuiltUrl);
           audioUrl = prebuiltUrl;
-          // Skip blob caching — CDN handles caching via HTTP headers.
         } else {
           console.log('Fetching audio (live TTS):', cacheKey);
 
@@ -158,7 +164,7 @@ export function useSlideNarration(options: UseSlideNarrationOptions) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY}`,
               },
-              body: JSON.stringify({ text, preset, gender, language }),
+              body: JSON.stringify({ text, preset, gender, language, voice }),
               signal: controller.signal,
             }
           );
