@@ -26,15 +26,17 @@ import { execSync } from "node:child_process";
 import { daySessions } from "../src/data/sessionModules";
 
 /**
- * Calls the Lovable AI Gateway (gemini-3.1-flash-image / Nano Banana 2)
- * directly with LOVABLE_API_KEY — no user-supplied Gemini key required.
+ * Uses OpenAI gpt-image-1 directly with the user's OPENAI_API_KEY.
  */
-const LOVABLE_API_KEY = process.env.LOVABLE_API_KEY;
-if (!LOVABLE_API_KEY) {
-  console.error("LOVABLE_API_KEY is required in the sandbox env");
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+if (!OPENAI_API_KEY) {
+  console.error("OPENAI_API_KEY is required in the sandbox env");
   process.exit(1);
 }
-const IMAGE_MODEL = process.env.SLIDE_IMAGE_MODEL || "google/gemini-3.1-flash-image";
+const IMAGE_MODEL = process.env.SLIDE_IMAGE_MODEL || "gpt-image-1";
+const IMAGE_SIZE = process.env.SLIDE_IMAGE_SIZE || "1024x1536"; // vertical
+const IMAGE_QUALITY = process.env.SLIDE_IMAGE_QUALITY || "medium";
+
 
 const MANIFEST_PATH = path.resolve("src/data/slideImageManifest.json");
 const FORCE = process.argv.includes("--force");
