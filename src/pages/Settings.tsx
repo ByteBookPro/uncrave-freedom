@@ -59,12 +59,12 @@ export default function Settings() {
   
   const [displayName, setDisplayName] = useState('');
   const [language, setLanguage] = useState<ContentLanguage>('en');
-  const [voicePreference, setVoicePreference] = useState<VoicePreference>('calm_female');
+  const [voicePreference, setVoicePreference] = useState<keyof typeof voiceLabels>('nova');
   const [cigarettesPerDay, setCigarettesPerDay] = useState<number | ''>('');
   const [yearsSmoking, setYearsSmoking] = useState<number | ''>('');
   const [isSaving, setIsSaving] = useState(false);
   const [isSigningOut, setIsSigningOut] = useState(false);
-  const [previewingVoice, setPreviewingVoice] = useState<VoicePreference | null>(null);
+  const [previewingVoice, setPreviewingVoice] = useState<keyof typeof voiceLabels | null>(null);
   const [previewingLanguage, setPreviewingLanguage] = useState<ContentLanguage | null>(null);
   const [previewAudio, setPreviewAudio] = useState<HTMLAudioElement | null>(null);
   const [triggersOpen, setTriggersOpen] = useState(false);
@@ -83,7 +83,7 @@ export default function Settings() {
   // Play a TTS preview with given parameters
   const playPreview = useCallback(async (
     previewLang: ContentLanguage,
-    gender: VoiceGender,
+    voice: keyof typeof voiceLabels,
     onStart: () => void,
     onEnd: () => void
   ) => {
@@ -103,7 +103,7 @@ export default function Settings() {
           },
           body: JSON.stringify({
             text: sampleText,
-            gender,
+            voice,
             language: previewLang,
             preset: 'dailyCoach'
           }),
@@ -146,23 +146,21 @@ export default function Settings() {
     }
   }, [stopPreview, toast]);
 
-  // Preview a specific language
+  // Preview a specific language (uses currently-selected voice)
   const playLanguagePreview = useCallback((lang: ContentLanguage) => {
-    const gender: VoiceGender = voicePreference === 'calm_female' ? 'female' : 'male';
     playPreview(
       lang,
-      gender,
+      voicePreference,
       () => setPreviewingLanguage(lang),
       () => setPreviewingLanguage(null)
     );
   }, [voicePreference, playPreview]);
 
-  // Preview a specific voice type
-  const playVoicePreview = useCallback((voice: VoicePreference) => {
-    const gender: VoiceGender = voice === 'calm_female' ? 'female' : 'male';
+  // Preview a specific voice (uses currently-selected language)
+  const playVoicePreview = useCallback((voice: keyof typeof voiceLabels) => {
     playPreview(
       language,
-      gender,
+      voice,
       () => setPreviewingVoice(voice),
       () => setPreviewingVoice(null)
     );
@@ -172,7 +170,7 @@ export default function Settings() {
     if (profile) {
       setDisplayName(profile.display_name || '');
       setLanguage((profile.language as ContentLanguage) || 'en');
-      setVoicePreference(((profile as any).voice_preference as VoicePreference) || 'calm_female');
+      setVoicePreference(normalizeVoicePref((profile as any).voice_preference));
       setCigarettesPerDay(profile.cigarettes_per_day || '');
       setYearsSmoking(profile.years_smoking || '');
     }
