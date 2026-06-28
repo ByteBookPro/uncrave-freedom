@@ -521,6 +521,10 @@ export default function Settings() {
           {isSaving ? 'Saving...' : 'Save Changes'}
         </Button>
 
+        <Button asChild variant="outline" className="w-full">
+          <Link to="/settings/generation">View content generation status</Link>
+        </Button>
+
         <Separator />
 
         {/* Sign Out Section */}
