@@ -16,13 +16,21 @@ type PresetType =
   | "guided";
 type VoiceGender = "female" | "male";
 type ContentLanguage = "en" | "de" | "zh" | "hi";
+type OpenAIVoice = "alloy" | "echo" | "fable" | "onyx" | "nova" | "shimmer" | "sage" | "ash";
 
-// Lovable AI TTS voices (openai/gpt-4o-mini-tts). All voices speak any language.
-// Picks below favor warm, calm timbres suitable for a smoking-cessation coach.
-const voiceMap: Record<VoiceGender, string> = {
-  female: "sage", // warm, grounded mezzo
-  male: "ash", // warm baritone
+// Legacy gender->voice map (backward compat for old saved preferences).
+const genderVoiceMap: Record<VoiceGender, OpenAIVoice> = {
+  female: "nova",
+  male: "onyx",
 };
+
+// Map legacy preference strings to OpenAI voices.
+const legacyVoiceMap: Record<string, OpenAIVoice> = {
+  calm_female: "nova",
+  energetic_male: "onyx",
+};
+
+const ALLOWED_VOICES: OpenAIVoice[] = ["alloy", "echo", "fable", "onyx", "nova", "shimmer", "sage", "ash"];
 
 // Natural-language pacing/tone steering. The model honors these like a director.
 const presetInstructions: Record<PresetType, string> = {
@@ -82,7 +90,7 @@ serve(async (req) => {
   }
 
   try {
-    const { text, preset, gender, language } = await req.json();
+    const { text, preset, gender, language, voice: requestedVoice } = await req.json();
     const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
 
     if (!LOVABLE_API_KEY) {
@@ -96,19 +104,28 @@ serve(async (req) => {
       language && ["en", "hi", "zh", "de"].includes(language)
         ? (language as ContentLanguage)
         : "en";
-    const selectedGender: VoiceGender = gender === "male" ? "male" : "female";
     const selectedPreset: PresetType =
       preset && preset in presetInstructions
         ? (preset as PresetType)
         : "dailyCoach";
 
-    const voice = voiceMap[selectedGender];
+    // Voice resolution priority: explicit `voice` → legacy mapping → gender fallback.
+    let voice: OpenAIVoice;
+    if (requestedVoice && ALLOWED_VOICES.includes(requestedVoice as OpenAIVoice)) {
+      voice = requestedVoice as OpenAIVoice;
+    } else if (requestedVoice && legacyVoiceMap[requestedVoice]) {
+      voice = legacyVoiceMap[requestedVoice];
+    } else {
+      const selectedGender: VoiceGender = gender === "male" ? "male" : "female";
+      voice = genderVoiceMap[selectedGender];
+    }
+
     const speed = presetSpeed[selectedPreset];
     const instructions = `${presetInstructions[selectedPreset]} ${languageHint[selectedLanguage]}`;
     const processedText = processTextForLanguage(text, selectedLanguage);
 
     console.log(
-      `TTS request: lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} speed=${speed} chars=${processedText.length}`,
+      `TTS request: lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} (requested=${requestedVoice ?? "n/a"}) speed=${speed} chars=${processedText.length}`,
     );
 
     const response = await fetch(
