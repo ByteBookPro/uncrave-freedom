@@ -352,7 +352,7 @@ export default function Settings() {
                           ? 'border-primary bg-primary/5' 
                           : 'border-border hover:border-primary/50'
                       }`}
-                      onClick={() => setVoicePreference(code as VoicePreference)}
+                      onClick={() => setVoicePreference(code as keyof typeof voiceLabels)}
                     >
                       <div className="flex items-center gap-3">
                         <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
@@ -374,7 +374,7 @@ export default function Settings() {
                           if (isPreviewing) {
                             stopPreview();
                           } else {
-                            playVoicePreview(code as VoicePreference);
+                            playVoicePreview(code as keyof typeof voiceLabels);
                           }
                         }}
                         disabled={(previewingVoice !== null || previewingLanguage !== null) && !isPreviewing}
