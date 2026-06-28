@@ -51,8 +51,8 @@ export default function GenerationStatus() {
   const audioExpected = useMemo(expectedAudioCount, []);
   const imageExpected = useMemo(expectedImageCount, []);
 
-  const audioDone = Object.keys(narrationManifest as Record<string, string>).length;
-  const imageDone = Object.keys(slideImageManifest as Record<string, string>).length;
+  const audioDone = Object.keys(narrationManifest as Record<string, unknown>).length;
+  const imageDone = Object.keys(slideImageManifest as Record<string, unknown>).length;
 
   const audioPct = Math.min(100, Math.round((audioDone / Math.max(1, audioExpected)) * 100));
   const imagePct = Math.min(100, Math.round((imageDone / Math.max(1, imageExpected)) * 100));
