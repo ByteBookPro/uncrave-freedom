@@ -15,7 +15,9 @@ import { TriggerChecklist } from '@/components/TriggerChecklist';
 import { TriggerAlternatives } from '@/components/TriggerAlternatives';
 type ContentLanguage = 'en' | 'de' | 'zh' | 'hi';
 type VoiceGender = 'female' | 'male';
-type VoicePreference = 'calm_female' | 'energetic_male';
+type VoicePreference =
+  | 'calm_female' | 'energetic_male' // legacy values still accepted
+  | 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer';
 
 // Sample texts for voice preview - short, engaging intro in each language
 const sampleTexts: Record<ContentLanguage, string> = {
@@ -32,10 +34,23 @@ const languageLabels: Record<ContentLanguage, { name: string; native: string }> 
   hi: { name: 'Hindi', native: 'हिन्दी' }
 };
 
-const voiceLabels: Record<VoicePreference, { name: string; description: string }> = {
-  calm_female: { name: 'Calm Coach', description: 'Warm, soothing female voice' },
-  energetic_male: { name: 'Energetic Coach', description: 'Motivating, upbeat male voice' }
+// All 6 OpenAI natural voices. Descriptions tuned for cessation-coach context.
+const voiceLabels: Record<Exclude<VoicePreference, 'calm_female' | 'energetic_male'>, { name: string; description: string; gender: VoiceGender }> = {
+  nova:    { name: 'Nova',    description: 'Warm, grounded female — calm coach (recommended)', gender: 'female' },
+  shimmer: { name: 'Shimmer', description: 'Bright, encouraging female — motivational lift',    gender: 'female' },
+  fable:   { name: 'Fable',   description: 'Soft British female — storyteller, intimate',       gender: 'female' },
+  onyx:    { name: 'Onyx',    description: 'Deep, steady male — therapeutic anchor',            gender: 'male'   },
+  echo:    { name: 'Echo',    description: 'Crisp, confident male — energetic mentor',           gender: 'male'   },
+  alloy:   { name: 'Alloy',   description: 'Neutral, balanced — versatile narrator',             gender: 'male'   },
 };
+
+// Normalize legacy preference values to a 6-voice key for selection state.
+function normalizeVoicePref(v: string | null | undefined): keyof typeof voiceLabels {
+  if (v === 'energetic_male') return 'onyx';
+  if (v === 'calm_female' || !v) return 'nova';
+  if (v in voiceLabels) return v as keyof typeof voiceLabels;
+  return 'nova';
+}
 
 export default function Settings() {
   const navigate = useNavigate();
