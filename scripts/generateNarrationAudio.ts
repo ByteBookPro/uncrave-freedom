@@ -224,7 +224,7 @@ for (const job of filtered) {
     progress.audio.perLang[job.lang] = (progress.audio.perLang[job.lang] || 0) + 1;
     progress.audio.updatedAt = new Date().toISOString();
     if (generated % 3 === 0) saveAll();
-    await new Promise((r) => setTimeout(r, 300));
+    await new Promise((r) => setTimeout(r, 1500));
   } catch (e: any) {
     console.error(`  ✗ ${job.tag}: ${e.message}`);
   }
