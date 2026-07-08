@@ -1,5 +1,8 @@
-// Lovable AI Gateway TTS — no rate limits, native streaming, billed per request.
-// Returns MP3 audio. Frontend caches by text hash so each narration is generated once.
+// Premium TTS via MeshAPI → ElevenLabs Multilingual v2
+// - eleven_multilingual_v2 for the richest, warmest voice (QuitSure-style)
+// - Native voice options per language + gender
+// - Tuned voice_settings for calm, unhurried coach delivery
+// - mp3_44100_128 for full-band, non-thin audio on mobile speakers
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
@@ -16,59 +19,100 @@ type PresetType =
   | "guided";
 type VoiceGender = "female" | "male";
 type ContentLanguage = "en" | "de" | "zh" | "hi";
-type OpenAIVoice = "alloy" | "echo" | "fable" | "onyx" | "nova" | "shimmer" | "sage" | "ash";
 
-// ElevenLabs voice IDs (via MeshAPI). Map our OpenAI-style names to ElevenLabs voices.
-const genderVoiceMap: Record<VoiceGender, string> = {
-  female: "EXAVITQu4vr4xnSDxMaL", // Sarah — warm, calm
-  male: "onwK4e9ZLuTAKqWW03F9",   // Daniel — warm male
+// Curated ElevenLabs voice IDs per language + gender.
+// Multilingual v2 handles all four languages with any voice, but native-language
+// timbre + tuning gives the "premium" feel users expect.
+const voiceByLangGender: Record<ContentLanguage, Record<VoiceGender, string>> = {
+  en: {
+    female: "EXAVITQu4vr4xnSDxMaL", // Sarah — warm, calm, professional
+    male: "onwK4e9ZLuTAKqWW03F9",   // Daniel — deep, warm British
+  },
+  hi: {
+    female: "EXAVITQu4vr4xnSDxMaL", // Sarah handles Hindi cleanly in multilingual_v2
+    male: "onwK4e9ZLuTAKqWW03F9",   // Daniel
+  },
+  zh: {
+    female: "XrExE9yKIg1WjnnlVkGX", // Matilda — soft, natural Mandarin
+    male: "TX3LPaxmHKxFdv7VOQHJ",   // Liam — clear, calm
+  },
+  de: {
+    female: "XrExE9yKIg1WjnnlVkGX", // Matilda — supportive
+    male: "JBFqnCBsd6RMkjVDRZzb",   // George — warm German-friendly baritone
+  },
 };
 
-const legacyVoiceMap: Record<string, string> = {
+// Explicit voice preference names (from Settings UI) → ElevenLabs IDs.
+const namedVoiceMap: Record<string, string> = {
+  // New premium named voices exposed in Settings
+  sarah: "EXAVITQu4vr4xnSDxMaL",
+  daniel: "onwK4e9ZLuTAKqWW03F9",
+  matilda: "XrExE9yKIg1WjnnlVkGX",
+  george: "JBFqnCBsd6RMkjVDRZzb",
+  liam: "TX3LPaxmHKxFdv7VOQHJ",
+  charlotte: "XB0fDUnXU5powFXDhCwa",
+  // Backward-compat legacy names
   calm_female: "EXAVITQu4vr4xnSDxMaL",
   energetic_male: "onwK4e9ZLuTAKqWW03F9",
-  // OpenAI voice names → ElevenLabs equivalents
   nova: "EXAVITQu4vr4xnSDxMaL",
-  shimmer: "21m00Tcm4TlvDq8ikWAM", // Rachel
-  alloy: "pNInz6obpgDQGcFmaJgB",   // Adam
+  shimmer: "21m00Tcm4TlvDq8ikWAM",
+  alloy: "pNInz6obpgDQGcFmaJgB",
   onyx: "onwK4e9ZLuTAKqWW03F9",
-  echo: "VR6AewLTigWG4xSOukaG",    // Arnold
-  fable: "AZnzlk1XvdvUeBnXmlld",   // Domi
+  echo: "VR6AewLTigWG4xSOukaG",
+  fable: "AZnzlk1XvdvUeBnXmlld",
   sage: "EXAVITQu4vr4xnSDxMaL",
   ash: "onwK4e9ZLuTAKqWW03F9",
 };
 
-const ALLOWED_VOICES = Object.keys(legacyVoiceMap);
+// Voice-settings tuning per preset. Premium warmth = higher stability + high
+// similarity_boost + low style + speaker_boost. Speed is set separately.
+interface VoiceSettings {
+  stability: number;
+  similarity_boost: number;
+  style: number;
+  use_speaker_boost: boolean;
+  speed: number;
+}
 
-// Natural-language pacing/tone steering. The model honors these like a director.
-const presetInstructions: Record<PresetType, string> = {
-  dailyCoach:
-    "Speak like a warm, trusted coach. Calm, confident, unhurried. Pause naturally after commas and full stops. Slight upward warmth at the end of reassuring lines. Never robotic or news-anchor.",
-  motivationLift:
-    "Speak with quiet, grounded conviction — like someone who deeply believes in the listener. A little brighter and more buoyant than baseline, but never excited or salesy. Lift the key promise words.",
-  cravingEmergency:
-    "Speak very slowly and softly, like a meditation guide talking someone through a hard moment. Long breaths between sentences. Low, steady, reassuring. Sound physically close to the listener.",
-  story:
-    "Narrate like a thoughtful storyteller — intimate, almost confidential. Vary pacing: slow on the meaningful lines, slightly faster on connective tissue. Let pauses do the work.",
-  guided:
-    "Speak as a breathwork / meditation guide. Very slow, very soft, very spacious. Long pauses, especially around the words 'breathe in', 'hold', 'breathe out'. Voice should feel like an exhale.",
+const presetSettings: Record<PresetType, VoiceSettings> = {
+  dailyCoach: {
+    stability: 0.55,        // relaxed but consistent
+    similarity_boost: 0.80, // stays true to voice character
+    style: 0.15,            // small dose of expressiveness
+    use_speaker_boost: true,
+    speed: 1.0,
+  },
+  motivationLift: {
+    stability: 0.50,
+    similarity_boost: 0.82,
+    style: 0.35,
+    use_speaker_boost: true,
+    speed: 1.02,
+  },
+  cravingEmergency: {
+    stability: 0.72,        // very steady, meditative
+    similarity_boost: 0.85,
+    style: 0.05,
+    use_speaker_boost: true,
+    speed: 0.92,
+  },
+  story: {
+    stability: 0.60,
+    similarity_boost: 0.80,
+    style: 0.25,
+    use_speaker_boost: true,
+    speed: 0.98,
+  },
+  guided: {
+    stability: 0.75,        // near-monotone, breathwork calm
+    similarity_boost: 0.85,
+    style: 0.05,
+    use_speaker_boost: true,
+    speed: 0.90,
+  },
 };
 
-const languageHint: Record<ContentLanguage, string> = {
-  en: "Speak in clear, natural English.",
-  hi: "Speak in natural, warm Hindi (हिंदी) with an urban Indian accent. Soft confidence, never harsh. Pronounce English loanwords cleanly.",
-  zh: "Speak in clear, standard Mandarin Chinese (普通话) with calm authority. Crisp tones, but never clipped — keep warmth.",
-  de: "Speak in warm, supportive German (Hochdeutsch). Conversational, not news-anchor. Soft on consonants.",
-};
-
-const presetSpeed: Record<PresetType, number> = {
-  dailyCoach: 0.96,
-  motivationLift: 1.0,
-  cravingEmergency: 0.88,
-  story: 0.97,
-  guided: 0.87,
-};
-
+// Insert breath-length pauses to help prosody land naturally on long lines.
 function processTextForLanguage(
   text: string,
   language: ContentLanguage,
@@ -98,42 +142,38 @@ serve(async (req) => {
   }
 
   try {
-    const { text, preset, gender, language, voice: requestedVoice } = await req.json();
+    const { text, preset, gender, language, voice: requestedVoice } =
+      await req.json();
     const MESHAPI_API_KEY = Deno.env.get("MESHAPI_API_KEY");
 
-    if (!MESHAPI_API_KEY) {
-      throw new Error("MESHAPI_API_KEY is not configured");
-    }
-    if (!text) {
-      throw new Error("Text is required");
-    }
+    if (!MESHAPI_API_KEY) throw new Error("MESHAPI_API_KEY is not configured");
+    if (!text) throw new Error("Text is required");
 
     const selectedLanguage: ContentLanguage =
       language && ["en", "hi", "zh", "de"].includes(language)
         ? (language as ContentLanguage)
         : "en";
     const selectedPreset: PresetType =
-      preset && preset in presetInstructions
+      preset && preset in presetSettings
         ? (preset as PresetType)
         : "dailyCoach";
+    const selectedGender: VoiceGender = gender === "male" ? "male" : "female";
 
-    // Voice resolution priority: explicit `voice` → legacy mapping → gender fallback.
+    // Voice resolution: explicit named/raw voice → language-native default.
     let voice: string;
-    if (requestedVoice && legacyVoiceMap[requestedVoice]) {
-      voice = legacyVoiceMap[requestedVoice];
-    } else if (requestedVoice && /^[A-Za-z0-9]{20,}$/.test(requestedVoice)) {
-      // Raw ElevenLabs voice ID passed through
-      voice = requestedVoice;
+    if (requestedVoice && namedVoiceMap[requestedVoice]) {
+      voice = namedVoiceMap[requestedVoice];
+    } else if (requestedVoice && /^[A-Za-z0-9]{18,}$/.test(requestedVoice)) {
+      voice = requestedVoice; // raw ElevenLabs voice ID
     } else {
-      const selectedGender: VoiceGender = gender === "male" ? "male" : "female";
-      voice = genderVoiceMap[selectedGender];
+      voice = voiceByLangGender[selectedLanguage][selectedGender];
     }
 
-    const speed = presetSpeed[selectedPreset];
+    const settings = presetSettings[selectedPreset];
     const processedText = processTextForLanguage(text, selectedLanguage);
 
     console.log(
-      `TTS request (MeshAPI/ElevenLabs): lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} (requested=${requestedVoice ?? "n/a"}) speed=${speed} chars=${processedText.length}`,
+      `TTS(MeshAPI/ElevenLabs mv2) lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} gender=${selectedGender} chars=${processedText.length}`,
     );
 
     const response = await fetch(
@@ -145,37 +185,35 @@ serve(async (req) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "elevenlabs/eleven_flash_v2_5",
+          model: "elevenlabs/eleven_multilingual_v2",
           input: processedText,
           voice,
           response_format: "mp3_44100_128",
           stream: false,
+          voice_settings: {
+            stability: settings.stability,
+            similarity_boost: settings.similarity_boost,
+            style: settings.style,
+            use_speaker_boost: settings.use_speaker_boost,
+            speed: settings.speed,
+          },
         }),
       },
     );
 
-
     if (!response.ok) {
       const errText = await response.text().catch(() => "");
-      console.error("Lovable AI TTS error:", response.status, errText);
+      console.error("MeshAPI TTS error:", response.status, errText);
       if (response.status === 429) {
         return new Response(
           JSON.stringify({ error: "Rate limited. Please retry shortly." }),
-          {
-            status: 429,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          },
+          { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } },
         );
       }
       if (response.status === 402) {
         return new Response(
-          JSON.stringify({
-            error: "AI credits exhausted. Please add credits in workspace settings.",
-          }),
-          {
-            status: 402,
-            headers: { ...corsHeaders, "Content-Type": "application/json" },
-          },
+          JSON.stringify({ error: "MeshAPI credits exhausted. Please top up your MeshAPI account." }),
+          { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } },
         );
       }
       throw new Error(`TTS gateway error ${response.status}: ${errText}`);
