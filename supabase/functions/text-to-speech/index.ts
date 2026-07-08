@@ -125,15 +125,15 @@ serve(async (req) => {
     const processedText = processTextForLanguage(text, selectedLanguage);
 
     console.log(
-      `TTS request (Lovable AI): lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} (requested=${requestedVoice ?? "n/a"}) speed=${speed} chars=${processedText.length}`,
+      `TTS request (MeshAPI): lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} (requested=${requestedVoice ?? "n/a"}) speed=${speed} chars=${processedText.length}`,
     );
 
     const response = await fetch(
-      "https://ai.gateway.lovable.dev/v1/audio/speech",
+      "https://api.meshapi.ai/v1/audio/speech",
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${LOVABLE_API_KEY}`,
+          Authorization: `Bearer ${MESHAPI_API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
