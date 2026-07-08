@@ -148,7 +148,7 @@ serve(async (req) => {
           model: "elevenlabs/eleven_flash_v2_5",
           input: processedText,
           voice,
-          response_format: "mp3",
+          response_format: "mp3_44100_128",
           stream: false,
         }),
       },
