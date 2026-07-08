@@ -144,9 +144,10 @@ serve(async (req) => {
   try {
     const { text, preset, gender, language, voice: requestedVoice } =
       await req.json();
-    const MESHAPI_API_KEY = Deno.env.get("MESHAPI_API_KEY");
+    const ELEVENLABS_API_KEY =
+      Deno.env.get("ELEVENLABS_API_KEY_1") ?? Deno.env.get("ELEVENLABS_API_KEY");
 
-    if (!MESHAPI_API_KEY) throw new Error("MESHAPI_API_KEY is not configured");
+    if (!ELEVENLABS_API_KEY) throw new Error("ELEVENLABS_API_KEY is not configured");
     if (!text) throw new Error("Text is required");
 
     const selectedLanguage: ContentLanguage =
