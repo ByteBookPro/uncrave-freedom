@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import slideImageManifest from '@/data/slideImageManifest.json';
+import { getDayVideoUrl } from '@/data/dayVideoManifest';
 
 // Module types matching database schema
 type ModuleType = 'STORY_VIDEO' | 'ANIMATED_SLIDES' | 'COACH_VIDEO' | 'GUIDED_PRACTICE' | 'CHECKPOINT' | 'CRAVING_TOOL' | 'TRIGGER_ALTERNATIVES';
@@ -374,7 +375,7 @@ export function DaySessionPlayer({
       case 'COACH_VIDEO':
         return (
           <MediaPlayer
-            src={currentModule.content?.videoUrl || ''}
+            src={currentModule.content?.videoUrl || getDayVideoUrl(dayNumber) || ''}
             type="video"
             title={currentModule.title}
             transcript={currentModule.content?.transcript}
