@@ -173,23 +173,20 @@ serve(async (req) => {
     const processedText = processTextForLanguage(text, selectedLanguage);
 
     console.log(
-      `TTS(MeshAPI/ElevenLabs mv2) lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} gender=${selectedGender} chars=${processedText.length}`,
+      `TTS(ElevenLabs mv2) lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} gender=${selectedGender} chars=${processedText.length}`,
     );
 
     const response = await fetch(
-      "https://api.meshapi.ai/v1/audio/speech",
+      `https://api.elevenlabs.io/v1/text-to-speech/${voice}?output_format=mp3_44100_128`,
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${MESHAPI_API_KEY}`,
+          "xi-api-key": ELEVENLABS_API_KEY,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "elevenlabs/eleven_multilingual_v2",
-          input: processedText,
-          voice,
-          response_format: "mp3_44100_128",
-          stream: false,
+          model_id: "eleven_multilingual_v2",
+          text: processedText,
           voice_settings: {
             stability: settings.stability,
             similarity_boost: settings.similarity_boost,
