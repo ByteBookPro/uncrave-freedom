@@ -22,9 +22,10 @@ import { execSync } from "node:child_process";
 import { daySessions } from "../src/data/sessionModules";
 import { localizedNarrations } from "../src/data/sessionNarrationLocalized";
 
-const MESHAPI_API_KEY = process.env.MESHAPI_API_KEY;
-if (!MESHAPI_API_KEY) {
-  console.error("MESHAPI_API_KEY required");
+const ELEVENLABS_API_KEY =
+  process.env.ELEVENLABS_API_KEY_1 || process.env.ELEVENLABS_API_KEY;
+if (!ELEVENLABS_API_KEY) {
+  console.error("ELEVENLABS_API_KEY_1 (or ELEVENLABS_API_KEY) required");
   process.exit(1);
 }
 
