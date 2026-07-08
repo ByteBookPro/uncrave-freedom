@@ -143,6 +143,7 @@ serve(async (req) => {
           instructions,
           speed,
           response_format: "mp3",
+          stream: false,
         }),
       },
     );
