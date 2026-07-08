@@ -99,10 +99,10 @@ serve(async (req) => {
 
   try {
     const { text, preset, gender, language, voice: requestedVoice } = await req.json();
-    const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+    const MESHAPI_API_KEY = Deno.env.get("MESHAPI_API_KEY");
 
-    if (!OPENAI_API_KEY) {
-      throw new Error("OPENAI_API_KEY is not configured");
+    if (!MESHAPI_API_KEY) {
+      throw new Error("MESHAPI_API_KEY is not configured");
     }
     if (!text) {
       throw new Error("Text is required");
@@ -118,39 +118,38 @@ serve(async (req) => {
         : "dailyCoach";
 
     // Voice resolution priority: explicit `voice` → legacy mapping → gender fallback.
-    let voice: OpenAIVoice;
-    if (requestedVoice && ALLOWED_VOICES.includes(requestedVoice as OpenAIVoice)) {
-      voice = requestedVoice as OpenAIVoice;
-    } else if (requestedVoice && legacyVoiceMap[requestedVoice]) {
+    let voice: string;
+    if (requestedVoice && legacyVoiceMap[requestedVoice]) {
       voice = legacyVoiceMap[requestedVoice];
+    } else if (requestedVoice && /^[A-Za-z0-9]{20,}$/.test(requestedVoice)) {
+      // Raw ElevenLabs voice ID passed through
+      voice = requestedVoice;
     } else {
       const selectedGender: VoiceGender = gender === "male" ? "male" : "female";
       voice = genderVoiceMap[selectedGender];
     }
 
     const speed = presetSpeed[selectedPreset];
-    const instructions = `${presetInstructions[selectedPreset]} ${languageHint[selectedLanguage]}`;
     const processedText = processTextForLanguage(text, selectedLanguage);
 
     console.log(
-      `TTS request (OpenAI direct): lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} (requested=${requestedVoice ?? "n/a"}) speed=${speed} chars=${processedText.length}`,
+      `TTS request (MeshAPI/ElevenLabs): lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} (requested=${requestedVoice ?? "n/a"}) speed=${speed} chars=${processedText.length}`,
     );
 
     const response = await fetch(
-      "https://api.openai.com/v1/audio/speech",
+      "https://api.meshapi.ai/v1/audio/speech",
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${OPENAI_API_KEY}`,
+          Authorization: `Bearer ${MESHAPI_API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "gpt-4o-mini-tts",
+          model: "elevenlabs/eleven_flash_v2_5",
           input: processedText,
           voice,
-          instructions,
-          speed,
           response_format: "mp3",
+          stream: false,
         }),
       },
     );
