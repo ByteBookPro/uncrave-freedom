@@ -142,7 +142,7 @@ serve(async (req) => {
           voice,
           instructions,
           speed,
-          response_format: "mp3",
+          response_format: "wav",
           stream: false,
         }),
       },
