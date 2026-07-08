@@ -18,19 +18,27 @@ type VoiceGender = "female" | "male";
 type ContentLanguage = "en" | "de" | "zh" | "hi";
 type OpenAIVoice = "alloy" | "echo" | "fable" | "onyx" | "nova" | "shimmer" | "sage" | "ash";
 
-// Legacy gender->voice map (backward compat for old saved preferences).
-const genderVoiceMap: Record<VoiceGender, OpenAIVoice> = {
-  female: "nova",
-  male: "onyx",
+// ElevenLabs voice IDs (via MeshAPI). Map our OpenAI-style names to ElevenLabs voices.
+const genderVoiceMap: Record<VoiceGender, string> = {
+  female: "EXAVITQu4vr4xnSDxMaL", // Sarah — warm, calm
+  male: "onwK4e9ZLuTAKqWW03F9",   // Daniel — warm male
 };
 
-// Map legacy preference strings to OpenAI voices.
-const legacyVoiceMap: Record<string, OpenAIVoice> = {
-  calm_female: "nova",
-  energetic_male: "onyx",
+const legacyVoiceMap: Record<string, string> = {
+  calm_female: "EXAVITQu4vr4xnSDxMaL",
+  energetic_male: "onwK4e9ZLuTAKqWW03F9",
+  // OpenAI voice names → ElevenLabs equivalents
+  nova: "EXAVITQu4vr4xnSDxMaL",
+  shimmer: "21m00Tcm4TlvDq8ikWAM", // Rachel
+  alloy: "pNInz6obpgDQGcFmaJgB",   // Adam
+  onyx: "onwK4e9ZLuTAKqWW03F9",
+  echo: "VR6AewLTigWG4xSOukaG",    // Arnold
+  fable: "AZnzlk1XvdvUeBnXmlld",   // Domi
+  sage: "EXAVITQu4vr4xnSDxMaL",
+  ash: "onwK4e9ZLuTAKqWW03F9",
 };
 
-const ALLOWED_VOICES: OpenAIVoice[] = ["alloy", "echo", "fable", "onyx", "nova", "shimmer", "sage", "ash"];
+const ALLOWED_VOICES = Object.keys(legacyVoiceMap);
 
 // Natural-language pacing/tone steering. The model honors these like a director.
 const presetInstructions: Record<PresetType, string> = {
