@@ -1,4 +1,5 @@
-// Generate images via OpenAI gpt-image-1 using the user's OPENAI_API_KEY.
+// Generate images via MeshAPI (OpenAI-compatible image endpoint).
+// MeshAPI auto-routes to the best available image model when `model: "auto"` is sent.
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
@@ -12,12 +13,14 @@ interface Body {
   n?: number;
 }
 
+const MESHAPI_URL = "https://api.meshapi.ai/v1/images/generations";
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: corsHeaders });
   try {
-    const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
-    if (!OPENAI_API_KEY) {
-      return new Response(JSON.stringify({ error: "OPENAI_API_KEY not configured" }), {
+    const MESHAPI_API_KEY = Deno.env.get("MESHAPI_API_KEY");
+    if (!MESHAPI_API_KEY) {
+      return new Response(JSON.stringify({ error: "MESHAPI_API_KEY not configured" }), {
         status: 500,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
@@ -29,36 +32,55 @@ Deno.serve(async (req) => {
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    const res = await fetch("https://api.openai.com/v1/images/generations", {
+
+    const res = await fetch(MESHAPI_URL, {
       method: "POST",
       headers: {
-        Authorization: `Bearer ${OPENAI_API_KEY}`,
+        Authorization: `Bearer ${MESHAPI_API_KEY}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: body.model || "gpt-image-1",
+        model: body.model || "auto",
         prompt: body.prompt,
         size: body.size || "1024x1536",
         quality: body.quality || "medium",
         n: body.n || 1,
+        response_format: "b64_json",
       }),
     });
+
     if (!res.ok) {
       const errText = await res.text();
-      console.error("OpenAI image error", res.status, errText);
-      return new Response(JSON.stringify({ error: `OpenAI ${res.status}: ${errText}` }), {
+      console.error("MeshAPI image error", res.status, errText);
+      return new Response(JSON.stringify({ error: `MeshAPI ${res.status}: ${errText}` }), {
         status: res.status,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+
     const json = await res.json();
-    const b64 = json?.data?.[0]?.b64_json;
+    // MeshAPI returns OpenAI-compatible shape: { data: [{ b64_json | url }] }
+    const first = json?.data?.[0];
+    let b64: string | undefined = first?.b64_json;
+
+    // If provider returned a URL instead of b64, fetch and inline it.
+    if (!b64 && first?.url) {
+      const imgRes = await fetch(first.url);
+      if (imgRes.ok) {
+        const buf = new Uint8Array(await imgRes.arrayBuffer());
+        let bin = "";
+        for (let i = 0; i < buf.length; i++) bin += String.fromCharCode(buf[i]);
+        b64 = btoa(bin);
+      }
+    }
+
     if (!b64) {
       return new Response(JSON.stringify({ error: "No image returned", raw: json }), {
         status: 502,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
+
     return new Response(
       JSON.stringify({
         dataUrl: `data:image/png;base64,${b64}`,
