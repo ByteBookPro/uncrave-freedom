@@ -144,7 +144,10 @@ export function AnimatedSlides({
     );
   }
 
-  const currentSlide = slides[currentIndex];
+  const currentSlide = slides[Math.min(currentIndex, slides.length - 1)] ?? slides[0];
+  if (!currentSlide) {
+    return null;
+  }
   const totalProgress = ((currentIndex + slideProgress / 100) / slides.length) * 100;
 
   // Get current narration text
