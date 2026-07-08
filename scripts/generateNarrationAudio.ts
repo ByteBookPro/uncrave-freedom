@@ -123,28 +123,28 @@ async function generateMp3(text: string, lang: Lang, gender: Gender): Promise<Bu
   const voice = voiceByLangGender[lang][gender];
   const processedText = processText(text, lang);
   for (let attempt = 1; attempt <= 4; attempt++) {
-    const res = await fetch("https://api.meshapi.ai/v1/audio/speech", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${MESHAPI_API_KEY}`,
-        "Content-Type": "application/json",
+    const res = await fetch(
+      `https://api.elevenlabs.io/v1/text-to-speech/${voice}?output_format=mp3_44100_128`,
+      {
+        method: "POST",
+        headers: {
+          "xi-api-key": ELEVENLABS_API_KEY!,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model_id: "eleven_multilingual_v2",
+          text: processedText,
+          voice_settings: VOICE_SETTINGS,
+        }),
       },
-      body: JSON.stringify({
-        model: "elevenlabs/eleven_multilingual_v2",
-        input: processedText,
-        voice,
-        response_format: "mp3_44100_128",
-        stream: false,
-        voice_settings: VOICE_SETTINGS,
-      }),
-    });
+    );
     if (res.status === 429 || res.status >= 500) {
       const wait = 1500 * attempt;
       console.warn(`  ↻ ${res.status}, retry in ${wait}ms`);
       await new Promise((r) => setTimeout(r, wait));
       continue;
     }
-    if (!res.ok) throw new Error(`meshapi ${res.status}: ${(await res.text()).slice(0, 200)}`);
+    if (!res.ok) throw new Error(`elevenlabs ${res.status}: ${(await res.text()).slice(0, 200)}`);
     return Buffer.from(await res.arrayBuffer());
   }
   throw new Error("exhausted retries");
