@@ -91,10 +91,10 @@ serve(async (req) => {
 
   try {
     const { text, preset, gender, language, voice: requestedVoice } = await req.json();
-    const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
 
-    if (!OPENAI_API_KEY) {
-      throw new Error("OPENAI_API_KEY is not configured");
+    if (!LOVABLE_API_KEY) {
+      throw new Error("LOVABLE_API_KEY is not configured");
     }
     if (!text) {
       throw new Error("Text is required");
@@ -125,19 +125,19 @@ serve(async (req) => {
     const processedText = processTextForLanguage(text, selectedLanguage);
 
     console.log(
-      `TTS request: lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} (requested=${requestedVoice ?? "n/a"}) speed=${speed} chars=${processedText.length}`,
+      `TTS request (Lovable AI): lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} (requested=${requestedVoice ?? "n/a"}) speed=${speed} chars=${processedText.length}`,
     );
 
     const response = await fetch(
-      "https://api.openai.com/v1/audio/speech",
+      "https://ai.gateway.lovable.dev/v1/audio/speech",
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${OPENAI_API_KEY}`,
+          Authorization: `Bearer ${LOVABLE_API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "gpt-4o-mini-tts",
+          model: "openai/gpt-4o-mini-tts",
           input: processedText,
           voice,
           instructions,
@@ -146,6 +146,7 @@ serve(async (req) => {
         }),
       },
     );
+
 
     if (!response.ok) {
       const errText = await response.text().catch(() => "");
