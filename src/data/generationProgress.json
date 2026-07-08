@@ -1,4 +1,18 @@
 {
-  "images": { "total": 0, "generated": 0, "updatedAt": null },
-  "audio": { "total": 0, "generated": 0, "updatedAt": null, "perLang": { "en": 0, "hi": 0, "zh": 0, "de": 0 } }
+  "images": {
+    "total": 0,
+    "generated": 0,
+    "updatedAt": null
+  },
+  "audio": {
+    "total": 47,
+    "generated": 18,
+    "updatedAt": "2026-07-08T01:26:34.902Z",
+    "perLang": {
+      "en": 18,
+      "hi": 0,
+      "zh": 0,
+      "de": 0
+    }
+  }
 }
