@@ -91,10 +91,10 @@ serve(async (req) => {
 
   try {
     const { text, preset, gender, language, voice: requestedVoice } = await req.json();
-    const MESHAPI_API_KEY = Deno.env.get("MESHAPI_API_KEY");
+    const OPENAI_API_KEY = Deno.env.get("OPENAI_API_KEY");
 
-    if (!MESHAPI_API_KEY) {
-      throw new Error("MESHAPI_API_KEY is not configured");
+    if (!OPENAI_API_KEY) {
+      throw new Error("OPENAI_API_KEY is not configured");
     }
     if (!text) {
       throw new Error("Text is required");
@@ -125,23 +125,24 @@ serve(async (req) => {
     const processedText = processTextForLanguage(text, selectedLanguage);
 
     console.log(
-      `TTS request (MeshAPI): lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} (requested=${requestedVoice ?? "n/a"}) speed=${speed} chars=${processedText.length}`,
+      `TTS request (OpenAI direct): lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} (requested=${requestedVoice ?? "n/a"}) speed=${speed} chars=${processedText.length}`,
     );
 
     const response = await fetch(
-      "https://api.meshapi.ai/v1/audio/speech",
+      "https://api.openai.com/v1/audio/speech",
       {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${MESHAPI_API_KEY}`,
+          Authorization: `Bearer ${OPENAI_API_KEY}`,
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          model: "openai/gpt-4o-mini-tts",
+          model: "gpt-4o-mini-tts",
           input: processedText,
           voice,
           instructions,
           speed,
+          response_format: "mp3",
         }),
       },
     );
