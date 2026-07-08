@@ -6,13 +6,13 @@
   },
   "audio": {
     "total": 47,
-    "generated": 12,
-    "updatedAt": "2026-07-08T01:34:37.807Z",
+    "generated": 42,
+    "updatedAt": "2026-07-08T01:54:16.453Z",
     "perLang": {
-      "en": 30,
-      "hi": 0,
-      "zh": 0,
-      "de": 0
+      "en": 86,
+      "hi": 6,
+      "zh": 6,
+      "de": 1
     }
   }
 }

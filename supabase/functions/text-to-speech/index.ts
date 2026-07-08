@@ -1,8 +1,7 @@
-// Premium TTS via MeshAPI → ElevenLabs Multilingual v2
-// - eleven_multilingual_v2 for the richest, warmest voice (QuitSure-style)
-// - Native voice options per language + gender
-// - Tuned voice_settings for calm, unhurried coach delivery
-// - mp3_44100_128 for full-band, non-thin audio on mobile speakers
+// Premium TTS via MeshAPI → Cartesia Sonic-3
+// - Cartesia Sonic-3 is a multilingual, low-latency premium TTS
+// - mp3_44100_128 for full-band audio (fixes the thin/treble sound)
+// - Per-language voice pairing with warm delivery
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const corsHeaders = {
@@ -20,99 +19,59 @@ type PresetType =
 type VoiceGender = "female" | "male";
 type ContentLanguage = "en" | "de" | "zh" | "hi";
 
-// Curated ElevenLabs voice IDs per language + gender.
-// Multilingual v2 handles all four languages with any voice, but native-language
-// timbre + tuning gives the "premium" feel users expect.
+// Cartesia voice UUIDs. Sonic-3 is multilingual — same voice IDs across languages.
+// Curated for warmth and coach-like delivery.
+const CARTESIA_VOICES = {
+  sarah:            "694f9389-aac1-45b6-b726-9d9369183238", // warm, calm female
+  britishLady:      "71a7ad14-091c-4e8e-a314-022ece01c121", // measured female
+  calmLady:         "00a77add-48d5-4ef6-8157-71e5437b282d", // soft female
+  newsman:          "d46abd1d-2d02-43e8-819f-51fb652c1c61", // steady male
+  britishReader:    "79a125e8-cd45-4c13-8a67-188112f4dd22", // warm male
+  barbershop:       "a0e99841-438c-4a64-b679-ae501e7d6091", // deep male
+} as const;
+
 const voiceByLangGender: Record<ContentLanguage, Record<VoiceGender, string>> = {
-  en: {
-    female: "EXAVITQu4vr4xnSDxMaL", // Sarah — warm, calm, professional
-    male: "onwK4e9ZLuTAKqWW03F9",   // Daniel — deep, warm British
-  },
-  hi: {
-    female: "EXAVITQu4vr4xnSDxMaL", // Sarah handles Hindi cleanly in multilingual_v2
-    male: "onwK4e9ZLuTAKqWW03F9",   // Daniel
-  },
-  zh: {
-    female: "XrExE9yKIg1WjnnlVkGX", // Matilda — soft, natural Mandarin
-    male: "TX3LPaxmHKxFdv7VOQHJ",   // Liam — clear, calm
-  },
-  de: {
-    female: "XrExE9yKIg1WjnnlVkGX", // Matilda — supportive
-    male: "JBFqnCBsd6RMkjVDRZzb",   // George — warm German-friendly baritone
-  },
+  en: { female: CARTESIA_VOICES.sarah,         male: CARTESIA_VOICES.britishReader },
+  hi: { female: CARTESIA_VOICES.sarah,         male: CARTESIA_VOICES.britishReader },
+  zh: { female: CARTESIA_VOICES.calmLady,      male: CARTESIA_VOICES.newsman },
+  de: { female: CARTESIA_VOICES.britishLady,   male: CARTESIA_VOICES.barbershop },
 };
 
-// Explicit voice preference names (from Settings UI) → ElevenLabs IDs.
+// Named voice preferences (used by Settings picker).
 const namedVoiceMap: Record<string, string> = {
-  // New premium named voices exposed in Settings
-  sarah: "EXAVITQu4vr4xnSDxMaL",
-  daniel: "onwK4e9ZLuTAKqWW03F9",
-  matilda: "XrExE9yKIg1WjnnlVkGX",
-  george: "JBFqnCBsd6RMkjVDRZzb",
-  liam: "TX3LPaxmHKxFdv7VOQHJ",
-  charlotte: "XB0fDUnXU5powFXDhCwa",
+  sarah: CARTESIA_VOICES.sarah,
+  british_lady: CARTESIA_VOICES.britishLady,
+  calm_lady: CARTESIA_VOICES.calmLady,
+  newsman: CARTESIA_VOICES.newsman,
+  british_reader: CARTESIA_VOICES.britishReader,
+  barbershop: CARTESIA_VOICES.barbershop,
   // Backward-compat legacy names
-  calm_female: "EXAVITQu4vr4xnSDxMaL",
-  energetic_male: "onwK4e9ZLuTAKqWW03F9",
-  nova: "EXAVITQu4vr4xnSDxMaL",
-  shimmer: "21m00Tcm4TlvDq8ikWAM",
-  alloy: "pNInz6obpgDQGcFmaJgB",
-  onyx: "onwK4e9ZLuTAKqWW03F9",
-  echo: "VR6AewLTigWG4xSOukaG",
-  fable: "AZnzlk1XvdvUeBnXmlld",
-  sage: "EXAVITQu4vr4xnSDxMaL",
-  ash: "onwK4e9ZLuTAKqWW03F9",
+  calm_female: CARTESIA_VOICES.sarah,
+  energetic_male: CARTESIA_VOICES.britishReader,
+  nova: CARTESIA_VOICES.sarah,
+  shimmer: CARTESIA_VOICES.calmLady,
+  alloy: CARTESIA_VOICES.britishLady,
+  onyx: CARTESIA_VOICES.barbershop,
+  echo: CARTESIA_VOICES.newsman,
+  fable: CARTESIA_VOICES.britishReader,
+  sage: CARTESIA_VOICES.sarah,
+  ash: CARTESIA_VOICES.newsman,
 };
 
-// Voice-settings tuning per preset. Premium warmth = higher stability + high
-// similarity_boost + low style + speaker_boost. Speed is set separately.
-interface VoiceSettings {
-  stability: number;
-  similarity_boost: number;
-  style: number;
-  use_speaker_boost: boolean;
-  speed: number;
-}
-
-const presetSettings: Record<PresetType, VoiceSettings> = {
-  dailyCoach: {
-    stability: 0.55,        // relaxed but consistent
-    similarity_boost: 0.80, // stays true to voice character
-    style: 0.15,            // small dose of expressiveness
-    use_speaker_boost: true,
-    speed: 1.0,
-  },
-  motivationLift: {
-    stability: 0.50,
-    similarity_boost: 0.82,
-    style: 0.35,
-    use_speaker_boost: true,
-    speed: 1.02,
-  },
-  cravingEmergency: {
-    stability: 0.72,        // very steady, meditative
-    similarity_boost: 0.85,
-    style: 0.05,
-    use_speaker_boost: true,
-    speed: 0.92,
-  },
-  story: {
-    stability: 0.60,
-    similarity_boost: 0.80,
-    style: 0.25,
-    use_speaker_boost: true,
-    speed: 0.98,
-  },
-  guided: {
-    stability: 0.75,        // near-monotone, breathwork calm
-    similarity_boost: 0.85,
-    style: 0.05,
-    use_speaker_boost: true,
-    speed: 0.90,
-  },
+// Speed tuning per preset (Cartesia accepts `speed` in [-1, 1], but the MeshAPI
+// OpenAI-compat surface uses the OpenAI-style `speed` multiplier). We keep both.
+const presetSpeed: Record<PresetType, number> = {
+  dailyCoach: 1.0,
+  motivationLift: 1.03,
+  cravingEmergency: 0.92,
+  story: 0.98,
+  guided: 0.90,
 };
 
-// Insert breath-length pauses to help prosody land naturally on long lines.
+const languageCode: Record<ContentLanguage, string> = {
+  en: "en", hi: "hi", zh: "zh", de: "de",
+};
+
 function processTextForLanguage(
   text: string,
   language: ContentLanguage,
@@ -144,10 +103,9 @@ serve(async (req) => {
   try {
     const { text, preset, gender, language, voice: requestedVoice } =
       await req.json();
-    const ELEVENLABS_API_KEY =
-      Deno.env.get("ELEVENLABS_API_KEY_1") ?? Deno.env.get("ELEVENLABS_API_KEY");
+    const MESHAPI_API_KEY = Deno.env.get("MESHAPI_API_KEY");
 
-    if (!ELEVENLABS_API_KEY) throw new Error("ELEVENLABS_API_KEY is not configured");
+    if (!MESHAPI_API_KEY) throw new Error("MESHAPI_API_KEY is not configured");
     if (!text) throw new Error("Text is required");
 
     const selectedLanguage: ContentLanguage =
@@ -155,53 +113,52 @@ serve(async (req) => {
         ? (language as ContentLanguage)
         : "en";
     const selectedPreset: PresetType =
-      preset && preset in presetSettings
+      preset && preset in presetSpeed
         ? (preset as PresetType)
         : "dailyCoach";
     const selectedGender: VoiceGender = gender === "male" ? "male" : "female";
 
-    // Voice resolution: explicit named/raw voice → language-native default.
     let voice: string;
     if (requestedVoice && namedVoiceMap[requestedVoice]) {
       voice = namedVoiceMap[requestedVoice];
-    } else if (requestedVoice && /^[A-Za-z0-9]{18,}$/.test(requestedVoice)) {
-      voice = requestedVoice; // raw ElevenLabs voice ID
+    } else if (
+      requestedVoice &&
+      /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+        .test(requestedVoice)
+    ) {
+      voice = requestedVoice; // raw Cartesia voice UUID
     } else {
       voice = voiceByLangGender[selectedLanguage][selectedGender];
     }
 
-    const settings = presetSettings[selectedPreset];
+    const speed = presetSpeed[selectedPreset];
     const processedText = processTextForLanguage(text, selectedLanguage);
 
     console.log(
-      `TTS(ElevenLabs mv2) lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} gender=${selectedGender} chars=${processedText.length}`,
+      `TTS(Cartesia/Sonic-3) lang=${selectedLanguage} preset=${selectedPreset} voice=${voice} speed=${speed} chars=${processedText.length}`,
     );
 
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${voice}?output_format=mp3_44100_128`,
-      {
-        method: "POST",
-        headers: {
-          "xi-api-key": ELEVENLABS_API_KEY,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model_id: "eleven_multilingual_v2",
-          text: processedText,
-          voice_settings: {
-            stability: settings.stability,
-            similarity_boost: settings.similarity_boost,
-            style: settings.style,
-            use_speaker_boost: settings.use_speaker_boost,
-            speed: settings.speed,
-          },
-        }),
+    const response = await fetch("https://api.meshapi.ai/v1/audio/speech", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${MESHAPI_API_KEY}`,
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({
+        model: "cartesia/sonic-3",
+        input: processedText,
+        voice,
+        response_format: "mp3_44100_128",
+        stream: false,
+        speed,
+        // Cartesia-specific extras forwarded through the gateway
+        language: languageCode[selectedLanguage],
+      }),
+    });
 
     if (!response.ok) {
       const errText = await response.text().catch(() => "");
-      console.error("MeshAPI TTS error:", response.status, errText);
+      console.error("MeshAPI/Cartesia TTS error:", response.status, errText);
       if (response.status === 429) {
         return new Response(
           JSON.stringify({ error: "Rate limited. Please retry shortly." }),

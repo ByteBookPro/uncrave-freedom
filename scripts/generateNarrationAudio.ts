@@ -22,10 +22,9 @@ import { execSync } from "node:child_process";
 import { daySessions } from "../src/data/sessionModules";
 import { localizedNarrations } from "../src/data/sessionNarrationLocalized";
 
-const ELEVENLABS_API_KEY =
-  process.env.ELEVENLABS_API_KEY_1 || process.env.ELEVENLABS_API_KEY;
-if (!ELEVENLABS_API_KEY) {
-  console.error("ELEVENLABS_API_KEY_1 (or ELEVENLABS_API_KEY) required");
+const MESHAPI_API_KEY = process.env.MESHAPI_API_KEY;
+if (!MESHAPI_API_KEY) {
+  console.error("MESHAPI_API_KEY required");
   process.exit(1);
 }
 
@@ -43,22 +42,16 @@ const PROGRESS_PATH = path.resolve("src/data/generationProgress.json");
 type Lang = "en" | "hi" | "zh" | "de";
 type Gender = "female" | "male";
 
-// Curated ElevenLabs voice IDs — must match text-to-speech/index.ts voiceByLangGender.
+// Cartesia Sonic-3 voice UUIDs (multilingual — same IDs across EN/HI/ZH/DE).
 const voiceByLangGender: Record<Lang, Record<Gender, string>> = {
-  en: { female: "EXAVITQu4vr4xnSDxMaL", male: "onwK4e9ZLuTAKqWW03F9" },
-  hi: { female: "EXAVITQu4vr4xnSDxMaL", male: "onwK4e9ZLuTAKqWW03F9" },
-  zh: { female: "XrExE9yKIg1WjnnlVkGX", male: "TX3LPaxmHKxFdv7VOQHJ" },
-  de: { female: "XrExE9yKIg1WjnnlVkGX", male: "JBFqnCBsd6RMkjVDRZzb" },
+  en: { female: "694f9389-aac1-45b6-b726-9d9369183238", male: "79a125e8-cd45-4c13-8a67-188112f4dd22" },
+  hi: { female: "694f9389-aac1-45b6-b726-9d9369183238", male: "79a125e8-cd45-4c13-8a67-188112f4dd22" },
+  zh: { female: "00a77add-48d5-4ef6-8157-71e5437b282d", male: "d46abd1d-2d02-43e8-819f-51fb652c1c61" },
+  de: { female: "71a7ad14-091c-4e8e-a314-022ece01c121", male: "a0e99841-438c-4a64-b679-ae501e7d6091" },
 };
 
-// Warm-coach voice settings — matches presetSettings.dailyCoach in the edge fn.
-const VOICE_SETTINGS = {
-  stability: 0.55,
-  similarity_boost: 0.8,
-  style: 0.15,
-  use_speaker_boost: true,
-  speed: 1.0,
-};
+const SPEED = 1.0; // dailyCoach preset
+
 
 const manifest: Record<string, string> = fs.existsSync(MANIFEST_PATH)
   ? JSON.parse(fs.readFileSync(MANIFEST_PATH, "utf8"))
@@ -123,28 +116,29 @@ async function generateMp3(text: string, lang: Lang, gender: Gender): Promise<Bu
   const voice = voiceByLangGender[lang][gender];
   const processedText = processText(text, lang);
   for (let attempt = 1; attempt <= 4; attempt++) {
-    const res = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${voice}?output_format=mp3_44100_128`,
-      {
-        method: "POST",
-        headers: {
-          "xi-api-key": ELEVENLABS_API_KEY!,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model_id: "eleven_multilingual_v2",
-          text: processedText,
-          voice_settings: VOICE_SETTINGS,
-        }),
+    const res = await fetch("https://api.meshapi.ai/v1/audio/speech", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${MESHAPI_API_KEY}`,
+        "Content-Type": "application/json",
       },
-    );
+      body: JSON.stringify({
+        model: "cartesia/sonic-3",
+        input: processedText,
+        voice,
+        response_format: "mp3_44100_128",
+        stream: false,
+        speed: SPEED,
+        language: lang,
+      }),
+    });
     if (res.status === 429 || res.status >= 500) {
       const wait = 1500 * attempt;
       console.warn(`  ↻ ${res.status}, retry in ${wait}ms`);
       await new Promise((r) => setTimeout(r, wait));
       continue;
     }
-    if (!res.ok) throw new Error(`elevenlabs ${res.status}: ${(await res.text()).slice(0, 200)}`);
+    if (!res.ok) throw new Error(`meshapi ${res.status}: ${(await res.text()).slice(0, 200)}`);
     return Buffer.from(await res.arrayBuffer());
   }
   throw new Error("exhausted retries");
@@ -230,7 +224,7 @@ for (const job of filtered) {
     progress.audio.perLang[job.lang] = (progress.audio.perLang[job.lang] || 0) + 1;
     progress.audio.updatedAt = new Date().toISOString();
     if (generated % 3 === 0) saveAll();
-    await new Promise((r) => setTimeout(r, 300));
+    await new Promise((r) => setTimeout(r, 1500));
   } catch (e: any) {
     console.error(`  ✗ ${job.tag}: ${e.message}`);
   }
