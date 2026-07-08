@@ -40,7 +40,7 @@ Deno.serve(async (req) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: body.model || "openai/gpt-image-1",
+        model: body.model || "openai/gpt-image-1-mini",
         prompt: body.prompt,
         size: body.size || "1024x1536",
         quality: body.quality || "medium",
